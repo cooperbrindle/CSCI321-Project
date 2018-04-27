@@ -9,8 +9,11 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         <view style={styles.titleContainer}>
-            <Text style={styles.Title}>
-                UOW Alumni
+            <Text style={styles.Title1}>
+                UOW
+            </Text>
+            <Text style={styles.Title2}>
+                Alumni
             </Text>
         </view>
         <view style={styles.inputContainer}>
@@ -40,6 +43,7 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         backgroundColor: '#0C2340',
     },
     titleContainer: {
@@ -54,11 +58,18 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row'
     },
-    Title: {
-        fontSize: 30,
+    Title1: {
+        fontSize: 40,
+        margin: 0,
         textAlign: 'center',
-        margin: 10,
         color: 'white',
+        /*fontStyle: 'Chronicle Display Roman'*/
+    },
+    Title2: {
+        margin: 0,
+        fontSize: 20,
+        textAlign: 'center',
+        color: '#cc0000',
         /*fontStyle: 'Chronicle Display Roman'*/
     },
     inputBox: {
