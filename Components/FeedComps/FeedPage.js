@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, View} from 'react-native'; 
 
 
-class Feed extends Component {
+export default class Feed extends Component {
 	render() {
 		return (
 		  <View style={styles.container}>

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, View} from 'react-native'; 
 
 
-class EventSingle extends Component {
+export default class EventSingle extends Component {
 	constructor(props){
 		super(props);
 		this.props.title = "TITLE";

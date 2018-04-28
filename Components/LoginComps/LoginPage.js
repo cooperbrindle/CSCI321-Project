@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, View} from 'react-native'; 
 
 
-class Login extends Component {
+export default class Login extends Component {
 
     loginPress() {
         this.props.navigation.navigate('Feed')
