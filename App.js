@@ -9,14 +9,14 @@ import {
 } from 'react-native'; 
 import { StackNavigator } from 'react-navigation';
 
+import LoginPage from './Components/LoginComps/LoginPage';
+import FeedPage from './Components/FeedComps/FeedPage';
+
 
 const navStack = StackNavigator({
 	//Routs
-  	Login: { screen: LoginPage,
-			path: './Components/LoginComps/LoginPage', },
-  	Feed: { screen: FeedPage,
-			path: './Components/FeedComps/FeedPage', },
-	
+  	Login: { screen: LoginPage},
+  	Feed: { screen: FeedPage},
   },{ //options
 	initialRouteName: 'Login',
 });
