@@ -1,10 +1,35 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, View} from 'react-native'; 
+import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View} from 'react-native'; 
 
+import EventSingle from './Components/FeedComps/EventSingle';
+
+
+const tempEvents = [
+	{title: "Event1"},
+	{title: "Event2"},
+	{title: "Event3"},
+	{title: "Event4"},
+	{title: "Event5"},
+	{title: "Event6"}
+]
 
 export default class Feed extends Component {
+	constructor(props){
+		super(props);
+		this.props.eventDataSource = tempEvents;
+	}
+
+
+	renderEventSingle(event){
+		return(
+			<EventSingle
+				title={event.title}
+			/>
+		)
+	}
+
 	render() {
 		return (
 		  <View style={styles.container}>
@@ -19,9 +44,11 @@ export default class Feed extends Component {
 						  <Text>Outlook</Text>
 						</View>
 					</View>
-					<View style={styles.events}>
-	
-					</View>
+					<FlatList style={styles.events}
+						data={this.props.eventDataSource}
+						renderItem={({ item }) => {this.renderEventSingle.bind(this)}}
+						keyExtractor={item => item.title}
+					/>
 				</View>
 		);
 	  }

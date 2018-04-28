@@ -13,9 +13,9 @@ import { StackNavigator } from 'react-navigation';
 const navStack = StackNavigator({
 	//Routs
   	Login: { screen: LoginPage,
-			path: 'Components/LoginComps/LoginPage', },
+			path: './Components/LoginComps/LoginPage', },
   	Feed: { screen: FeedPage,
-			path: 'Components/FeedComps/FeedPage', },
+			path: './Components/FeedComps/FeedPage', },
 	
   },{ //options
 	initialRouteName: 'Login',
