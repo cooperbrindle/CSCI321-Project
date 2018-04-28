@@ -4,7 +4,12 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, View} from 'react-native'; 
 
 
-export default class Login extends Component {
+class Login extends Component {
+
+    loginPress() {
+        this.props.navigation.navigate('Feed')
+    };
+
   render() {
     return (
       <View style={styles.container}>
@@ -23,7 +28,7 @@ export default class Login extends Component {
                 placeholder="password"/>
             <Button style={styles.loginBtn}
                 title="Login"
-                onPress={{}}/>
+                onPress={this.loginPress}/>
         </view>
         <view style={styles.socialContainer}>
             <Button style={styles.socialBtn}
