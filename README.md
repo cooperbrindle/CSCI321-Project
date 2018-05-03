@@ -1,22 +1,34 @@
-CSCI321 Project
+## CSCI321 Project - UOW Alumni App
 
-UOW Alumni mobile application
+## Requirements
 
-  - Daniel McKinnell  - Dev Leader
-  - Cooper Brindle    - Project Leader
-  - Daniel Gibson     - Documentation
-  - Adrian Wattakee   - UI
+- Visual Studio Code
+- React Native CLI (`npm install -g react-native-cli`)
 
 React Native with Redux
-  Android
-  iOS
-  
-  
-UOW CSCI321 Project course
-Client: UOW Alumni Team
-  - Carly Evans (EIS)
-  - Paris Dennett (EIS)
-  - Leanne Newsham (Alumni Head)
+  - Android
+  - iOS
+React Navigation
 
-Supervisor: Mark Freeman
+### Installing
 
+```
+$ npm install
+```
+
+will fix up when full process is prepared
+
+## The Team
+
+- Cooper Brindle  - Project Leader
+- Daniel McKinnell  - Lead Developer
+- Daniel Gibson - Documentation Lead
+- Adrian Wattakee - UX/UI Design
+
+## Client
+
+#Supervisor: Mark Freeman
+
+- Carly Evans (EIS)
+- Paris Dennett (EIS)
+- Leanne Newsham (Alumni Head)
