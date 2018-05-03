@@ -1,6 +1,6 @@
 ## CSCI321 Project - UOW Alumni App
 
-## Requirements
+### Requirements
 
 - Visual Studio Code
 - React Native CLI (`npm install -g react-native-cli`)
@@ -18,16 +18,16 @@ $ npm install
 
 will fix up when full process is prepared
 
-## The Team
+### The Team
 
 - Cooper Brindle  - Project Leader
 - Daniel McKinnell  - Lead Developer
 - Daniel Gibson - Documentation Lead
 - Adrian Wattakee - UX/UI Design
 
-## Client
+### Client
 
-#Supervisor: Mark Freeman
+### Supervisor: Mark Freeman
 
 - Carly Evans (EIS)
 - Paris Dennett (EIS)
