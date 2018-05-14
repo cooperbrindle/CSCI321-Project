@@ -33,7 +33,7 @@ export default class EventSingle extends Component {
 		
 		const styles = StyleSheet.create({
 			container: {
-				flex: 1,
+				//flex: 1,
 				flexDirection: 'row',
 				justifyContent: 'space-between',
 				backgroundColor: 'white',
@@ -46,6 +46,7 @@ export default class EventSingle extends Component {
 				fontSize: 20,
 			},
 			date: {
+				//flex: 1,
 				height: 80,
 				width: 60,
 				justifyContent: 'center',

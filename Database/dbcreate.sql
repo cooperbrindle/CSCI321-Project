@@ -18,6 +18,7 @@ CREATE TABLE CONSTITUENT(
     birthdate       VARCHAR(8)      NOT NULL, /* Constituent Birth Date ie 27101996 */
     isinactive      BINARY(1)       NOT NULL, /* Are the an active Alumni Member */ /* Get active definition */
     givesanonymously BINARY(1)      NOT NULL, /* Donor Status */
+    webaddress      VARCHAR(2047)   NULL, /* Constituent Web Address */
     
 
 );

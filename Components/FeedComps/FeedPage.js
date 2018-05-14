@@ -44,7 +44,7 @@ export default class Feed extends Component {
 						  <Text>Outlook</Text>
 						</View>
 					</View>
-					<FlatList style={styles.events}
+					<FlatList
 						data={this.props.eventDataSource}
 						renderItem={({ item }) => {this.renderEventSingle.bind(this)}}
 						keyExtractor={item => item.title}
@@ -62,7 +62,7 @@ export default class Feed extends Component {
 		topMenuBar: {
 			height: 30,
 			backgroundColor: '#0047BB',
-			fontSize: 12,
+			//fontSize: 12,
 			justifyContent: 'center',
 		},
 		topSection: {
@@ -73,7 +73,7 @@ export default class Feed extends Component {
 		  flex: 1,
 		  height: 60,
 		  backgroundColor:'#d9d9d6',
-		  fontSize:10,
+		  //fontSize:10,
 		  alignItems: 'center',
 		  justifyContent: 'center',
 		},
