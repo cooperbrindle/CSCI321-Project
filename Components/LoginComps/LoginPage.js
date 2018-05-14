@@ -13,15 +13,15 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <view style={styles.titleContainer}>
+        <View style={styles.titleContainer}>
             <Text style={styles.Title1}>
                 UOW
             </Text>
             <Text style={styles.Title2}>
                 Alumni
             </Text>
-        </view>
-        <view style={styles.inputContainer}>
+        </View>
+        <View style={styles.inputContainer}>
             <TextInput style={styles.inputBox}
                 placeholder="student number"/>
             <TextInput style={styles.inputBox}
@@ -29,8 +29,8 @@ export default class Login extends Component {
             <Button style={styles.loginBtn}
                 title="Login"
                 onPress={this.loginPress}/>
-        </view>
-        <view style={styles.socialContainer}>
+        </View>
+        <View style={styles.socialContainer}>
             <Button style={styles.socialBtn}
                 title="Google"
                 onPress={{}}/>
@@ -40,7 +40,7 @@ export default class Login extends Component {
             <Button style={styles.socialBtn}
                 title="LinkedIn"
                 onPress={{}}/>
-        </view>
+        </View>
       </View>
     );
   }
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
         /*fontStyle: 'Chronicle Display Roman'*/
     },
     inputBox: {
+        backgroundColor: '#ffffff',
         textAlign: 'left',
         marginBottom: 5,
     },

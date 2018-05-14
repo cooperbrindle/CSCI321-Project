@@ -53,13 +53,13 @@ export default class EventSingle extends Component {
 			},
 			dateDay: {
 				marginLeft: 15,
-				align: 'center',
+				alignContent: 'center',
 				fontSize: 22,
 				color: 'black',
 			},
 			dateMonth: {
 				marginLeft: 15,
-				align: 'center',
+				alignContent: 'center',
 				fontSize: 14,
 				color: '#cc0000'
 			},

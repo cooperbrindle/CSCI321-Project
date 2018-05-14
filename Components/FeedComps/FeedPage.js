@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View} from 'react-native'; 
 
-import EventSingle from './Components/FeedComps/EventSingle';
+import { EventSingle } from './EventSingle.js';
 
 
 const tempEvents = [
@@ -63,7 +63,7 @@ export default class Feed extends Component {
 			height: 30,
 			backgroundColor: '#0047BB',
 			fontSize: 12,
-			justifyContent: 'center'
+			justifyContent: 'center',
 		},
 		topSection: {
 			flex: 1,
