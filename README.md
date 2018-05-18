@@ -1,20 +1,18 @@
 ## CSCI321 Project - UOW Alumni App
 
-## Requirements
-
-- Visual Studio Code
-- React Native CLI (`npm install -g react-native-cli`)
-
 React Native with Redux
   - Android
   - iOS
-React Navigation
+
+## Requirements
+
+- React Native CLI (`npm install -g react-native-cli`)
+- React Navigation
+- Java JDK(1.8) (JRE doesn't have required tools)
+- Node.js, Python2
+
 
 ### Installing
-
-```
-$ npm install
-```
 
 How to get react native setup:
 
@@ -38,4 +36,5 @@ will fix up when full process is prepared
 ## Client
 
 - Carly Evans (EIS)
-- Paris Dennett
+- Paris Dennett (EIS)
+- Leanne Newsham (Alumni Head)
