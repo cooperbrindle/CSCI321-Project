@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, View} from 'react-native'; 
+import { Platform, StyleSheet, Text, TextInput, Button, View, TouchableOpacity} from 'react-native'; 
 
 
 export default class Login extends Component {
@@ -13,79 +13,80 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.titleContainer}>
-            <Text style={styles.Title1}>
-                UOW
-            </Text>
-            <Text style={styles.Title2}>
-                Alumni
-            </Text>
-        </View>
+        
+
+        
         <View style={styles.inputContainer}>
             <TextInput style={styles.inputBox}
-                placeholder="student number"/>
+                        placeholder="username"/>
             <TextInput style={styles.inputBox}
-                placeholder="password"/>
+                        placeholder="password"/>
             <Button style={styles.loginBtn}
                 title="Login"
                 onPress={this.loginPress}/>
         </View>
+
+
         <View style={styles.socialContainer}>
-            <Button style={styles.socialBtn}
-                title="Google"
-                onPress={{}}/>
-            <Button style={styles.socialBtn}
-                title="Facebook"
-                onPress={{}}/>
-            <Button style={styles.socialBtn}
-                title="LinkedIn"
-                onPress={{}}/>
+            <TouchableOpacity style={styles.socialBtn}
+                        onPress={{}}>
+                <Text style={styles.socialText} > facebook </Text>
+                <Text style={styles.socialText} > Linkedin </Text>
+            </TouchableOpacity>
         </View>
+
+
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+    /////////////////////////////// Main Styles
     container: {
         flex: 1,
         backgroundColor: '#0C2340',
     },
-    titleContainer: {
+    logoContainer: {
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
     },
+
+    /////////////////////////////// Input Stlyes
     inputContainer: {
-        flex: 2,
-    },
-    socialContainer: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    Title1: {
-        fontSize: 40,
-        margin: 0,
-        textAlign: 'center',
-        color: 'white',
-        /*fontStyle: 'Chronicle Display Roman'*/
-    },
-    Title2: {
-        margin: 0,
-        fontSize: 20,
-        textAlign: 'center',
-        color: '#cc0000',
-        /*fontStyle: 'Chronicle Display Roman'*/
+        flex: 3,
+        MarginLeft: 5,
+        MarginRight: 5,
     },
     inputBox: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#d9d9d6',
         textAlign: 'left',
-        marginBottom: 5,
+        marginBottom: 0,
     },
     loginBtn: {
-        marginBottom: 5,
+        marginTop: 5,
+        borderRadius:10,
+        borderWidth: 2,
+        borderColor: 'white'
+    },
+
+    /////////////////////////////// Social Login Styles
+    socialContainer: {
+        flex: 1,
+        flexDirection: 'column'
     },
     socialBtn: {
         flex: 1,
+        marginLeft: 5,
+        marginTop: 2,
+        marginBottom: 2,
+    },
+    socialImage: {
+
+    },
+    socialText: {
+        color: 'white',
+        fontSize: 8,
     }
 });

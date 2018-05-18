@@ -26,7 +26,7 @@ export default class App extends Component<Props> {
   render() {
 	return (
     //< navStack />
-    < FeedPage />
+    < LoginPage />
 	);
   }
 }
