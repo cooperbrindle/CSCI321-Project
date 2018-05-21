@@ -13,10 +13,10 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.titleContainer}>
+        <View  style={styles.titleContainer}>
             <Image
-                    style={{width: 200, height: 150}}
-                    source={{uri: '/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png'}}
+                style={{width: 300, height: 200}}
+                source={require('/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png')}
             />
         </View>
         <View style={styles.inputContainer}>
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'row'
     },
     inputContainer: {
         flex: 2,
