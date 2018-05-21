@@ -1,7 +1,8 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, View, Image} from 'react-native'; 
+import { Platform, StyleSheet, Text, 
+    TextInput, Button, View, Image, TouchableOpacity} from 'react-native'; 
 import { createStackNavigator } from 'react-navigation';
 
 
@@ -38,7 +39,7 @@ export default class Login extends React.Component {
                 onPress={this._onPressButton}>
                 <Image
                     style={styles.button}
-                    source={require('./myButton.png')}
+                    source={require('/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png')}
                 />
                 <Text style={styles.socialText}>
                     Continue with facebook
@@ -48,7 +49,7 @@ export default class Login extends React.Component {
                 onPress={this._onPressButton}>
                 <Image
                     style={styles.button}
-                    source={require('./myButton.png')}
+                    source={require('/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png')}
                 />
                 <Text style={styles.socialText}>
                     Continue with Linkedin
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         marginBottom: 5,
+        backgroundColor: '#ffffff'
     },
     socailImage: {
         width: 66,
