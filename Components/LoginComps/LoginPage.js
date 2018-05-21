@@ -37,23 +37,27 @@ export default class Login extends React.Component {
         <View style={styles.socialContainer}>
             <TouchableHighlight style={styles.socialBtn}
                 onPress={this._onPressButton}>
-                <Image
-                    style={styles.button}
-                    source={require('./AlumniLogoOffical.png')}
-                />
-                <Text style={styles.socialText}>
-                    Continue with facebook
-                </Text>
+                <View style={styles.socialView}>
+                    <Image
+                        style={styles.socialImage}
+                        source={require('./AlumniLogoOffical.png')}
+                    />
+                    <Text style={styles.socialText}>
+                        Continue with facebook
+                    </Text>
+                </View>
             </TouchableHighlight>
             <TouchableHighlight style={styles.socialBtn}
                 onPress={this._onPressButton}>
-                <Image
-                    style={styles.button}
-                    source={require('./AlumniLogoOffical.png')}
-                />
-                <Text style={styles.socialText}>
-                    Continue with Linkedin
-                </Text>
+                <View style={styles.socialView}>
+                    <Image
+                        style={styles.socialImage}
+                        source={require('./AlumniLogoOffical.png')}
+                    />
+                    <Text style={styles.socialText}>
+                        Continue with Linkedin
+                    </Text>
+                </View>
             </TouchableHighlight>
         </View>
       </View>
@@ -93,10 +97,19 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         marginBottom: 5,
-        backgroundColor: 'white',
+        backgroundColor: '#000000',
     },
-    socailImage: {
+    socialView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    socialImage: {
         width: 66,
         height: 58,
+    },
+    socialText: {
+        color: '#ffffff',
+        fontSize: 12,
     },
 });
