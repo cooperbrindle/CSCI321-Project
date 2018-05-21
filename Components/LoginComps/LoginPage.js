@@ -17,47 +17,39 @@ export default class Login extends React.Component {
       <View style={styles.container}>
         <View  style={styles.titleContainer}>
             <Image
-                style={{width: 300, height: 200, paddingBottom: 50,}}
-                source={require('./AlumniLogoOffical.png')}
+                style={{width: 380, height: 120, paddingBottom: 10,}}
+                source={require('./logo.png')}
             />
         </View>
 
 
         <View style={styles.inputContainer}>
             <TextInput style={styles.inputBox}
-                placeholder="student number" underlineColorAndroid='transparent'/>
+                placeholder="student number" underlineColorAndroid='transparent' placeholderTextColor='#cc0000'/>
             <TextInput style={styles.inputBox}
-                placeholder="password"/>
-            <Button style={styles.loginBtn}
-                title="Login"
-                onPress={() => this.props.navigation.navigate('Feed')}/>
+                placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='#cc0000'/>
+            <TouchableHighlight style={styles.loginBtn}
+                onPress={() => this.props.navigation.navigate('Feed')}>
+                <Text style={styles.socialText}>
+                        LOGIN
+                </Text>
+            </TouchableHighlight>
+                
         </View>
 
 
         <View style={styles.socialContainer}>
             <TouchableHighlight style={styles.socialBtn}
                 onPress={this._onPressButton}>
-                <View style={styles.socialView}>
-                    <Image
-                        style={styles.socialImage}
-                        source={require('./AlumniLogoOffical.png')}
-                    />
                     <Text style={styles.socialText}>
                         Continue with facebook
                     </Text>
-                </View>
             </TouchableHighlight>
             <TouchableHighlight style={styles.socialBtn}
                 onPress={this._onPressButton}>
-                <View style={styles.socialView}>
-                    <Image
-                        style={styles.socialImage}
-                        source={require('./AlumniLogoOffical.png')}
-                    />
                     <Text style={styles.socialText}>
                         Continue with Linkedin
                     </Text>
-                </View>
             </TouchableHighlight>
         </View>
       </View>
@@ -85,29 +77,52 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 40,
         marginRight: 40,
-        marginBottom: 5,
+        marginBottom: 20,
     },
     inputBox: {
-        backgroundColor: '#d9d9d6',
+        flex: 1,
+        marginRight:20,
+        alignItems: 'center',
+        marginLeft:20,
         color: '#cc0000',
+        marginTop:5,
+        paddingTop:5,
+        paddingBottom:5,
+        backgroundColor:'#d9d9d6',
+        borderRadius:10,
+        borderWidth: 1,
         textAlign: 'center',
-        marginBottom: 5,
     },
+
     loginBtn: {
-        marginBottom: 5,
+        flex: 1,
+        marginRight:20,
+        alignItems: 'center',
+        marginLeft:20,
+        marginTop:5,
+        paddingTop:5,
+        paddingBottom:5,
+        backgroundColor:'#cc0000',
+        borderRadius:10,
+        borderWidth: 1,
     },
 
     socialContainer: {
         flex: 1,
         flexDirection: 'column',
-        paddingBottom: 100,
+        paddingBottom: 20,
     },
     socialBtn: {
         flex: 1,
-        marginLeft: 40,
-        marginRight: 40,
-        marginBottom: 5,
-        backgroundColor: '#cc0000',
+        marginRight:20,
+        alignItems: 'center',
+        marginLeft:20,
+        marginTop:5,
+        paddingTop:5,
+        paddingBottom:5,
+        backgroundColor:'#cc0000',
+        borderRadius:10,
+        borderWidth: 1,
     },
     socialView: {
         flexDirection: 'row',
@@ -115,8 +130,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     socialImage: {
-        width: 66,
-        height: 58,
+        width: 20,
+        height: 20,
     },
     socialText: {
         color: '#ffffff',
