@@ -11,22 +11,21 @@ import {
 import LoginPage from './Components/LoginComps/LoginPage';
 import FeedPage from './Components/FeedComps/FeedPage';
 
+import { createStackNavigator } from 'react-navigation';
 
-/*const navStack = StackNavigator({
+
+const RootStack = createStackNavigator({
 	//Routs
   	Login: { screen: LoginPage},
   	Feed: { screen: FeedPage},
   },{ //options
 	initialRouteName: 'Login',
 });
-*/
+
 type Props = {} ;
-export default class App extends Component<Props> {
+export default class App extends React.Component{
   render() {
-	return (
-    //< navStack />
-    < LoginPage />
-	);
+    return <RootStack />;
   }
 }
 

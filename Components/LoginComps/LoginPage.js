@@ -2,9 +2,10 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, View, Image} from 'react-native'; 
+import { createStackNavigator } from 'react-navigation';
 
 
-export default class Login extends Component {
+export default class Login extends React.Component {
 
     loginPress() {
         this.props.navigation.navigate('Feed')
@@ -26,7 +27,7 @@ export default class Login extends Component {
                 placeholder="password"/>
             <Button style={styles.loginBtn}
                 title="Login"
-                onPress={this.loginPress}/>
+                onPress={() => this.props.navigation.navigate('Feed')}/>
         </View>
         <View style={styles.socialContainer}>
             <Image
