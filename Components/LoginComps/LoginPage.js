@@ -17,7 +17,7 @@ export default class Login extends React.Component {
       <View style={styles.container}>
         <View  style={styles.titleContainer}>
             <Image
-                style={{width: 300, height: 200}}
+                style={{width: 300, height: 200, paddingBottom: 50,}}
                 source={require('./AlumniLogoOffical.png')}
             />
         </View>
@@ -25,7 +25,7 @@ export default class Login extends React.Component {
 
         <View style={styles.inputContainer}>
             <TextInput style={styles.inputBox}
-                placeholder="student number"/>
+                placeholder="student number" underlineColorAndroid='transparent'/>
             <TextInput style={styles.inputBox}
                 placeholder="password"/>
             <Button style={styles.loginBtn}
@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#0C2340',
     },
+    logo: {
+        flex: 1,
+        width: 300,
+        height: 250,
+    },
     titleContainer: {
         flex: 2,
         justifyContent: 'center',
@@ -77,11 +82,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     inputContainer: {
-        flex: 2,
+        flex: 1,
+        marginLeft: 40,
+        marginRight: 40,
+        marginBottom: 5,
     },
     inputBox: {
-        backgroundColor: '#ffffff',
-        textAlign: 'left',
+        backgroundColor: '#d9d9d6',
+        color: '#cc0000',
+        textAlign: 'center',
         marginBottom: 5,
     },
     loginBtn: {
@@ -90,14 +99,15 @@ const styles = StyleSheet.create({
 
     socialContainer: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        paddingBottom: 100,
     },
     socialBtn: {
         flex: 1,
-        marginLeft: 5,
-        marginRight: 5,
+        marginLeft: 40,
+        marginRight: 40,
         marginBottom: 5,
-        backgroundColor: '#000000',
+        backgroundColor: '#cc0000',
     },
     socialView: {
         flexDirection: 'row',
@@ -110,6 +120,6 @@ const styles = StyleSheet.create({
     },
     socialText: {
         color: '#ffffff',
-        fontSize: 12,
+        fontSize: 20,
     },
 });
