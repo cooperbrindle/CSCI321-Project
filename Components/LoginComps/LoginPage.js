@@ -20,6 +20,8 @@ export default class Login extends React.Component {
                 source={require('/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png')}
             />
         </View>
+
+
         <View style={styles.inputContainer}>
             <TextInput style={styles.inputBox}
                 placeholder="student number"/>
@@ -29,15 +31,29 @@ export default class Login extends React.Component {
                 title="Login"
                 onPress={() => this.props.navigation.navigate('Feed')}/>
         </View>
+
+
         <View style={styles.socialContainer}>
-            <Image
-                style={{width: 66, height: 58}}
-                source={{uri: 'https://en.facebookbrand.com/wp-content/uploads/2016/05/flogo_rgb_hex-brc-site-250.png'}}
-            />
-            <Image
-                style={{width: 66, height: 58}}
-                source={{uri: '/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/In-2C-CMYK-0p5in-R.png'}}
-            />
+            <TouchableOpacity style={styles.socialBtn}
+                onPress={this._onPressButton}>
+                <Image
+                    style={styles.button}
+                    source={require('./myButton.png')}
+                />
+                <Text style={styles.socialText}>
+                    Continue with facebook
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialBtn}
+                onPress={this._onPressButton}>
+                <Image
+                    style={styles.button}
+                    source={require('./myButton.png')}
+                />
+                <Text style={styles.socialText}>
+                    Continue with Linkedin
+                </Text>
+            </TouchableOpacity>
         </View>
       </View>
     );
@@ -58,24 +74,6 @@ const styles = StyleSheet.create({
     inputContainer: {
         flex: 2,
     },
-    socialContainer: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    Title1: {
-        fontSize: 40,
-        margin: 0,
-        textAlign: 'center',
-        color: 'white',
-        /*fontStyle: 'Chronicle Display Roman'*/
-    },
-    Title2: {
-        margin: 0,
-        fontSize: 20,
-        textAlign: 'center',
-        color: '#cc0000',
-        /*fontStyle: 'Chronicle Display Roman'*/
-    },
     inputBox: {
         backgroundColor: '#ffffff',
         textAlign: 'left',
@@ -84,7 +82,19 @@ const styles = StyleSheet.create({
     loginBtn: {
         marginBottom: 5,
     },
+
+    socialContainer: {
+        flex: 1,
+        flexDirection: 'column'
+    },
     socialBtn: {
         flex: 1,
-    }
+        marginLeft: 5,
+        marginRight: 5,
+        marginBottom: 5,
+    },
+    socailImage: {
+        width: 66,
+        height: 58,
+    },
 });
