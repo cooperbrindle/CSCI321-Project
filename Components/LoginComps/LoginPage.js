@@ -18,7 +18,7 @@ export default class Login extends React.Component {
         <View  style={styles.titleContainer}>
             <Image
                 style={{width: 300, height: 200}}
-                source={require('/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png')}
+                source={require('AlumniLogoOffical.png')}
             />
         </View>
 
@@ -39,7 +39,7 @@ export default class Login extends React.Component {
                 onPress={this._onPressButton}>
                 <Image
                     style={styles.button}
-                    source={require('/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png')}
+                    source={require('AlumniLogoOffical.png')}
                 />
                 <Text style={styles.socialText}>
                     Continue with facebook
@@ -49,7 +49,7 @@ export default class Login extends React.Component {
                 onPress={this._onPressButton}>
                 <Image
                     style={styles.button}
-                    source={require('/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png')}
+                    source={require('AlumniLogoOffical.png')}
                 />
                 <Text style={styles.socialText}>
                     Continue with Linkedin
