@@ -21,6 +21,11 @@ export default class Login extends React.Component {
                 source={require('./logo.png')}
             />
         </View>
+        <View style={styles.banner}>
+                <Text>
+                    Alumni
+                </Text>
+        </View>
 
 
         <View style={styles.inputContainer}>
@@ -61,14 +66,24 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#0C2340',
+
     },
     logo: {
         flex: 1,
         width: 300,
         height: 250,
     },
+    banner: {
+        flex: 1,
+        backgroundColor: '#ffffff',
+        marginLeft: 0,
+        marginRight: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        marginTop:5,
+    },
     titleContainer: {
-        flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
