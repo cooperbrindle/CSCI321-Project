@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, View} from 'react-native'; 
+import { Platform, StyleSheet, Text, TextInput, Button, View, Image} from 'react-native'; 
 
 
 export default class Login extends Component {
@@ -14,12 +14,10 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.titleContainer}>
-            <Text style={styles.Title1}>
-                UOW
-            </Text>
-            <Text style={styles.Title2}>
-                Alumni
-            </Text>
+            <Image
+                    style={{width: 200, height: 150}}
+                    source={{uri: '/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/AlumniLogoOffical.png'}}
+            />
         </View>
         <View style={styles.inputContainer}>
             <TextInput style={styles.inputBox}
@@ -31,15 +29,14 @@ export default class Login extends Component {
                 onPress={this.loginPress}/>
         </View>
         <View style={styles.socialContainer}>
-            <Button style={styles.socialBtn}
-                title="Google"
-                onPress={{}}/>
-            <Button style={styles.socialBtn}
-                title="Facebook"
-                onPress={{}}/>
-            <Button style={styles.socialBtn}
-                title="LinkedIn"
-                onPress={{}}/>
+            <Image
+                style={{width: 66, height: 58}}
+                source={{uri: 'https://en.facebookbrand.com/wp-content/uploads/2016/05/flogo_rgb_hex-brc-site-250.png'}}
+            />
+            <Image
+                style={{width: 66, height: 58}}
+                source={{uri: '/Users/cooperbrindle/OneDrive - University of Wollongong/UOW ComSci/CSIT321/CSCI321-Project/assets/In-2C-CMYK-0p5in-R.png'}}
+            />
         </View>
       </View>
     );

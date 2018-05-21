@@ -1,6 +1,10 @@
 package com.testproject;
 
 import android.app.Application;
+import java.util.Arrays;
+import java.util.List;
+ 
+import com.oblador.vectoricons.VectorIconsPackage;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -42,4 +46,11 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
+  @Override
+protected List<ReactPackage> getPackages() {
+  return Arrays.<ReactPackage>asList(
+      new MainReactPackage(),
+      new VectorIconsPackage() //add this
+  );
+}
 }

@@ -7,7 +7,6 @@ import {
   Text,
   View
 } from 'react-native'; 
-import { StackNavigator } from 'react-navigation';
 
 import LoginPage from './Components/LoginComps/LoginPage';
 import FeedPage from './Components/FeedComps/FeedPage';
@@ -26,7 +25,7 @@ export default class App extends Component<Props> {
   render() {
 	return (
     //< navStack />
-    < FeedPage />
+    < LoginPage />
 	);
   }
 }
