@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, 
-    TextInput, Button, View, Image, TouchableOpacity} from 'react-native'; 
+    TextInput, Button, View, Image, TouchableOpacity, TouchableHighlight} from 'react-native'; 
 import { createStackNavigator } from 'react-navigation';
 
 
@@ -18,7 +18,7 @@ export default class Login extends React.Component {
         <View  style={styles.titleContainer}>
             <Image
                 style={{width: 300, height: 200}}
-                source={require('AlumniLogoOffical.png')}
+                source={require('./AlumniLogoOffical.png')}
             />
         </View>
 
@@ -35,26 +35,26 @@ export default class Login extends React.Component {
 
 
         <View style={styles.socialContainer}>
-            <TouchableOpacity style={styles.socialBtn}
+            <TouchableHighlight style={styles.socialBtn}
                 onPress={this._onPressButton}>
                 <Image
                     style={styles.button}
-                    source={require('AlumniLogoOffical.png')}
+                    source={require('./AlumniLogoOffical.png')}
                 />
                 <Text style={styles.socialText}>
                     Continue with facebook
                 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.socialBtn}
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.socialBtn}
                 onPress={this._onPressButton}>
                 <Image
                     style={styles.button}
-                    source={require('AlumniLogoOffical.png')}
+                    source={require('./AlumniLogoOffical.png')}
                 />
                 <Text style={styles.socialText}>
                     Continue with Linkedin
                 </Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
         </View>
       </View>
     );
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         marginBottom: 5,
-        backgroundColor: '#ffffff'
+        backgroundColor: 'white',
     },
     socailImage: {
         width: 66,
