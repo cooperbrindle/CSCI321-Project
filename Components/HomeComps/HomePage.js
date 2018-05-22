@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View} from 'react-native'; 
+import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight} from 'react-native'; 
 
 import { EventSingle } from './EventSingle.js';
 
@@ -15,7 +15,7 @@ const tempEvents = [
 	{title: "Event6"}
 ]
 
-export default class Feed extends Component {
+export default class HomePage extends Component {
 	constructor(props){
 		super(props);
 		this.props.eventDataSource = tempEvents;
@@ -30,28 +30,70 @@ export default class Feed extends Component {
 		)
 	}
 
+	renderdashBtn(title){
+		return(
+			<TouchableHighlight style={styles.dashBtn}
+					onPress={this._onPressButton}>
+				<Text style={styles.dashText}>
+					{title}
+				</Text>
+            </TouchableHighlight>
+		)
+	}
+
+	renderHighlight(title, day, month){
+		return(
+			<TouchableHighlight style={styles.hlBtn}
+					onPress={this._onPressButton}>
+				<View style={styles.hlBtnView}>
+					<View style={styles.hlCont}>
+						<Text style={styles.hlTitle}>
+							{title}
+						</Text>
+					</View>
+					<View style={styles.hlDate}>
+						<Text style={styles.hlDay}>
+							{day}
+						</Text>
+						<Text style={styles.hlMonth}>
+							{month}
+						</Text>
+					</View>
+				</View>
+            </TouchableHighlight>
+		)
+	}
+
 	render() {
 		return (
-		  <View style={styles.container}>
-					<View style={styles.topMenuBar}>
-						<Text>Menu</Text>
-					</View>
-					<View style={styles.topSection}>
-						<View style={styles.middle}>
-						  <Text>Update Details</Text>
-						</View>
-						<View style={styles.middle}>
-						  <Text>Outlook</Text>
-						</View>
-					</View>
-					<FlatList
-						data={this.props.eventDataSource}
-						renderItem={({ item }) => {this.renderEventSingle.bind(this)}}
-						keyExtractor={item => item.title}
-					/>
+			<View style={styles.container}>
+					
+				<View style={styles.dashboard}>
+					{this.renderdashBtn("Update Details")}
+					{this.renderdashBtn("Outlook")}
 				</View>
+
+				<View style={styles.dashboard}>
+					{this.renderdashBtn("Events")}
+					{this.renderdashBtn("Promotions")}
+				</View>
+
+				<View style={styles.dashboard}>
+					{this.renderdashBtn("Networking")}
+					{this.renderdashBtn("Mentoring")}
+				</View>
+
+				<View style={styles.highlightsContainer}>
+					<Text style={styles.highlightHeading}>
+						Highlights
+					</Text>
+
+					{this.renderHighlight("Presentation", "25", "MAY", )}
+				</View>
+
+			</View>
 		);
-	  }
+		}
 	};
 	
 	const styles = StyleSheet.create({
@@ -59,26 +101,78 @@ export default class Feed extends Component {
 			flex: 1,
 			backgroundColor: '#0C2340',
 		},
-		topMenuBar: {
-			height: 30,
-			backgroundColor: '#0047BB',
-			//fontSize: 12,
-			justifyContent: 'center',
+		
+
+		/////////////////////////////////////////DASH BOARD
+		dashboard: {
+			flex: 1,
+			flexDirection: 'row',
+			marginLeft: 5,
+			marginRight: 5,
+
 		},
-		topSection: {
+				dashBtn: {
+					flex: 1,
+					margin: 5,
+					backgroundColor: 'white',
+					justifyContent: 'center',
+					alignContent: 'center',
+				},
+						dashText: {
+							color: '#0C2340',
+							fontSize: 18,
+							//fontWeight: 'bold',
+							textAlign: 'center',
+							alignSelf: 'center',
+						},
+
+
+		/////////////////////////////////////////HIGHLIGHTS
+		highlightsContainer: {
+			flex: 2,
+		},
+		highlightHeading: {
+			color: 'white',
+			marginLeft: 10,
+			marginTop: 20,
+			marginBottom: 20,
+			fontSize: 28,
+		},
+		/////////////Button
+		hlBtn: {
+			flex: 1,
+			backgroundColor: 'white',
+			borderWidth: 2,
+			borderColor: 'white',
+			marginBottom: 50,
+		},
+		hlBtnView: {
 			flex: 1,
 			flexDirection: 'row',
 		},
-		middle: {
-		  flex: 1,
-		  height: 60,
-		  backgroundColor:'#d9d9d6',
-		  //fontSize:10,
-		  alignItems: 'center',
-		  justifyContent: 'center',
-		},
-		events: {
-	
-		},
-		
+				hlCont: {
+					flex: 2.5,
+				},
+						hlTitle: {
+							fontSize: 24,
+							color: '#0C2340',
+							margin: 30,
+						},
+				hlDate: {
+					flex: 1,
+					backgroundColor: '#0C2340',
+					justifyContent: 'center',
+				},
+						hlDay: {
+							fontSize: 36,
+							textAlign: 'center',
+							color: 'white',
+							margin: 0,
+						},
+						hlMonth: {
+							fontSize: 18,
+							textAlign: 'center',
+							color: '#cc0000',
+							margin: 0,
+						},
 	});
