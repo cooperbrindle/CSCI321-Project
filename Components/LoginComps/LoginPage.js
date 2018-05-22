@@ -2,14 +2,14 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, 
-    TextInput, Button, View, Image, TouchableOpacity, TouchableHighlight} from 'react-native'; 
+    TextInput, Button, View, Image, TouchableHighlight} from 'react-native'; 
 import { createStackNavigator } from 'react-navigation';
 
 
 export default class Login extends React.Component {
 
     loginPress() {
-        this.props.navigation.navigate('Feed')
+        this.props.navigation.navigate('Home')
     };
 
   render() {
@@ -37,7 +37,7 @@ export default class Login extends React.Component {
             <TextInput style={styles.inputBox}
                 placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='grey'/>
             <TouchableHighlight style={styles.loginBtn}
-                onPress={() => this.props.navigation.navigate('Feed')}>
+                onPress={() => this.props.navigation.navigate('Home')}>
                 <Text style={styles.loginText}>
                         LOGIN
                 </Text>
