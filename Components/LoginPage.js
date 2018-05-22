@@ -6,6 +6,10 @@ import { Platform, StyleSheet, Text,
 import { createStackNavigator } from 'react-navigation';
 
 
+const uowLogo = './assets/logo.png';
+const fbLogo = './assets/fblogo.png';
+const liLogo = './assets/lilogo.png';
+
 export default class Login extends React.Component {
 
     loginPress() {
@@ -22,7 +26,7 @@ export default class Login extends React.Component {
                 style={styles.logo}
                 resizeMode='center'
                 resizeMethod='resize'
-                source={require('./logo.png')}
+                source={require(uowLogo)}
             />
             <View style={styles.banner}>
                     <Text style={styles.bannerText}>
@@ -52,7 +56,7 @@ export default class Login extends React.Component {
                 <View style={styles.socialBtnView}>
                     <Image
                         style={styles.socialImage}
-                        source={require('./fblogo.png')}
+                        source={require(fbLogo)}
                     />
 
                     <Text style={styles.socialText}>
@@ -65,7 +69,7 @@ export default class Login extends React.Component {
                 <View style={styles.socialBtnView}>
                     <Image
                         style={styles.socialImage}
-                        source={require('./linkedinlogo.png')}
+                        source={require(liLogo)}
                     />
                     
                     <Text style={styles.socialText}>

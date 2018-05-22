@@ -8,8 +8,8 @@ import {
   View
 } from 'react-native'; 
 
-import LoginPage from './Components/LoginComps/LoginPage';
-import HomePage from './Components/HomeComps/HomePage';
+import LoginPage from './Components/LoginPage';
+import HomePage from './Components/HomePage';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
@@ -23,7 +23,7 @@ const NavStack = createStackNavigator({
 
 const RootStack = createSwitchNavigator({
   //Routs
-    Login: { screen: LoginPage},
+	Login: { screen: LoginPage},
   	Home: { screen: NavStack},
   },{ //options
   initialRouteName: 'Login',
@@ -32,7 +32,7 @@ const RootStack = createSwitchNavigator({
 type Props = {} ;
 export default class App extends React.Component{
   render() {
-    return <RootStack />;
+	return <RootStack />;
   }
 }
 

@@ -1,9 +1,9 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight} from 'react-native';
+import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
-import { EventSingle } from './EventSingle.js';
+import { EventSingle } from './HomeComps/EventSingle.js';
 
 
 const tempEvents = [
@@ -17,13 +17,21 @@ const tempEvents = [
 
 
 
-
 export default class HomePage extends Component {
 	constructor(props){
 		super(props);
 		this.props.eventDataSource = tempEvents;
 	}
-
+	static navigationOptions = {
+		title: 'Home',
+		headerStyle: {
+			backgroundColor: '#0C2340',
+		},
+		headerTintColor: 'white',
+		headerTitleStyle: {
+			fontWeight: 'bold',
+		},
+	}
 
 	renderEventSingle(event){
 		return(
@@ -70,7 +78,7 @@ export default class HomePage extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-					
+				
 				<View style={styles.dashboard}>
 					{this.renderdashBtn("Update Details")}
 					{this.renderdashBtn("Outlook")}
@@ -110,9 +118,9 @@ export default class HomePage extends Component {
 		dashboard: {
 			flex: 1,
 			flexDirection: 'row',
-			marginLeft: 5,
-			marginRight: 5,
-
+			marginLeft: 7,
+			marginRight: 7,
+			justifyContent: 'space-between',
 		},
 				dashBtn: {
 					flex: 1,
@@ -132,7 +140,7 @@ export default class HomePage extends Component {
 
 		/////////////////////////////////////////HIGHLIGHTS
 		highlightsContainer: {
-			flex: 2,
+			flex: 1.5,
 		},
 		highlightHeading: {
 			color: 'white',
@@ -147,7 +155,9 @@ export default class HomePage extends Component {
 			backgroundColor: 'white',
 			borderWidth: 2,
 			borderColor: 'white',
-			marginBottom: 50,
+			marginBottom: 20,
+			marginLeft: 10,
+			marginRight: 10,
 		},
 		hlBtnView: {
 			flex: 1,
@@ -155,11 +165,12 @@ export default class HomePage extends Component {
 		},
 				hlCont: {
 					flex: 2.5,
+					padding: 20,
 				},
 						hlTitle: {
 							fontSize: 24,
 							color: '#0C2340',
-							margin: 30,
+							//margin: 30,
 						},
 				hlDate: {
 					flex: 1,
