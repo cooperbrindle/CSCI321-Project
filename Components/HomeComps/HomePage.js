@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight} from 'react-native'; 
+import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight} from 'react-native';
 
 import { EventSingle } from './EventSingle.js';
 
@@ -14,6 +14,9 @@ const tempEvents = [
 	{title: "Event5"},
 	{title: "Event6"}
 ]
+
+
+
 
 export default class HomePage extends Component {
 	constructor(props){

@@ -9,25 +9,30 @@ import {
 } from 'react-native'; 
 
 import LoginPage from './Components/LoginComps/LoginPage';
-/*import HomePage from './Components/HomeComps/HomePage';
+import HomePage from './Components/HomeComps/HomePage';
 
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 
-const RootStack = createStackNavigator({
-	//Routs
-  	Login: { screen: LoginPage},
+const NavStack = createStackNavigator({
+  //Routs
   	Home: { screen: HomePage},
   },{ //options
+  initialRouteName: 'Home',
+});
+
+const RootStack = createSwitchNavigator({
+  //Routs
+    Login: { screen: LoginPage},
+  	Home: { screen: NavStack},
+  },{ //options
   initialRouteName: 'Login',
-  headerStyle: {backgroundColor: '#0C2340'},
-  headerTitleStyle: {color: 'white'},
-});*/
+});
 
 type Props = {} ;
 export default class App extends React.Component{
   render() {
-    return <LoginPage />;
+    return <RootStack />;
   }
 }
 
