@@ -49,15 +49,29 @@ export default class Login extends React.Component {
         <View style={styles.socialContainer}>
             <TouchableHighlight style={styles.socialBtnFB}
                 onPress={this._onPressButton}>
+                <View style={styles.socialBtnView}>
+                    <Image
+                        style={styles.socialImage}
+                        source={require('./fblogo.png')}
+                    />
+
                     <Text style={styles.socialText}>
                         Continue with facebook
                     </Text>
+                </View>
             </TouchableHighlight>
             <TouchableHighlight style={styles.socialBtnLI}
                 onPress={this._onPressButton}>
+                <View style={styles.socialBtnView}>
+                    <Image
+                        style={styles.socialImage}
+                        source={require('./linkedinlogo.png')}
+                    />
+                    
                     <Text style={styles.socialText}>
                         Continue with Linkedin
                     </Text>
+                </View>
             </TouchableHighlight>
         </View>
       </View>
@@ -72,23 +86,26 @@ const styles = StyleSheet.create({
     },
 
     logoCont: {
+        marginTop: 50,
         flex: 2,
     },
     logo: {
-        width: 252,
-        height: 101,
+        width: 180,
+        height: 72,
         flexDirection: 'row',
         alignSelf: 'center',
     },
     banner: {
+        marginTop: 8,
         backgroundColor: 'white',
         margin: 0,
         justifyContent: 'center',
         padding: 10,
+        paddingBottom: 20,
         flexDirection: 'row',
     },
     bannerText: {
-        fontSize: 24,
+        fontSize: 22,
         color: '#0C2340',
         fontWeight: 'bold',
     },
@@ -96,11 +113,11 @@ const styles = StyleSheet.create({
 
     /////////////////////////////////////////INPUT STYLES
     inputContainer: {
-        flex: 2,
+        flex: 2.5,
         marginLeft: 5,
         marginRight: 5,
-        marginTop: 40,
         marginBottom: 60,
+        alignContent: 'flex-start',
     },
     inputBox: {
         alignItems: 'center',
@@ -109,8 +126,8 @@ const styles = StyleSheet.create({
         marginTop: 0,
         paddingLeft: 10,
         backgroundColor:'#d9d9d6',
-        height: 45,
-        borderRadius:10,
+        height: 50,
+        borderRadius:5,
         borderWidth: 1,
     },
     loginBtn: {
@@ -118,7 +135,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop:5,
         backgroundColor:'#0C2340',
-        height: 45,
+        height: 50,
         borderRadius:10,
         borderWidth: 2,
         borderColor: '#d9d9d6',
@@ -135,34 +152,40 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     socialBtnFB: {
-        alignItems: 'center',
-        height: 45,
+        height: 50,
         backgroundColor:'#3B5998',
         borderRadius:10,
         borderWidth: 1,
-        alignContent: 'center',
         justifyContent: 'center',
     },
     socialBtnLI: {
-        alignItems: 'center',
-        height: 45,
+        height: 50,
         backgroundColor:'#0077B5',
         borderRadius:10,
         borderWidth: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
-    },/*
-    socialView: {
-        flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'center',
     },
+    socialBtnView: {
+        flex: 1,
+        flexDirection: 'row',
+        alignContent: 'center',
+        alignItems: 'center',
+        //justifyContent: 'center',
+    },
     socialImage: {
-        width: 20,
-        height: 20,
-    },*/
+        position: 'absolute',
+        marginLeft: 10,
+        marginTop: 10,
+        width: 30,
+        height: 30,
+        margin: 0,
+        alignSelf: 'flex-start',
+    },
     socialText: {
+        flex: 1,
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        textAlign: 'center',
     },
 });

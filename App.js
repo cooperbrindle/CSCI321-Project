@@ -9,7 +9,7 @@ import {
 } from 'react-native'; 
 
 import LoginPage from './Components/LoginComps/LoginPage';
-import FeedPage from './Components/FeedComps/FeedPage';
+/*import HomePage from './Components/HomeComps/HomePage';
 
 import { createStackNavigator } from 'react-navigation';
 
@@ -17,15 +17,17 @@ import { createStackNavigator } from 'react-navigation';
 const RootStack = createStackNavigator({
 	//Routs
   	Login: { screen: LoginPage},
-  	Feed: { screen: FeedPage},
+  	Home: { screen: HomePage},
   },{ //options
-	initialRouteName: 'Login',
-});
+  initialRouteName: 'Login',
+  headerStyle: {backgroundColor: '#0C2340'},
+  headerTitleStyle: {color: 'white'},
+});*/
 
 type Props = {} ;
 export default class App extends React.Component{
   render() {
-    return <RootStack />;
+    return <LoginPage />;
   }
 }
 
