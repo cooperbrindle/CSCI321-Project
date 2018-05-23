@@ -12,6 +12,7 @@ import LoginPage from './Components/LoginPage';
 import HomePage from './Components/HomePage';
 import EventSingle from './Components/EventSingle';
 import HomePage2 from './Components/HomePage2';
+import UpdateDetailsMenu from './Components/UpdateDetailsMenu';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
@@ -21,6 +22,7 @@ const NavStack = createStackNavigator({
     Home: { screen: HomePage},
     EventSingle: { screen: EventSingle},
     Home2: { screen: HomePage2},
+    UDMenu: { screen: UpdateDetailsMenu},
   },{ //options
   initialRouteName: 'Home',
 });
