@@ -68,17 +68,12 @@ export default class EventSingle extends Component {
             </View>
 		)
 	}
-	renderdashBtn(title){
+	renderInfoBanner(title){
 		return(
 			<View style={styles.dashBtn}
 					onPress={this._onPressButton}>
 				<View style={styles.dashBtnContainer}>
-					<Image
-                        style={styles.dashBtnImg}
-                        source={require(dashTmp)}
-                    />
 					<Text style={styles.dashText}>
-						{title}
 					</Text>
 				</View>
             </View>
@@ -106,7 +101,7 @@ export default class EventSingle extends Component {
 				</View>
 
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Events")}
+					{this.renderInfoBanner("Events")}
 				</View>
 				<View style={styles.headingContainer}>
 					{this.renderRegister()}
@@ -144,11 +139,6 @@ export default class EventSingle extends Component {
 					justifyContent: 'center',
 					alignContent: 'center',
 				},
-						dashBtnImg: {
-							width: 45,
-							height: 45,
-							alignSelf: 'center',
-						},
 						dashText: {
 							color: '#0C2340',
 							fontSize: 18,
@@ -183,7 +173,6 @@ export default class EventSingle extends Component {
 			marginLeft: 10,
 			marginRight: 10,
 		},
-		/////////////Button
 		headingView: {
 			flex: 1,
 			flexDirection: 'row',
