@@ -16,8 +16,9 @@ const tempEvents = [
 ]
 
 const dashTmp = './assets/dashTmp.png';
+const uowLogo = './assets/logo.png';
 
-export default class HomePage extends Component {
+export default class HomePage2 extends Component {
 	constructor(props){
 		super(props);
 		this.props.eventDataSource = tempEvents;
@@ -57,7 +58,22 @@ export default class HomePage extends Component {
             </TouchableHighlight>
 		)
 	}
-
+	renderdashBtnSmall(title){
+		return(
+			<TouchableHighlight style={styles.dashBtnSmall}
+					onPress={this._onPressButton}>
+				<View style={styles.dashBtnContainerSmall}>
+					<Image
+                        style={styles.dashBtnImgSmall}
+                        source={require(dashTmp)}
+                    />
+					<Text style={styles.dashTextSmall}>
+						{title}
+					</Text>
+				</View>
+            </TouchableHighlight>
+		)
+	}
 	renderHighlight(title, day, month){
 		return(
 			<TouchableHighlight style={styles.hlBtn}
@@ -84,20 +100,30 @@ export default class HomePage extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+				<View style={styles.logoCont}>
+					<Image
+						style={styles.logo}
+						resizeMode='center'
+						resizeMethod='resize'
+						source={require(uowLogo)}
+					/>
+					<View style={styles.banner}>
+							<Text style={styles.bannerText}>
+								ALUMNI
+							</Text>
+					</View>
+				</View>
 				
 				<View style={styles.dashboard}>
 					{this.renderdashBtn("Update Details")}
-					{this.renderdashBtn("Outlook")}
-				</View>
-
-				<View style={styles.dashboard}>
 					{this.renderdashBtn("Events")}
-					{this.renderdashBtn("Promotions")}
 				</View>
 
-				<View style={styles.dashboard}>
-					{this.renderdashBtn("Networking")}
-					{this.renderdashBtn("Mentoring")}
+				<View style={styles.dashboardSmall}>
+					{this.renderdashBtnSmall("Outlook")}
+					{this.renderdashBtnSmall("Promotions")}
+					{this.renderdashBtnSmall("Networking")}
+					{this.renderdashBtnSmall("Mentoring")}
 				</View>
 
 				<View style={styles.highlightsContainer}>
@@ -118,6 +144,33 @@ export default class HomePage extends Component {
 			flex: 1,
 			backgroundColor: '#0C2340',
 		},
+
+		/////////////////////////////////////////LOGO
+		logoCont: {
+			//marginTop: 10,
+			flex: 1,
+		},
+		logo: {
+			width: 180,
+			height: 72,
+			flexDirection: 'row',
+			alignSelf: 'center',
+		},
+		banner: {
+			//marginTop: 8,
+			backgroundColor: 'white',
+			margin: 0,
+			justifyContent: 'center',
+			padding: 5,
+			paddingBottom: 10,
+			flexDirection: 'row',
+			marginBottom: 10,
+		},
+		bannerText: {
+			fontSize: 18,
+			color: '#0C2340',
+			fontWeight: 'bold',
+		},
 		
 
 		/////////////////////////////////////////DASH BOARD
@@ -136,7 +189,6 @@ export default class HomePage extends Component {
 					alignContent: 'center',
 				},
 				dashBtnContainer: {
-					//flexDirection: 'column',
 					justifyContent: 'center',
 					alignContent: 'center',
 				},
@@ -148,11 +200,39 @@ export default class HomePage extends Component {
 						dashText: {
 							color: '#0C2340',
 							fontSize: 18,
-							//fontWeight: 'bold',
 							textAlign: 'center',
 							alignSelf: 'center',
 						},
-
+/////////////////////////////////////////DASH BOARD    SMALL
+dashboardSmall: {
+	flex: 0.75,
+	flexDirection: 'row',
+	marginLeft: 7,
+	marginRight: 7,
+	justifyContent: 'space-between',
+},
+		dashBtnSmall: {
+			flex: 1,
+			margin: 5,
+			backgroundColor: 'white',
+			justifyContent: 'center',
+			alignContent: 'center',
+		},
+		dashBtnContainerSmall: {
+			justifyContent: 'center',
+			alignContent: 'center',
+		},
+				dashBtnImgSmall: {
+					width: 30,
+					height: 30,
+					alignSelf: 'center',
+				},
+				dashTextSmall: {
+					color: '#0C2340',
+					fontSize: 12,
+					textAlign: 'center',
+					alignSelf: 'center',
+				},
 
 		/////////////////////////////////////////HIGHLIGHTS
 		highlightsContainer: {
