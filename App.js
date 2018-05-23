@@ -10,13 +10,15 @@ import {
 
 import LoginPage from './Components/LoginPage';
 import HomePage from './Components/HomePage';
+import HomePage2 from './Components/HomePage2';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 
 const NavStack = createStackNavigator({
   //Routs
-  	Home: { screen: HomePage},
+    Home: { screen: HomePage},
+    Home2: { screen: HomePage2},
   },{ //options
   initialRouteName: 'Home',
 });
