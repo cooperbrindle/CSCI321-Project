@@ -45,11 +45,7 @@ export default class HomePage extends Component {
 	renderdashBtn(title){
 		return(
 			<TouchableHighlight style={styles.dashBtn}
-<<<<<<< HEAD
-			onPress={this._onPressButton}>
-=======
 					onPress={() => this.props.navigation.navigate('Home2')}>
->>>>>>> 391b49daaca612e45bd40605f8568edfbcfb0290
 				<View style={styles.dashBtnContainer}>
 					<Image
                         style={styles.dashBtnImg}
