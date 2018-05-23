@@ -1,5 +1,4 @@
 
-
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
@@ -15,6 +14,7 @@ const tempEvents = [
 
 const dashTmp = './assets/dashTmp.png';
 const uowLogo = './assets/logo.png';
+const eventTmp = './assets/tree.jpg';
 
 export default class EventSingle extends Component {
 	constructor(props){
@@ -22,7 +22,7 @@ export default class EventSingle extends Component {
 		this.props.eventDataSource = tempEvents;
 	}
 	static navigationOptions = {
-		title: 'EventSingle',
+		title: '*EventTitle*',
 		headerStyle: {
 			backgroundColor: '#0C2340',
 		},
@@ -31,40 +31,16 @@ export default class EventSingle extends Component {
 			fontWeight: 'bold',
 		},
 	}
-
-	renderEventSingle(event){
+	renderDescription(title, day, month){
 		return(
-			<EventSingle
-				title={event.title}
-			/>
-		)
-	}
-
-	renderdashBtn(title){
-		return(
-			<TouchableHighlight style={styles.dashBtn}
-					onPress={this._onPressButton}>
-				<View style={styles.dashBtnContainer}>
-					<Image
-                        style={styles.dashBtnImg}
-                        source={require(dashTmp)}
-                    />
-					<Text style={styles.dashText}>
-						{title}
-					</Text>
-				</View>
-            </TouchableHighlight>
-		)
-	}
-
-	renderHighlight(title, day, month){
-		return(
-			<TouchableHighlight style={styles.hlBtn}
-					onPress={this._onPressButton}>
-				<View style={styles.hlBtnView}>
+			<View style={styles.heading}>
+				<View style={styles.headingView}>
 					<View style={styles.hlCont}>
 						<Text style={styles.hlTitle}>
 							{title}
+						</Text>
+						<Text>
+							Join fellow alumni for drinks and canapes
 						</Text>
 					</View>
 					<View style={styles.hlDate}>
@@ -76,6 +52,45 @@ export default class EventSingle extends Component {
 						</Text>
 					</View>
 				</View>
+            </View>
+		)
+	}
+	renderPic(){
+		return(
+			<View style={styles.dashBtn}>
+				<View style={styles.dashBtnContainer}>
+					<Image
+						style={styles.eventImg}
+						resizeMode={'center'}
+						source={require(eventTmp)}	
+                    />
+				</View>
+            </View>
+		)
+	}
+	renderdashBtn(title){
+		return(
+			<View style={styles.dashBtn}
+					onPress={this._onPressButton}>
+				<View style={styles.dashBtnContainer}>
+					<Image
+                        style={styles.dashBtnImg}
+                        source={require(dashTmp)}
+                    />
+					<Text style={styles.dashText}>
+						{title}
+					</Text>
+				</View>
+            </View>
+		)
+	}
+	renderRegister(){
+		return(
+			<TouchableHighlight style={styles.registerBtn}
+					onPress={this._onPressButton}>
+				<Text>
+					Register
+				</Text>
             </TouchableHighlight>
 		)
 	}
@@ -83,43 +98,19 @@ export default class EventSingle extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View style={styles.logoCont}>
-					<Image
-						style={styles.logo}
-						resizeMode='center'
-						resizeMethod='resize'
-						source={require(uowLogo)}
-					/>
-					<View style={styles.banner}>
-							<Text style={styles.bannerText}>
-								ALUMNI
-							</Text>
-					</View>
-				</View>
-				
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Update Details")}
-					{this.renderdashBtn("Outlook")}
+					{this.renderDescription("Boston Alumni Event 2018", "25", "MAY", )}
+				</View>		
+				<View style={styles.dashboard}>
+					{this.renderPic()}
 				</View>
 
 				<View style={styles.dashboard}>
 					{this.renderdashBtn("Events")}
-					{this.renderdashBtn("Promotions")}
 				</View>
-
-				{/*<View style={styles.dashboard}>
-					{this.renderdashBtn("Networking")}
-					{this.renderdashBtn("Mentoring")}
-				</View>*/}
-
-				<View style={styles.highlightsContainer}>
-					<Text style={styles.highlightHeading}>
-						Highlights
-					</Text>
-
-					{this.renderHighlight("Presentation", "25", "MAY", )}
-				</View>
-
+				<View style={styles.headingContainer}>
+					{this.renderRegister()}
+				</View>	
 			</View>
 		);
 		}
@@ -130,35 +121,10 @@ export default class EventSingle extends Component {
 			flex: 1,
 			backgroundColor: '#0C2340',
 		},
-
-		/////////////////////////////////////////LOGO
-		logoCont: {
-			//marginTop: 10,
-			flex: 1,
-		},
-		logo: {
-			width: 180,
-			height: 72,
-			flexDirection: 'row',
+		/////////////////////////////////////////EVENT IMAGE
+		eventImg: {
 			alignSelf: 'center',
 		},
-		banner: {
-			//marginTop: 8,
-			backgroundColor: 'white',
-			margin: 0,
-			justifyContent: 'center',
-			padding: 5,
-			paddingBottom: 10,
-			flexDirection: 'row',
-			marginBottom: 10,
-		},
-		bannerText: {
-			fontSize: 18,
-			color: '#0C2340',
-			fontWeight: 'bold',
-		},
-		
-
 		/////////////////////////////////////////DASH BOARD
 		dashboard: {
 			flex: 1,
@@ -190,29 +156,35 @@ export default class EventSingle extends Component {
 							alignSelf: 'center',
 						},
 
-
-		/////////////////////////////////////////HIGHLIGHTS
-		highlightsContainer: {
-			flex: 1.5,
+		/////////////////////////////////////////REGISTER
+		registerContainer: {
+			flex: 1,
 		},
-		highlightHeading: {
-			color: 'white',
-			marginLeft: 10,
-			marginTop: 20,
-			marginBottom: 20,
-			fontSize: 28,
+		registerBtn: {
+			justifyContent: 'center',
+			alignItems: 'center',
+			marginTop:5,
+			backgroundColor:'#0C2340',
+			height: 50,
+			borderRadius:10,
+			borderWidth: 2,
+			borderColor: '#d9d9d6',
 		},
-		/////////////Button
-		hlBtn: {
+		/////////////////////////////////////////HEADING
+		headingContainer: {
+			flex: 1,
+		},
+		heading: {
 			flex: 1,
 			backgroundColor: 'white',
 			borderWidth: 2,
 			borderColor: 'white',
-			marginBottom: 20,
+			marginBottom: 5,
 			marginLeft: 10,
 			marginRight: 10,
 		},
-		hlBtnView: {
+		/////////////Button
+		headingView: {
 			flex: 1,
 			flexDirection: 'row',
 		},
@@ -223,6 +195,15 @@ export default class EventSingle extends Component {
 						hlTitle: {
 							fontSize: 24,
 							color: '#0C2340',
+							textAlign: 'center',
+							alignSelf: 'center',
+							//margin: 30,
+						},
+						hlText: {
+							fontSize: 12,
+							color: '#0C2340',
+							textAlign: 'center',
+							alignSelf: 'center',
 							//margin: 30,
 						},
 				hlDate: {
