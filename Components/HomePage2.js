@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
-import { EventSingle } from './HomeComps/EventSingle.js';
+import { EventSingle } from './EventSingle.js';
 
 
 const tempEvents = [
