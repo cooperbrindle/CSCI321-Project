@@ -16,7 +16,6 @@ const tempEvents = [
 ]
 
 const dashTmp = './assets/dashTmp.png';
-const uowLogo = './assets/logo.png';
 
 export default class HomePage extends Component {
 	constructor(props){
@@ -85,19 +84,6 @@ export default class HomePage extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View style={styles.logoCont}>
-					<Image
-						style={styles.logo}
-						resizeMode='center'
-						resizeMethod='resize'
-						source={require(uowLogo)}
-					/>
-					<View style={styles.banner}>
-							<Text style={styles.bannerText}>
-								ALUMNI
-							</Text>
-					</View>
-				</View>
 				
 				<View style={styles.dashboard}>
 					{this.renderdashBtn("Update Details")}
@@ -109,10 +95,10 @@ export default class HomePage extends Component {
 					{this.renderdashBtn("Promotions")}
 				</View>
 
-				{/*<View style={styles.dashboard}>
+				<View style={styles.dashboard}>
 					{this.renderdashBtn("Networking")}
 					{this.renderdashBtn("Mentoring")}
-				</View>*/}
+				</View>
 
 				<View style={styles.highlightsContainer}>
 					<Text style={styles.highlightHeading}>
@@ -132,33 +118,6 @@ export default class HomePage extends Component {
 			flex: 1,
 			backgroundColor: '#0C2340',
 		},
-
-		/////////////////////////////////////////LOGO
-		logoCont: {
-			//marginTop: 10,
-			flex: 1,
-		},
-		logo: {
-			width: 180,
-			height: 72,
-			flexDirection: 'row',
-			alignSelf: 'center',
-		},
-		banner: {
-			//marginTop: 8,
-			backgroundColor: 'white',
-			margin: 0,
-			justifyContent: 'center',
-			padding: 5,
-			paddingBottom: 10,
-			flexDirection: 'row',
-			marginBottom: 10,
-		},
-		bannerText: {
-			fontSize: 18,
-			color: '#0C2340',
-			fontWeight: 'bold',
-		},
 		
 
 		/////////////////////////////////////////DASH BOARD
@@ -177,6 +136,7 @@ export default class HomePage extends Component {
 					alignContent: 'center',
 				},
 				dashBtnContainer: {
+					//flexDirection: 'column',
 					justifyContent: 'center',
 					alignContent: 'center',
 				},
@@ -188,6 +148,7 @@ export default class HomePage extends Component {
 						dashText: {
 							color: '#0C2340',
 							fontSize: 18,
+							//fontWeight: 'bold',
 							textAlign: 'center',
 							alignSelf: 'center',
 						},
