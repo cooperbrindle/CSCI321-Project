@@ -42,10 +42,10 @@ export default class HomePage extends Component {
 		)
 	}
 
-	renderdashBtn(title){
+	renderdashBtn(title, nav){
 		return(
 			<TouchableHighlight style={styles.dashBtn}
-					onPress={() => this.props.navigation.navigate('Home2')}>
+					onPress={() => this.props.navigation.navigate(nav)}>
 				<View style={styles.dashBtnContainer}>
 					<Image
                         style={styles.dashBtnImg}
@@ -100,13 +100,13 @@ export default class HomePage extends Component {
 				</View>
 				
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Update Details")}
-					{this.renderdashBtn("Outlook")}
+					{this.renderdashBtn("Update Details", 'UDMenu')}
+					{this.renderdashBtn("Outlook", 'Home2')}
 				</View>
 
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Events")}
-					{this.renderdashBtn("Promotions")}
+					{this.renderdashBtn("Events", 'Home2')}
+					{this.renderdashBtn("Promotions", 'Home2')}
 				</View>
 
 				{/*<View style={styles.dashboard}>
