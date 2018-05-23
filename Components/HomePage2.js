@@ -200,6 +200,7 @@ export default class HomePage2 extends Component {
 						dashText: {
 							color: '#0C2340',
 							fontSize: 18,
+							marginTop: 10,
 							textAlign: 'center',
 							alignSelf: 'center',
 						},
@@ -230,6 +231,7 @@ dashboardSmall: {
 				dashTextSmall: {
 					color: '#0C2340',
 					fontSize: 12,
+					marginTop: 10,
 					textAlign: 'center',
 					alignSelf: 'center',
 				},
