@@ -3,7 +3,9 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
-import { EventSingle } from './EventSingle.js';
+import { EventSingle } from './EventSingle';
+
+import { DashButton } from './dashButton';
 
 
 const tempEvents = [
@@ -17,6 +19,7 @@ const tempEvents = [
 
 const dashTmp = './assets/dashTmp.png';
 const uowLogo = './assets/logo.png';
+const DB = new DashButton();
 
 export default class HomePage extends Component {
 	constructor(props){
@@ -32,31 +35,6 @@ export default class HomePage extends Component {
 		headerTitleStyle: {
 			fontWeight: 'bold',
 		},
-	}
-
-	renderEventSingle(event){
-		return(
-			<EventSingle
-				title={event.title}
-			/>
-		)
-	}
-
-	renderdashBtn(title, nav){
-		return(
-			<TouchableHighlight style={styles.dashBtn}
-					onPress={() => this.props.navigation.navigate(nav)}>
-				<View style={styles.dashBtnContainer}>
-					<Image
-                        style={styles.dashBtnImg}
-                        source={require(dashTmp)}
-                    />
-					<Text style={styles.dashText}>
-						{title}
-					</Text>
-				</View>
-            </TouchableHighlight>
-		)
 	}
 
 	renderHighlight(title, day, month){
@@ -100,19 +78,14 @@ export default class HomePage extends Component {
 				</View>
 				
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Update Details", 'UDMenu')}
-					{this.renderdashBtn("Outlook", 'Home2')}
+					{DB.renderDashBtn("Update Details", 'UDMenu')}
+					{DB.renderDashBtn("Outlook", 'Home2')}
 				</View>
 
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Events", 'Home2')}
-					{this.renderdashBtn("Promotions", 'Home2')}
+					{DB.renderDashBtn("Events", 'Home2')}
+					{DB.renderDashBtn("Promotions", 'Home2')}
 				</View>
-
-				{/*<View style={styles.dashboard}>
-					{this.renderdashBtn("Networking")}
-					{this.renderdashBtn("Mentoring")}
-				</View>*/}
 
 				<View style={styles.highlightsContainer}>
 					<Text style={styles.highlightHeading}>
@@ -171,7 +144,7 @@ export default class HomePage extends Component {
 			marginRight: 7,
 			justifyContent: 'space-between',
 		},
-				dashBtn: {
+		/*		dashBtn: {
 					flex: 1,
 					margin: 5,
 					backgroundColor: 'white',
@@ -194,7 +167,7 @@ export default class HomePage extends Component {
 							alignSelf: 'center',
 						},
 
-
+		*/
 		/////////////////////////////////////////HIGHLIGHTS
 		highlightsContainer: {
 			flex: 1.5,
