@@ -3,8 +3,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
-import { EventSingle } from './EventSingle.js';
-
 
 const tempEvents = [
 	{title: "Event1"},
@@ -18,13 +16,13 @@ const tempEvents = [
 const dashTmp = './assets/dashTmp.png';
 const uowLogo = './assets/logo.png';
 
-export default class HomePage extends Component {
+export default class EventSingle extends Component {
 	constructor(props){
 		super(props);
 		this.props.eventDataSource = tempEvents;
 	}
 	static navigationOptions = {
-		title: 'Home',
+		title: 'EventSingle',
 		headerStyle: {
 			backgroundColor: '#0C2340',
 		},
@@ -45,7 +43,7 @@ export default class HomePage extends Component {
 	renderdashBtn(title){
 		return(
 			<TouchableHighlight style={styles.dashBtn}
-			onPress={this._onPressButton}>
+					onPress={this._onPressButton}>
 				<View style={styles.dashBtnContainer}>
 					<Image
                         style={styles.dashBtnImg}
@@ -62,7 +60,7 @@ export default class HomePage extends Component {
 	renderHighlight(title, day, month){
 		return(
 			<TouchableHighlight style={styles.hlBtn}
-				onPress={() => this.props.navigation.navigate('EventSingle')}>
+					onPress={this._onPressButton}>
 				<View style={styles.hlBtnView}>
 					<View style={styles.hlCont}>
 						<Text style={styles.hlTitle}>

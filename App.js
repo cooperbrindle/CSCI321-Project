@@ -10,13 +10,15 @@ import {
 
 import LoginPage from './Components/LoginPage';
 import HomePage from './Components/HomePage';
+import EventSingle from './Components/EventSingle';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 
 const NavStack = createStackNavigator({
   //Routs
-  	Home: { screen: HomePage},
+    Home: { screen: HomePage},
+    EventSingle: { screen: EventSingle},
   },{ //options
   initialRouteName: 'Home',
 });
@@ -24,7 +26,7 @@ const NavStack = createStackNavigator({
 const RootStack = createSwitchNavigator({
   //Routs
 	Login: { screen: LoginPage},
-  	Home: { screen: NavStack},
+    Home: { screen: NavStack},
   },{ //options
   initialRouteName: 'Login',
 });
