@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
 import { EventSingle } from './EventSingle.js';
+import { DashButton } from './dashButton';
 
 
 const tempEvents = [
@@ -17,6 +18,7 @@ const tempEvents = [
 
 const dashTmp = './assets/dashTmp.png';
 const uowLogo = './assets/logo.png';
+const DB = new DashButton();
 
 export default class HomePage2 extends Component {
 	constructor(props){
@@ -34,30 +36,6 @@ export default class HomePage2 extends Component {
 		},
 	}
 
-	renderEventSingle(event){
-		return(
-			<EventSingle
-				title={event.title}
-			/>
-		)
-	}
-
-	renderdashBtn(title){
-		return(
-			<TouchableHighlight style={styles.dashBtn}
-					onPress={this._onPressButton}>
-				<View style={styles.dashBtnContainer}>
-					<Image
-                        style={styles.dashBtnImg}
-                        source={require(dashTmp)}
-                    />
-					<Text style={styles.dashText}>
-						{title}
-					</Text>
-				</View>
-            </TouchableHighlight>
-		)
-	}
 	renderdashBtnSmall(title){
 		return(
 			<TouchableHighlight style={styles.dashBtnSmall}
@@ -115,8 +93,8 @@ export default class HomePage2 extends Component {
 				</View>
 				
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Update Details")}
-					{this.renderdashBtn("Events")}
+					{DB.renderDashBtn("Update Details", this.props.navigation, 'UDMenu')}
+					{DB.renderDashBtn("Events", this.props.navigation, 'Home')}
 				</View>
 
 				<View style={styles.dashboardSmall}>
@@ -181,29 +159,6 @@ export default class HomePage2 extends Component {
 			marginRight: 7,
 			justifyContent: 'space-between',
 		},
-				dashBtn: {
-					flex: 1,
-					margin: 5,
-					backgroundColor: 'white',
-					justifyContent: 'center',
-					alignContent: 'center',
-				},
-				dashBtnContainer: {
-					justifyContent: 'center',
-					alignContent: 'center',
-				},
-						dashBtnImg: {
-							width: 45,
-							height: 45,
-							alignSelf: 'center',
-						},
-						dashText: {
-							color: '#0C2340',
-							fontSize: 18,
-							marginTop: 10,
-							textAlign: 'center',
-							alignSelf: 'center',
-						},
 /////////////////////////////////////////DASH BOARD    SMALL
 dashboardSmall: {
 	flex: 0.75,

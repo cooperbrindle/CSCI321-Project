@@ -6,10 +6,10 @@ import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, Touchabl
 
 const dashTmp = './assets/dashTmp.png';
 export class DashButton {
- renderDashBtn = (title, nav) => {
+ renderDashBtn = (title, nav, dir) => {
 		return(
 			<TouchableHighlight style={styles.dashBtn}
-					onPress={() => this.props.navigation.navigate(nav)}>
+					onPress={() => nav.navigate(dir)}>
 				<View style={styles.dashBtnContainer}>
 					<Image
                         style={styles.dashBtnImg}

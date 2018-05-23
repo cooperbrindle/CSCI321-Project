@@ -78,13 +78,13 @@ export default class HomePage extends Component {
 				</View>
 				
 				<View style={styles.dashboard}>
-					{DB.renderDashBtn("Update Details", 'UDMenu')}
-					{DB.renderDashBtn("Outlook", 'Home2')}
+					{DB.renderDashBtn("Update Details", this.props.navigation, 'UDMenu')}
+					{DB.renderDashBtn("Outlook", this.props.navigation, 'Home2')}
 				</View>
 
 				<View style={styles.dashboard}>
-					{DB.renderDashBtn("Events", 'Home2')}
-					{DB.renderDashBtn("Promotions", 'Home2')}
+					{DB.renderDashBtn("Events", this.props.navigation, 'Home2')}
+					{DB.renderDashBtn("Promotions", this.props.navigation, 'Home2')}
 				</View>
 
 				<View style={styles.highlightsContainer}>
