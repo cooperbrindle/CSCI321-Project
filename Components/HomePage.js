@@ -148,6 +148,8 @@ export default class HomePage extends Component {
 			//marginTop: 8,
 			backgroundColor: 'white',
 			margin: 0,
+			marginLeft: 5,
+			marginRight: 5,
 			justifyContent: 'center',
 			padding: 5,
 			paddingBottom: 10,

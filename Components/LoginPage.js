@@ -101,6 +101,8 @@ const styles = StyleSheet.create({
     },
     banner: {
         marginTop: 8,
+        marginLeft: 5,
+        marginRight: 5,
         backgroundColor: 'white',
         margin: 0,
         justifyContent: 'center',

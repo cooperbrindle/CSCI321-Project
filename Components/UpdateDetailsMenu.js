@@ -42,12 +42,12 @@ export default class UpdateDetailsMenu extends Component {
 			<View style={styles.container}>
 				
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Update Details")}
-					{this.renderdashBtn("Events")}
+					{this.renderdashBtn("Personal")}
+					{this.renderdashBtn("Contact")}
 				</View>
                 <View style={styles.dashboard}>
-					{this.renderdashBtn("Update Details")}
-					{this.renderdashBtn("Events")}
+					{this.renderdashBtn("Employment")}
+					{this.renderdashBtn("Subscriptions")}
 				</View>
 
                 <View style={styles.socialContainer}>
