@@ -4,11 +4,12 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, 
     TextInput, Button, View, Image, TouchableHighlight} from 'react-native'; 
 import { createStackNavigator } from 'react-navigation';
+import { Logo } from './Logo';
 
 
-const uowLogo = './assets/logo.png';
 const fbLogo = './assets/fblogo.png';
 const liLogo = './assets/lilogo.png';
+const logo = new Logo(1);
 
 export default class Login extends React.Component {
 
@@ -20,20 +21,7 @@ export default class Login extends React.Component {
     return (
       <View style={styles.container}>
 
-
-        <View style={styles.logoCont}>
-            <Image
-                style={styles.logo}
-                resizeMode='center'
-                resizeMethod='resize'
-                source={require(uowLogo)}
-            />
-            <View style={styles.banner}>
-                    <Text style={styles.bannerText}>
-                        ALUMNI
-                    </Text>
-            </View>
-        </View>
+        {logo.renderLogo()}
 
         <View style={styles.inputContainer}>
             <TextInput style={styles.inputBox}
@@ -89,33 +77,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#0C2340',
     },
 
-    logoCont: {
+    /*logoCont: {
         marginTop: 50,
         flex: 2,
-    },
-    logo: {
-        width: 180,
-        height: 72,
-        flexDirection: 'row',
-        alignSelf: 'center',
-    },
-    banner: {
-        marginTop: 8,
-        marginLeft: 5,
-        marginRight: 5,
-        backgroundColor: 'white',
-        margin: 0,
-        justifyContent: 'center',
-        padding: 10,
-        paddingBottom: 20,
-        flexDirection: 'row',
-    },
-    bannerText: {
-        fontSize: 22,
-        color: '#0C2340',
-        fontWeight: 'bold',
-    },
-
+    },*/
 
     /////////////////////////////////////////INPUT STYLES
     inputContainer: {
