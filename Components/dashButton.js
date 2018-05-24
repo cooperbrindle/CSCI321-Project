@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
+import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
 
 
 const dashTmp = './assets/dashTmp.png';
@@ -22,10 +22,8 @@ export class DashButton {
             </TouchableHighlight>
 		)
 	}
-	
-	
-
 }
+
 const styles = StyleSheet.create({
 		
     /////////////////////////////////////////DASH BOARD
