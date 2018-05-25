@@ -5,6 +5,7 @@ import { Platform, StyleSheet, Text,
     TextInput, Button, View, Image, TouchableHighlight} from 'react-native'; 
 import { createStackNavigator } from 'react-navigation';
 import { Logo } from './Logo';
+import { Sha256 } from './sha-256'
 
 
 const fbLogo = './assets/fblogo.png';
