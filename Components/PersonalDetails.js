@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
+import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
 
 const dashTmp = './assets/dashTmp.png';
 const fbLogo = './assets/fblogo.png';
@@ -38,6 +38,7 @@ export default class UpdateDetailsMenu extends Component {
 				<Text style={styles.title}>
                     Personal
                 </Text>
+                <ScrollView>
                 <View style={styles.topInput}>
                     <View style={styles.inputContSmall}>
                         <Text style={styles.inputText}>
@@ -74,7 +75,7 @@ export default class UpdateDetailsMenu extends Component {
                 {this.renderInput('First Name', 'Ya Boi')}
                 {this.renderInput('Last Name', 'Shiny')}
                 {this.renderInput('Student Number', '1234567')}
-                {this.renderInput('Email (preffered)', 'YaBoi@uowmail.edu.au')}
+                {this.renderInput('Email (preferred)', 'YaBoi@uowmail.edu.au')}
 				
                 <View style={styles.submitBtnCont}>
                     <TouchableHighlight style={styles.submitBtn}
@@ -91,6 +92,7 @@ export default class UpdateDetailsMenu extends Component {
                     </TouchableHighlight>
                         
                 </View>
+                </ScrollView>
 			</View>
 		);
 		}
