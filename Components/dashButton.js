@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
                 backgroundColor: 'white',
                 justifyContent: 'center',
                 alignContent: 'center',
+                borderRadius: 2,
             },
             dashBtnContainer: {
                 justifyContent: 'center',
