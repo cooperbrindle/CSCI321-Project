@@ -20,10 +20,10 @@ export default class UpdateDetailsMenu extends Component {
 		},
 	}
 
-	renderdashBtn(title){
+	renderdashBtn(title, dir){
 		return(
 			<TouchableHighlight style={styles.dashBtn}
-					onPress={this._onPressButton}>
+					onPress={() => this.props.navigation.navigate(dir)}>
 				<View style={styles.dashBtnContainer}>
 					<Image
                         style={styles.dashBtnImg}
@@ -42,12 +42,12 @@ export default class UpdateDetailsMenu extends Component {
 			<View style={styles.container}>
 				
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Personal")}
-					{this.renderdashBtn("Contact")}
+					{this.renderdashBtn("Personal", 'PersonalDets')}
+					{this.renderdashBtn("Contact", 'PersonalDets')}
 				</View>
                 <View style={styles.dashboard}>
-					{this.renderdashBtn("Employment")}
-					{this.renderdashBtn("Subscriptions")}
+					{this.renderdashBtn("Employment", 'PersonalDets')}
+					{this.renderdashBtn("Subscriptions", 'PersonalDets')}
 				</View>
 
                 <View style={styles.socialContainer}>
@@ -83,7 +83,7 @@ export default class UpdateDetailsMenu extends Component {
                     <TouchableHighlight style={styles.submitBtn}
                         onPress={() => this.props.navigation.navigate('Home')}>
                         <Text style={styles.submitBtnText}>
-                                Submit
+                                Save Changes
                         </Text>
                     </TouchableHighlight>
                     <TouchableHighlight style={styles.submitBtn}
@@ -119,7 +119,8 @@ export default class UpdateDetailsMenu extends Component {
 					margin: 5,
 					backgroundColor: 'white',
 					justifyContent: 'center',
-					alignContent: 'center',
+                    alignContent: 'center',
+                    borderRadius: 2,
 				},
 				dashBtnContainer: {
 					justifyContent: 'center',
@@ -204,5 +205,6 @@ export default class UpdateDetailsMenu extends Component {
         },
         submitBtnText: {
             color: '#cc0000',
+            fontWeight: 'bold',
         },
 	});
