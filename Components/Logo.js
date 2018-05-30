@@ -2,24 +2,25 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
 
 
-const uowLogo = './assets/logo.png';
 var imgHeight = 72;
 var imgWidth = 180;
 var textSize = 22;
 
-export class Logo {
-    Logo(scale){
-        textSize = textSize * scale;
-        imgHeight = imgHeight * scale;
-        imgWidth = imgWidth * scale;
+export class Logo extends React.Component{
+
+    constructor(props){
+        super(props);
+        textSize *= props.scale;
+        imgHeight *= props.scale;
+        imgWidth *= props.scale;
     }
-    renderLogo = () => {
+    render() {
         return(
-            <View style={styles.logoCont}>
+            <View>
                 <Image
                     resizeMode='center'
                     resizeMethod='resize'
-                    source={require(uowLogo)}
+                    source={require('./assets/logo.png')}
                     style={{
                         width: imgWidth,
                         height: imgHeight,
@@ -41,10 +42,6 @@ export class Logo {
 
 const styles = StyleSheet.create({
 
-    logoCont: {
-        marginTop: 50,
-        flex: 2,
-    },
     banner: {
         marginTop: 8,
         marginLeft: 5,

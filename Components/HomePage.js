@@ -4,27 +4,14 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
 import { EventSingle } from './EventSingle';
+import { DashButton } from './DashButton';
+import { Logo } from './Logo';
 
-import { DashButton } from './dashButton';
-
-
-const tempEvents = [
-	{title: "Event1"},
-	{title: "Event2"},
-	{title: "Event3"},
-	{title: "Event4"},
-	{title: "Event5"},
-	{title: "Event6"}
-]
-
-const dashTmp = './assets/dashTmp.png';
-const uowLogo = './assets/logo.png';
-const DB = new DashButton();
+const dashTmp = require('./assets/dashTmp.png');
 
 export default class HomePage extends Component {
 	constructor(props){
 		super(props);
-		this.props.eventDataSource = tempEvents;
 	}
 	static navigationOptions = {
 		title: 'Home',
@@ -64,27 +51,17 @@ export default class HomePage extends Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.logoCont}>
-					<Image
-						style={styles.logo}
-						resizeMode='center'
-						resizeMethod='resize'
-						source={require(uowLogo)}
-					/>
-					<View style={styles.banner}>
-							<Text style={styles.bannerText}>
-								ALUMNI
-							</Text>
-					</View>
-				</View>
-				
-				<View style={styles.dashboard}>
-					{DB.renderDashBtn("Update Details", this.props.navigation, 'UDMenu')}
-					{DB.renderDashBtn("Outlook", this.props.navigation, 'Home2')}
+					<Logo scale={0.8} />
 				</View>
 
 				<View style={styles.dashboard}>
-					{DB.renderDashBtn("Events", this.props.navigation, 'Home2')}
-					{DB.renderDashBtn("Promotions", this.props.navigation, 'Home2')}
+					<DashButton title='Update Details' img={dashTmp} nav={()=>this.props.navigation.navigate('UDMenu')} />
+					<DashButton title='Outlook' img={dashTmp} nav={()=>this.props.navigation.navigate('Home2')} />
+				</View>
+
+				<View style={styles.dashboard}>
+					<DashButton title='Events' img={dashTmp} nav={()=>this.props.navigation.navigate('Home2')} />
+					<DashButton title='Promotions' img={dashTmp} nav={()=>this.props.navigation.navigate('Home2')} />
 				</View>
 
 				<View style={styles.highlightsContainer}>
@@ -108,34 +85,9 @@ export default class HomePage extends Component {
 
 		/////////////////////////////////////////LOGO
 		logoCont: {
-			//marginTop: 10,
 			flex: 1,
 		},
-		logo: {
-			width: 180,
-			height: 72,
-			flexDirection: 'row',
-			alignSelf: 'center',
-		},
-		banner: {
-			//marginTop: 8,
-			backgroundColor: 'white',
-			margin: 0,
-			marginLeft: 5,
-			marginRight: 5,
-			justifyContent: 'center',
-			padding: 5,
-			paddingBottom: 10,
-			flexDirection: 'row',
-			marginBottom: 10,
-		},
-		bannerText: {
-			fontSize: 18,
-			color: '#0C2340',
-			fontWeight: 'bold',
-		},
 		
-
 		/////////////////////////////////////////DASH BOARD
 		dashboard: {
 			flex: 1,
@@ -144,30 +96,7 @@ export default class HomePage extends Component {
 			marginRight: 7,
 			justifyContent: 'space-between',
 		},
-		/*		dashBtn: {
-					flex: 1,
-					margin: 5,
-					backgroundColor: 'white',
-					justifyContent: 'center',
-					alignContent: 'center',
-				},
-				dashBtnContainer: {
-					justifyContent: 'center',
-					alignContent: 'center',
-				},
-						dashBtnImg: {
-							width: 45,
-							height: 45,
-							alignSelf: 'center',
-						},
-						dashText: {
-							color: '#0C2340',
-							fontSize: 18,
-							textAlign: 'center',
-							alignSelf: 'center',
-						},
-
-		*/
+		
 		/////////////////////////////////////////HIGHLIGHTS
 		highlightsContainer: {
 			flex: 1.5,

@@ -4,27 +4,17 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
 import { EventSingle } from './EventSingle.js';
-import { DashButton } from './dashButton';
+import { DashButton } from './DashButton';
 
 
-const tempEvents = [
-	{title: "Event1"},
-	{title: "Event2"},
-	{title: "Event3"},
-	{title: "Event4"},
-	{title: "Event5"},
-	{title: "Event6"}
-]
-
-const dashTmp = './assets/dashTmp.png';
+const dashTmp = require('./assets/dashTmp.png');
 const uowLogo = './assets/logo.png';
-const DB = new DashButton();
 
 export default class HomePage2 extends Component {
 	constructor(props){
 		super(props);
-		this.props.eventDataSource = tempEvents;
 	}
+	
 	static navigationOptions = {
 		title: 'Home',
 		headerStyle: {
@@ -39,11 +29,11 @@ export default class HomePage2 extends Component {
 	renderdashBtnSmall(title){
 		return(
 			<TouchableHighlight style={styles.dashBtnSmall}
-					onPress={this._onPressButton}>
+					onPress={() => this.props.navigation.navigate('Home')}>
 				<View style={styles.dashBtnContainerSmall}>
 					<Image
                         style={styles.dashBtnImgSmall}
-                        source={require(dashTmp)}
+                        source={dashTmp}
                     />
 					<Text style={styles.dashTextSmall}>
 						{title}
@@ -55,7 +45,7 @@ export default class HomePage2 extends Component {
 	renderHighlight(title, day, month){
 		return(
 			<TouchableHighlight style={styles.hlBtn}
-					onPress={this._onPressButton}>
+					onPress={() => this.props.navigation.navigate('EventSingle')}>
 				<View style={styles.hlBtnView}>
 					<View style={styles.hlCont}>
 						<Text style={styles.hlTitle}>
@@ -93,8 +83,8 @@ export default class HomePage2 extends Component {
 				</View>
 				
 				<View style={styles.dashboard}>
-					{DB.renderDashBtn("Update Details", this.props.navigation, 'UDMenu')}
-					{DB.renderDashBtn("Events", this.props.navigation, 'Home')}
+					<DashButton title='Update Details' img={dashTmp} nav={()=>this.props.navigation.navigate('Home')} />
+					<DashButton title='Outlook' img={dashTmp} nav={()=>this.props.navigation.navigate('Home')} />
 				</View>
 
 				<View style={styles.dashboardSmall}>

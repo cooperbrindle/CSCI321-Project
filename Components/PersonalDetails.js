@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
+import { DefaultButton } from './DefaultButton';
 
 const dashTmp = './assets/dashTmp.png';
 const fbLogo = './assets/fblogo.png';
@@ -78,19 +79,7 @@ export default class UpdateDetailsMenu extends Component {
                 {this.renderInput('Email (preferred)', 'YaBoi@uowmail.edu.au')}
 				
                 <View style={styles.submitBtnCont}>
-                    <TouchableHighlight style={styles.submitBtn}
-                        onPress={() => this.props.navigation.navigate('UDMenu')}>
-                        <Text style={styles.submitBtnText}>
-                                Save Changes
-                        </Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.submitBtn}
-                        onPress={() => this.props.navigation.navigate('UDMenu')}>
-                        <Text style={styles.submitBtnText}>
-                                Discard Changes
-                        </Text>
-                    </TouchableHighlight>
-                        
+                    <DefaultButton title='Discard' nav={() => this.props.navigation.navigate('UDMenu')} />
                 </View>
                 </ScrollView>
 			</View>
@@ -184,20 +173,6 @@ export default class UpdateDetailsMenu extends Component {
             marginBottom: 10,
             alignContent: 'flex-start',
             justifyContent: 'flex-end',
-        },
-        submitBtn: {
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop:5,
-            backgroundColor:'#0C2340',
-            height: 50,
-            borderRadius:10,
-            borderWidth: 2,
-            borderColor: '#d9d9d6',
-        },
-        submitBtnText: {
-            color: '#cc0000',
-            fontWeight: 'bold',
         },
 		
 	});

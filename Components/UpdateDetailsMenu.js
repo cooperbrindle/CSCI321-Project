@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
+import { DefaultButton } from './DefaultButton';
+import { SocialButton } from './SocialButton';
 
 const dashTmp = './assets/dashTmp.png';
-const fbLogo = './assets/fblogo.png';
-const liLogo = './assets/lilogo.png';
 
 export default class UpdateDetailsMenu extends Component {
 	
@@ -51,48 +51,12 @@ export default class UpdateDetailsMenu extends Component {
 				</View>
 
                 <View style={styles.socialContainer}>
-                    <TouchableHighlight style={styles.socialBtnFB}
-                        onPress={this._onPressButton}>
-                        <View style={styles.socialBtnView}>
-                            <Image
-                                style={styles.socialImage}
-                                source={require(fbLogo)}
-                            />
-
-                            <Text style={styles.socialText}>
-                                Import from facebook
-                            </Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.socialBtnLI}
-                        onPress={this._onPressButton}>
-                        <View style={styles.socialBtnView}>
-                            <Image
-                                style={styles.socialImage}
-                                source={require(liLogo)}
-                            />
-                            
-                            <Text style={styles.socialText}>
-                                Import from Linkedin
-                            </Text>
-                        </View>
-                    </TouchableHighlight>
+                    <SocialButton title='Import from' nav={{}} />
                 </View>
 
                 <View style={styles.submitBtnCont}>
-                    <TouchableHighlight style={styles.submitBtn}
-                        onPress={() => this.props.navigation.navigate('Home')}>
-                        <Text style={styles.submitBtnText}>
-                                Save Changes
-                        </Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.submitBtn}
-                        onPress={() => this.props.navigation.navigate('Home')}>
-                        <Text style={styles.submitBtnText}>
-                                Reset
-                        </Text>
-                    </TouchableHighlight>
-                        
+                    <DefaultButton title='Save Changes' nav={() => this.props.navigation.navigate('UDMenu')} />
+                    <DefaultButton title='Discard Changes' nav={() => this.props.navigation.navigate('UDMenu')} />   
                 </View>
 
 			</View>
@@ -147,42 +111,6 @@ export default class UpdateDetailsMenu extends Component {
             marginRight: 5,
             justifyContent: 'center',
         },
-        socialBtnFB: {
-            height: 50,
-            backgroundColor:'#3B5998',
-            borderRadius:10,
-            borderWidth: 1,
-            justifyContent: 'center',
-        },
-        socialBtnLI: {
-            height: 50,
-            backgroundColor:'#0077B5',
-            borderRadius:10,
-            borderWidth: 1,
-            justifyContent: 'center',
-        },
-        socialBtnView: {
-            flex: 1,
-            flexDirection: 'row',
-            alignContent: 'center',
-            alignItems: 'center',
-        },
-        socialImage: {
-            position: 'absolute',
-            marginLeft: 10,
-            marginTop: 10,
-            width: 30,
-            height: 30,
-            margin: 0,
-            alignSelf: 'flex-start',
-        },
-        socialText: {
-            flex: 1,
-            color: 'white',
-            fontWeight: 'bold',
-            alignSelf: 'center',
-            textAlign: 'center',
-        },
 
         /////////////////////////////////////////SUBMIT BUTTONS
         submitBtnCont: {
@@ -192,19 +120,5 @@ export default class UpdateDetailsMenu extends Component {
             marginBottom: 10,
             alignContent: 'flex-start',
             justifyContent: 'flex-end',
-        },
-        submitBtn: {
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop:5,
-            backgroundColor:'#0C2340',
-            height: 50,
-            borderRadius:10,
-            borderWidth: 2,
-            borderColor: '#d9d9d6',
-        },
-        submitBtnText: {
-            color: '#cc0000',
-            fontWeight: 'bold',
         },
 	});
