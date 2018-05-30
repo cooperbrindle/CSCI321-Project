@@ -13,7 +13,9 @@ import HomePage from './Components/HomePage';
 import EventSingle from './Components/EventSingle';
 import HomePage2 from './Components/HomePage2';
 import UpdateDetailsMenu from './Components/UpdateDetailsMenu';
-import PersonalDetails from './Components/PersonalDetails';
+import AccountForm from './Components/AccountForm';
+import ContactForm from './Components/ContactForm';
+import EmploymentForm from './Components/EmploymentForm';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
@@ -24,7 +26,9 @@ const NavStack = createStackNavigator({
     EventSingle: { screen: EventSingle},
     Home2: { screen: HomePage2},
     UDMenu: { screen: UpdateDetailsMenu},
-    PersonalDets: { screen: PersonalDetails},
+    AccForm: { screen: AccountForm},
+    ContForm: { screen: ContactForm},
+    EmpForm: { screen: EmploymentForm},
   },{ //options
   initialRouteName: 'Home',
 });

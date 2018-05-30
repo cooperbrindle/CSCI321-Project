@@ -3,9 +3,10 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 import { DefaultButton } from './DefaultButton';
+import { DashButton } from './DashButton';
 import { SocialButton } from './SocialButton';
 
-const dashTmp = './assets/dashTmp.png';
+const dashTmp = require('./assets/dashTmp.png');
 
 export default class UpdateDetailsMenu extends Component {
 	
@@ -20,34 +21,18 @@ export default class UpdateDetailsMenu extends Component {
 		},
 	}
 
-	renderdashBtn(title, dir){
-		return(
-			<TouchableHighlight style={styles.dashBtn}
-					onPress={() => this.props.navigation.navigate(dir)}>
-				<View style={styles.dashBtnContainer}>
-					<Image
-                        style={styles.dashBtnImg}
-                        source={require(dashTmp)}
-                    />
-					<Text style={styles.dashText}>
-						{title}
-					</Text>
-				</View>
-            </TouchableHighlight>
-		)
-	}
-
 	render() {
 		return (
 			<View style={styles.container}>
 				
 				<View style={styles.dashboard}>
-					{this.renderdashBtn("Personal", 'PersonalDets')}
-					{this.renderdashBtn("Contact", 'PersonalDets')}
+					<DashButton title='Account' img={dashTmp} nav={()=>this.props.navigation.navigate('AccForm')} />
+					<DashButton title='Contact' img={dashTmp} nav={()=>this.props.navigation.navigate('ContForm')} />
 				</View>
-                <View style={styles.dashboard}>
-					{this.renderdashBtn("Employment", 'PersonalDets')}
-					{this.renderdashBtn("Subscriptions", 'PersonalDets')}
+
+				<View style={styles.dashboard}>
+					<DashButton title='Employment' img={dashTmp} nav={()=>this.props.navigation.navigate('EmpForm')} />
+					<DashButton title='Subscriptions' img={dashTmp} nav={()=>this.props.navigation.navigate('')} />
 				</View>
 
                 <View style={styles.socialContainer}>
@@ -78,30 +63,6 @@ export default class UpdateDetailsMenu extends Component {
 			marginRight: 7,
 			justifyContent: 'space-between',
 		},
-				dashBtn: {
-					flex: 1,
-					margin: 5,
-					backgroundColor: 'white',
-					justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 2,
-				},
-				dashBtnContainer: {
-					justifyContent: 'center',
-					alignContent: 'center',
-				},
-						dashBtnImg: {
-							width: 45,
-							height: 45,
-							alignSelf: 'center',
-						},
-						dashText: {
-							color: '#0C2340',
-							fontSize: 18,
-							marginTop: 10,
-							textAlign: 'center',
-							alignSelf: 'center',
-						},
 
 		/////////////////////////////////////////SOCIAL STYLES
         socialContainer: {

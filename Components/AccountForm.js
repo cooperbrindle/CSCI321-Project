@@ -2,14 +2,11 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
+import { styles } from './FormStyles';
 import { DefaultButton } from './DefaultButton';
 
-const dashTmp = './assets/dashTmp.png';
-const fbLogo = './assets/fblogo.png';
-const liLogo = './assets/lilogo.png';
 
-export default class UpdateDetailsMenu extends Component {
-	
+export default class AccountForm extends Component {
 	static navigationOptions = {
 		title: 'Update Details',
 		headerStyle: {
@@ -20,7 +17,6 @@ export default class UpdateDetailsMenu extends Component {
 			fontWeight: 'bold',
 		},
 	}
-
 	renderInput(title, ph){
 		return(
 			<View style={styles.inputCont}>
@@ -37,7 +33,7 @@ export default class UpdateDetailsMenu extends Component {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>
-                    Personal
+                    Account Info
                 </Text>
                 <ScrollView>
                 <View style={styles.topInput}>
@@ -86,93 +82,3 @@ export default class UpdateDetailsMenu extends Component {
 		);
 		}
 	};
-	
-	const styles = StyleSheet.create({
-		container: {
-			flex: 1,
-			backgroundColor: '#0C2340',
-		},
-
-        /////////////////////////////////////////
-        title: {
-            alignSelf: 'center',
-            textAlign: 'center',
-            fontSize: 28,
-            color: 'white',
-            marginBottom: 10,
-        },
-
-        /////////////////////////////////////////Containers
-        topInput: {
-            flexDirection: 'row',
-            marginRight: 5,
-            marginLeft: 5,
-            marginTop: 10,
-            marginBottom: 10,
-        },
-        dateCont: {
-            flexDirection: 'row',
-        },
-
-        inputCont: {
-            flexDirection: 'column',
-            marginLeft: 5,
-            marginRight: 5,
-            marginTop: 10,
-            marginBottom: 10,
-        },
-        inputContSmall: {
-            flex: 4,
-            flexDirection: 'column',
-            marginRight: 60,
-        },
-        inputContDate: {
-            flex: 1,
-            flexDirection: 'column',
-            marginLeft: 10,
-        },
-        inputContYear: {
-            flex: 2,
-            flexDirection: 'column',
-            marginLeft: 10,
-        },
-
-        //////////////////////////////////////////Inputs
-        inputText: {
-            alignSelf: 'flex-start',
-            textAlign: 'right',
-            fontSize: 18,
-            color: 'white',
-        },
-        inputBox: {
-            color: 'grey',
-            paddingLeft: 10,
-            backgroundColor:'#d9d9d6',
-            height: 50,
-            borderRadius:5,
-        },
-        inputBoxSmall: {
-            color: 'grey',
-            backgroundColor:'#d9d9d6',
-            height: 50,
-            borderRadius:5,
-        },
-        inputBoxDate: {
-            color: 'grey',
-            alignItems: 'center',
-            textAlign: 'center',
-            backgroundColor:'#d9d9d6',
-            height: 50,
-            borderRadius:5,
-        },
-
-        /////////////////////////////////////////SUBMIT BUTTONS
-        submitBtnCont: {
-            marginLeft: 5,
-            marginRight: 5,
-            marginBottom: 10,
-            alignContent: 'flex-start',
-            justifyContent: 'flex-end',
-        },
-		
-	});
