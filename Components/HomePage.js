@@ -51,7 +51,7 @@ export default class HomePage extends Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.logoCont}>
-					<Logo scale={0.8} />
+					<Logo scale={1} />
 				</View>
 
 				<View style={styles.dashboard}>

@@ -68,6 +68,7 @@ export const styles = StyleSheet.create({
     },
     inputBoxSmall: {
         color: 'grey',
+        paddingLeft: 10,
         backgroundColor:'#d9d9d6',
         height: 50,
         borderRadius:5,

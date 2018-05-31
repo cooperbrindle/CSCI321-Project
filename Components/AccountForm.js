@@ -69,15 +69,14 @@ export default class AccountForm extends Component {
                     
                 </View>
 
-                {this.renderInput('First Name', 'Ya Boi')}
-                {this.renderInput('Last Name', 'Shiny')}
+                {this.renderInput('First Name', 'John')}
+                {this.renderInput('Last Name', 'Smith')}
                 {this.renderInput('Student Number', '1234567')}
-                {this.renderInput('Email (preferred)', 'YaBoi@uowmail.edu.au')}
 				
+                </ScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Discard' nav={() => this.props.navigation.navigate('UDMenu')} />
                 </View>
-                </ScrollView>
 			</View>
 		);
 		}

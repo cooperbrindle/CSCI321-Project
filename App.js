@@ -16,6 +16,7 @@ import UpdateDetailsMenu from './Components/UpdateDetailsMenu';
 import AccountForm from './Components/AccountForm';
 import ContactForm from './Components/ContactForm';
 import EmploymentForm from './Components/EmploymentForm';
+import SubscriptionForm from './Components/SubscriptionForm';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
@@ -29,6 +30,7 @@ const NavStack = createStackNavigator({
     AccForm: { screen: AccountForm},
     ContForm: { screen: ContactForm},
     EmpForm: { screen: EmploymentForm},
+    SubForm: { screen: SubscriptionForm},
   },{ //options
   initialRouteName: 'Home',
 });

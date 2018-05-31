@@ -37,16 +37,16 @@ export default class EmploymentForm extends Component {
                 </Text>
                 <ScrollView>
 
-                {this.renderInput('Job Title', 'Head Reciever')}
-                {this.renderInput('Employer', 'C0op3rs m0m')}
-                {this.renderInput('Country', 'sTr4ya')}
-                {this.renderInput('City', 'Dat r1ch boI town dawG')}
-                {this.renderInput('State / Country / Region', '')}
+                {this.renderInput('Job Title', 'Dev Leader')}
+                {this.renderInput('Employer', 'Big Ole Company')}
+                {this.renderInput('Country', 'Australia')}
+                {this.renderInput('City', 'Wollongong')}
+                {this.renderInput('State / Country / Region', 'Somewhere')}
 				
+                </ScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Discard' nav={() => this.props.navigation.navigate('UDMenu')} />
                 </View>
-                </ScrollView>
 			</View>
 		);
 		}

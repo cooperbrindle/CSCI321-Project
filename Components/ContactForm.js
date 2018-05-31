@@ -37,16 +37,16 @@ export default class ContactForm extends Component {
                 </Text>
                 <ScrollView>
 
-                {this.renderInput('email', 'Ya Boi')}
-                {this.renderInput('Mobile', 'Shiny')}
-                {this.renderInput('fuck this', 'whats this for')}
-                {this.renderInput('address will be a pain', 'dankAdidly lane ya mums house whore')}
-                {this.renderInput('united states of USA', '#Murica')}
+				{this.renderInput('email (preferred)', 'js@uowmail.edu.au')}
+				{this.renderInput('Other email', '')}
+                {this.renderInput('Mobile', '0441234567')}
+                {this.renderInput('Address', 'This field will be expanded out in the future')}
+                {this.renderInput('City', 'Wollongong')}
 				
+                </ScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Discard' nav={() => this.props.navigation.navigate('UDMenu')} />
                 </View>
-                </ScrollView>
 			</View>
 		);
 		}

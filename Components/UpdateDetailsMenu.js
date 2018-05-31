@@ -32,7 +32,7 @@ export default class UpdateDetailsMenu extends Component {
 
 				<View style={styles.dashboard}>
 					<DashButton title='Employment' img={dashTmp} nav={()=>this.props.navigation.navigate('EmpForm')} />
-					<DashButton title='Subscriptions' img={dashTmp} nav={()=>this.props.navigation.navigate('')} />
+					<DashButton title='Subscriptions' img={dashTmp} nav={()=>this.props.navigation.navigate('SubForm')} />
 				</View>
 
                 <View style={styles.socialContainer}>
