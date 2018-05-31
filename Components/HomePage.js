@@ -86,6 +86,7 @@ export default class HomePage extends Component {
 		/////////////////////////////////////////LOGO
 		logoCont: {
 			flex: 1,
+			marginBottom: 15,
 		},
 		
 		/////////////////////////////////////////DASH BOARD
@@ -100,12 +101,13 @@ export default class HomePage extends Component {
 		/////////////////////////////////////////HIGHLIGHTS
 		highlightsContainer: {
 			flex: 1.5,
+			justifyContent: 'flex-end',
 		},
 		highlightHeading: {
 			color: 'white',
 			marginLeft: 10,
 			marginTop: 20,
-			marginBottom: 20,
+			marginBottom: 10,
 			fontSize: 28,
 		},
 		/////////////Button
