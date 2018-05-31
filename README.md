@@ -1,14 +1,14 @@
 ## CSCI321 Project - UOW Alumni App
 
-React Native with Redux
+React Native
   - Android
   - iOS
 
 ## Requirements
 
-- React Native CLI (`npm install -g react-native-cli`)
+- React Native
 - React Navigation
-- Java JDK(1.8) (JRE doesn't have required tools)
+- Java JDK 1.8 (JRE doesn't have required tools)
 - Node.js, Python2
 
 
@@ -18,13 +18,16 @@ How to get react native setup:
 
 https://facebook.github.io/react-native/docs/getting-started.html
 
-Also need this for the app navigation:
+```
+npm install -g create-react-native-app
+```
+For the app navigation:
 
 ```
 npm install --save react-navigation
 ```
 
-will fix up when full process is prepared
+## Project will later be ejected for native code use and final deployment
 
 ## Members
 
@@ -35,6 +38,6 @@ will fix up when full process is prepared
 
 ## Client
 
-- Carly Evans (EIS)
-- Paris Dennett (EIS)
+- Carly Evans (Alumni EIS)
+- Paris Dennett (Alumni Business)
 - Leanne Newsham (Alumni Head)
