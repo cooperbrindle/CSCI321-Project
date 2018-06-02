@@ -23,7 +23,7 @@ import firebase from 'firebase';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAN7jnv-YL5RWJ3uoeO-mpFV2W_kJKYWuU',
+  apiKey: '',
   authDomain: 'alumnitest-1.firebaseapp.com',
 };
 
