@@ -10,6 +10,7 @@ React Native
 - React Navigation
 - Java JDK 1.8 (JRE doesn't have required tools)
 - Node.js, Python2
+- firebase
 
 
 ### Installing
@@ -25,6 +26,11 @@ For the app navigation:
 
 ```
 npm install --save react-navigation
+```
+
+For firebase
+```
+npm install --save firebase
 ```
 
 ## Project will later be ejected for native code use and final deployment
