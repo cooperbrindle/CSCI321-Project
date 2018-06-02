@@ -2,38 +2,71 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, 
-    TextInput, Button, View, Image, TouchableHighlight} from 'react-native'; 
+    TextInput, Button, View, Image, 
+    TouchableHighlight, ActivityIndicator} from 'react-native'; 
 import { createStackNavigator } from 'react-navigation';
 import { Logo } from './Logo';
 import { DefaultButton } from './DefaultButton';
-import { Sha256 } from './sha-256'
 import { SocialButton } from './SocialButton';
 
-
 export default class Login extends React.Component {
-       
-
-    loginPress() {
-        this.props.navigation.navigate('Home')
+    
+    state = {
+        username: 'abc@uowmail.edu.au',
+        password: '123456',
+        errorMessage: '',
+        isLoading: true,
     };
 
+    componentDidMount(){
+        this.setState({isLoading: false});
+    }
+
+    loginPress() {
+        this.setState({errorMessage: '', isLoading: true});
+        const {username, password } = this.state;
+        if(username != '' || password != ''){
+            this.props.screenProps.auth().signInWithEmailAndPassword(username, password)
+            .then(() =>{
+                this.setState({isLoading: false});
+                this.props.navigation.navigate('Home');
+            })
+            .catch((error) =>{
+                this.setState({errorMessage: error.message, isLoading: false});
+            });
+        }
+    };
+    
+
     render() {
+
+        const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
         return (
         <View style={styles.container}>
             
             <View style={styles.logoCont} >
                 <Logo scale={1}/>
             </View>
+            
+            <Text style={styles.errorText}>{this.state.errorMessage}</Text>
 
             <View style={styles.inputContainer}>
                 <TextInput style={styles.inputBox}
-                    placeholder="student number" underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                    placeholder="username" underlineColorAndroid='transparent' placeholderTextColor='grey'
+                    onChangeText={(username) => this.setState({username})}
+                    value={this.state.username} />
                 <TextInput style={styles.inputBox}
-                    placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                    placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='grey'
+                    onChangeText={(password) => this.setState({password})} secureTextEntry
+                    value={this.state.password}/>
                 
-                <DefaultButton title='Login' nav={()=>this.props.navigation.navigate('Home')} />
-                    
+                <DefaultButton title='Login' nav={() => this.loginPress()} />
+                
+                <View style={styles.activityView}>
+                    {actInd}
+                </View>
             </View>
+            
 
             <View style={styles.socialContainer}>
                 <SocialButton title='Continue with' nav={{}} />
@@ -53,7 +86,13 @@ const styles = StyleSheet.create({
         marginTop: 50,
         flex: 2,
     },
+    
+    errorText: {color: 'red',},
 
+    activityView: {
+        justifyContent: 'center',
+        alignContent: 'center',
+    },
     /////////////////////////////////////////INPUT STYLES
     inputContainer: {
         flex: 2.5,

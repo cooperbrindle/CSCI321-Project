@@ -17,9 +17,15 @@ import AccountForm from './Components/AccountForm';
 import ContactForm from './Components/ContactForm';
 import EmploymentForm from './Components/EmploymentForm';
 import SubscriptionForm from './Components/SubscriptionForm';
+import firebase from 'firebase';
+//import firebaseConfig from './Components/Database/DatabaseConfig';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
+const firebaseConfig = {
+  apiKey: 'AIzaSyAN7jnv-YL5RWJ3uoeO-mpFV2W_kJKYWuU',
+  authDomain: 'alumnitest-1.firebaseapp.com',
+};
 
 const NavStack = createStackNavigator({
   //Routs
@@ -44,13 +50,13 @@ const RootStack = createSwitchNavigator({
 });
 
 export default class App extends React.Component{
+
+  componentWillMount(){
+    firebase.initializeApp(firebaseConfig);
+  }
+
   render() {
-	return <RootStack />;
+	  return <RootStack screenProps={firebase}/>;
   }
 }
 
-const styles = StyleSheet.create({
-	
-});
-
-/**/
