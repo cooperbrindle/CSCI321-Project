@@ -63,7 +63,7 @@ export default class SignUpForm extends Component {
         addMessage(data)
             .then((result) => {
                 this.setState({isLoading: false, errorMessage: ''});
-                */this.handleSubmitResult(result);/*
+                */this.handleSubmitResult();/*
             
             }).catch(error => {
                 this.setState({isLoading: false, errorMessage: error.message});

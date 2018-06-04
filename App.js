@@ -28,6 +28,7 @@ import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 const firebaseConfig = {
   apiKey: 'AIzaSyAN7jnv-YL5RWJ3uoeO-mpFV2W_kJKYWuU',
   authDomain: 'alumnitest-1.firebaseapp.com',
+  //TODO: add firestore domain thingy
 };
 
 const NavStack = createStackNavigator({
