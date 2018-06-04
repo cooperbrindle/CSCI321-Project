@@ -51,7 +51,7 @@ const RootStack = createSwitchNavigator({
   SUForm: { screen: SignUpForm},
   SUFinish: { screen: SignUpFinish},
   },{ //options
-  initialRouteName: 'SUForm',
+  initialRouteName: 'Login',
 });
 
 export default class App extends React.Component{
