@@ -10,7 +10,7 @@ export class SocialButton extends React.Component{
         return(
             <View>
             <TouchableHighlight style={styles.socialBtnFB}
-                onPress={this._onPressButton}>
+                onPress={this.props.fbOnClick}>
                 <View style={styles.socialBtnView}>
                     <Image
                         style={styles.socialImage}
@@ -25,7 +25,7 @@ export class SocialButton extends React.Component{
 
 
             <TouchableHighlight style={styles.socialBtnLI}
-                onPress={this._onPressButton}>
+                onPress={this.props.liOnClick}>
                 <View style={styles.socialBtnView}>
                     <Image
                         style={styles.socialImage}
