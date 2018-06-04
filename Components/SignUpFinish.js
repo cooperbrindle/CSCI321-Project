@@ -8,17 +8,7 @@ import { Logo } from './Logo.js';
 
 
 export default class SignUpFinish extends Component {
-	/*static navigationOptions = {
-		title: 'Sign Up',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-			fontWeight: 'bold',
-		},
-    }*/
-
+	
     state = {
         errorMessage: '',
         isLoading: false,
@@ -31,29 +21,49 @@ export default class SignUpFinish extends Component {
         this.props.firebase = this.props.screenProps;
         var emailProp = this.props.navigation.getParam('email', '**error passing email info**');
         this.setState({email:  emailProp});
+        this.props.constitID = this.props.navigation.getParam('constitID', '');
+        if(this.props.constitID = ''){
+            //TODO: handle blank constitID error
+                //possibly show redirect button back to signupForm
+        }
     }
     
     submitForm() {
+        
         this.setState({isLoading: true, errorMessage: ''});
         
         if(this.state.password != this.state.passwordConf){
             this.setState({isLoading: true, errorMessage: 'Passwords do not match'});
         }else{
             this.props.firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-                .then((result) => {
-                    this.setState({isLoading: false, errorMessage: ''});
-                    
-                    /////////////////////////////////////////////////////
-                    //////////// TODO: Need to link new account to current user in database
-                    /////////////////////////////////////////////////////
-                    
-                    this.props.navigation.navigate('Home'); 
+            .then((user) => {
+                /////////////////////////////////////////////////////
+                //////////// TODO: handle if user signs up with different email to alumni RE version
+                /////////////////////////////////////////////////////
                 
-                }).catch(error => {
-                    this.setState({isLoading: false, errorMessage: error.message});
+                //create document in appUser linking new user to corresponding contituent
+                /*this.props.firebase.firestore().collection('appUser').doc(user.uid).set({
+                    constituentID: this.props.constitID,
+                    //possibly add date joined and other data
+                }).then(() => {
+                    */this.setState({isLoading: false, errorMessage: ''});    
+                    this.props.navigation.navigate('Home');/* 
+                }).catch((error) =>{
+                    // TODO: is this handled by the outer catch as well????????
+                });*/
+            }).catch(error => {
+                this.setState({isLoading: false, errorMessage: error.message});
             });
         }
     }
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////// UI /////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
 
 	renderInput(title, ph, stateValue, isSecure){
 		return(

@@ -30,6 +30,17 @@ export default class SignUpForm extends Component {
     componentDidMount(){
         this.props.firebase = this.props.screenProps;
     }
+
+    handleSubmitResult(result){
+        /*if(result == null || result =='' || result.constitID == null || result.constitID == ''){
+            this.setState({errorMessage: 'No UOW Alumni found with those details...'});
+        }else{
+            */this.props.navigation.navigate('SUFinish', {
+                email: this.state.email,
+                //constitID: result.constitID, //TODO: add uis later maybe
+            });
+        //}
+    }
     
     submitForm() {
         this.setState({isLoading: true, errorMessage: ''});
@@ -52,15 +63,7 @@ export default class SignUpForm extends Component {
         addMessage(data)
             .then((result) => {
                 this.setState({isLoading: false, errorMessage: ''});
-                
-                /////////////////////////////////////////////////////
-                //////////// TODO: Possibly need to handle a returned user ID for linking
-                /////////////////////////////////////////////////////
-                
-                */this.props.navigation.navigate('SUFinish', {
-                    email: this.state.email,
-                    uid: '', //TODO: add uis later maybe
-                });/* //navigate and pass on email
+                */this.handleSubmitResult(result);/*
             
             }).catch(error => {
                 this.setState({isLoading: false, errorMessage: error.message});
