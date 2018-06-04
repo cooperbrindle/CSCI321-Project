@@ -20,14 +20,15 @@ export default class Login extends React.Component {
 
     componentDidMount(){
         this.setState({isLoading: false});
+        this.props.firebase = this.props.screenProps;
     }
 
     loginPress() {
         this.setState({errorMessage: '', isLoading: true});
         const {username, password } = this.state;
         if(username != '' || password != ''){
-            this.props.screenProps.auth().signInWithEmailAndPassword(username, password)
-            .then(() =>{
+            this.props.firebase.auth().signInWithEmailAndPassword(username, password)
+            .then((result) =>{
                 this.setState({isLoading: false});
                 this.props.navigation.navigate('Home');
             })
@@ -36,6 +37,15 @@ export default class Login extends React.Component {
             });
         }
     };
+
+    signupPress() {
+        this.props.navigation.navigate('SUForm');
+    }
+
+    facebookLogin() {
+        //this.setState({isLoading: true});
+        
+    }
     
 
     render() {
@@ -53,14 +63,15 @@ export default class Login extends React.Component {
             <View style={styles.inputContainer}>
                 <TextInput style={styles.inputBox}
                     placeholder="username" underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={(username) => this.setState({username})}
+                    onChangeText={(un) => this.setState({username:un})}
                     value={this.state.username} />
                 <TextInput style={styles.inputBox}
                     placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={(password) => this.setState({password})} secureTextEntry
+                    onChangeText={(pw) => this.setState({password:pw})} secureTextEntry
                     value={this.state.password}/>
                 
                 <DefaultButton title='Login' nav={() => this.loginPress()} />
+                <DefaultButton title='Sign Up' nav={() => this.signupPress()} />
                 
                 <View style={styles.activityView}>
                     {actInd}
@@ -69,7 +80,7 @@ export default class Login extends React.Component {
             
 
             <View style={styles.socialContainer}>
-                <SocialButton title='Continue with' nav={{}} />
+                <SocialButton title='Continue with' fbOnClick={()=>this.facebookLogin()} />
             </View>
         </View>
         );

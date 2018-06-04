@@ -17,13 +17,16 @@ import AccountForm from './Components/AccountForm';
 import ContactForm from './Components/ContactForm';
 import EmploymentForm from './Components/EmploymentForm';
 import SubscriptionForm from './Components/SubscriptionForm';
+import SignUpForm from './Components/SignUpForm';
+import SignUpFinish from './Components/SignUpFinish';
+
 import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 const firebaseConfig = {
-  apiKey: '',
+  apiKey: 'AIzaSyAN7jnv-YL5RWJ3uoeO-mpFV2W_kJKYWuU',
   authDomain: 'alumnitest-1.firebaseapp.com',
 };
 
@@ -44,9 +47,11 @@ const NavStack = createStackNavigator({
 const RootStack = createSwitchNavigator({
   //Routs
 	Login: { screen: LoginPage},
-    Home: { screen: NavStack},
+  Home: { screen: NavStack},
+  SUForm: { screen: SignUpForm},
+  SUFinish: { screen: SignUpFinish},
   },{ //options
-  initialRouteName: 'Login',
+  initialRouteName: 'SUForm',
 });
 
 export default class App extends React.Component{
