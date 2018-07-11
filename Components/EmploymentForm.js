@@ -17,6 +17,18 @@ export default class EmploymentForm extends Component {
 			fontWeight: 'bold',
 		},
 	}
+
+	/////////////////////////////////////
+    //
+    componentWillMount(){
+        //create new structure here with only the required information
+
+        //this.setState({thisData, changedData});
+    }
+    //
+	/////////////////////////////////////
+	
+	
 	renderInput(title, ph){
 		return(
 			<View style={styles.inputCont}>

@@ -21,6 +21,35 @@ export default class UpdateDetailsMenu extends Component {
 		},
 	}
 
+	///////////////////////////////////////////////////////////////////
+	//
+	// New Code
+	/*
+	componentWillMount(){
+		const changedDataTmp = [];
+		const dataTmp = {
+            firstName: '',
+            lastName: '',
+            DOB: '',
+            stdNum: '',
+			email: '',
+			//TODO: request all this info from user object and from database
+		};
+		
+		this.setState({data: dataTmp, changedData: changedDataTmp});
+	}
+	*/
+	//
+	////////////////////////////////////////////////////////////////////
+	//
+	//	Method to navigate to form and pass data
+	//	 will pass the entire structure and each page can just pick out what it needs essentialls
+	navigateToForm(formName){
+		//navigate using passed in form name and add the two datastructures to the nav props
+		//THEN: change all DashButtons nav={...} to nav={() this.navigateToForm('pageName')} I think
+	}
+
+
 	render() {
 		return (
 			<View style={styles.container}>

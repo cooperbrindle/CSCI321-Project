@@ -16,7 +16,19 @@ export default class AccountForm extends Component {
 		headerTitleStyle: {
 			fontWeight: 'bold',
 		},
-	}
+    }
+    
+    /////////////////////////////////////
+    //
+    componentWillMount(){
+        //create new structure here with only the required information
+
+        //this.setState({thisData, changedData});
+    }
+    //
+    /////////////////////////////////////
+
+    
 	renderInput(title, ph){
 		return(
 			<View style={styles.inputCont}>
