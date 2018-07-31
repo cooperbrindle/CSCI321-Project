@@ -24,8 +24,10 @@ export default class Login extends React.Component {
     }
 
     loginPress() {
+        console.warn('attempting login');
         this.setState({errorMessage: '', isLoading: true});
         const {username, password } = this.state;
+        try{
         if(username != '' || password != ''){
             this.props.firebase.auth().signInWithEmailAndPassword(username, password)
             .then((result) =>{
@@ -36,6 +38,8 @@ export default class Login extends React.Component {
                 this.setState({errorMessage: error.message, isLoading: false});
             });
         }
+    }catch(err){console.warn('try catch: ' + err.message);
+    this.setState({isLoading: false});}
     };
 
     signupPress() {

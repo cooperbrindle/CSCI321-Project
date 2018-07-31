@@ -57,7 +57,7 @@ export default class EmploymentForm extends Component {
 				
                 </ScrollView>
                 <View style={styles.submitBtnCont}>
-                    <DefaultButton title='Discard' nav={() => this.props.navigation.navigate('UDMenu')} />
+                    <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
 			</View>
 		);

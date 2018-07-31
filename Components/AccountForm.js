@@ -21,22 +21,52 @@ export default class AccountForm extends Component {
     /////////////////////////////////////
     //
     componentWillMount(){
-        //create new structure here with only the required information
+        console.warn('Component Mounting');
+        const data = this.props.navigation.getParam('data', 'NoData');
+        if(data == 'NoData'){
+            console.error('NO DATA PASSED TO ACCOUNT FORM PAGE');
+            this.props.navigation.goBack();
+        }
+        this.state = {
+            title: data.title,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            day: data.day,
+            month: data.month,
+            year: data.year,
+            stdNum: data.stdNum
+        };
+    }
 
-        //this.setState({thisData, changedData});
+    saveChanges(){
+        let data = this.props.navigation.getParam('data', 'NoData');
+        try{
+            data.title = this.state.title;
+            data.firstName = this.state.firstName;
+            data.lastName = this.state.lastName;
+            data.Day = this.state.day;
+            data.Month = this.state.Month;
+            data.year = this.state.year;
+            data.stdNum = this.state.stdNum;
+        }catch(err){
+            console.warn('ERROR: '+ err.message);
+        }
+        this.props.navigation.goBack();
     }
     //
     /////////////////////////////////////
 
     
-	renderInput(title, ph){
+	renderInput(title, ph, onChangeT, v){
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
                     {title}
                 </Text>
                 <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
+                    onChangeText={onChangeT}
+                    value={v} />
             </View>
 		)
 	}
@@ -54,7 +84,9 @@ export default class AccountForm extends Component {
                             Title
                         </Text>
                         <TextInput style={styles.inputBoxSmall}
-                            placeholder='Mr' underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
+                            onChangeText={(t) => this.setState({title:t})}
+                            value={this.state.title} />
                     </View>
                     
                     <View style={styles.inputContDate}>
@@ -62,32 +94,39 @@ export default class AccountForm extends Component {
                             DD
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder='25' underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
+                            onChangeText={(d) => this.setState({day:d})}
+                            value={this.state.day} />
                     </View>
                     <View style={styles.inputContDate}>
                         <Text style={styles.inputText}>
                             MM
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder='05' underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
+                            onChangeText={(m) => this.setState({month:m})}
+                            value={this.state.month} />
                     </View>
                     <View style={styles.inputContYear}>
                         <Text style={styles.inputText}>
                             YYYY
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder='2018' underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
+                            onChangeText={(y) => this.setState({year:y})}
+                            value={this.state.year} />
                     </View>
                     
                 </View>
 
-                {this.renderInput('First Name', 'John')}
-                {this.renderInput('Last Name', 'Smith')}
-                {this.renderInput('Student Number', '1234567')}
+                {this.renderInput('First Name', '', (a) => this.setState({firstName:a}), this.state.firstName)}
+                {this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName)}
+                {this.renderInput('Student Number', '', (a) => this.setState({stdNum:a}), this.state.stdNum)}
 				
                 </ScrollView>
                 <View style={styles.submitBtnCont}>
-                    <DefaultButton title='Discard' nav={() => this.props.navigation.navigate('UDMenu')} />
+                    <DefaultButton title='Save' nav={() => this.saveChanges()} />
+                    <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
 			</View>
 		);

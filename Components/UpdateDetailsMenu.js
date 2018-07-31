@@ -23,30 +23,39 @@ export default class UpdateDetailsMenu extends Component {
 
 	///////////////////////////////////////////////////////////////////
 	//
-	// New Code
-	/*
+	// 
+	
 	componentWillMount(){
-		const changedDataTmp = [];
-		const dataTmp = {
-            firstName: '',
-            lastName: '',
-            DOB: '',
-            stdNum: '',
-			email: '',
+		data = {
+			title: 'Mr',
+			firstName: 'Daniel',
+			lastName: 'McK',
+			day: '11',
+			month: '11',
+			year: '96',
+			stdNum: '1234567',
+			email: 'email@gmail.com',
+			emailOther: 'noOther@nothing.com',
+			mobile: '0435879645',
+			address: 'somewhere',
+			city: 'Wollongong',
 			//TODO: request all this info from user object and from database
 		};
-		
-		this.setState({data: dataTmp, changedData: changedDataTmp});
+		const originalData = JSON.parse(JSON.stringify(data))
+		this.setState({originalData: originalData, data: data});
 	}
-	*/
-	//
-	////////////////////////////////////////////////////////////////////
-	//
+
+	
 	//	Method to navigate to form and pass data
 	//	 will pass the entire structure and each page can just pick out what it needs essentialls
 	navigateToForm(formName){
-		//navigate using passed in form name and add the two datastructures to the nav props
-		//THEN: change all DashButtons nav={...} to nav={() this.navigateToForm('pageName')} I think
+		
+		this.props.navigation.navigate(formName, {data: this.state.data});
+	}
+
+	discardChanges(){
+		const newData = JSON.parse(JSON.stringify(this.state.originalData));
+		this.setState({data: newData});
 	}
 
 
@@ -55,13 +64,13 @@ export default class UpdateDetailsMenu extends Component {
 			<View style={styles.container}>
 				
 				<View style={styles.dashboard}>
-					<DashButton title='Account' img={dashTmp} nav={()=>this.props.navigation.navigate('AccForm')} />
-					<DashButton title='Contact' img={dashTmp} nav={()=>this.props.navigation.navigate('ContForm')} />
+					<DashButton title='Account' img={dashTmp} nav={()=>this.props.navigation.navigate('AccForm', {data: this.state.data})} />
+					<DashButton title='Contact' img={dashTmp} nav={()=>this.props.navigation.navigate('ContForm', {data: this.state.data})} />
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='Employment' img={dashTmp} nav={()=>this.props.navigation.navigate('EmpForm')} />
-					<DashButton title='Subscriptions' img={dashTmp} nav={()=>this.props.navigation.navigate('SubForm')} />
+					<DashButton title='Employment' img={dashTmp} nav={()=>this.props.navigation.navigate('EmpForm', {data: this.state.data})} />
+					<DashButton title='Subscriptions' img={dashTmp} nav={()=>this.props.navigation.navigate('SubForm', {data: this.state.data})} />
 				</View>
 
                 <View style={styles.socialContainer}>
@@ -70,7 +79,7 @@ export default class UpdateDetailsMenu extends Component {
 
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Save Changes' nav={() => this.props.navigation.navigate('UDMenu')} />
-                    <DefaultButton title='Discard Changes' nav={() => this.props.navigation.navigate('UDMenu')} />   
+                    <DefaultButton title='Discard Changes' nav={() => this.discardChanges()} />   
                 </View>
 
 			</View>
