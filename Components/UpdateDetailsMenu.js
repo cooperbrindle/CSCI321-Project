@@ -26,6 +26,17 @@ export default class UpdateDetailsMenu extends Component {
 	// 
 	
 	componentWillMount(){
+		this.props.firebase = this.props.screenProps;
+		let db = this.props.firebase.firestore();
+		const uid = this.props.firebase.auth().currentUser.uid;
+		
+		//TODO: check collection names
+		const userLink = db.collection('UserLinks')
+			.where('id', '==', uid);
+		const user = db.collection('AlumniUser')
+			.where('constitID', '==', userLink.constitID);
+
+
 		data = {
 			title: 'Mr',
 			firstName: 'Daniel',
@@ -39,10 +50,11 @@ export default class UpdateDetailsMenu extends Component {
 			mobile: '0435879645',
 			address: 'somewhere',
 			city: 'Wollongong',
-			//TODO: request all this info from user object and from database
 		};
 		const originalData = JSON.parse(JSON.stringify(data))
 		this.setState({originalData: originalData, data: data});
+		this.props.constitID = userLink.constitID;
+		
 	}
 
 	
@@ -57,6 +69,12 @@ export default class UpdateDetailsMenu extends Component {
 		const newData = JSON.parse(JSON.stringify(this.state.originalData));
 		this.setState({data: newData});
 	}
+
+	saveChanges(){
+
+	}
+
+
 
 
 	render() {
