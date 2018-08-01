@@ -30,11 +30,11 @@ export default class AccountForm extends Component {
         this.state = {
             title: data.title,
             firstName: data.firstName,
-            lastName: data.lastName,
+            keyName: data.keyName,
             day: data.day,
             month: data.month,
             year: data.year,
-            stdNum: data.stdNum
+            ssn: data.ssn
         };
     }
 
@@ -43,11 +43,11 @@ export default class AccountForm extends Component {
         try{
             data.title = this.state.title;
             data.firstName = this.state.firstName;
-            data.lastName = this.state.lastName;
-            data.Day = this.state.day;
-            data.Month = this.state.Month;
-            data.year = this.state.year;
-            data.stdNum = this.state.stdNum;
+            data.keyName = this.state.keyName;
+            //data.Day = this.state.day;
+            //data.Month = this.state.Month;
+            //data.year = this.state.year;
+            data.ssn = this.state.ssn;
         }catch(err){
             console.warn('ERROR: '+ err.message);
         }
@@ -120,8 +120,8 @@ export default class AccountForm extends Component {
                 </View>
 
                 {this.renderInput('First Name', '', (a) => this.setState({firstName:a}), this.state.firstName)}
-                {this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName)}
-                {this.renderInput('Student Number', '', (a) => this.setState({stdNum:a}), this.state.stdNum)}
+                {this.renderInput('Last Name', '', (a) => this.setState({keyName:a}), this.state.keyName)}
+                {this.renderInput('Student Number', '', (a) => this.setState({ssn:a}), this.state.ssn)}
 				
                 </ScrollView>
                 <View style={styles.submitBtnCont}>

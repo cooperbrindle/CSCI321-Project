@@ -30,13 +30,12 @@ export default class UpdateDetailsMenu extends Component {
 	
 	componentWillMount(){
 		try{
-		this.props.firebase = this.props.screenProps;
-		let db = this.props.firebase.firestore();
+		
+		this.setState({firebase: this.props.screenProps});
+		let db = this.props.screenProps.firestore();
 		db.settings({timestampsInSnapshots: true});
 
-
-
-		const uid = this.props.firebase.auth().currentUser.uid;
+		const uid = this.props.screenProps.auth().currentUser.uid;
 		
 		//get constitID from UserLink Collection
 		db.collection('UserLinks')
@@ -50,11 +49,12 @@ export default class UpdateDetailsMenu extends Component {
 						.where('constituentID', '==', userlink.data().constituentID)
 						.get()
 						.then(doc => {
-							doc.forEach(constitient => {
-								if(constitient.exists){
-									console.warn(constitient.data());
-									const originalData = JSON.parse(JSON.stringify(constitient.data()))
-									this.setState({originalData: originalData, data: constitient.data()});
+							doc.forEach(constituent => {
+								if(constituent.exists){
+									console.warn(constituent.data());
+									const originalData = JSON.parse(JSON.stringify(constituent.data()))
+									this.setState({originalData: originalData, data: constituent.data(), constituentRefID: constituent.id});
+									this.props.constituentRefID = constituent.id;
 								}else{console.warn('constituent does not exist'); this.handleDBErrors();}
 							});
 						}).catch(error => { this.handleDBErrors(error);})
@@ -64,20 +64,6 @@ export default class UpdateDetailsMenu extends Component {
 		
 
 		}catch(err){console.warn('try catch error: ' + err.message);}
-		/*data = {
-			title: 'Mr',
-			firstName: 'Daniel',
-			lastName: 'McK',
-			day: '11',
-			month: '11',
-			year: '96',
-			stdNum: '1234567',
-			email: 'email@gmail.com',
-			emailOther: 'noOther@nothing.com',
-			mobile: '0435879645',
-			address: 'somewhere',
-			city: 'Wollongong',
-		};*/
 		
 	}
 
@@ -101,7 +87,19 @@ export default class UpdateDetailsMenu extends Component {
 	}
 
 	saveChanges(){
-
+		try{
+			let db = this.state.firebase.firestore();
+			db.settings({timestampsInSnapshots: true});
+			
+			db.collection('Constituent').doc(this.state.constituentRefID)
+			.update(
+				this.state.data
+			).then(() => {
+				console.warn('successfully updated');
+			}).catch((error) => {
+				console.warn(error.message);
+			});
+		}catch(err){console.warn('catch error: '+ err.message);}
 	}
 
 
@@ -126,7 +124,7 @@ export default class UpdateDetailsMenu extends Component {
                 </View>
 
                 <View style={styles.submitBtnCont}>
-                    <DefaultButton title='Save Changes' nav={() => this.props.navigation.navigate('UDMenu')} />
+                    <DefaultButton title='Save Changes' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard Changes' nav={() => this.discardChanges()} />   
                 </View>
 
