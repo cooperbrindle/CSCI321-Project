@@ -6,6 +6,9 @@ import { DefaultButton } from './DefaultButton';
 import { DashButton } from './DashButton';
 import { SocialButton } from './SocialButton';
 
+import firebase from 'firebase';
+import firestore from 'firebase/firestore';
+
 const dashTmp = require('./assets/dashTmp.png');
 
 export default class UpdateDetailsMenu extends Component {
@@ -26,18 +29,46 @@ export default class UpdateDetailsMenu extends Component {
 	// 
 	
 	componentWillMount(){
+		try{
 		this.props.firebase = this.props.screenProps;
 		let db = this.props.firebase.firestore();
+		db.settings({timestampsInSnapshots: true});
+
+
+
 		const uid = this.props.firebase.auth().currentUser.uid;
 		
 		//TODO: check collection names
-		const userLink = db.collection('UserLinks')
-			.where('id', '==', uid);
-		const user = db.collection('AlumniUser')
-			.where('constitID', '==', userLink.constitID);
 
+		//get constitID from UserLink Collection
 
-		data = {
+		console.warn('uid: ' + uid);
+
+		db.collection('UserLinks')
+			.doc(uid)
+			.get()
+			.then(userlink => {
+				if(userlink.exists){
+					//get all data related to constitID
+					console.warn('userlink constitID: ' + userlink.data().constitID);
+					db.collection('Constituent')
+						.where('constituentID', '==', userlink.data().constitID)
+						.get()
+						.then(doc => {
+							if(doc.exists){
+								
+								const originalData = JSON.parse(JSON.stringify(doc))
+								this.setState({originalData: originalData, data: doc});
+
+							}else{ this.handleDBErrors();}
+						}).catch(error => { this.handleDBErrors(error);})
+
+				}else{ this.handleDBErrors();}
+			}).catch(error => { this.handleDBErrors(error);})
+		
+
+		}catch(err){console.warn('try catch error: ' + err.message);}
+		/*data = {
 			title: 'Mr',
 			firstName: 'Daniel',
 			lastName: 'McK',
@@ -50,11 +81,14 @@ export default class UpdateDetailsMenu extends Component {
 			mobile: '0435879645',
 			address: 'somewhere',
 			city: 'Wollongong',
-		};
-		const originalData = JSON.parse(JSON.stringify(data))
-		this.setState({originalData: originalData, data: data});
-		this.props.constitID = userLink.constitID;
+		};*/
 		
+	}
+
+	handleDBErrors(error){
+		if(error == null)
+			console.warn('if else error');
+		else console.warn(error.message)
 	}
 
 	
