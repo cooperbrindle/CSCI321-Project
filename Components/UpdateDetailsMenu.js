@@ -38,29 +38,25 @@ export default class UpdateDetailsMenu extends Component {
 
 		const uid = this.props.firebase.auth().currentUser.uid;
 		
-		//TODO: check collection names
-
 		//get constitID from UserLink Collection
-
-		console.warn('uid: ' + uid);
-
 		db.collection('UserLinks')
 			.doc(uid)
 			.get()
 			.then(userlink => {
 				if(userlink.exists){
 					//get all data related to constitID
-					console.warn('userlink constitID: ' + userlink.data().constitID);
+					console.warn('userlink constitID: ' + userlink.data().constituentID);
 					db.collection('Constituent')
-						.where('constituentID', '==', userlink.data().constitID)
+						.where('constituentID', '==', userlink.data().constituentID)
 						.get()
 						.then(doc => {
-							if(doc.exists){
-								
-								const originalData = JSON.parse(JSON.stringify(doc))
-								this.setState({originalData: originalData, data: doc});
-
-							}else{ this.handleDBErrors();}
+							doc.forEach(constitient => {
+								if(constitient.exists){
+									console.warn(constitient.data());
+									const originalData = JSON.parse(JSON.stringify(constitient.data()))
+									this.setState({originalData: originalData, data: constitient.data()});
+								}else{console.warn('constituent does not exist'); this.handleDBErrors();}
+							});
 						}).catch(error => { this.handleDBErrors(error);})
 
 				}else{ this.handleDBErrors();}
