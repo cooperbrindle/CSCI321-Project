@@ -31,43 +31,41 @@ export default class UpdateDetailsMenu extends Component {
 	componentWillMount(){
 		try{
 		
-		this.setState({firebase: this.props.screenProps});
-		let db = this.props.screenProps.firestore();
+		this.setState({firebase: this.props.screenProps,
+			isLoading: true, didLoad: false});
+		
+			let db = this.props.screenProps.firestore();
 		db.settings({timestampsInSnapshots: true});
-
 		const uid = this.props.screenProps.auth().currentUser.uid;
 		
 		//get constitID from UserLink Collection
-		db.collection('UserLinks')
-			.doc(uid)
-			.get()
+		db.collection('UserLinks').doc(uid).get()
 			.then(userlink => {
 				if(userlink.exists){
 					//get all data related to constitID
-					console.warn('userlink constitID: ' + userlink.data().constituentID);
 					db.collection('Constituent')
-						.where('constituentID', '==', userlink.data().constituentID)
-						.get()
+						.where('constituentID', '==', userlink.data().constituentID).get()
 						.then(doc => {
 							doc.forEach(constituent => {
 								if(constituent.exists){
-									console.warn(constituent.data());
+									console.warn('Constituent Data Loaded');
 									const originalData = JSON.parse(JSON.stringify(constituent.data()))
-									this.setState({originalData: originalData, data: constituent.data(), constituentRefID: constituent.id});
-									this.props.constituentRefID = constituent.id;
-								}else{console.warn('constituent does not exist'); this.handleDBErrors();}
+									this.setState({originalData: originalData, data: constituent.data(),
+										constituentRefID: constituent.id, isLoading: false, didLoad: true});
+
+								}else{this.handleDBErrors();}
 							});
 						}).catch(error => { this.handleDBErrors(error);})
 
 				}else{ this.handleDBErrors();}
 			}).catch(error => { this.handleDBErrors(error);})
 		
-
 		}catch(err){console.warn('try catch error: ' + err.message);}
 		
 	}
 
 	handleDBErrors(error){
+		this.setState({isLoading: false});
 		if(error == null)
 			console.warn('if else error');
 		else console.warn(error.message)
@@ -77,8 +75,8 @@ export default class UpdateDetailsMenu extends Component {
 	//	Method to navigate to form and pass data
 	//	 will pass the entire structure and each page can just pick out what it needs essentialls
 	navigateToForm(formName){
-		
-		this.props.navigation.navigate(formName, {data: this.state.data});
+		if(!this.state.isLoading)
+			this.props.navigation.navigate(formName, {data: this.state.data});
 	}
 
 	discardChanges(){
