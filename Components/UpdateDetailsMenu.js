@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
+import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
 import { DefaultButton } from './DefaultButton';
 import { DashButton } from './DashButton';
 import { SocialButton } from './SocialButton';
@@ -31,10 +31,15 @@ export default class UpdateDetailsMenu extends Component {
 	componentWillMount(){
 		try{
 		
-		this.setState({firebase: this.props.screenProps,
-			isLoading: true, didLoad: false});
+		this.state = {
+			firebase: this.props.screenProps,
+			isLoading: true,
+			didLoad: false,
+			errorMessage: '',
+			firebase: this.props.screenProps,
+		};
 		
-			let db = this.props.screenProps.firestore();
+		let db = this.props.screenProps.firestore();
 		db.settings({timestampsInSnapshots: true});
 		const uid = this.props.screenProps.auth().currentUser.uid;
 		
@@ -50,8 +55,12 @@ export default class UpdateDetailsMenu extends Component {
 								if(constituent.exists){
 									console.warn('Constituent Data Loaded');
 									const originalData = JSON.parse(JSON.stringify(constituent.data()))
-									this.setState({originalData: originalData, data: constituent.data(),
-										constituentRefID: constituent.id, isLoading: false, didLoad: true});
+									this.setState({originalData: originalData,
+										data: constituent.data(),
+										constituentRefID: constituent.id,
+										isLoading: false,
+										didLoad: true,
+									});
 
 								}else{this.handleDBErrors();}
 							});
@@ -85,6 +94,7 @@ export default class UpdateDetailsMenu extends Component {
 	}
 
 	saveChanges(){
+		this.setState({errorMessage: ''});
 		try{
 			let db = this.state.firebase.firestore();
 			db.settings({timestampsInSnapshots: true});
@@ -93,20 +103,40 @@ export default class UpdateDetailsMenu extends Component {
 			.update(
 				this.state.data
 			).then(() => {
+				//TODO: show sucessful update
 				console.warn('successfully updated');
 			}).catch((error) => {
+				this.setState({errorMessage: 'Error updating details'});
 				console.warn(error.message);
 			});
+
+			if(this.state.data.email != this.state.originalData.email){
+				this.state.firebase.auth().currentUser.updateEmail(this.state.data.email)
+				.then(() => {
+					console.warn('successfully updates User email');
+				}).catch(error => {
+					this.setState({errorMessage: 'Error updating details'});
+					console.warn(error.message)
+				});
+			}
 		}catch(err){console.warn('catch error: '+ err.message);}
 	}
 
 
+	renderLoading(){
+		if(this.state.isLoading)
+			return (
+				<ActivityIndicator size='large' color='#cc0000'/>
+			);
+		else return (
+			<View/>
+		);
+	}
 
-
-	render() {
-		return (
-			<View style={styles.container}>
-				
+	renderDashBoard(){
+		if(this.state.didLoad)
+			return(
+				<View style={styles.container}>
 				<View style={styles.dashboard}>
 					<DashButton title='Account' img={dashTmp} nav={()=>this.props.navigation.navigate('AccForm', {data: this.state.data})} />
 					<DashButton title='Contact' img={dashTmp} nav={()=>this.props.navigation.navigate('ContForm', {data: this.state.data})} />
@@ -125,6 +155,20 @@ export default class UpdateDetailsMenu extends Component {
                     <DefaultButton title='Save Changes' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard Changes' nav={() => this.discardChanges()} />   
                 </View>
+				</View>
+			);
+		else return(
+			<View/>
+		);
+	}
+
+	render() {
+
+		return (
+			<View style={styles.container}>
+				
+				{this.renderLoading()}
+				{this.renderDashBoard()}
 
 			</View>
 		);

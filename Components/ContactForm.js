@@ -27,6 +27,7 @@ export default class ContactForm extends Component {
             this.props.navigation.goBack();
         }
         this.state = {
+            errorMessage: '',
             email: data.email,
             emailOther: data.emailOther,
             mobile: data.mobile,
@@ -36,6 +37,9 @@ export default class ContactForm extends Component {
     }
 
     saveChanges(){
+        if(!this.validateDate())
+            return;
+
         let data = this.props.navigation.getParam('data', 'NoData');
         try{
             data.email = this.state.email;
@@ -47,6 +51,23 @@ export default class ContactForm extends Component {
             console.warn('ERROR: '+ err.message);
         }
         this.props.navigation.goBack();
+    }
+
+    validateDate(){
+        //TODO: email validation
+        if(this.state.email == '' || this.state.emailOther == '' ||
+        this.state.mobile == '' || this.state.address == '' || this.state.city == ''){
+            this.setState({errorMessage: 'Empty Fields'});
+            console.warn('INVALID MOBILE');
+            return false;
+        }
+        //TODO: check mobile for nonDigits
+        if(/[a-z]/i.test(this.state.mobile)){
+            this.setState({errorMessage: 'Invalid Mobile'});
+            console.warn('INVALID MOBILE');
+            return false;
+        }
+        return true;
     }
     //
     /////////////////////////////////////

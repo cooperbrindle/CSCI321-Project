@@ -28,36 +28,76 @@ export default class AccountForm extends Component {
             this.props.navigation.goBack();
         }
         this.state = {
+            errorMessage: '',
             title: data.title,
             firstName: data.firstName,
             keyName: data.keyName,
-            day: data.day,
-            month: data.month,
-            year: data.year,
+            day: data.birthDate.substr(0,2),
+            month: data.birthDate.substr(2,2),
+            year: data.birthDate.substr(4,4),
             ssn: data.ssn
         };
     }
 
     saveChanges(){
+        if(!this.validateData())
+            return;
+
         let data = this.props.navigation.getParam('data', 'NoData');
         try{
             data.title = this.state.title;
             data.firstName = this.state.firstName;
             data.keyName = this.state.keyName;
-            //data.Day = this.state.day;
-            //data.Month = this.state.Month;
-            //data.year = this.state.year;
+            data.birthDate = this.state.day + this.state.month + this.state.year;
             data.ssn = this.state.ssn;
         }catch(err){
             console.warn('ERROR: '+ err.message);
         }
         this.props.navigation.goBack();
     }
+
+    validateData(){
+        this.setState({errorMessage: ''});
+        ////////////////Empty Input validation
+        if(this.state.title == '' || this.state.firstName == '' ||
+        this.state.keyName == '' || this.state.day == '' ||
+        this.state.month == '' || this.state.year == '' ||
+        this.state.ssn == ''){
+            this.setState({errorMessage: 'Empty Input'});
+            return false;
+        }
+
+        ////////////////Date Validation
+        /*try{
+        const ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+        const day = parseInt(this.state.day);
+        const month = parseInt(this.state.month);
+        const year = parseInt(this.state.year);
+        if(month < 1 || month > 12){
+            this.setState({errorMessage: 'Invalid Date'});
+            return false;
+        }
+        else if(day < 1 || day > ListofDays[month]){
+            this.setState({errorMessage: 'Invalid Date'});
+            return false;
+        }
+        else if(year > Date.getYear()){
+            this.setState({errorMessage: 'Invalid Date'});
+            return false;
+        }
+
+        }catch(err){
+            this.setState({errorMessage: 'Invalid Date'});
+            return false;
+        }*/
+
+        return true;
+    }
     //
     /////////////////////////////////////
-
+    //TODO: make uneditale fields slightly different colour
     
-	renderInput(title, ph, onChangeT, v){
+	renderInput(title, ph, onChangeT, v, edita){
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
@@ -66,7 +106,7 @@ export default class AccountForm extends Component {
                 <TextInput style={styles.inputBox}
                     placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
                     onChangeText={onChangeT}
-                    value={v} />
+                    value={v} editable = {edita}/>
             </View>
 		)
 	}
@@ -96,7 +136,7 @@ export default class AccountForm extends Component {
                         <TextInput style={styles.inputBoxDate}
                             placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
                             onChangeText={(d) => this.setState({day:d})}
-                            value={this.state.day} />
+                            value={this.state.day} editable={false} />
                     </View>
                     <View style={styles.inputContDate}>
                         <Text style={styles.inputText}>
@@ -105,7 +145,7 @@ export default class AccountForm extends Component {
                         <TextInput style={styles.inputBoxDate}
                             placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
                             onChangeText={(m) => this.setState({month:m})}
-                            value={this.state.month} />
+                            value={this.state.month} editable={false}/>
                     </View>
                     <View style={styles.inputContYear}>
                         <Text style={styles.inputText}>
@@ -114,14 +154,14 @@ export default class AccountForm extends Component {
                         <TextInput style={styles.inputBoxDate}
                             placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
                             onChangeText={(y) => this.setState({year:y})}
-                            value={this.state.year} />
+                            value={this.state.year} editable={false}/>
                     </View>
                     
                 </View>
 
-                {this.renderInput('First Name', '', (a) => this.setState({firstName:a}), this.state.firstName)}
-                {this.renderInput('Last Name', '', (a) => this.setState({keyName:a}), this.state.keyName)}
-                {this.renderInput('Student Number', '', (a) => this.setState({ssn:a}), this.state.ssn)}
+                {this.renderInput('First Name', '', (a) => this.setState({firstName:a}), this.state.firstName, true)}
+                {this.renderInput('Last Name', '', (a) => this.setState({keyName:a}), this.state.keyName, true)}
+                {this.renderInput('Student Number', '', (a) => this.setState({ssn:a}), this.state.ssn, false)}
 				
                 </ScrollView>
                 <View style={styles.submitBtnCont}>
