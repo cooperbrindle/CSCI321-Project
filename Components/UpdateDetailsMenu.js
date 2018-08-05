@@ -36,6 +36,7 @@ export default class UpdateDetailsMenu extends Component {
 			isLoading: true,
 			didLoad: false,
 			errorMessage: '',
+			successMessage: '',
 			firebase: this.props.screenProps,
 		};
 		
@@ -133,6 +134,28 @@ export default class UpdateDetailsMenu extends Component {
 		);
 	}
 
+	renderMessages(){
+		if(this.state.errorMessage != ''){
+			return(
+				<View style={styles.errorView}>
+					<Text style={styles.errorText}>
+						{this.state.errorMessage}
+					</Text>
+				</View>
+			);
+		}
+		else if(this.state.successMessage != ''){
+			return(
+				<View style={styles.SuccessView}>
+					<Text style={styles.successText}>
+						{this.state.successMessage}
+					</Text>
+				</View>
+			);
+		}
+		else return (<View/>);
+	}
+
 	renderDashBoard(){
 		if(this.state.didLoad)
 			return(
@@ -166,7 +189,7 @@ export default class UpdateDetailsMenu extends Component {
 
 		return (
 			<View style={styles.container}>
-				
+				{this.renderMessages()}
 				{this.renderLoading()}
 				{this.renderDashBoard()}
 
@@ -179,6 +202,14 @@ export default class UpdateDetailsMenu extends Component {
 		container: {
 			flex: 1,
 			backgroundColor: '#0C2340',
+		},
+
+		errorView: {
+			backgroundColor: 'red',
+		},
+
+		errorText: {
+			color: 'white',
 		},
 
 		/////////////////////////////////////////DASH BOARD
