@@ -19,6 +19,7 @@ import EmploymentForm from './Components/EmploymentForm';
 import SubscriptionForm from './Components/SubscriptionForm';
 import SignUpForm from './Components/SignUpForm';
 import SignUpFinish from './Components/SignUpFinish';
+import OutlookWebPage from './Components/OutlookWeb';
 
 import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
@@ -26,9 +27,12 @@ import firebase from 'firebase';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAN7jnv-YL5RWJ3uoeO-mpFV2W_kJKYWuU',
-  authDomain: 'alumnitest-1.firebaseapp.com',
-  projectId: 'alumnitest-1'
+  apiKey: "AIzaSyAN7jnv-YL5RWJ3uoeO-mpFV2W_kJKYWuU",
+    authDomain: "alumnitest-1.firebaseapp.com",
+    databaseURL: "https://alumnitest-1.firebaseio.com",
+    projectId: "alumnitest-1",
+    storageBucket: "alumnitest-1.appspot.com",
+    messagingSenderId: "990092777009"
 };
 
 const NavStack = createStackNavigator({
@@ -41,6 +45,7 @@ const NavStack = createStackNavigator({
     ContForm: { screen: ContactForm},
     EmpForm: { screen: EmploymentForm},
     SubForm: { screen: SubscriptionForm},
+    OutlookWeb: { screen: OutlookWebPage},
   },{ //options
   initialRouteName: 'Home',
 });
