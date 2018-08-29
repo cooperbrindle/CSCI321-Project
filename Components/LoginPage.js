@@ -8,6 +8,10 @@ import { createStackNavigator } from 'react-navigation';
 import { Logo } from './Logo';
 import { DefaultButton } from './DefaultButton';
 import { SocialButton } from './SocialButton';
+import { Facebook } from 'expo';
+import firebase from 'firebase';
+
+const FACEBOOK_APP_ID = '1049993008511643';
 
 export default class Login extends React.Component {
     
@@ -46,8 +50,29 @@ export default class Login extends React.Component {
         this.props.navigation.navigate('SUForm');
     }
 
-    facebookLogin() {
-        //this.setState({isLoading: true});
+    async facebookLogin() {
+        console.warn('logging in with facebook');
+        this.setState({isLoading: true});
+        try{
+
+            const { type, token } = await Facebook.logInWithReadPermissionsAsync(FACEBOOK_APP_ID, {
+                permissions: ['public_profile', 'email']
+            });
+            if (type === 'success') {
+                //Firebase credential is created with the Facebook access token.
+                const credential = firebase.auth.FacebookAuthProvider.credential(token);
+                this.props.firebase.auth().signInAndRetrieveDataWithCredential(credential)
+                .then(() => {
+                    this.setState({ errorMessage: '', isLoading: false });
+                }).catch(error => {
+                    this.setState({ errorMessage: error.message, isLoading: false });
+                });
+            }else{
+                this.setState({ errorMessage: 'Login Cancelled', isLoading: false });    
+            }
+        }catch(error){
+            this.setState({ errorMessage: error.message, isLoading: false });
+        }
         
     }
     

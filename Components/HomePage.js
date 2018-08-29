@@ -56,7 +56,7 @@ export default class HomePage extends Component {
 
 				<View style={styles.dashboard}>
 					<DashButton title='Update Details' img={dashTmp} nav={()=>this.props.navigation.navigate('UDMenu')} />
-					<DashButton title='Outlook' img={dashTmp} nav={()=>this.props.navigation.navigate('Home2')} />
+					<DashButton title='Outlook' img={dashTmp} nav={()=>this.props.navigation.navigate('OutlookWeb')} />
 				</View>
 
 				<View style={styles.dashboard}>
