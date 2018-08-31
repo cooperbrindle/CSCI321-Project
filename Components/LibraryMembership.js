@@ -18,7 +18,7 @@ const blurbPoints = '-  Access a wide range of online resources, including e-jou
 const blurbEnd = 'New membership applications will be processed and confirmed within 5-7 business days via return email.\n'+
             'Memberships need to be renewed annually, and you will be sent a reminder.';
 
-export default class AccountForm extends Component {
+export default class LibraryMembership extends Component {
 	static navigationOptions = {
 		title: 'Library Membership',
 		headerStyle: {
