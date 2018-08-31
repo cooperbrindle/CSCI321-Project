@@ -7,5 +7,4 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 DROP TABLE APPUSER;
-DROP TABLE EDUCATIONALINSTITUTION;
 DROP TABLE CONSTITUENT;
