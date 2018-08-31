@@ -21,6 +21,7 @@ import SignUpForm from './Components/SignUpForm';
 import SignUpFinish from './Components/SignUpFinish';
 import OutlookWebPage from './Components/OutlookWeb';
 import LibraryMembership from './Components/LibraryMembership';
+import Discounts from './Components/Discounts';
 
 import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
