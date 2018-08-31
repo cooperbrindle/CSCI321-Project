@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
 import { styles } from './FormStyles';
 import { DefaultButton } from './DefaultButton';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class ContactForm extends Component {
     static navigationOptions = {
@@ -14,7 +14,6 @@ export default class ContactForm extends Component {
 		},
 		headerTintColor: 'white',
 		headerTitleStyle: {
-			fontWeight: 'bold',
 		},
 	}
 
@@ -89,11 +88,14 @@ export default class ContactForm extends Component {
 
 	render() {
 		return (
+                <KeyboardAwareScrollView
+                style={{ backgroundColor: '#0C2340' }}
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                >
 			<View style={styles.container}>
 				<Text style={styles.title}>
                     Contact Info
                 </Text>
-                <ScrollView>
 
 				{this.renderInput('email (preferred)', 'js@uowmail.edu.au', (a) => this.setState({email:a}), this.state.email)}
 				{this.renderInput('Other email', '', (a) => this.setState({emailOther:a}), this.state.emailOther)}
@@ -101,12 +103,12 @@ export default class ContactForm extends Component {
                 {this.renderInput('Address', 'This field will be expanded out in the future', (a) => this.setState({address:a}), this.state.address)}
                 {this.renderInput('City', 'Wollongong', (a) => this.setState({city:a}), this.state.city)}
 				
-                </ScrollView>
                 <View style={styles.submitBtnCont}>
 					<DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
 			</View>
+                </KeyboardAwareScrollView>
 		);
 		}
 	};

@@ -11,7 +11,7 @@ import {
 import LoginPage from './Components/LoginPage';
 import HomePage from './Components/HomePage';
 import EventSingle from './Components/EventSingle';
-import HomePage2 from './Components/HomePage2';
+import Promotions from './Components/Promotions';
 import UpdateDetailsMenu from './Components/UpdateDetailsMenu';
 import AccountForm from './Components/AccountForm';
 import ContactForm from './Components/ContactForm';
@@ -20,6 +20,7 @@ import SubscriptionForm from './Components/SubscriptionForm';
 import SignUpForm from './Components/SignUpForm';
 import SignUpFinish from './Components/SignUpFinish';
 import OutlookWebPage from './Components/OutlookWeb';
+import LibraryMembership from './Components/LibraryMembership';
 
 import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
@@ -39,13 +40,14 @@ const NavStack = createStackNavigator({
   //Routes
     Home: { screen: HomePage},
     EventSingle: { screen: EventSingle},
-    Home2: { screen: HomePage2},
+    Promotion: { screen: Promotions},
     UDMenu: { screen: UpdateDetailsMenu},
     AccForm: { screen: AccountForm},
     ContForm: { screen: ContactForm},
     EmpForm: { screen: EmploymentForm},
     SubForm: { screen: SubscriptionForm},
     OutlookWeb: { screen: OutlookWebPage},
+    LibraryMem: { screen: LibraryMembership },
   },{ //options
   initialRouteName: 'Home',
 });
@@ -57,7 +59,7 @@ const RootStack = createSwitchNavigator({
   SUForm: { screen: SignUpForm},
   SUFinish: { screen: SignUpFinish},
   },{ //options
-  initialRouteName: 'Login',
+  initialRouteName: 'Home',
 });
 
 export default class App extends React.Component{

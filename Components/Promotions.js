@@ -1,14 +1,11 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
-
-import { EventSingle } from './EventSingle.js';
+import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
 import { DashButton } from './DashButton';
-
+import { Logo } from './Logo';
 
 const dashTmp = require('./assets/dashTmp.png');
-const uowLogo = './assets/logo.png';
 
 export default class HomePage2 extends Component {
 	constructor(props){
@@ -69,37 +66,22 @@ export default class HomePage2 extends Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.logoCont}>
-					<Image
-						style={styles.logo}
-						resizeMode='center'
-						resizeMethod='resize'
-						source={require(uowLogo)}
-					/>
-					<View style={styles.banner}>
-							<Text style={styles.bannerText}>
-								ALUMNI
-							</Text>
-					</View>
+					<Logo scale={1} />
 				</View>
 				
 				<View style={styles.dashboard}>
-					<DashButton title='Update Details' img={dashTmp} nav={()=>this.props.navigation.navigate('Home')} />
-					<DashButton title='Outlook' img={dashTmp} nav={()=>this.props.navigation.navigate('Home')} />
+					<DashButton title='Discounts' img={dashTmp} nav={()=>this.props.navigation.navigate('Home')} />
+					<DashButton title='Library Membership' img={dashTmp} nav={()=>this.props.navigation.navigate('LibraryMem')} />
 				</View>
 
 				<View style={styles.dashboardSmall}>
-					{this.renderdashBtnSmall("Outlook")}
-					{this.renderdashBtnSmall("Promotions")}
-					{this.renderdashBtnSmall("Networking")}
+					{this.renderdashBtnSmall("Careers")}
 					{this.renderdashBtnSmall("Mentoring")}
+					{this.renderdashBtnSmall("Volunteering")}
+					{this.renderdashBtnSmall("Scholarships")}
 				</View>
 
 				<View style={styles.highlightsContainer}>
-					<Text style={styles.highlightHeading}>
-						Highlights
-					</Text>
-
-					{this.renderHighlight("Presentation", "25", "MAY", )}
 				</View>
 
 			</View>

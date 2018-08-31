@@ -8,6 +8,10 @@ import { DashButton } from './DashButton';
 import { Logo } from './Logo';
 
 const dashTmp = require('./assets/dashTmp.png');
+const updateDetailsIcon = require('./assets/UpdateDetails.png');
+const outlookIcon = require('./assets/Outlook.png');
+const eventsIcon = require('./assets/Events.png');
+const promoIcon = require('./assets/Promotions.png');
 
 export default class HomePage extends Component {
 	constructor(props){
@@ -20,9 +24,9 @@ export default class HomePage extends Component {
 		},
 		headerTintColor: 'white',
 		headerTitleStyle: {
-			fontWeight: 'bold',
+			
 		},
-	}
+	} 
 
 	renderHighlight(title, day, month){
 		return(
@@ -55,13 +59,13 @@ export default class HomePage extends Component {
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='Update Details' img={dashTmp} nav={()=>this.props.navigation.navigate('UDMenu')} />
-					<DashButton title='Outlook' img={dashTmp} nav={()=>this.props.navigation.navigate('OutlookWeb')} />
+					<DashButton title='Update Details' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('UDMenu')} />
+					<DashButton title='Outlook' img={outlookIcon} nav={()=>this.props.navigation.navigate('OutlookWeb')} />
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='Events' img={dashTmp} nav={()=>this.props.navigation.navigate('Home2')} />
-					<DashButton title='Promotions' img={dashTmp} nav={()=>this.props.navigation.navigate('Home2')} />
+					<DashButton title='Events' img={eventsIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
+					<DashButton title='Promotions' img={promoIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
 				</View>
 
 				<View style={styles.highlightsContainer}>

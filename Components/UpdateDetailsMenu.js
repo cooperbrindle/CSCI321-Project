@@ -10,6 +10,10 @@ import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 
 const dashTmp = require('./assets/dashTmp.png');
+const accountIcon = require('./assets/Account.png');
+const contactIcon = require('./assets/Contact.png');
+const employmentIcon = require('./assets/Employment.png');
+const subscripIcon = require('./assets/Subscriptions.png');
 
 export default class UpdateDetailsMenu extends Component {
 	
@@ -20,7 +24,7 @@ export default class UpdateDetailsMenu extends Component {
 		},
 		headerTintColor: 'white',
 		headerTitleStyle: {
-			fontWeight: 'bold',
+			
 		},
 	}
 
@@ -161,13 +165,13 @@ export default class UpdateDetailsMenu extends Component {
 			return(
 				<View style={styles.container}>
 				<View style={styles.dashboard}>
-					<DashButton title='Account' img={dashTmp} nav={()=>this.props.navigation.navigate('AccForm', {data: this.state.data})} />
-					<DashButton title='Contact' img={dashTmp} nav={()=>this.props.navigation.navigate('ContForm', {data: this.state.data})} />
+					<DashButton title='Account' img={accountIcon} nav={()=>this.props.navigation.navigate('AccForm', {data: this.state.data})} />
+					<DashButton title='Contact' img={contactIcon} nav={()=>this.props.navigation.navigate('ContForm', {data: this.state.data})} />
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='Employment' img={dashTmp} nav={()=>this.props.navigation.navigate('EmpForm', {data: this.state.data})} />
-					<DashButton title='Subscriptions' img={dashTmp} nav={()=>this.props.navigation.navigate('SubForm', {data: this.state.data})} />
+					<DashButton title='Employment' img={employmentIcon} nav={()=>this.props.navigation.navigate('EmpForm', {data: this.state.data})} />
+					<DashButton title='Subscriptions' img={subscripIcon} nav={()=>this.props.navigation.navigate('SubForm', {data: this.state.data})} />
 				</View>
 
                 <View style={styles.socialContainer}>

@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
 import { styles } from './FormStyles';
 import { DefaultButton } from './DefaultButton';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 export default class EmploymentForm extends Component {
@@ -14,7 +15,6 @@ export default class EmploymentForm extends Component {
 		},
 		headerTintColor: 'white',
 		headerTitleStyle: {
-			fontWeight: 'bold',
 		},
 	}
 
@@ -47,7 +47,11 @@ export default class EmploymentForm extends Component {
 				<Text style={styles.title}>
                     Employment Info
                 </Text>
-                <ScrollView>
+                <KeyboardAwareScrollView
+				style={{ backgroundColor: '#4c69a5' }}
+				resetScrollToCoords={{ x: 0, y: 0 }}
+				contentContainerStyle={styles.container}
+		  		scrollEnabled={false}>
 
                 {this.renderInput('Job Title', 'Dev Leader')}
                 {this.renderInput('Employer', 'Big Ole Company')}
@@ -55,7 +59,7 @@ export default class EmploymentForm extends Component {
                 {this.renderInput('City', 'Wollongong')}
                 {this.renderInput('State / Country / Region', 'Somewhere')}
 				
-                </ScrollView>
+                </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>

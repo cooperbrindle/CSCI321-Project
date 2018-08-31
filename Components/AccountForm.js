@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
 import { styles } from './FormStyles';
 import { DefaultButton } from './DefaultButton';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 export default class AccountForm extends Component {
@@ -14,7 +15,6 @@ export default class AccountForm extends Component {
 		},
 		headerTintColor: 'white',
 		headerTitleStyle: {
-			fontWeight: 'bold',
 		},
     }
     
@@ -117,7 +117,7 @@ export default class AccountForm extends Component {
 				<Text style={styles.title}>
                     Account Info
                 </Text>
-                <ScrollView>
+                <KeyboardAwareScrollView>
                 <View style={styles.topInput}>
                     <View style={styles.inputContSmall}>
                         <Text style={styles.inputText}>
@@ -163,7 +163,7 @@ export default class AccountForm extends Component {
                 {this.renderInput('Last Name', '', (a) => this.setState({keyName:a}), this.state.keyName, true)}
                 {this.renderInput('Student Number', '', (a) => this.setState({ssn:a}), this.state.ssn, false)}
 				
-                </ScrollView>
+                </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
