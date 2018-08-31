@@ -83,20 +83,17 @@ export default class AccountForm extends Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-                <View style={thisStyles.logoView}>
-                <Image style={thisStyles.logo}
-                    source={libraryLogo} />
-                </View>
+			<View style={thisStyles.container}>
+                    <Image style={thisStyles.logo}
+                        source={libraryLogo} />
+                
 
-                <Text style={styles.title}>
+                <Text style={thisStyles.title}>
                     Claim your library card!
                 </Text>
 
 				<ScrollView style={thisStyles.blurbView}>
-                    <Text style={thisStyles.blurbTextStart}>
-                        {blurbStart}
-                    </Text>
+                    
                     <Text style={thisStyles.blurbTextPoints}>
                         {blurbPoints}
                     </Text>
@@ -114,6 +111,17 @@ export default class AccountForm extends Component {
     };
     
     const thisStyles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: '#0C2340',
+        },
+        title: {
+            alignSelf: 'center',
+            textAlign: 'center',
+            fontSize: 36,
+            color: 'white',
+            marginBottom: 10,
+        },
         blurbView: {
             flex:1,
             backgroundColor: '#0C2340',
@@ -122,12 +130,9 @@ export default class AccountForm extends Component {
             marginTop: 20,
             marginBottom: 30,
         },
-        logoView: {
-            flex:0.4,
-            align: 'center',
-            justifyContent: 'center',
-        },
         logo: {
+            flex:0.5,
+            alignSelf: 'center',
             resizeMode: 'center',
         },
         blurbTextStart: {

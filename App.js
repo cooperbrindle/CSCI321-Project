@@ -48,7 +48,7 @@ const NavStack = createStackNavigator({
     SubForm: { screen: SubscriptionForm},
     OutlookWeb: { screen: OutlookWebPage},
     LibraryMem: { screen: LibraryMembership },
-    Discounts: { screen: Discounts },
+    //Discounts: { screen: Discounts },
   },{ //options
   initialRouteName: 'Home',
 });
@@ -60,7 +60,7 @@ const RootStack = createSwitchNavigator({
   SUForm: { screen: SignUpForm},
   SUFinish: { screen: SignUpFinish},
   },{ //options
-  initialRouteName: 'Home',
+  initialRouteName: 'Login',
 });
 
 export default class App extends React.Component{
