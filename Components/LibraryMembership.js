@@ -102,7 +102,7 @@ export default class AccountForm extends Component {
                 {/*this.renderInput('Preferred Email', '', (a) => this.setState({preferredEmail:a}), this.state.preferredEmail, true)*/}
 				
                 <View style={styles.submitBtnCont}>
-                    <DefaultButton title='Submit' nav={() => this.submit()} />
+                    <DefaultButton title='Claim Now' nav={() => this.submit()} />
                 </View>
 
 			</View>

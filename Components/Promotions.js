@@ -7,7 +7,7 @@ import { Logo } from './Logo';
 
 const dashTmp = require('./assets/dashTmp.png');
 
-export default class HomePage2 extends Component {
+export default class Promotions extends Component {
 	constructor(props){
 		super(props);
 	}
@@ -39,24 +39,18 @@ export default class HomePage2 extends Component {
             </TouchableHighlight>
 		)
 	}
-	renderHighlight(title, day, month){
+	renderdashBtnNA(title){
 		return(
-			<TouchableHighlight style={styles.hlBtn}
-					onPress={() => this.props.navigation.navigate('EventSingle')}>
-				<View style={styles.hlBtnView}>
-					<View style={styles.hlCont}>
-						<Text style={styles.hlTitle}>
-							{title}
-						</Text>
-					</View>
-					<View style={styles.hlDate}>
-						<Text style={styles.hlDay}>
-							{day}
-						</Text>
-						<Text style={styles.hlMonth}>
-							{month}
-						</Text>
-					</View>
+			<TouchableHighlight style={styles.dashBtnSmall}
+					onPress={() => this.props.navigation.navigate('Home')}>
+				<View style={styles.dashBtnContainerSmall}>
+					<Image
+                        style={styles.dashBtnImgSmall}
+                        source={dashTmp}
+                    />
+					<Text style={styles.dashTextSmall}>
+						{title}
+					</Text>
 				</View>
             </TouchableHighlight>
 		)
@@ -76,8 +70,8 @@ export default class HomePage2 extends Component {
 
 				<View style={styles.dashboardSmall}>
 					{this.renderdashBtnSmall("Careers")}
-					{this.renderdashBtnSmall("Mentoring")}
-					{this.renderdashBtnSmall("Volunteering")}
+					{this.renderdashBtnNA("Mentoring")}
+					{this.renderdashBtnNA("Volunteering")}
 					{this.renderdashBtnSmall("Scholarships")}
 				</View>
 
@@ -143,6 +137,14 @@ dashboardSmall: {
 			flex: 1,
 			margin: 5,
 			backgroundColor: 'white',
+			justifyContent: 'center',
+			alignContent: 'center',
+		},
+		dashBtnNA: {
+			flex: 1,
+			margin: 5,
+			opacity: 0.5,
+			backgroundColor: 'black',
 			justifyContent: 'center',
 			alignContent: 'center',
 		},

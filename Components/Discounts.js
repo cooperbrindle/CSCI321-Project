@@ -5,7 +5,7 @@ import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, Touchabl
 
 import { EventSingle } from './EventSingle';
 import { DashButton } from './DashButton';
-import { Logo } from './Logo';
+import { Logo } from './discLogo';
 
 const dashTmp = require('./assets/dashTmp.png');
 const updateDetailsIcon = require('./assets/UpdateDetails.png');
@@ -27,30 +27,6 @@ export default class Discounts extends Component {
 			
 		},
 	} 
-
-	renderHighlight(title, day, month){
-		return(
-			<TouchableHighlight style={styles.hlBtn}
-				onPress={() => this.props.navigation.navigate('EventSingle')}>
-				<View style={styles.hlBtnView}>
-					<View style={styles.hlCont}>
-						<Text style={styles.hlTitle}>
-							{title}
-						</Text>
-					</View>
-					<View style={styles.hlDate}>
-						<Text style={styles.hlDay}>
-							{day}
-						</Text>
-						<Text style={styles.hlMonth}>
-							{month}
-						</Text>
-					</View>
-				</View>
-            </TouchableHighlight>
-		)
-	}
-
 	render() {
 		return (
 			<View style={styles.container}>
@@ -59,23 +35,14 @@ export default class Discounts extends Component {
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='Update Details' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('UDMenu')} />
-					<DashButton title='Outlook' img={outlookIcon} nav={()=>this.props.navigation.navigate('OutlookWeb')} />
+					<DashButton title='UOW' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('UDMenu')} />
+					<DashButton title='Local' img={outlookIcon} nav={()=>this.props.navigation.navigate('OutlookWeb')} />
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='Events' img={eventsIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
-					<DashButton title='Promotions' img={promoIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
+					<DashButton title='National' img={eventsIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
+					<DashButton title='Global' img={promoIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
 				</View>
-
-				<View style={styles.highlightsContainer}>
-					<Text style={styles.highlightHeading}>
-						Highlights
-					</Text>
-
-					{this.renderHighlight("Presentation", "25", "MAY", )}
-				</View>
-
 			</View>
 		);
 		}

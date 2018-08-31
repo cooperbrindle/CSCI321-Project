@@ -49,7 +49,7 @@ const NavStack = createStackNavigator({
     SubForm: { screen: SubscriptionForm},
     OutlookWeb: { screen: OutlookWebPage},
     LibraryMem: { screen: LibraryMembership },
-    //Discounts: { screen: Discounts },
+    Discounts: { screen: Discounts },
   },{ //options
   initialRouteName: 'Home',
 });
