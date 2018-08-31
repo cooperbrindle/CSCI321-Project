@@ -1,17 +1,22 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
+import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
+
+import { EventSingle } from './EventSingle';
 import { DashButton } from './DashButton';
 import { Logo } from './Logo';
 
 const dashTmp = require('./assets/dashTmp.png');
+const updateDetailsIcon = require('./assets/UpdateDetails.png');
+const outlookIcon = require('./assets/Outlook.png');
+const eventsIcon = require('./assets/Events.png');
+const promoIcon = require('./assets/Promotions.png');
 
-export default class HomePage2 extends Component {
+export default class Discounts extends Component {
 	constructor(props){
 		super(props);
 	}
-	
 	static navigationOptions = {
 		title: 'Home',
 		headerStyle: {
@@ -19,30 +24,14 @@ export default class HomePage2 extends Component {
 		},
 		headerTintColor: 'white',
 		headerTitleStyle: {
-			fontWeight: 'bold',
+			
 		},
-	}
+	} 
 
-	renderdashBtnSmall(title){
-		return(
-			<TouchableHighlight style={styles.dashBtnSmall}
-					onPress={() => this.props.navigation.navigate('Home')}>
-				<View style={styles.dashBtnContainerSmall}>
-					<Image
-                        style={styles.dashBtnImgSmall}
-                        source={dashTmp}
-                    />
-					<Text style={styles.dashTextSmall}>
-						{title}
-					</Text>
-				</View>
-            </TouchableHighlight>
-		)
-	}
 	renderHighlight(title, day, month){
 		return(
 			<TouchableHighlight style={styles.hlBtn}
-					onPress={() => this.props.navigation.navigate('EventSingle')}>
+				onPress={() => this.props.navigation.navigate('EventSingle')}>
 				<View style={styles.hlBtnView}>
 					<View style={styles.hlCont}>
 						<Text style={styles.hlTitle}>
@@ -68,20 +57,23 @@ export default class HomePage2 extends Component {
 				<View style={styles.logoCont}>
 					<Logo scale={1} />
 				</View>
-				
+
 				<View style={styles.dashboard}>
-					<DashButton title='Discounts' img={dashTmp} nav={()=>this.props.navigation.navigate('Discounts')} />
-					<DashButton title='Library Membership' img={dashTmp} nav={()=>this.props.navigation.navigate('LibraryMem')} />
+					<DashButton title='Update Details' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('UDMenu')} />
+					<DashButton title='Outlook' img={outlookIcon} nav={()=>this.props.navigation.navigate('OutlookWeb')} />
 				</View>
 
-				<View style={styles.dashboardSmall}>
-					{this.renderdashBtnSmall("Careers")}
-					{this.renderdashBtnSmall("Mentoring")}
-					{this.renderdashBtnSmall("Volunteering")}
-					{this.renderdashBtnSmall("Scholarships")}
+				<View style={styles.dashboard}>
+					<DashButton title='Events' img={eventsIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
+					<DashButton title='Promotions' img={promoIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
 				</View>
 
 				<View style={styles.highlightsContainer}>
+					<Text style={styles.highlightHeading}>
+						Highlights
+					</Text>
+
+					{this.renderHighlight("Presentation", "25", "MAY", )}
 				</View>
 
 			</View>
@@ -97,32 +89,10 @@ export default class HomePage2 extends Component {
 
 		/////////////////////////////////////////LOGO
 		logoCont: {
-			//marginTop: 10,
 			flex: 1,
-		},
-		logo: {
-			width: 180,
-			height: 72,
-			flexDirection: 'row',
-			alignSelf: 'center',
-		},
-		banner: {
-			//marginTop: 8,
-			backgroundColor: 'white',
-			margin: 0,
-			justifyContent: 'center',
-			padding: 5,
-			paddingBottom: 10,
-			flexDirection: 'row',
-			marginBottom: 10,
-		},
-		bannerText: {
-			fontSize: 18,
-			color: '#0C2340',
-			fontWeight: 'bold',
+			marginBottom: 15,
 		},
 		
-
 		/////////////////////////////////////////DASH BOARD
 		dashboard: {
 			flex: 1,
@@ -131,47 +101,17 @@ export default class HomePage2 extends Component {
 			marginRight: 7,
 			justifyContent: 'space-between',
 		},
-/////////////////////////////////////////DASH BOARD    SMALL
-dashboardSmall: {
-	flex: 0.75,
-	flexDirection: 'row',
-	marginLeft: 7,
-	marginRight: 7,
-	justifyContent: 'space-between',
-},
-		dashBtnSmall: {
-			flex: 1,
-			margin: 5,
-			backgroundColor: 'white',
-			justifyContent: 'center',
-			alignContent: 'center',
-		},
-		dashBtnContainerSmall: {
-			justifyContent: 'center',
-			alignContent: 'center',
-		},
-				dashBtnImgSmall: {
-					width: 30,
-					height: 30,
-					alignSelf: 'center',
-				},
-				dashTextSmall: {
-					color: '#0C2340',
-					fontSize: 12,
-					marginTop: 10,
-					textAlign: 'center',
-					alignSelf: 'center',
-				},
-
+		
 		/////////////////////////////////////////HIGHLIGHTS
 		highlightsContainer: {
 			flex: 1.5,
+			justifyContent: 'flex-end',
 		},
 		highlightHeading: {
 			color: 'white',
 			marginLeft: 10,
 			marginTop: 20,
-			marginBottom: 20,
+			marginBottom: 10,
 			fontSize: 28,
 		},
 		/////////////Button
