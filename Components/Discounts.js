@@ -35,13 +35,13 @@ export default class Discounts extends Component {
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='UOW' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('UDMenu')} />
-					<DashButton title='Local' img={outlookIcon} nav={()=>this.props.navigation.navigate('OutlookWeb')} />
+					<DashButton title='UOW' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
+					<DashButton title='Local' img={outlookIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='National' img={eventsIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
-					<DashButton title='Global' img={promoIcon} nav={()=>this.props.navigation.navigate('Promotion')} />
+					<DashButton title='National' img={eventsIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
+					<DashButton title='Global' img={promoIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
 				</View>
 			</View>
 		);
