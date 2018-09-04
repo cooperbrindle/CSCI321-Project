@@ -1,19 +1,19 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const app = express();
 
-var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-var mysql = require('mysql');
-var con = mysql.createConnection({
+const sql = mysql.createConnection({
 	host: "localhost",
 	user: "yourusername",
 	password: "yourpassword"
 });
 
-con.connect((err) => {
+sql.connect((err) => {
 	if (err) throw err;
 	console.log("Connected!");
 });
@@ -23,13 +23,13 @@ con.connect((err) => {
 
 app.get('/discounts', (req, res) => {
 
-	if(!req.body.notes || typeof req.body.notes != "string") {
+	if(!req.body.category || typeof req.body.category != "string") {
 		res.status(400).send("400 Bad Request")
 	}
 
-	var category = req.body.category;
+	const category = req.body.category;
 	var data;
-	con.query('SELECT * FROM DISCOUNTS WHERE partnerType = '+category, (err, result, fields) => {
+	sql.query('SELECT * FROM DISCOUNTS WHERE partnerType = ' + category, (err, result, fields) => {
 		if (err) throw err;
 		console.log(result);
 		data = result;
