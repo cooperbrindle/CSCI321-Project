@@ -23,6 +23,9 @@ import OutlookWebPage from './Components/OutlookWeb';
 import LibraryMembership from './Components/LibraryMembership';
 import Discounts from './Components/Discounts';
 import DiscountsList from './Components/DiscountsList';
+import Scholarships from './Components/Scholarships';
+import Careers from './Components/Careers';
+import CareerHub from './Components/CareerHub';
 
 import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
@@ -52,8 +55,12 @@ const NavStack = createStackNavigator({
     LibraryMem: { screen: LibraryMembership },
     Discounts: { screen: Discounts },
     DiscountsList: {screen: DiscountsList},
+    Scholarships: {screen: Scholarships},
+    Careers: {screen: Careers},
+    CareerHub: {screen: CareerHub},
+
   },{ //options
-  initialRouteName: 'DiscountsList',
+  initialRouteName: 'Home',
 });
 
 const RootStack = createSwitchNavigator({

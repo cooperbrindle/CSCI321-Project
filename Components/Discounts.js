@@ -18,7 +18,7 @@ export default class Discounts extends Component {
 		super(props);
 	}
 	static navigationOptions = {
-		title: 'Home',
+		title: 'Alumni Discounts',
 		headerStyle: {
 			backgroundColor: '#0C2340',
 		},
@@ -27,6 +27,28 @@ export default class Discounts extends Component {
 			
 		},
 	} 
+	renderHighlight(title, day, month){
+		return(
+			<TouchableHighlight style={styles.hlBtn}
+				onPress={() => this.props.navigation.navigate('EventSingle')}>
+				<View style={styles.hlBtnView}>
+					<View style={styles.hlCont}>
+						<Text style={styles.hlTitle}>
+							{title}
+						</Text>
+					</View>
+					<View style={styles.hlDate}>
+						<Text style={styles.hlDay}>
+							{day}
+						</Text>
+						<Text style={styles.hlMonth}>
+							{month}
+						</Text>
+					</View>
+				</View>
+            </TouchableHighlight>
+		)
+	}
 	render() {
 		return (
 			<View style={styles.container}>
@@ -42,6 +64,12 @@ export default class Discounts extends Component {
 				<View style={styles.dashboard}>
 					<DashButton title='National' img={eventsIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
 					<DashButton title='Global' img={promoIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
+				</View>
+				<View style={styles.highlightsContainer}>
+					<Text style={styles.highlightHeading}>
+						Featured
+					</Text>
+					{this.renderHighlight("The Little Prince", "10%", "OFF", )}
 				</View>
 			</View>
 		);

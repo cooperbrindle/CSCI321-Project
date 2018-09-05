@@ -13,7 +13,7 @@ export default class Promotions extends Component {
 	}
 	
 	static navigationOptions = {
-		title: 'Home',
+		title: 'Promotions',
 		headerStyle: {
 			backgroundColor: '#0C2340',
 		},
@@ -22,11 +22,48 @@ export default class Promotions extends Component {
 			fontWeight: 'bold',
 		},
 	}
-
-	renderdashBtnSmall(title){
+	renderHighlight(title, day, month){
+		return(
+			<TouchableHighlight style={styles.hlBtn}
+				onPress={() => this.props.navigation.navigate('EventSingle')}>
+				<View style={styles.hlBtnView}>
+					<View style={styles.hlCont}>
+						<Text style={styles.hlTitle}>
+							{title}
+						</Text>
+					</View>
+					<View style={styles.hlDate}>
+						<Text style={styles.hlDay}>
+							{day}
+						</Text>
+						<Text style={styles.hlMonth}>
+							{month}
+						</Text>
+					</View>
+				</View>
+            </TouchableHighlight>
+		)
+	}
+	renderDashBtnSchol(title){
 		return(
 			<TouchableHighlight style={styles.dashBtnSmall}
-					onPress={() => this.props.navigation.navigate('Home')}>
+					onPress={() => this.props.navigation.navigate('Scholarships')}>
+				<View style={styles.dashBtnContainerSmall}>
+					<Image
+                        style={styles.dashBtnImgSmall}
+                        source={dashTmp}
+                    />
+					<Text style={styles.dashTextSmall}>
+						{title}
+					</Text>
+				</View>
+            </TouchableHighlight>
+		)
+	}
+	renderDashBtnCar(title){
+		return(
+			<TouchableHighlight style={styles.dashBtnSmall}
+					onPress={() => this.props.navigation.navigate('Careers')}>
 				<View style={styles.dashBtnContainerSmall}>
 					<Image
                         style={styles.dashBtnImgSmall}
@@ -69,13 +106,17 @@ export default class Promotions extends Component {
 				</View>
 
 				<View style={styles.dashboardSmall}>
-					{this.renderdashBtnSmall("Careers")}
+					{this.renderDashBtnCar("Careers")}
 					{this.renderdashBtnNA("Mentoring")}
 					{this.renderdashBtnNA("Volunteering")}
-					{this.renderdashBtnSmall("Scholarships")}
+					{this.renderDashBtnSchol("Scholarships")}
 				</View>
 
 				<View style={styles.highlightsContainer}>
+					<Text style={styles.highlightHeading}>
+						Featured
+					</Text>
+					{this.renderHighlight("The Little Prince", "10%", "OFF", )}
 				</View>
 
 			</View>
