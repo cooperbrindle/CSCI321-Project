@@ -1,11 +1,11 @@
 
-const API_URL = '';
+const API_URL = '149.28.172.13';
 
 export default class Vultr{
     
     constructor() {
         this.token = null;
-        //other shit
+        this.API_URL = '149.28.172.13';
     }
 
     signInWithEmailPassword(email, password) {
@@ -20,9 +20,10 @@ export default class Vultr{
     }
 
     static getDiscounts(category) {
+        console.log('INSIDE VULTR SDK DISCOUNTS');
         return new Promise((resolve, reject) => {
             
-            data = fetch(API_URL + '/discounts', {
+            data = fetch('http://149.28.172.13/discounts', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

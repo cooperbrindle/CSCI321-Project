@@ -9,19 +9,23 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 const sql = mysql.createConnection({
 	host: "localhost",
-	user: "yourusername",
-	password: "yourpassword"
+	user: "username",
+	password: "password"
 });
 
 sql.connect((err) => {
 	if (err) throw err;
 	console.log("Connected!");
 });
- 
+sql.query('use alumniapp', (err, result, fields) => {
+	if(err) throw err;
+	else console.log(result);
+}); 
 
  
 
-app.get('/discounts', (req, res) => {
+app.post('/discounts', (req, res) => {
+	console.log('REQUEST MADE');
 
 	if(!req.body.category || typeof req.body.category != "string") {
 		res.status(400).send("400 Bad Request")
@@ -29,24 +33,17 @@ app.get('/discounts', (req, res) => {
 
 	const category = req.body.category;
 	var data;
-	sql.query('SELECT * FROM DISCOUNTS WHERE partnerType = ' + category, (err, result, fields) => {
+	sql.query('SELECT * FROM DISCOUNTS WHERE partnerType = \'' + category + '\'', (err, result, fields) => {
 		if (err) throw err;
 		console.log(result);
 		data = result;
+		res.json(result);
 	});
-	//res.json(data);
-	res.json([
-		{blurb: 'item description 1'},
-		{blurb: 'item description 2'},
-		{blurb: 'item description 3'},
-		{blurb: 'item description 4'},
-		{blurb: 'item description 5'},
-		{blurb: 'item description 6'},
-		{blurb: 'item description 7'},
-	]);
+	
+		
 })
  
-app.listen(3000)
+app.listen(80)
 
 
 ///////////////

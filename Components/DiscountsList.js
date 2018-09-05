@@ -7,47 +7,48 @@ import { EventSingle } from './EventSingle';
 import { DashButton } from './DashButton';
 import { Logo } from './discLogo';
 
+import Vultrsdk from './Vultrsdk';
+
 
 const tmpImg = require('./assets/dashTmp.png');
 
-const discountList = [
-    {blurb: 'item description 1'},
-    {blurb: 'item description 2'},
-    {blurb: 'item description 3'},
-    {blurb: 'item description 4'},
-    {blurb: 'item description 5'},
-    {blurb: 'item description 6'},
-    {blurb: 'item description 7'},
-];
 
 export default class DiscountsList extends Component {
 	constructor(props){
         super(props);
-        state = {
-            isLoading: true,
-            errorMessage: '',
-        }
-	}
+    }
+    
 	static navigationOptions = {
-		title: 'Discounts',
+        title: 'Discounts',
 		headerStyle: {
-			backgroundColor: '#0C2340',
+            backgroundColor: '#0C2340',
 		},
 		headerTintColor: 'white',
 		headerTitleStyle: {
-			
-		},
+            
+        },
+    }
+    
+    state = {
+        isLoading: true,
+        errorMessage: '',
+        data: null,
     }
     
     componentDidMount(){ 
-        /*Vultrsdk.getDiscounts('UOW')
+        var category = this.props.navigation.getParam('category', '');
+        if(category == ''){
+            console.warn('Error getting category');
+            this.setState({isLoading: false, errorMessage: 'error getting category'});
+        }
+        Vultrsdk.getDiscounts(category)
         .then((res) => {
             this.setState({data: res, isLoading: false, errorMessage: ''});
 
         }).catch((error) => {
-            this.setState({isLoading: false, errorMessage: error.message});
+            console.warn(error);
+            this.setState({isLoading: false, errorMessage: error});
         })
-        */
     }
 
     renderActivityIndicator(){
@@ -70,13 +71,13 @@ export default class DiscountsList extends Component {
         )
     }
     renderList(){
-        /*if(data == null)
+        if(this.state.isLoading)
             return <View/>;
-        */
-        return(
+        
+        else return(
             <ScrollView style={styles.scrollView}>
                 <FlatList style={styles.fList}
-                    data={discountList}
+                    data={this.state.data}
                     renderItem={({item}) => this.renderItem(item)}
                 />
             </ScrollView>
@@ -85,6 +86,7 @@ export default class DiscountsList extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+                {this.renderActivityIndicator()}
 				{this.renderList()}
 			</View>
 		);
@@ -120,5 +122,6 @@ export default class DiscountsList extends Component {
             fontSize: 18,
             paddingLeft: 20,
             paddingTop: 20,
+            paddingRight: 10,
         }
 	});

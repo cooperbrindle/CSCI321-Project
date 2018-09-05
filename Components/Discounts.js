@@ -57,13 +57,13 @@ export default class Discounts extends Component {
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='UOW' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
-					<DashButton title='Local' img={outlookIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
+					<DashButton title='UOW' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('DiscountsList',{category: 'uow'})} />
+					<DashButton title='Local' img={outlookIcon} nav={()=>this.props.navigation.navigate('DiscountsList',{category: 'local'})} />
 				</View>
 
 				<View style={styles.dashboard}>
-					<DashButton title='National' img={eventsIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
-					<DashButton title='Global' img={promoIcon} nav={()=>this.props.navigation.navigate('DiscountsList')} />
+					<DashButton title='National' img={eventsIcon} nav={()=>this.props.navigation.navigate('DiscountsList',{category: 'national'})} />
+					<DashButton title='Global' img={promoIcon} nav={()=>this.props.navigation.navigate('DiscountsList',{category: 'global'})} />
 				</View>
 				<View style={styles.highlightsContainer}>
 					<Text style={styles.highlightHeading}>
