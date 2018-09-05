@@ -15,8 +15,7 @@ const blurbPoints = '-  Access a wide range of online resources, including e-jou
             '-  Borrow 30 items for 28 days at the Wollongong location, or five items at other locations\n\n'+
             '-  Renew items and place up to 10 holds at a time.\n\n';
 
-const blurbEnd = 'New membership applications will be processed and confirmed within 5-7 business days via return email.\n'+
-            'Memberships need to be renewed annually, and you will be sent a reminder.';
+const blurbEnd = 'New membership applications will be processed and confirmed within 5-7 business days via return email.';
 
 export default class LibraryMembership extends Component {
 	static navigationOptions = {
