@@ -60,7 +60,7 @@ const NavStack = createStackNavigator({
     CareerHub: {screen: CareerHub},
 
   },{ //options
-  initialRouteName: 'Discounts',
+  initialRouteName: 'Home',
 });
 
 const RootStack = createSwitchNavigator({

@@ -1,3 +1,4 @@
+const log = require('./lib/log').log;
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -6,11 +7,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+log('Session Started');
 
 const sql = mysql.createConnection({
 	host: "localhost",
-	user: "username",
-	password: "password"
+	user: "danielm",
+	password: "Shiny380"
 });
 
 sql.connect((err) => {
@@ -25,8 +27,9 @@ sql.query('use alumniapp', (err, result, fields) => {
  
 
 app.post('/discounts', (req, res) => {
-	console.log('REQUEST MADE');
+	log(' Request made to: /discounts');
 
+	try{
 	if(!req.body.category || typeof req.body.category != "string") {
 		res.status(400).send("400 Bad Request")
 	}
@@ -35,11 +38,13 @@ app.post('/discounts', (req, res) => {
 	var data;
 	sql.query('SELECT * FROM DISCOUNTS WHERE partnerType = \'' + category + '\'', (err, result, fields) => {
 		if (err) throw err;
-		console.log(result);
+		//console.log(result);
 		data = result;
 		res.json(result);
 	});
-	
+	}catch(err){
+		log('ERROR: ' + err);
+	}
 		
 })
  
