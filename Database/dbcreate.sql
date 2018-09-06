@@ -5,49 +5,59 @@
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* Constituent Table */
 
-/* Cooper 14/05/18 */
-CREATE TABLE CONSTITUENT(
-    constituentID   VARCHAR(100)    NOT NULL, /* Universal Unique Identifier */
-    firstName       VARCHAR(50)     NULL, /* Constituent First Name */
-    middleName      VARCHAR(50)     NULL, /* Constituent Middlename */
-    surName         VARCHAR(50)     NOT NULL,
-    maidenName      VARCHAR(100)    NULL, /* Constituent Maidenname */
-    nickName        VARCHAR(50)     NULL, /* Preferred name */
-    ssn             DECIMAL(7)      NOT NULL, /* Student Number */ 
-    title           VARCHAR(5)      NOT NULL, /* Mr Mrs etc */
-    suffix          VARCHAR(5)      NULL,   /* Phd etc */
-    gender          VARCHAR(1)      NOT NULL, /* m for Male, f for female, n for non-binary, t for trans, o for other */
-    birthDate       VARCHAR(8)      NOT NULL, /* Constituent Birth Date ie 27101996 */
-    doNotMail       BINARY(1)       NOT NULL, /* Recieve mail notifications */
-    doNotEmail       BINARY(1)       NOT NULL, /* Recieve email notifications */
-    doNotPhone       BINARY(1)       NOT NULL, /* Recieve phone calls */
-    /*Date Added */
-    /*Date Changed */
-    CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (constituentID),
-    UNIQUE (ssn) );
 
 /* Cooper 24/05/18 */
 CREATE TABLE APPUSER(
-    constituentID   VARCHAR(256)    NOT NULL, /* Universal Unique Identifier */ /* check storage method */
-    username        VARCHAR(256)     NOT NULL, /* Unique user name */
-    password        VARCHAR(256)     NOT NULL, /* Hash value of password */
+    CnBio_ID        VARCHAR(10)     NOT NULL, /* Universal Unique Identifier */
+    username        VARCHAR(256)    NOT NULL, /* Unique user name */
+    password        VARCHAR(256)    NOT NULL, /* Hash value of password */
     salt            DECIMAL(3)      NOT NULL, /* Random salt value to reduce collision and false positive risk */
-    CONSTRAINT USER_pkey PRIMARY KEY (constituentID, username),
-    CONSTRAINT USER_fkey1 FOREIGN KEY (constituentID)
-        REFERENCES CONSTITUENT (constituentID) );
+    CONSTRAINT USER_pkey PRIMARY KEY (CnBio_ID, username),
+    CONSTRAINT USER_fkey1 FOREIGN KEY (CnBio_ID)
+        REFERENCES CONSTITUENT (CnBio_ID) );
 
-/* Cooper 24/05/18 */
-/*
-CREATE TABLE CONTACT(
-    /*CONST ID*/  
-    /*Phone Number*/
-    /* Email */
-    /* Addres */
+/* Cooper 06/09/18 */
+CREATE TABLE CONSTITUENT(
+    CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    CnBio_ID2           VARCHAR(10)     NOT NULL, /* Student Number */
+    CnBio_Birth_date    DATE            NOT NULL, /* Date of Birth */
+    CnBio_Title_1       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
+    CnBio_First_Name    VARCHAR(36)     NULL, /* First Name */
+    CnBio_Nickname      VARCHAR(36)     NULL, /* Nickname */
+    CnBio_Middle_Name   VARCHAR(36)     NULL, /* Middle Name */
+    CnBio_Surname       VARCHAR(64)     NOT NULL, /* Last Name/s */
+    CnBio_Maiden_name   VARCHAR(64)     NULL, /* Maiden Name */
+    CnPrBs_Org_Name     VARCHAR(256)    NULL, /* Employer Organisation Name */
+    CnPrBs_Position     VARCHAR(256)    NULL, /* Position Name */
+    CnAdrPrf_Address    VARCHAR(256)    NOT NULL, /* Home Address */
+    CnAdrPrf_Suburb     VARCHAR(256)    NOT NULL, /* Home Suburb */
+    CnAdrPrf_State      VARCHAR(256)    NOT NULL, /* Home State */
+    CnAdrPrf_County     VARCHAR(256)    NULL, /* Home County */
+    CnAdrPrf_Postcode   VARCHAR(256)    NOT NULL, /* Home Postcode */
+    CnAdrPrf_CountryLongDescription     VARCHAR(256)    NOT NULL, /* Home Country */
+    CnPh_1_01_Phone_number  VARCHAR(256)    NOT NULL, /* Preferred Email */
+    CnPh_1_02_Phone_number  VARCHAR(256)    NOT NULL, /* Other Email */
+    CnPh_1_03_Phone_number  VARCHAR(256)    NOT NULL, /* LinkedIn URL */
+    CnPh_1_04_Phone_number  VARCHAR(256)    NOT NULL, /* Mobile Number */
+    CnPh_1_05_Phone_number  VARCHAR(256)    NOT NULL, /* Unknown */
 
+    CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (CnBio_ID),
+    UNIQUE (CnBio_ID2) );
+
+/* Cooper 06/09/2018 */
+CREATE TABLE LIBRARYMEM(
+    CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    CnBio_ID2           VARCHAR(10)     NOT NULL, /* Student Number */
+    CnAttrCat_1_01_Description VARCHAR(256) NOT NULL, /* Membership Username */
+    CnAttrCat_2_01_Description VARCHAR(256) NOT NULL, /* Membership Password */
+    CnMem_1_01_Cur_Expires_on  DATE         NULL, /* Date of Membership Expiry */
+    
+    CONSTRAINT LIBRARYMEM_pkey PRIMARY KEY (CnBio_ID),
+    CONSTRAINT LIBRARYMEM_fkey1 FOREIGN KEY (CnBio_ID)
+        REFERENCES CONSTITUENT (CnBio_ID)
+);
 /* Cooper 31/08/2018 */
-
 CREATE TABLE DISCOUNTS(
     titleID         VARCHAR(24)     NOT NULL, /* Short Hand Unique Name for Discounts */
     partnerType     VARCHAR(24)     NOT NULL, /* UOW, Local, National, Global */
