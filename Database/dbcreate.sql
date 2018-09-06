@@ -43,7 +43,7 @@ CREATE TABLE CONSTITUENT(
     CnPh_1_05_Phone_number  VARCHAR(256)    NOT NULL, /* Unknown */
 
     CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (CnBio_ID),
-    UNIQUE (CnBio_ID2) );
+    CONSTRAINT CONSTITUENT_uni UNIQUE (CnBio_ID2) );
 
 /* Cooper 06/09/2018 */
 CREATE TABLE LIBRARYMEM(
@@ -55,7 +55,31 @@ CREATE TABLE LIBRARYMEM(
     
     CONSTRAINT LIBRARYMEM_pkey PRIMARY KEY (CnBio_ID),
     CONSTRAINT LIBRARYMEM_fkey1 FOREIGN KEY (CnBio_ID)
-        REFERENCES CONSTITUENT (CnBio_ID) );
+        REFERENCES CONSTITUENT (CnBio_ID),
+    CONSTRAINT LIBRARYMEM_fkey2 FOREIGN KEY (CnBio_ID2)
+        REFERENCES CONSTITUENT (CnBio_ID2) );
+
+/* Cooper 06/09/2018 */
+CREATE TABLE EVENTS(
+    eventname       VARCHAR(256)    NOT NULL, /* Event Name */
+    eventgroup      VARCHAR(64)     NOT NULL, /* Organising Department */
+    eventtype       VARCHAR(64)     NOT NULL, /* Purpose of Event */
+    startdate       DATE            NOT NULL, /* Start of Event */
+    enddate         DATE            NOT NULL, /* End of Event */
+    starttime       VARCHAR(10)     NOT NULL, /* Start Time */
+    endtime         VARCHAR(10)     NOT NULL, /* End Time */
+    capacity        DECIMAL(4)      NOT NULL, /* Max number of attendants */
+    locationname    VARCHAR(256)    NULL, /* Event Venue */
+    address         VARCHAR(256)    NULL, /* Venue Address */
+    city            VARCHAR(256)    NULL, /* Venue City */
+    State           VARCHAR(256)    NULL, /* Venue State */
+    postcode        VARCHAR(256)    NULL, /* Venue Postcode */
+    country         VARCHAR(256)    NULL, /* Event Country */
+    regLink         VARCHAR(256)    NULL, /* Paid Event Rego Link */
+    mapsLink        VARCHAR(256)    NULL, /* Google maps API Link */
+    onApp           VARCHAR(3)      NOT NULL, /* To be displayed */
+    CONSTRAINT EVENTS_pkey PRIMARY KEY (eventname) );
+
 /* Cooper 31/08/2018 */
 CREATE TABLE DISCOUNTS(
     titleID         VARCHAR(24)     NOT NULL, /* Short Hand Unique Name for Discounts */
@@ -63,5 +87,4 @@ CREATE TABLE DISCOUNTS(
     displayName     VARCHAR(256)    NOT NULL, /* Full display name for Discount */
     discountType    VARCHAR(2)      NOT NULL, /* dc = display card, co = checkout code, em = email, li = link */
     blurb           VARCHAR(1028)   NOT NULL, /* To be displayed on discount page */
-    CONSTRAINT DISCOUNTS_pkey PRIMARY KEY (titleID)
-);
+    CONSTRAINT DISCOUNTS_pkey PRIMARY KEY (titleID) );
