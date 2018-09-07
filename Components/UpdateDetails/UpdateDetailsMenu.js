@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
-import { DefaultButton } from './DefaultButton';
-import { DashButton } from './DashButton';
-import { SocialButton } from './SocialButton';
+import { DefaultButton } from '../DefaultButton';
+import { DashButton } from '../DashButton';
+import { SocialButton } from '../SocialButton';
 
 import firebase from 'firebase';
 import firestore from 'firebase/firestore';

@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, Alert, Image} from 'react-native';
-import { styles } from './FormStyles';
-import { DefaultButton } from './DefaultButton';
+import { styles } from '../FormStyles';
+import { DefaultButton } from '../DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 

@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
-import { EventSingle } from './EventSingle';
-import { DashButton } from './DashButton';
+import { EventSingle } from '../Events/EventSingle';
+import { DashButton } from '../DashButton';
 import { Logo } from './discLogo';
 
 const dashTmp = require('./assets/dashTmp.png');

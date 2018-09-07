@@ -7,5 +7,7 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 DROP TABLE APPUSER;
-DROP TABLE CONSTITUENT;
+DROP TABLE EVENTS;
+DROP TABLE LIBRARYMEM;
 DROP TABLE DISCOUNTS;
+DROP TABLE CONSTITUENT;

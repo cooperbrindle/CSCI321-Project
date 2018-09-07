@@ -5,18 +5,6 @@
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-
-/* Cooper 24/05/18 */
-CREATE TABLE APPUSER(
-    CnBio_ID        VARCHAR(10)     NOT NULL, /* Universal Unique Identifier */
-    username        VARCHAR(256)    NOT NULL, /* Unique user name */
-    password        VARCHAR(256)    NOT NULL, /* Hash value of password */
-    salt            DECIMAL(3)      NOT NULL, /* Random salt value to reduce collision and false positive risk */
-    CONSTRAINT USER_pkey PRIMARY KEY (CnBio_ID, username),
-    CONSTRAINT USER_fkey1 FOREIGN KEY (CnBio_ID)
-        REFERENCES CONSTITUENT (CnBio_ID) );
-
 /* Cooper 06/09/18 */
 CREATE TABLE CONSTITUENT(
     CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
@@ -88,3 +76,13 @@ CREATE TABLE DISCOUNTS(
     discountType    VARCHAR(2)      NOT NULL, /* dc = display card, co = checkout code, em = email, li = link */
     blurb           VARCHAR(1028)   NOT NULL, /* To be displayed on discount page */
     CONSTRAINT DISCOUNTS_pkey PRIMARY KEY (titleID) );
+
+/* Cooper 24/05/18 */
+CREATE TABLE APPUSER(
+    CnBio_ID        VARCHAR(10)     NOT NULL, /* Universal Unique Identifier */
+    username        VARCHAR(256)    NOT NULL, /* Unique user name */
+    password        VARCHAR(256)    NOT NULL, /* Hash value of password */
+    salt            DECIMAL(3)      NOT NULL, /* Random salt value to reduce collision and false positive risk */
+    CONSTRAINT USER_pkey PRIMARY KEY (CnBio_ID, username),
+    CONSTRAINT USER_fkey1 FOREIGN KEY (CnBio_ID)
+        REFERENCES CONSTITUENT (CnBio_ID) );

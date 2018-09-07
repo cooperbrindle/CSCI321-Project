@@ -5,6 +5,8 @@
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* Load Discounts */
 INSERT INTO DISCOUNTS VALUES ('unibar', 'uow', 'UNIBAR', 'dc', 'Purchase event tickets at student prices!');
 INSERT INTO DISCOUNTS VALUES ('studperf', 'uow', 'Student Performances', 'dc', 'Discounted tickets to all theatre productions from Australias rising stars!');
 INSERT INTO DISCOUNTS VALUES ('uniActive', 'uow', 'UNIACTIVE Wollongong Campus and Innovation Campus Gyms', 'dc', 'Concession rate on a variety of memberships, visit passes and casual visits!');
@@ -23,3 +25,4 @@ INSERT INTO DISCOUNTS VALUES ('dell', 'national', 'DELL Computers', 'em', 'Recei
 /* TFE Hotels */
 /* Hotel Storm */
 /* Experience OZ */
+

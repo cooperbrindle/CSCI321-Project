@@ -3,11 +3,11 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
 
-import { EventSingle } from './EventSingle';
-import { DashButton } from './DashButton';
+import { EventSingle } from '../Events/EventSingle';
+import { DashButton } from '../DashButton';
 import { Logo } from './discLogo';
 
-import Vultrsdk from './Vultrsdk';
+import Vultrsdk from '../Vultrsdk';
 
 
 const tmpImg = require('./assets/dashTmp.png');

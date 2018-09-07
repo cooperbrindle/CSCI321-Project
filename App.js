@@ -10,22 +10,22 @@ import {
 
 import LoginPage from './Components/LoginPage';
 import HomePage from './Components/HomePage';
-import EventSingle from './Components/EventSingle';
-import Promotions from './Components/Promotions';
-import UpdateDetailsMenu from './Components/UpdateDetailsMenu';
-import AccountForm from './Components/AccountForm';
-import ContactForm from './Components/ContactForm';
-import EmploymentForm from './Components/EmploymentForm';
-import SubscriptionForm from './Components/SubscriptionForm';
+import EventSingle from './Components/Events/EventSingle';
+import Promotions from './Components/Promotions/Promotions';
+import UpdateDetailsMenu from './Components/UpdateDetails/UpdateDetailsMenu';
+import AccountForm from './Components/UpdateDetails/AccountForm';
+import ContactForm from './Components/UpdateDetails/ContactForm';
+import EmploymentForm from './Components/UpdateDetails/EmploymentForm';
+import SubscriptionForm from './Components/UpdateDetails/SubscriptionForm';
 import SignUpForm from './Components/SignUpForm';
 import SignUpFinish from './Components/SignUpFinish';
-import OutlookWebPage from './Components/OutlookWeb';
-import LibraryMembership from './Components/LibraryMembership';
-import Discounts from './Components/Discounts';
-import DiscountsList from './Components/DiscountsList';
-import Scholarships from './Components/Scholarships';
-import Careers from './Components/Careers';
-import CareerHub from './Components/CareerHub';
+import OutlookWebPage from './Components/Outlook/OutlookWeb';
+import LibraryMembership from './Components/Promotions/LibraryMembership';
+import Discounts from './Components/Promotions/Discounts';
+import DiscountsList from './Components/Promotions/DiscountsList';
+import Scholarships from './Components/Promotions/Scholarships';
+import Careers from './Components/Promotions/Careers';
+import CareerHub from './Components/Promotions/CareerHub';
 
 import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
