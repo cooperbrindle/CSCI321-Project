@@ -9,7 +9,7 @@
 CREATE TABLE CONSTITUENT(
     CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
     CnBio_ID2           VARCHAR(10)     NOT NULL, /* Student Number */
-    CnBio_Birth_date    DATE            NOT NULL, /* Date of Birth */
+    CnBio_Birth_date    VARCHAR(10)     NOT NULL, /* Date of Birth */
     CnBio_Title_1       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
     CnBio_First_Name    VARCHAR(36)     NULL, /* First Name */
     CnBio_Nickname      VARCHAR(36)     NULL, /* Nickname */
@@ -75,15 +75,16 @@ CREATE TABLE DISCOUNTS(
     displayName     VARCHAR(256)    NOT NULL, /* Full display name for Discount */
     discountType    VARCHAR(2)      NOT NULL, /* dc = display card, co = checkout code, em = email, li = link */
     blurb           VARCHAR(1028)   NOT NULL, /* To be displayed on discount page */
-    imageURL        VARCHAR(256)    NOT NULL, /* URL for Logo to be Displayed */
+    imageURL        VARCHAR(256)    NULL, /* URL for Logo to be Displayed */
     CONSTRAINT DISCOUNTS_pkey PRIMARY KEY (titleID) );
 
 /* Cooper 24/05/18 */
 CREATE TABLE APPUSER(
     CnBio_ID        VARCHAR(10)     NOT NULL, /* Universal Unique Identifier */
     username        VARCHAR(256)    NOT NULL, /* Unique user name */
-    password        VARCHAR(256)    NOT NULL, /* Hash value of password */
-    salt            DECIMAL(3)      NOT NULL, /* Random salt value to reduce collision and false positive risk */
+    passHash        VARCHAR(256)    NOT NULL, /* Hash value of password */
+
     CONSTRAINT USER_pkey PRIMARY KEY (CnBio_ID, username),
+    CONSTRAINT APPUSER_uni UNIQUE (username),
     CONSTRAINT USER_fkey1 FOREIGN KEY (CnBio_ID)
         REFERENCES CONSTITUENT (CnBio_ID) );
