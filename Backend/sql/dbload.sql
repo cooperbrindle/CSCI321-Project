@@ -13,6 +13,9 @@ FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
+/* Load Users */
+INSERT INTO APPUSER VALUES ('129062', 'sclaypole', 'password');
+INSERT INTO APPUSER VALUES ('165537', 'ewarren', 'password');
 /* Load Discounts */
 INSERT INTO DISCOUNTS VALUES ('unibar', 'uow', 'UNIBAR', 'dc', 'Purchase event tickets at student prices!', NULL);
 INSERT INTO DISCOUNTS VALUES ('studperf', 'uow', 'Student Performances', 'dc', 'Discounted tickets to all theatre productions from Australias rising stars!', NULL);
