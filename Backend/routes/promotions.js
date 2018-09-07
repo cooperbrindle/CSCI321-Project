@@ -1,6 +1,9 @@
 var router = require('express').Router();
-var sql = require('mysql');
-const log = require('./lib/log').log;
+var dbconn = require('../sqlConnection');
+const log = require('../lib/log').log;
+
+
+
 
 router.post('/discounts', (req, res) => {
 	log(' Request made to: /discounts');
@@ -12,7 +15,7 @@ router.post('/discounts', (req, res) => {
 
 	const category = req.body.category;
 	var data;
-	sql.query('SELECT * FROM DISCOUNTS WHERE partnerType = \'' + category + '\'', (err, result, fields) => {
+	dbconn.query('SELECT * FROM DISCOUNTS WHERE partnerType = \'' + category + '\'', (err, result, fields) => {
 		if (err) throw err;
 		//console.log(result);
 		data = result;
@@ -23,3 +26,5 @@ router.post('/discounts', (req, res) => {
 	}
 		
 })
+
+module.exports = router;

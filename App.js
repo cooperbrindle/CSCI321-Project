@@ -27,19 +27,20 @@ import Scholarships from './Components/Promotions/Scholarships';
 import Careers from './Components/Promotions/Careers';
 import CareerHub from './Components/Promotions/CareerHub';
 
-import firebase from 'firebase';
+//import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
+import Vultrsdk from './Components/Vultrsdk';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
-const firebaseConfig = {
+/*const firebaseConfig = {
   apiKey: "AIzaSyAN7jnv-YL5RWJ3uoeO-mpFV2W_kJKYWuU",
     authDomain: "alumnitest-1.firebaseapp.com",
     databaseURL: "https://alumnitest-1.firebaseio.com",
     projectId: "alumnitest-1",
     storageBucket: "alumnitest-1.appspot.com",
     messagingSenderId: "990092777009"
-};
+};*/
 
 const NavStack = createStackNavigator({
   //Routes
@@ -70,19 +71,21 @@ const RootStack = createSwitchNavigator({
   SUForm: { screen: SignUpForm},
   SUFinish: { screen: SignUpFinish},
   },{ //options
-  initialRouteName: 'Home',
+  initialRouteName: 'Login',
 });
 
 export default class App extends React.Component{
 
   componentWillMount(){
-    try{
+    /*try{
     firebase.initializeApp(firebaseConfig);
     }catch(err){console.warn('App.js Firebase: ' + err.message);}
+    */
   }
 
   render() {
-	  return <RootStack screenProps={firebase}/>;
+    vultr = new Vultrsdk();
+	  return <RootStack screenProps={vultr}/>;
   }
 }
 

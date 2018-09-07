@@ -6,10 +6,7 @@ import { DefaultButton } from '../DefaultButton';
 import { DashButton } from '../DashButton';
 import { SocialButton } from '../SocialButton';
 
-import firebase from 'firebase';
-import firestore from 'firebase/firestore';
 
-const dashTmp = require('../assets/dashTmp.png');
 const accountIcon = require('../assets/Account.png');
 const contactIcon = require('../assets/Contact.png');
 const employmentIcon = require('../assets/Employment.png');
@@ -36,18 +33,15 @@ export default class UpdateDetailsMenu extends Component {
 		try{
 		
 		this.state = {
-			firebase: this.props.screenProps,
+			vultr: this.props.screenProps,
 			isLoading: true,
 			didLoad: false,
 			errorMessage: '',
 			successMessage: '',
-			firebase: this.props.screenProps,
 		};
 		
-		let db = this.props.screenProps.firestore();
-		db.settings({timestampsInSnapshots: true});
-		const uid = this.props.screenProps.auth().currentUser.uid;
-		
+		let vultr = this.props.screenProps;
+		/*
 		//get constitID from UserLink Collection
 		db.collection('UserLinks').doc(uid).get()
 			.then(userlink => {
@@ -74,8 +68,8 @@ export default class UpdateDetailsMenu extends Component {
 				}else{ this.handleDBErrors();}
 			}).catch(error => { this.handleDBErrors(error);})
 		
+			*/
 		}catch(err){console.warn('try catch error: ' + err.message);}
-		
 	}
 
 	handleDBErrors(error){
