@@ -5,7 +5,7 @@ export default class Vultr{
     
     constructor() {
         this.token = null;
-        this.basicData = null;
+        this.data = null;
     }
 
     loadConstituent(username){
@@ -24,8 +24,9 @@ export default class Vultr{
                 if(!result.ok) reject('SERVER ERROR');
                 else return result.json();
             }).then((res) => {
-                this.basicData = res;
-                console.log(res);
+                this.translateRE(res[0]);
+                //console.log(res);
+                console.log(this.data);
                 resolve();
             }).catch((error) => {
                 reject(error);
@@ -88,5 +89,27 @@ export default class Vultr{
                 reject(error);
             })
         });
+    }
+
+    translateRE(result){
+        this.data = {
+            id: result.CnBio_ID,
+            stdNum: result.CnBio_ID2,
+            title: result.CnBio_Title,
+            firstName: result.CnBio_First_Name,
+            lastName: result.CnBio_Surname,
+            birthDate: result.CnBio_Birth_date,
+            maidenName: result.CnBio_Maiden_name,
+            address: result.CnAdrPrf_Address ,
+            suburb: result.CnAdrPrf_Suburb,
+            state: result.CnAdrPrf_State,
+            country: result.CnAdrPrf_CountryLongDescription,
+            postcode: result.CnAdrPrf_Postcode,
+            email: result.CnPh_1_01_Phone_number,
+            emailOther: result.CnPh_1_02_Phone_number,
+            mobile: result.CnPh_1_04_Phone_number
+
+
+        };
     }
 };

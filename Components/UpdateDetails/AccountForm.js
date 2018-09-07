@@ -31,11 +31,11 @@ export default class AccountForm extends Component {
             errorMessage: '',
             title: data.title,
             firstName: data.firstName,
-            keyName: data.keyName,
+            lastName: data.lastName,
             day: data.birthDate.substr(0,2),
-            month: data.birthDate.substr(2,2),
-            year: data.birthDate.substr(4,4),
-            ssn: data.ssn
+            month: data.birthDate.substr(3,2),
+            year: data.birthDate.substr(6,4),
+            stdNum: data.stdNum
         };
     }
 
@@ -47,9 +47,9 @@ export default class AccountForm extends Component {
         try{
             data.title = this.state.title;
             data.firstName = this.state.firstName;
-            data.keyName = this.state.keyName;
+            data.lastName = this.state.lastName;
             data.birthDate = this.state.day + this.state.month + this.state.year;
-            data.ssn = this.state.ssn;
+            data.stdNum = this.state.stdNum;
         }catch(err){
             console.warn('ERROR: '+ err.message);
         }
@@ -60,9 +60,9 @@ export default class AccountForm extends Component {
         this.setState({errorMessage: ''});
         ////////////////Empty Input validation
         if(this.state.title == '' || this.state.firstName == '' ||
-        this.state.keyName == '' || this.state.day == '' ||
+        this.state.lastName == '' || this.state.day == '' ||
         this.state.month == '' || this.state.year == '' ||
-        this.state.ssn == ''){
+        this.state.stdNum == ''){
             this.setState({errorMessage: 'Empty Input'});
             return false;
         }
@@ -160,8 +160,8 @@ export default class AccountForm extends Component {
                 </View>
 
                 {this.renderInput('First Name', '', (a) => this.setState({firstName:a}), this.state.firstName, true)}
-                {this.renderInput('Last Name', '', (a) => this.setState({keyName:a}), this.state.keyName, true)}
-                {this.renderInput('Student Number', '', (a) => this.setState({ssn:a}), this.state.ssn, false)}
+                {this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName, true)}
+                {this.renderInput('Student Number', '', (a) => this.setState({stdNum:a}), this.state.stdNum, false)}
 				
                 </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
