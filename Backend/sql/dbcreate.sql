@@ -85,5 +85,6 @@ CREATE TABLE APPUSER(
     passHash        VARCHAR(256)    NOT NULL, /* Hash value of password */
 
     CONSTRAINT USER_pkey PRIMARY KEY (CnBio_ID, username),
+    CONSTRAINT APPUSER_uni UNIQUE (username),
     CONSTRAINT USER_fkey1 FOREIGN KEY (CnBio_ID)
         REFERENCES CONSTITUENT (CnBio_ID) );
