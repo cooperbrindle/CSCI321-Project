@@ -18,10 +18,10 @@ INSERT INTO APPUSER VALUES ('129062', 'sclaypole', 'password');
 INSERT INTO APPUSER VALUES ('165537', 'ewarren', 'password');
 /* Load Discounts */
 INSERT INTO DISCOUNTS VALUES ('unibar', 'uow', 'UNIBAR', 'dc', 'Purchase event tickets at student prices!', 'https://unibar.uow.edu.au/content/groups/webasset/@web/documents/siteelement/img_unibar_logo.png');
-INSERT INTO DISCOUNTS VALUES ('studperf', 'uow', 'Student Performances', 'dc', 'Discounted tickets to all theatre productions from Australias rising stars!', NULL);
-INSERT INTO DISCOUNTS VALUES ('uniActive', 'uow', 'UNIACTIVE Wollongong Campus and Innovation Campus Gyms', 'dc', 'Concession rate on a variety of memberships, visit passes and casual visits!', NULL);
-INSERT INTO DISCOUNTS VALUES ('uniCentre', 'uow', 'UNICENTRE Market ALley', 'dc', 'Stall fees at student prices for this fortnightly open-air market!', NULL);
-INSERT INTO DISCOUNTS VALUES ('uowFC', 'uow', 'UOW Football Club', 'dc', 'Free admission to all UOW Football Club home games at Kooloobong Oval!', NULL);
+INSERT INTO DISCOUNTS VALUES ('studperf', 'uow', 'Student Performances', 'dc', 'Discounted tickets to all theatre productions from Australias rising stars!', 'https://lha.uow.edu.au/content/groups/public/@web/@lha/@taem/documents/mm/uow222855.jpg');
+INSERT INTO DISCOUNTS VALUES ('uniActive', 'uow', 'UNIACTIVE Wollongong Campus and Innovation Campus Gyms', 'dc', 'Concession rate on a variety of memberships, visit passes and casual visits!', 'https://uniactive.uow.edu.au/content/groups/webasset/@web/documents/siteelement/logo_uniactive_monogram.png');
+INSERT INTO DISCOUNTS VALUES ('uniCentre', 'uow', 'UNICENTRE Market Alley', 'dc', 'Stall fees at student prices for this fortnightly open-air market!', 'https://pulse.uow.edu.au/content/groups/webasset/@web/@unic/documents/siteelement/logo_pulse_emoji.png');
+INSERT INTO DISCOUNTS VALUES ('uowFC', 'uow', 'UOW Football Club', 'dc', 'Free admission to all UOW Football Club home games at Kooloobong Oval!', 'https://clubs.uow.edu.au/assets/clubs/uow-sport/Uploads/_resampled/SetWidth3-UOWFootballNavy-White-Background.jpg');
 INSERT INTO DISCOUNTS VALUES ('rmb', 'local', 'RMB Lawyers', 'dc', '10% discount, except no win no fee work. Phone +61 2 4228 8288!', 'https://www.uow.edu.au/content/groups/public/@web/@community/documents/mm/uow192897.jpg');
 INSERT INTO DISCOUNTS VALUES ('livingroom', 'local', 'The Living Room', 'dc', '15% discount, 7 days a week!', 'https://www.uow.edu.au/content/groups/public/@web/@community/documents/mm/uow192916.png');
 INSERT INTO DISCOUNTS VALUES ('northbeach', 'local', 'Northbeach Pavilion', 'dc', '10% discount on dining for breakfast, lunch and dinner (not available at the kiosk).', 'https://www.uow.edu.au/content/groups/public/@web/@community/documents/mm/uow192900.jpg');
