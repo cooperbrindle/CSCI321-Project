@@ -9,11 +9,11 @@ import { SocialButton } from '../SocialButton';
 import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 
-const dashTmp = require('./assets/dashTmp.png');
-const accountIcon = require('./assets/Account.png');
-const contactIcon = require('./assets/Contact.png');
-const employmentIcon = require('./assets/Employment.png');
-const subscripIcon = require('./assets/Subscriptions.png');
+const dashTmp = require('../assets/dashTmp.png');
+const accountIcon = require('../assets/Account.png');
+const contactIcon = require('../assets/Contact.png');
+const employmentIcon = require('../assets/Employment.png');
+const subscripIcon = require('../assets/Subscriptions.png');
 
 export default class UpdateDetailsMenu extends Component {
 	

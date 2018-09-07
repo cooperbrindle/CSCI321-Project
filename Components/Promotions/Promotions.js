@@ -5,7 +5,7 @@ import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'reac
 import { DashButton } from '../DashButton';
 import { Logo } from '../Logo';
 
-const dashTmp = require('./assets/dashTmp.png');
+const dashTmp = require('../assets/dashTmp.png');
 
 export default class Promotions extends Component {
 	constructor(props){

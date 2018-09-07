@@ -7,11 +7,11 @@ import { EventSingle } from '../Events/EventSingle';
 import { DashButton } from '../DashButton';
 import { Logo } from './discLogo';
 
-const dashTmp = require('./assets/dashTmp.png');
-const updateDetailsIcon = require('./assets/UpdateDetails.png');
-const outlookIcon = require('./assets/Outlook.png');
-const eventsIcon = require('./assets/Events.png');
-const promoIcon = require('./assets/Promotions.png');
+const dashTmp = require('../assets/dashTmp.png');
+const updateDetailsIcon = require('../assets/UpdateDetails.png');
+const outlookIcon = require('../assets/Outlook.png');
+const eventsIcon = require('../assets/Events.png');
+const promoIcon = require('../assets/Promotions.png');
 
 export default class Discounts extends Component {
 	constructor(props){

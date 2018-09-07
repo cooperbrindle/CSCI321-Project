@@ -10,7 +10,7 @@ import { Logo } from './discLogo';
 import Vultrsdk from '../Vultrsdk';
 
 
-const tmpImg = require('./assets/dashTmp.png');
+const tmpImg = require('../assets/dashTmp.png');
 
 
 export default class DiscountsList extends Component {

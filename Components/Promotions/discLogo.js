@@ -20,7 +20,7 @@ export class Logo extends React.Component{
                 <Image
                     resizeMode='center'
                     resizeMethod='resize'
-                    source={require('./assets/logo.png')}
+                    source={require('../assets/logo.png')}
                     style={{
                         width: imgWidth,
                         height: imgHeight,

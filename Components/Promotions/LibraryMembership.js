@@ -7,7 +7,7 @@ import { DefaultButton } from '../DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
-const libraryLogo = require('./assets/libraryLogo.jpg');
+const libraryLogo = require('../assets/libraryLogo.jpg');
 const blurbStart = 'You are entitled to an Alumni Membership for the UOW Library.\n'+
             'With a membership, you can:\n\n';
 

@@ -7,7 +7,7 @@ import { DefaultButton } from '../DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
-const libraryLogo = require('./assets/careerSmart.jpg');
+const libraryLogo = require('../assets/careerSmart.jpg');
 
 const blurbPoints = 'Career Consultations - Schedule an appointment with our experienced counsellors and consultants\n\n'+
             'Resume Review - Have our qualified team review your Resume\n\n'+
