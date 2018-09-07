@@ -60,7 +60,7 @@ export default class DiscountsList extends Component {
             <View style={styles.itemView}>
                  <Image
                     style={styles.image}
-                    source={tmpImg}
+                    source={{uri: item.imageURL}}
                 />
                 <View style={styles.textView}>
                     <Text style={styles.text}>
@@ -112,7 +112,7 @@ export default class DiscountsList extends Component {
         image: {
             flex: 1,
             height: 140,
-            resizeMode: 'center',
+            resizeMode: 'contain',
         },
         textView: {
             flex: 2,
