@@ -57,17 +57,19 @@ export default class DiscountsList extends Component {
 
     renderItem(item){
         return(
-            <View style={styles.itemView}>
-                 <Image
-                    style={styles.image}
-                    source={{uri: item.imageURL}}
-                />
-                <View style={styles.textView}>
-                    <Text style={styles.text}>
-                        {item.blurb}
-                    </Text>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle')}>
+                <View style={styles.itemView}>
+                    <Image
+                        style={styles.image}
+                        source={{uri: item.imageURL}}
+                    />
+                    <View style={styles.textView}>
+                        <Text style={styles.text}>
+                            {item.blurb}
+                        </Text>
+                    </View>
                 </View>
-            </View>
+            </TouchableHighlight>
         )
     }
     renderList(){
@@ -79,6 +81,7 @@ export default class DiscountsList extends Component {
                 <FlatList style={styles.fList}
                     data={this.state.data}
                     renderItem={({item}) => this.renderItem(item)}
+                    keyExtractor={(item, index) => index}
                 />
             </ScrollView>
         )
