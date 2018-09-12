@@ -16,15 +16,15 @@ const FACEBOOK_APP_ID = '1049993008511643';
 export default class Login extends React.Component {
     
     state = {
-        username: 'abc@uowmail.edu.au',
-        password: '123456',
+        username: 'ewarren',
+        password: 'password',
         errorMessage: '',
         isLoading: true,
     };
 
     componentDidMount(){
         this.setState({isLoading: false});
-        this.props.firebase = this.props.screenProps;
+        this.props.vultr = this.props.screenProps;
     }
 
     loginPress() {
@@ -33,16 +33,16 @@ export default class Login extends React.Component {
         const {username, password } = this.state;
         try{
         if(username != '' || password != ''){
-            this.props.firebase.auth().signInWithEmailAndPassword(username, password)
+            this.props.vultr.signInWithEmailPassword(username, password)
             .then((result) =>{
                 this.setState({isLoading: false});
                 this.props.navigation.navigate('Home');
             })
             .catch((error) =>{
-                this.setState({errorMessage: error.message, isLoading: false});
+                this.setState({errorMessage: error, isLoading: false});
             });
         }
-    }catch(err){console.warn('try catch: ' + err.message);
+    }catch(err){console.warn('try catch: ' + err);
     this.setState({isLoading: false});}
     };
 

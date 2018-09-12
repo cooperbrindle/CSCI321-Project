@@ -6,10 +6,7 @@ import { DefaultButton } from '../DefaultButton';
 import { DashButton } from '../DashButton';
 import { SocialButton } from '../SocialButton';
 
-import firebase from 'firebase';
-import firestore from 'firebase/firestore';
 
-const dashTmp = require('../assets/dashTmp.png');
 const accountIcon = require('../assets/Account.png');
 const contactIcon = require('../assets/Contact.png');
 const employmentIcon = require('../assets/Employment.png');
@@ -28,55 +25,32 @@ export default class UpdateDetailsMenu extends Component {
 		},
 	}
 
-	///////////////////////////////////////////////////////////////////
-	//
-	// 
+	state = {
+		vultr: this.props.screenProps,
+		isLoading: true,
+		didLoad: false,
+		errorMessage: '',
+		successMessage: '',
+	};
+	
 	
 	componentWillMount(){
 		try{
 		
-		this.state = {
-			firebase: this.props.screenProps,
-			isLoading: true,
-			didLoad: false,
-			errorMessage: '',
-			successMessage: '',
-			firebase: this.props.screenProps,
-		};
 		
-		let db = this.props.screenProps.firestore();
-		db.settings({timestampsInSnapshots: true});
-		const uid = this.props.screenProps.auth().currentUser.uid;
-		
-		//get constitID from UserLink Collection
-		db.collection('UserLinks').doc(uid).get()
-			.then(userlink => {
-				if(userlink.exists){
-					//get all data related to constitID
-					db.collection('Constituent')
-						.where('constituentID', '==', userlink.data().constituentID).get()
-						.then(doc => {
-							doc.forEach(constituent => {
-								if(constituent.exists){
-									console.warn('Constituent Data Loaded');
-									const originalData = JSON.parse(JSON.stringify(constituent.data()))
-									this.setState({originalData: originalData,
-										data: constituent.data(),
-										constituentRefID: constituent.id,
-										isLoading: false,
-										didLoad: true,
-									});
+		let vultr = this.props.screenProps;
+		const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
+		this.setState({
+			originalData: originalData,
+			data: vultr.data,
+			constituentRefID: vultr.data.id,
+			isLoading: false,
+			didLoad: true,
+		});
 
-								}else{this.handleDBErrors();}
-							});
-						}).catch(error => { this.handleDBErrors(error);})
-
-				}else{ this.handleDBErrors();}
-			}).catch(error => { this.handleDBErrors(error);})
-		
 		}catch(err){console.warn('try catch error: ' + err.message);}
-		
 	}
+
 
 	handleDBErrors(error){
 		this.setState({isLoading: false});
@@ -101,29 +75,7 @@ export default class UpdateDetailsMenu extends Component {
 	saveChanges(){
 		this.setState({errorMessage: ''});
 		try{
-			let db = this.state.firebase.firestore();
-			db.settings({timestampsInSnapshots: true});
 			
-			db.collection('Constituent').doc(this.state.constituentRefID)
-			.update(
-				this.state.data
-			).then(() => {
-				//TODO: show sucessful update
-				console.warn('successfully updated');
-			}).catch((error) => {
-				this.setState({errorMessage: 'Error updating details'});
-				console.warn(error.message);
-			});
-
-			if(this.state.data.email != this.state.originalData.email){
-				this.state.firebase.auth().currentUser.updateEmail(this.state.data.email)
-				.then(() => {
-					console.warn('successfully updates User email');
-				}).catch(error => {
-					this.setState({errorMessage: 'Error updating details'});
-					console.warn(error.message)
-				});
-			}
 		}catch(err){console.warn('catch error: '+ err.message);}
 	}
 

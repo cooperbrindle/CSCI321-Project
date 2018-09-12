@@ -3,11 +3,9 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
 
-import { EventSingle } from './Events/EventSingle';
 import { DashButton } from './DashButton';
 import { Logo } from './Logo';
 
-const dashTmp = require('./assets/dashTmp.png');
 const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
@@ -26,7 +24,8 @@ export default class HomePage extends Component {
 		headerTitleStyle: {
 			
 		},
-	} 
+	}
+
 
 	renderHighlight(title, day, month){
 		return(
