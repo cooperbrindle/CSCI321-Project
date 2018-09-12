@@ -52,8 +52,8 @@ CREATE TABLE EVENTS(
     eventname       VARCHAR(256)    NOT NULL, /* Event Name */
     eventgroup      VARCHAR(64)     NOT NULL, /* Organising Department */
     eventtype       VARCHAR(64)     NOT NULL, /* Purpose of Event */
-    startdate       DATE            NOT NULL, /* Start of Event */
-    enddate         DATE            NOT NULL, /* End of Event */
+    startdate       VARCHAR(10)            NOT NULL, /* Start of Event */
+    enddate         VARCHAR(10)            NOT NULL, /* End of Event */
     starttime       VARCHAR(10)     NOT NULL, /* Start Time */
     endtime         VARCHAR(10)     NOT NULL, /* End Time */
     capacity        DECIMAL(4)      NOT NULL, /* Max number of attendants */
