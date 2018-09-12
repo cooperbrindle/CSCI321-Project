@@ -1,16 +1,7 @@
-
-
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
-
-import { EventSingle } from '../Events/EventSingle';
-import { DashButton } from '../DashButton';
-import { Logo } from './discLogo';
+import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
 
 import Vultrsdk from '../Vultrsdk';
-
-
-const tmpImg = require('../assets/dashTmp.png');
 
 
 export default class EventsList extends Component {
@@ -36,7 +27,7 @@ export default class EventsList extends Component {
     }
     
     componentDidMount(){ 
-        Vultrsdk.getEvents()
+        Vultrsdk.getEvents('events')
         .then((res) => {
             this.setState({data: res, isLoading: false, errorMessage: ''});
 

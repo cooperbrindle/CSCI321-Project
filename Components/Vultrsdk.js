@@ -91,10 +91,10 @@ export default class Vultr{
         });
     }
 
-    static getEvents() {
+    static getEvents(category) {
         return new Promise((resolve, reject) => {
             
-            data = fetch(API_URL + '/promotions/events', {
+            data = fetch(API_URL + '/events/eventslist', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

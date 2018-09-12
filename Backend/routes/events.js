@@ -5,7 +5,7 @@ const log = require('../lib/log').log;
 
 
 
-router.post('/events', (req, res) => {
+router.post('/eventlist', (req, res) => {
 	log(' Request made to: /events');
 
 	try{
@@ -15,7 +15,7 @@ router.post('/events', (req, res) => {
 
 	const category = req.body.category;
 	var data;
-	dbconn.query('SELECT * FROM EVENTS WHERE onApp = \'&yes&\'', (err, result, fields) => {
+	dbconn.query('SELECT * FROM EVENTS', (err, result, fields) => {
 		if (err) throw err;
 		//console.log(result);
 		data = result;
