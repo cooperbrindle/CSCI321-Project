@@ -26,6 +26,7 @@ import DiscountsList from './Components/Promotions/DiscountsList';
 import Scholarships from './Components/Promotions/Scholarships';
 import Careers from './Components/Promotions/Careers';
 import CareerHub from './Components/Promotions/CareerHub';
+import EventsList from './Components/Promotions/EventsList.js'
 
 //import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
@@ -59,6 +60,7 @@ const NavStack = createStackNavigator({
     Scholarships: {screen: Scholarships},
     Careers: {screen: Careers},
     CareerHub: {screen: CareerHub},
+    EventsList: {screen: EventsList},
 
   },{ //options
   initialRouteName: 'Home',

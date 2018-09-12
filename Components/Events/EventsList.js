@@ -36,12 +36,7 @@ export default class EventsList extends Component {
     }
     
     componentDidMount(){ 
-        var category = this.props.navigation.getParam('category', '');
-        if(category == ''){
-            console.warn('Error getting category');
-            this.setState({isLoading: false, errorMessage: 'error getting category'});
-        }
-        Vultrsdk.getDiscounts(category)
+        Vultrsdk.getEvents()
         .then((res) => {
             this.setState({data: res, isLoading: false, errorMessage: ''});
 
@@ -59,13 +54,14 @@ export default class EventsList extends Component {
         return(
             <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle')}>
                 <View style={styles.itemView}>
-                    <Image
-                        style={styles.image}
-                        source={{uri: item.imageURL}}
-                    />
                     <View style={styles.textView}>
                         <Text style={styles.text}>
-                            {item.blurb}
+                            {item.eventname}
+                        </Text>
+                    </View>
+                    <View style={styles.textView}>
+                        <Text style={styles.text}>
+                            {item.eventtype}
                         </Text>
                     </View>
                 </View>
