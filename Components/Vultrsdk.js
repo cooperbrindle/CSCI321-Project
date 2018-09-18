@@ -116,6 +116,27 @@ export default class Vultr{
     }
 
 
+    static getEvents(category) {
+        return new Promise((resolve, reject) => {
+            
+            data = fetch(API_URL + '/events/eventslist', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    category: category
+                })
+            }).then((res) => {
+                //console.log(res.json())
+                resolve(res.json());
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
+
     translateFromRE(result){
         this.data = {
             id: result.CnBio_ID,

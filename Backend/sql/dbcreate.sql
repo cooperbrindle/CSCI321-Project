@@ -80,8 +80,8 @@ CREATE TABLE EVENTS(
     eventname       VARCHAR(256)    NOT NULL, /* Event Name */
     eventgroup      VARCHAR(64)     NOT NULL, /* Organising Department */
     eventtype       VARCHAR(64)     NOT NULL, /* Purpose of Event */
-    startdate       DATE            NOT NULL, /* Start of Event */
-    enddate         DATE            NOT NULL, /* End of Event */
+    startdate       VARCHAR(10)            NOT NULL, /* Start of Event */
+    enddate         VARCHAR(10)            NOT NULL, /* End of Event */
     starttime       VARCHAR(10)     NOT NULL, /* Start Time */
     endtime         VARCHAR(10)     NOT NULL, /* End Time */
     capacity        DECIMAL(4)      NOT NULL, /* Max number of attendants */
@@ -101,7 +101,7 @@ CREATE TABLE DISCOUNTS(
     titleID         VARCHAR(24)     NOT NULL, /* Short Hand Unique Name for Discounts */
     partnerType     VARCHAR(24)     NOT NULL, /* UOW, Local, National, Global */
     displayName     VARCHAR(256)    NOT NULL, /* Full display name for Discount */
-    discountType    VARCHAR(2)      NOT NULL, /* dc = display card, co = checkout code, em = email, li = link */
+    discountType    VARCHAR(4)      NOT NULL, /* dc = display card, co = checkout code, em = email, li = link */
     blurb           VARCHAR(1028)   NOT NULL, /* To be displayed on discount page */
     imageURL        VARCHAR(256)    NULL, /* URL for Logo to be Displayed */
     CONSTRAINT DISCOUNTS_pkey PRIMARY KEY (titleID) );

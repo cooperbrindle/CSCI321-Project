@@ -26,21 +26,13 @@ import DiscountsList from './Components/Promotions/DiscountsList';
 import Scholarships from './Components/Promotions/Scholarships';
 import Careers from './Components/Promotions/Careers';
 import CareerHub from './Components/Promotions/CareerHub';
+import EventsList from './Components/Events/EventsList.js'
 
 //import firebase from 'firebase';
 //import firebaseConfig from './Components/Database/DatabaseConfig';
 import Vultrsdk from './Components/Vultrsdk';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
-
-/*const firebaseConfig = {
-  apiKey: "AIzaSyAN7jnv-YL5RWJ3uoeO-mpFV2W_kJKYWuU",
-    authDomain: "alumnitest-1.firebaseapp.com",
-    databaseURL: "https://alumnitest-1.firebaseio.com",
-    projectId: "alumnitest-1",
-    storageBucket: "alumnitest-1.appspot.com",
-    messagingSenderId: "990092777009"
-};*/
 
 const NavStack = createStackNavigator({
   //Routes
@@ -59,6 +51,7 @@ const NavStack = createStackNavigator({
     Scholarships: {screen: Scholarships},
     Careers: {screen: Careers},
     CareerHub: {screen: CareerHub},
+    EventsList: {screen: EventsList},
 
   },{ //options
   initialRouteName: 'Home',
@@ -71,7 +64,7 @@ const RootStack = createSwitchNavigator({
   SUForm: { screen: SignUpForm},
   SUFinish: { screen: SignUpFinish},
   },{ //options
-  initialRouteName: 'Login',
+  initialRouteName: 'Home',
 });
 
 export default class App extends React.Component{

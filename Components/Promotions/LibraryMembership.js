@@ -30,7 +30,7 @@ export default class LibraryMembership extends Component {
     
     /////////////////////////////////////
     //
-    componentWillMount(){
+    setState(){
         //TODO: Check if already submitted a request?
         /*
         const data = this.props.navigation.getParam('data', 'NoData');
