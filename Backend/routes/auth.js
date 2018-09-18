@@ -50,26 +50,4 @@ router.post('/login', (req, res) => {
 })
 
 
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
-router.post('/loadconstituent', (req, res) => {
-	log('loading constituent');
-	try{
-	if(!req.body.username || typeof req.body.username != "string")
-		res.status(400).send("400 Bad Request");
-	const qry = 'SELECT * FROM CONSTITUENT WHERE CnBio_ID = ('+
-			'SELECT CnBio_ID FROM APPUSER WHERE username = \'' + req.body.username + '\')';
-
-	dbconn.query(qry, (err, result, fields) => {
-		if(err) throw err;
-
-		res.json(result);
-	});
-	
-	
-	}catch(err){
-		log('ERROR: ' + err);
-	}
-});
-
 module.exports = router;
