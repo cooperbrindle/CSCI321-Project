@@ -15,7 +15,7 @@ router.post('/discounts', (req, res) => {
 
 	const category = req.body.category;
 	var data;
-	dbconn.query('SELECT * FROM DISCOUNTS WHERE partnerType = \'' + category + '\'', (err, result, fields) => {
+	dbconn.query('SELECT * FROM DISCOUNTS ORDER BY partnerType', (err, result, fields) => {
 		if (err) throw err;
 		//console.log(result);
 		data = result;

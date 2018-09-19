@@ -22,7 +22,6 @@ import SignUpFinish from './Components/SignUpFinish';
 import OutlookWebPage from './Components/Outlook/OutlookWeb';
 import LibraryMembership from './Components/Promotions/LibraryMembership';
 import Discounts from './Components/Promotions/Discounts';
-import DiscountsList from './Components/Promotions/DiscountsList';
 import Scholarships from './Components/Promotions/Scholarships';
 import Careers from './Components/Promotions/Careers';
 import CareerHub from './Components/Promotions/CareerHub';
@@ -47,7 +46,6 @@ const NavStack = createStackNavigator({
     OutlookWeb: { screen: OutlookWebPage},
     LibraryMem: { screen: LibraryMembership },
     Discounts: { screen: Discounts },
-    DiscountsList: {screen: DiscountsList},
     Scholarships: {screen: Scholarships},
     Careers: {screen: Careers},
     CareerHub: {screen: CareerHub},
@@ -64,7 +62,7 @@ const RootStack = createSwitchNavigator({
   SUForm: { screen: SignUpForm},
   SUFinish: { screen: SignUpFinish},
   },{ //options
-  initialRouteName: 'Home',
+  initialRouteName: 'Login',
 });
 
 export default class App extends React.Component{

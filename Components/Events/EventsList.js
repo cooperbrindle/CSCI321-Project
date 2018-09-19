@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
+import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView, Image} from 'react-native';
 
 import Vultrsdk from '../Vultrsdk';
 
@@ -42,6 +42,10 @@ export default class EventsList extends Component {
     }
 
     renderItem(item){
+        var parts = item.startdate.split('/')
+        var d = new Date(parts[2], parts[1]-1, parts[0]);
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
         return(
             <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle')}>
                 <View style={styles.itemView}>
@@ -50,9 +54,12 @@ export default class EventsList extends Component {
                             {item.eventname}
                         </Text>
                     </View>
-                    <View style={styles.textView}>
-                        <Text style={styles.text}>
-                            {item.eventtype}
+                    <View style={styles.hlDate}>
+                        <Text style={styles.hlDay}>
+                            {parts[0]}
+                        </Text>
+                        <Text style={styles.hlMonth}>
+                            {months[parts[1]-1]}
                         </Text>
                     </View>
                 </View>
@@ -113,5 +120,44 @@ export default class EventsList extends Component {
             paddingLeft: 20,
             paddingTop: 20,
             paddingRight: 10,
-        }
+        },
+        hlBtn: {
+			flex: 1,
+			backgroundColor: 'white',
+			borderWidth: 2,
+			borderColor: 'white',
+			marginBottom: 20,
+			marginLeft: 10,
+			marginRight: 10,
+		},
+		hlBtnView: {
+			flex: 1,
+			flexDirection: 'row',
+		},
+				hlCont: {
+					flex: 2.5,
+					padding: 20,
+				},
+						hlTitle: {
+							fontSize: 24,
+							color: '#0C2340',
+							//margin: 30,
+						},
+				hlDate: {
+					flex: 1,
+					backgroundColor: '#0C2340',
+					justifyContent: 'center',
+				},
+						hlDay: {
+							fontSize: 36,
+							textAlign: 'center',
+							color: 'white',
+							margin: 0,
+						},
+						hlMonth: {
+							fontSize: 18,
+							textAlign: 'center',
+							color: '#cc0000',
+							margin: 0,
+						},
 	});

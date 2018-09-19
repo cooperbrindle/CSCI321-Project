@@ -9,7 +9,6 @@ import { Logo } from './Logo';
 import { DefaultButton } from './DefaultButton';
 import { SocialButton } from './SocialButton';
 import { Facebook } from 'expo';
-import firebase from 'firebase';
 
 const FACEBOOK_APP_ID = '1049993008511643';
 
