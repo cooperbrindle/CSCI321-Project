@@ -22,8 +22,7 @@ export default class Login extends React.Component {
     };
 
     componentDidMount(){
-        this.setState({isLoading: false});
-        this.props.vultr = this.props.screenProps;
+        this.setState({isLoading: false, vultr: this.props.screenProps});
     }
 
     loginPress() {
@@ -32,7 +31,7 @@ export default class Login extends React.Component {
         const {username, password } = this.state;
         try{
         if(username != '' || password != ''){
-            this.props.vultr.signInWithEmailPassword(username, password)
+            this.state.vultr.signInWithEmailPassword(username, password)
             .then((result) =>{
                 this.setState({isLoading: false});
                 this.props.navigation.navigate('Home');
