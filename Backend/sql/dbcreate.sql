@@ -7,73 +7,73 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* Cooper 06/09/18 */
 CREATE TABLE CONSTITUENT(
-    CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
-    CnBio_ID2           VARCHAR(10)     NOT NULL, /* Student Number */
-    CnBio_Birth_date    VARCHAR(10)     NOT NULL, /* Date of Birth */
-    CnBio_Title_1       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
-    CnBio_First_Name    VARCHAR(36)     NULL, /* First Name */
-    CnBio_Nickname      VARCHAR(36)     NULL, /* Nickname */
-    CnBio_Middle_Name   VARCHAR(36)     NULL, /* Middle Name */
-    CnBio_Surname       VARCHAR(64)     NOT NULL, /* Last Name/s */
-    CnBio_Maiden_name   VARCHAR(64)     NULL, /* Maiden Name */
-    CnPrBs_Org_Name     VARCHAR(256)    NULL, /* Employer Organisation Name */
-    CnPrBs_Position     VARCHAR(256)    NULL, /* Position Name */
-    CnAdrPrf_Address    VARCHAR(256)    NOT NULL, /* Home Address */
-    CnAdrPrf_Suburb     VARCHAR(256)    NOT NULL, /* Home Suburb */
-    CnAdrPrf_State      VARCHAR(256)    NOT NULL, /* Home State */
-    CnAdrPrf_County     VARCHAR(256)    NULL, /* Home County */
-    CnAdrPrf_Postcode   VARCHAR(256)    NOT NULL, /* Home Postcode */
-    CnAdrPrf_CountryLongDescription     VARCHAR(256)    NOT NULL, /* Home Country */
-    CnPh_1_01_Phone_number  VARCHAR(256)    NOT NULL, /* Preferred Email */
-    CnPh_1_02_Phone_number  VARCHAR(256)    NOT NULL, /* Other Email */
-    CnPh_1_03_Phone_number  VARCHAR(256)    NOT NULL, /* LinkedIn URL */
-    CnPh_1_04_Phone_number  VARCHAR(256)    NOT NULL, /* Mobile Number */
-    CnPh_1_05_Phone_number  VARCHAR(256)    NOT NULL, /* Unknown */
+    id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
+    birthDate   VARCHAR(10)     NOT NULL, /* Date of Birth */
+    title       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
+    firstName   VARCHAR(36)     NULL, /* First Name */
+    nickname    VARCHAR(36)     NULL, /* Nickname */
+    middleName  VARCHAR(36)     NULL, /* Middle Name */
+    surname     VARCHAR(64)     NOT NULL, /* Last Name/s */
+    maidenName  VARCHAR(64)     NULL, /* Maiden Name */
+    orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
+    position    VARCHAR(256)    NULL, /* Position Name */
+    address     VARCHAR(256)    NOT NULL, /* Home Address */
+    suburb      VARCHAR(256)    NOT NULL, /* Home Suburb */
+    state       VARCHAR(256)    NOT NULL, /* Home State */
+    county      VARCHAR(256)    NULL, /* Home County */
+    postcode    VARCHAR(256)    NOT NULL, /* Home Postcode */
+    country     VARCHAR(256)    NOT NULL, /* Home Country */
+    email       VARCHAR(256)    NOT NULL, /* Preferred Email */
+    emailOther  VARCHAR(256)    NOT NULL, /* Other Email */
+    linkedIn    VARCHAR(256)    NOT NULL, /* LinkedIn URL */
+    mobile      VARCHAR(256)    NOT NULL, /* Mobile Number */
+    other       VARCHAR(256)    NOT NULL, /* Unknown */
 
-    CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (CnBio_ID),
-    CONSTRAINT CONSTITUENT_uni UNIQUE (CnBio_ID2) );
+    CONSTRAINT CONSTITUENTEXPORT_pkey PRIMARY KEY (id),
+    CONSTRAINT CONSTITUENTEXPORT_uni UNIQUE (stdNum));
 
 
 CREATE TABLE CONSTITUENTEXPORT(
-    CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
-    CnBio_ID2           VARCHAR(10)     NOT NULL, /* Student Number */
-    CnBio_Birth_date    VARCHAR(10)     NOT NULL, /* Date of Birth */
-    CnBio_Title_1       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
-    CnBio_First_Name    VARCHAR(36)     NULL, /* First Name */
-    CnBio_Nickname      VARCHAR(36)     NULL, /* Nickname */
-    CnBio_Middle_Name   VARCHAR(36)     NULL, /* Middle Name */
-    CnBio_Surname       VARCHAR(64)     NOT NULL, /* Last Name/s */
-    CnBio_Maiden_name   VARCHAR(64)     NULL, /* Maiden Name */
-    CnPrBs_Org_Name     VARCHAR(256)    NULL, /* Employer Organisation Name */
-    CnPrBs_Position     VARCHAR(256)    NULL, /* Position Name */
-    CnAdrPrf_Address    VARCHAR(256)    NOT NULL, /* Home Address */
-    CnAdrPrf_Suburb     VARCHAR(256)    NOT NULL, /* Home Suburb */
-    CnAdrPrf_State      VARCHAR(256)    NOT NULL, /* Home State */
-    CnAdrPrf_County     VARCHAR(256)    NULL, /* Home County */
-    CnAdrPrf_Postcode   VARCHAR(256)    NOT NULL, /* Home Postcode */
-    CnAdrPrf_CountryLongDescription     VARCHAR(256)    NOT NULL, /* Home Country */
-    CnPh_1_01_Phone_number  VARCHAR(256)    NOT NULL, /* Preferred Email */
-    CnPh_1_02_Phone_number  VARCHAR(256)    NOT NULL, /* Other Email */
-    CnPh_1_03_Phone_number  VARCHAR(256)    NOT NULL, /* LinkedIn URL */
-    CnPh_1_04_Phone_number  VARCHAR(256)    NOT NULL, /* Mobile Number */
-    CnPh_1_05_Phone_number  VARCHAR(256)    NOT NULL, /* Unknown */
+    id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
+    birthDate   VARCHAR(10)     NOT NULL, /* Date of Birth */
+    title       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
+    firstName   VARCHAR(36)     NULL, /* First Name */
+    nickname    VARCHAR(36)     NULL, /* Nickname */
+    middleName  VARCHAR(36)     NULL, /* Middle Name */
+    surname     VARCHAR(64)     NOT NULL, /* Last Name/s */
+    maidenName  VARCHAR(64)     NULL, /* Maiden Name */
+    orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
+    position    VARCHAR(256)    NULL, /* Position Name */
+    address     VARCHAR(256)    NOT NULL, /* Home Address */
+    suburb      VARCHAR(256)    NOT NULL, /* Home Suburb */
+    state       VARCHAR(256)    NOT NULL, /* Home State */
+    county      VARCHAR(256)    NULL, /* Home County */
+    postcode    VARCHAR(256)    NOT NULL, /* Home Postcode */
+    country     VARCHAR(256)    NOT NULL, /* Home Country */
+    email       VARCHAR(256)    NOT NULL, /* Preferred Email */
+    emailOther  VARCHAR(256)    NOT NULL, /* Other Email */
+    linkedIn    VARCHAR(256)    NOT NULL, /* LinkedIn URL */
+    mobile      VARCHAR(256)    NOT NULL, /* Mobile Number */
+    other       VARCHAR(256)    NOT NULL, /* Unknown */
 
-    CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (CnBio_ID),
-    CONSTRAINT CONSTITUENT_uni UNIQUE (CnBio_ID2) );
+    CONSTRAINT CONSTITUENTEXPORT_pkey PRIMARY KEY (id),
+    CONSTRAINT CONSTITUENTEXPORT_uni UNIQUE (stdNum));
 
 /* Cooper 06/09/2018 */
 CREATE TABLE LIBRARYMEM(
-    CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
-    CnBio_ID2           VARCHAR(10)     NOT NULL, /* Student Number */
-    CnAttrCat_1_01_Description VARCHAR(256) NOT NULL, /* Membership Username */
-    CnAttrCat_2_01_Description VARCHAR(256) NOT NULL, /* Membership Password */
-    CnMem_1_01_Cur_Expires_on  DATE         NULL, /* Date of Membership Expiry */
+    id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
+    username    VARCHAR(256)    NOT NULL, /* Membership Username */
+    password    VARCHAR(256)    NOT NULL, /* Membership Password */
+    expiry      DATE            NULL, /* Date of Membership Expiry */
     
-    CONSTRAINT LIBRARYMEM_pkey PRIMARY KEY (CnBio_ID),
-    CONSTRAINT LIBRARYMEM_fkey1 FOREIGN KEY (CnBio_ID)
-        REFERENCES CONSTITUENT (CnBio_ID),
-    CONSTRAINT LIBRARYMEM_fkey2 FOREIGN KEY (CnBio_ID2)
-        REFERENCES CONSTITUENT (CnBio_ID2) );
+    CONSTRAINT LIBRARYMEM_pkey PRIMARY KEY (id),
+    CONSTRAINT LIBRARYMEM_fkey1 FOREIGN KEY (id)
+        REFERENCES CONSTITUENT (id),
+    CONSTRAINT LIBRARYMEM_fkey2 FOREIGN KEY (stdNum)
+        REFERENCES CONSTITUENT (stdNum) );
 
 /* Cooper 06/09/2018 */
 CREATE TABLE EVENTS(
@@ -108,11 +108,11 @@ CREATE TABLE DISCOUNTS(
 
 /* Cooper 24/05/18 */
 CREATE TABLE APPUSER(
-    CnBio_ID        VARCHAR(10)     NOT NULL, /* Universal Unique Identifier */
-    username        VARCHAR(256)    NOT NULL, /* Unique user name */
-    passHash        VARCHAR(256)    NOT NULL, /* Hash value of password */
+    id          VARCHAR(10)     NOT NULL, /* Universal Unique Identifier */
+    username    VARCHAR(256)    NOT NULL, /* Unique user name */
+    passHash    VARCHAR(256)    NOT NULL, /* Hash value of password */
 
-    CONSTRAINT USER_pkey PRIMARY KEY (CnBio_ID, username),
+    CONSTRAINT USER_pkey PRIMARY KEY (id, username),
     CONSTRAINT APPUSER_uni UNIQUE (username),
-    CONSTRAINT USER_fkey1 FOREIGN KEY (CnBio_ID)
-        REFERENCES CONSTITUENT (CnBio_ID) );
+    CONSTRAINT USER_fkey1 FOREIGN KEY (id)
+        REFERENCES CONSTITUENT (id) );
