@@ -1,9 +1,9 @@
 Event Name,Event Group,Event Type,Event Start Date,Event End Date,Event Start Time,Event End Time,Event Capacity,Location,Location Address,Location City,Location State,Location Postcode,Location Country,Event Specific _tributes Event Registration Link Description,Event Specific Attributes Map Link Description,Display on Alumni App Description
 2018 New York Alumni Event,Alumni Relations,Social/Networking,5/9/18,5/9/18,07:00 PM,09:00 PM,120,The Modern at MoMA,"9 W 53rd St, New York, 10019",New York City,New York,10019,U.S.A.,https://www.youruowcommunity.edu.au/events/2018-new-york-alumni-event,,Yes - PAID
-2018 New York Alumni Event - MoMA Private Tour,Alumni Relations,Tour,5/9/18,5/9/18,06:00 PM,07:00 PM,0,The Modern at MoMA,,New York City,New York,10019,U.S.A.,,,
-2018 Paris Alumni Event,Alumni Relations,Social/Networking,7/9/18,7/9/18,06:30 PM,08:30 PM,40,,,,,,,,,Yes - FREE
-2018 Oslo Alumni Event,Alumni Relations,Social/Networking,9/9/18,9/9/18,06:00 PM,08:00 PM,30,Tjuvholmen Room at The Thief,Landgangen 1,Oslo,,0252,NORWAY,,,Yes - FREE
-2018 London Alumni Event,Alumni Relations,Social/Networking,12/9/18,12/9/18,06:30 PM,09:30 PM,140,,,,,,,,,
-2018 Fellowship and Alumni Awards Dinner,Alumni Relations,Recognition,11/10/18,11/10/18,06:30 PM,09:00 PM,220,University Hall,University of Wollongong,WOLLONGONG,New South Wales,2500,AUSTRALIA,,,No
-2018 Sydney Exclusive Alumni Event,Alumni Relations,Social/Networking,2/11/18,2/11/18,05:30 PM,08:00 PM,200,"Harbourside Room, Museum of Contemporary Art","West Circular Quay, the Rocks",SYDNEY,New South Wales,2000,AUSTRALIA,,,
-2018 Honorary Chapter Meeting - November,Alumni Relations,Meeting,13/11/18,13/11/18,04:30 PM,06:00 PM,0,,,,,,,,,
+2018 New York Alumni Event - MoMA Private Tour,Alumni Relations,Tour,5/9/18,5/9/18,06:00 PM,07:00 PM,0,The Modern at MoMA,,New York City,New York,10019,U.S.A.,https://www.youruowcommunity.edu.au/events/2018-new-york-alumni-event,,
+2018 Paris Alumni Event,Alumni Relations,Social/Networking,7/9/18,7/9/18,06:30 PM,08:30 PM,40,,,,,,,https://www.youruowcommunity.edu.au/events/2018-new-york-alumni-event,,Yes - FREE
+2018 Oslo Alumni Event,Alumni Relations,Social/Networking,9/9/18,9/9/18,06:00 PM,08:00 PM,30,Tjuvholmen Room at The Thief,Landgangen 1,Oslo,,0252,NORWAY,https://www.youruowcommunity.edu.au/events/2018-new-york-alumni-event,,Yes - FREE
+2018 London Alumni Event,Alumni Relations,Social/Networking,12/9/18,12/9/18,06:30 PM,09:30 PM,140,,,,,,,https://www.youruowcommunity.edu.au/events/2018-new-york-alumni-event,,
+2018 Fellowship and Alumni Awards Dinner,Alumni Relations,Recognition,11/10/18,11/10/18,06:30 PM,09:00 PM,220,University Hall,University of Wollongong,WOLLONGONG,New South Wales,2500,AUSTRALIA,https://www.youruowcommunity.edu.au/events/2018-new-york-alumni-event,,No
+2018 Sydney Exclusive Alumni Event,Alumni Relations,Social/Networking,2/11/18,2/11/18,05:30 PM,08:00 PM,200,"Harbourside Room, Museum of Contemporary Art","West Circular Quay, the Rocks",SYDNEY,New South Wales,2000,AUSTRALIA,https://www.youruowcommunity.edu.au/events/2018-new-york-alumni-event,,
+2018 Honorary Chapter Meeting - November,Alumni Relations,Meeting,13/11/18,13/11/18,04:30 PM,06:00 PM,0,,,,,,,https://www.youruowcommunity.edu.au/events/2018-new-york-alumni-event,,

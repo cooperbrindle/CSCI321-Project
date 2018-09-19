@@ -99,7 +99,7 @@ export default class EventsList extends Component {
             //flex: 1,
         },
         fList: {
-            //flex: 1,
+            flex: 1,
         },
 		itemView: {
             flexDirection: 'row',

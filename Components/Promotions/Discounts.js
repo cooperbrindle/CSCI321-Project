@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
 
-import { EventSingle } from '../Events/EventSingle';
+import { EventSingle } from '../Events/EventSingleOld';
 import { DashButton } from '../DashButton';
 import { Logo } from './discLogo';
 
@@ -108,8 +108,8 @@ export default class Discounts extends Component {
             //flex: 1,
         },
         image: {
+            backgroundColor: '#FFFFFF',
             flex: 1,
-            height: 140,
             resizeMode: 'contain',
         },
         textView: {
@@ -120,6 +120,7 @@ export default class Discounts extends Component {
             fontSize: 18,
             paddingLeft: 20,
             paddingTop: 20,
+            paddingBottom: 20,
             paddingRight: 10,
         }
 	});
