@@ -37,16 +37,26 @@ export default class UpdateDetailsMenu extends Component {
 	componentWillMount(){
 		try{
 		
-		
-		let vultr = this.props.screenProps;
-		const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
-		this.setState({
-			originalData: originalData,
-			data: vultr.data,
-			constituentRefID: vultr.data.id,
-			isLoading: false,
-			didLoad: true,
-		});
+		var vultr = this.props.screenProps;
+		this.setState({vultr: this.props.screenProps});
+		vultr.loadConstituent()
+		.then(() => {
+			const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
+			this.setState({
+				originalData: originalData,
+				data: vultr.data,
+				constituentRefID: vultr.data.id,
+				isLoading: false,
+				didLoad: true,
+			});
+
+		}).catch((err) => {
+			this.setState({
+				isLoading: false,
+				didLoad: false,
+			});
+		})
+
 
 		}catch(err){console.warn('try catch error: ' + err.message);}
 	}
@@ -73,9 +83,20 @@ export default class UpdateDetailsMenu extends Component {
 	}
 
 	saveChanges(){
-		this.setState({errorMessage: ''});
+		this.setState({errorMessage: '', isLoading: true});
 		try{
-			
+			this.state.vultr.updateDetails(data)
+			.then(() => {
+				this.setState({errorMessage: '',
+					successMessage: 'Successfully updates',
+					isLoading: false
+				});
+			}).catch(() => {
+				this.setState({errorMessage: 'Error updating details',
+					successMessage: '',
+					isLoading: false
+				});
+			})
 		}catch(err){console.warn('catch error: '+ err.message);}
 	}
 

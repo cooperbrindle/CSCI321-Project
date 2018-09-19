@@ -33,6 +33,34 @@ CREATE TABLE CONSTITUENT(
     CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (CnBio_ID),
     CONSTRAINT CONSTITUENT_uni UNIQUE (CnBio_ID2) );
 
+
+CREATE TABLE CONSTITUENTEXPORT(
+    CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    CnBio_ID2           VARCHAR(10)     NOT NULL, /* Student Number */
+    CnBio_Birth_date    VARCHAR(10)     NOT NULL, /* Date of Birth */
+    CnBio_Title_1       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
+    CnBio_First_Name    VARCHAR(36)     NULL, /* First Name */
+    CnBio_Nickname      VARCHAR(36)     NULL, /* Nickname */
+    CnBio_Middle_Name   VARCHAR(36)     NULL, /* Middle Name */
+    CnBio_Surname       VARCHAR(64)     NOT NULL, /* Last Name/s */
+    CnBio_Maiden_name   VARCHAR(64)     NULL, /* Maiden Name */
+    CnPrBs_Org_Name     VARCHAR(256)    NULL, /* Employer Organisation Name */
+    CnPrBs_Position     VARCHAR(256)    NULL, /* Position Name */
+    CnAdrPrf_Address    VARCHAR(256)    NOT NULL, /* Home Address */
+    CnAdrPrf_Suburb     VARCHAR(256)    NOT NULL, /* Home Suburb */
+    CnAdrPrf_State      VARCHAR(256)    NOT NULL, /* Home State */
+    CnAdrPrf_County     VARCHAR(256)    NULL, /* Home County */
+    CnAdrPrf_Postcode   VARCHAR(256)    NOT NULL, /* Home Postcode */
+    CnAdrPrf_CountryLongDescription     VARCHAR(256)    NOT NULL, /* Home Country */
+    CnPh_1_01_Phone_number  VARCHAR(256)    NOT NULL, /* Preferred Email */
+    CnPh_1_02_Phone_number  VARCHAR(256)    NOT NULL, /* Other Email */
+    CnPh_1_03_Phone_number  VARCHAR(256)    NOT NULL, /* LinkedIn URL */
+    CnPh_1_04_Phone_number  VARCHAR(256)    NOT NULL, /* Mobile Number */
+    CnPh_1_05_Phone_number  VARCHAR(256)    NOT NULL, /* Unknown */
+
+    CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (CnBio_ID),
+    CONSTRAINT CONSTITUENT_uni UNIQUE (CnBio_ID2) );
+
 /* Cooper 06/09/2018 */
 CREATE TABLE LIBRARYMEM(
     CnBio_ID            VARCHAR(10)     NOT NULL, /* Constituent ID Number */
