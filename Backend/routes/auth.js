@@ -38,7 +38,7 @@ router.post('/login', (req, res) => {
 			errorMsg = 'Incorrect username or password';
 		}else{
 			console.warn('Correct Password');
-			errorMsg = ''
+			errorMsg = '';
 		}
 		
 		res.json({error: errorMsg});

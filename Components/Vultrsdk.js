@@ -26,7 +26,7 @@ export default class Vultr{
                 else return result.json();
             
             }).then((res) => {
-                this.translateFromRE(res[0]);
+                res[0];
                 resolve();
             
             }).catch((error) => {
@@ -77,7 +77,7 @@ export default class Vultr{
     static updateDetails(data) {
         return new Promise((resolve, reject) => {
             
-            data = fetch(API_URL + '/user/updatedetails', {
+            d = fetch(API_URL + '/user/updatedetails', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -136,7 +136,7 @@ export default class Vultr{
             })
         });
     }
-
+/*
     translateFromRE(result){
         this.data = {
             id: result.CnBio_ID,
@@ -175,4 +175,5 @@ export default class Vultr{
             CnPh_1_04_Phone_number: result.mobile
         };
     }
+    */
 };
