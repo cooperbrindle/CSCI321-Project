@@ -9,6 +9,13 @@ export default class Vultr{
     }
 
     loadConstituent(username){
+        id = '';
+        if(!username){
+            console.warn("seting ID");
+            id = this.data.id;
+            username = '';
+        }
+
         return new Promise((resolve, reject) => {
         
             data = fetch(API_URL + '/user/loadconstituent', {
@@ -19,6 +26,7 @@ export default class Vultr{
                 },
                 body: JSON.stringify({
                     username: username,
+                    id: id
                 })
 
             }).then((result) => {
@@ -26,9 +34,9 @@ export default class Vultr{
                 else return result.json();
             
             }).then((res) => {
-                res[0];
+                this.data = res[0];
+                console.log(res[0]);
                 resolve();
-            
             }).catch((error) => {
                 reject(error);
             })
@@ -74,7 +82,7 @@ export default class Vultr{
     }
 
 
-    static updateDetails(data) {
+    updateDetails(data) {
         return new Promise((resolve, reject) => {
             
             d = fetch(API_URL + '/user/updatedetails', {
@@ -87,6 +95,7 @@ export default class Vultr{
                     data: data
                 })
             }).then((res) => {
+                this.data = data;
                 resolve('success');
             }).catch((error) => {
                 reject(error);

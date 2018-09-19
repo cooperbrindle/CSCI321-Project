@@ -85,7 +85,9 @@ export default class UpdateDetailsMenu extends Component {
 	saveChanges(){
 		this.setState({errorMessage: '', isLoading: true});
 		try{
-			this.state.vultr.updateDetails(data)
+			var vultr = this.props.screenProps;
+			console.warn('starting update');
+			vultr.updateDetails(this.state.data)
 			.then(() => {
 				this.setState({errorMessage: '',
 					successMessage: 'Successfully updates',
