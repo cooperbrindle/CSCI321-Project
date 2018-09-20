@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
 
 import { DashButton } from './CustomProps/DashButton';
 import { Logo } from './CustomProps/Logo';
@@ -10,6 +10,7 @@ const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
 const promoIcon = require('./assets/Promotions.png');
+const settingsIcon = require('./assets/Settings.png');
 
 export default class HomePage extends Component {
 	constructor(props){
@@ -19,12 +20,27 @@ export default class HomePage extends Component {
 		title: 'Home',
 		headerStyle: {
 			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
 			
 		},
-	}
+		headerTintColor: 'white',
+		headerRight: (
+			<TouchableHighlight
+				onClick={() => console.log('touched')}
+			>
+				<Image source={settingsIcon}
+					style={{resizeMode: 'center', }}
+				/>
+			</TouchableHighlight>	
+		),
+		// headerRightContainerStyle: {
+		// 	backgroundColour: 'white',
+		// 	alignItems: 'right',
+		// 	justifyContent: 'flex-end',
+		// 	flex: 0.2,
+		// 	padding: 10,
+		// 	margin: 10,
+		// },
+	};
 
 
 	renderHighlight(title, day, month){
@@ -59,7 +75,7 @@ export default class HomePage extends Component {
 
 				<View style={styles.dashboard}>
 					<DashButton title='Update Details' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('UDMenu')} />
-					<DashButton title='Outlook' img={outlookIcon} nav={()=>this.props.navigation.navigate('OutlookWeb')} />
+					<DashButton title='Outlook' img={outlookIcon} nav={()=>this.props.navigation.navigate('OutlookMag')} />
 				</View>
 
 				<View style={styles.dashboard}>
@@ -90,6 +106,9 @@ export default class HomePage extends Component {
 		logoCont: {
 			flex: 1,
 			marginBottom: 15,
+		},
+		settings: {
+			//resizeMode: 'center'
 		},
 		
 		/////////////////////////////////////////DASH BOARD

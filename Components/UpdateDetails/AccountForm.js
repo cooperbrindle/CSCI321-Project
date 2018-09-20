@@ -21,7 +21,6 @@ export default class AccountForm extends Component {
     /////////////////////////////////////
     //
     componentWillMount(){
-        console.warn('Component Mounting');
         const data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
             console.error('NO DATA PASSED TO ACCOUNT FORM PAGE');

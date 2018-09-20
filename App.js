@@ -23,36 +23,44 @@ import EventsList from './Components/Events/EventsList.js'
 
 import Vultrsdk from './Components/Vultrsdk';
 
-import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
 
-const NavStack = createStackNavigator({
-  //Routes
-    Home: { screen: HomePage},
-    EventSingle: { screen: EventSingle},
-    Promotion: { screen: Promotions},
-    UDMenu: { screen: UpdateDetailsMenu},
-    AccForm: { screen: AccountForm},
-    ContForm: { screen: ContactForm},
-    EmpForm: { screen: EmploymentForm},
-    SubForm: { screen: SubscriptionForm},
-    OutlookWeb: { screen: OutlookWebPage},
-    LibraryMem: { screen: LibraryMembership },
-    Discounts: { screen: Discounts },
-    Scholarships: {screen: Scholarships},
-    Careers: {screen: Careers},
-    CareerHub: {screen: CareerHub},
-    EventsList: {screen: EventsList},
-
-  },{ //options
-  initialRouteName: 'Home',
+const settingsNav = createDrawerNavigator({
+	//Routes
+	Password: {screen: HomePage},
+	FAQ: {screen: HomePage},
 });
 
+const navStack = createStackNavigator({
+	//Routes
+	Home: { screen: HomePage},
+	OutlookMag: { screen: OutlookWebPage },
+	UDMenu: { screen: UpdateDetailsMenu },
+	AccForm: { screen: AccountForm },
+	ContForm: { screen: ContactForm },
+	EmpForm: { screen: EmploymentForm },
+	SubForm: { screen: SubscriptionForm },
+	EventSingle: { screen: EventSingle },
+    EventsList: {screen: EventsList },
+    Promotion: { screen: Promotions },
+    LibraryMem: { screen: LibraryMembership },
+    Discounts: { screen: Discounts },
+    Scholarships: { screen: Scholarships },
+    Careers: { screen: Careers },
+	CareerHub: { screen: CareerHub },
+	settings: { screen: settingsNav }
+},{ //options
+  	initialRouteName: 'Home',
+});
+
+
+
 const RootStack = createSwitchNavigator({
-  //Routs
+  	//Routs
 	Login: { screen: LoginPage},
-  Home: { screen: NavStack},
-  SUForm: { screen: SignUpForm},
-  SUFinish: { screen: SignUpFinish},
+	Home: { screen: navStack },
+	SUForm: { screen: SignUpForm},
+	SUFinish: { screen: SignUpFinish},
   },{ //options
   initialRouteName: 'Login',
 });
