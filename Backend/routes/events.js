@@ -15,9 +15,8 @@ router.post('/eventslist', (req, res) => {
 
 	const category = req.body.category;
 	var data;
-	dbconn.query('SELECT * FROM EVENTS ORDER BY STR_TO_DATE(startdate, \'%d/%m/%Y\')', (err, result, fields) => {
+	dbconn.query('SELECT * FROM EVENTS ORDER BY STR_TO_DATE(startdate, \'%d/%m/%Y\')', (err, result) => {
 		if (err) throw err;
-		//console.log(result);
 		data = result;
 		res.json(result);
 	});

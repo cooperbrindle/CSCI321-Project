@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
 import { styles } from '../FormStyles';
-import { DefaultButton } from '../DefaultButton';
+import { DefaultButton } from '../CustomProps/DefaultButton';
 
 
 export default class SubscriptionForm extends Component {

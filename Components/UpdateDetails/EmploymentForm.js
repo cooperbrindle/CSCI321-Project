@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
 import { styles } from '../FormStyles';
-import { DefaultButton } from '../DefaultButton';
+import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
@@ -21,22 +21,42 @@ export default class EmploymentForm extends Component {
 	/////////////////////////////////////
     //
     componentWillMount(){
-        //create new structure here with only the required information
-
-        //this.setState({thisData, changedData});
+        console.warn('Component Mounting');
+        const data = this.props.navigation.getParam('data', 'NoData');
+        if(data == 'NoData'){
+            console.error('NO DATA PASSED TO EMPLOYMENT FORM PAGE');
+            this.props.navigation.goBack();
+        }
+        this.state = {
+            errorMessage: '',
+            position: data.position,
+            orgName: data.orgName,
+        };
     }
     //
 	/////////////////////////////////////
+
+	saveChanges(){
+        let data = this.props.navigation.getParam('data', 'NoData');
+        try{
+            data.position = this.state.position;
+            data.orgName = this.state.orgName;
+        }catch(err){
+            console.warn('ERROR: '+ err.message);
+        }
+        this.props.navigation.goBack();
+	}
 	
-	
-	renderInput(title, ph){
+	renderInput(title, ph, onChangeT, v, edita){
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
                     {title}
                 </Text>
                 <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
+                    onChangeText={onChangeT}
+                    value={v} editable = {edita}/>
             </View>
 		)
 	}
@@ -47,23 +67,16 @@ export default class EmploymentForm extends Component {
 				<Text style={styles.title}>
                     Employment Info
                 </Text>
-                <KeyboardAwareScrollView
-				style={{ backgroundColor: '#4c69a5' }}
-				resetScrollToCoords={{ x: 0, y: 0 }}
-				contentContainerStyle={styles.container}
-		  		scrollEnabled={false}>
-
-                {this.renderInput('Job Title', 'Dev Leader')}
-                {this.renderInput('Employer', 'Big Ole Company')}
-                {this.renderInput('Country', 'Australia')}
-                {this.renderInput('City', 'Wollongong')}
-                {this.renderInput('State / Country / Region', 'Somewhere')}
+                <KeyboardAwareScrollView>
+                {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
+                {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
 				
                 </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
+                    <DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
 			</View>
 		);
-		}
-	};
+	}
+};

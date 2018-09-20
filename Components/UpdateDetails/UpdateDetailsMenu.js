@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
-import { DefaultButton } from '../DefaultButton';
-import { DashButton } from '../DashButton';
-import { SocialButton } from '../SocialButton';
+import { DefaultButton } from '../CustomProps/DefaultButton';
+import { DashButton } from '../CustomProps/DashButton';
+import { SocialButton } from '../CustomProps/SocialButton';
 
 
 const accountIcon = require('../assets/Account.png');
@@ -90,7 +90,7 @@ export default class UpdateDetailsMenu extends Component {
 			vultr.updateDetails(this.state.data)
 			.then(() => {
 				this.setState({errorMessage: '',
-					successMessage: 'Successfully updates',
+					successMessage: 'Successfully updated',
 					isLoading: false
 				});
 			}).catch(() => {

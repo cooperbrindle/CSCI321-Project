@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
 import { styles } from '../FormStyles';
-import { DefaultButton } from '../DefaultButton';
+import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
@@ -48,7 +48,7 @@ export default class AccountForm extends Component {
             data.title = this.state.title;
             data.firstName = this.state.firstName;
             data.lastName = this.state.lastName;
-            data.birthDate = this.state.day + this.state.month + this.state.year;
+            data.birthDate = this.state.day + '/' + this.state.month + '/' + this.state.year;
             data.stdNum = this.state.stdNum;
         }catch(err){
             console.warn('ERROR: '+ err.message);
@@ -148,7 +148,7 @@ export default class AccountForm extends Component {
                             value={this.state.month} editable={false}/>
                     </View>
                     <View style={styles.inputContYear}>
-                        <Text style={styles.inputText}>
+                        <Text style={styles.inputText}>bj
                             YYYY
                         </Text>
                         <TextInput style={styles.inputBoxDate}
@@ -170,5 +170,5 @@ export default class AccountForm extends Component {
                 </View>
 			</View>
 		);
-		}
-	};
+	}
+};

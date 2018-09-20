@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
-import { styles } from './FormStyles';
-import { DefaultButton } from './DefaultButton';
+import { styles } from '../FormStyles';
+import { DefaultButton } from '../CustomProps/DefaultButton';
 
 
 export default class SignUpForm extends Component {

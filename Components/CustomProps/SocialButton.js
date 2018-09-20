@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native';
 
 
-const fbLogo = require('./assets/fblogo.png');
-const liLogo = require('./assets/lilogo.png');
+const fbLogo = require('../assets/fblogo.png');
+const liLogo = require('../assets/lilogo.png');
 export class SocialButton extends React.Component{
 
     render() {

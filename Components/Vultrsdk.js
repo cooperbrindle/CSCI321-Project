@@ -6,16 +6,10 @@ export default class Vultr{
     constructor() {
         this.token = null;
         this.data = null;
+        this.username = '';
     }
 
-    loadConstituent(username){
-        id = '';
-        if(!username){
-            console.warn("seting ID");
-            id = this.data.id;
-            username = '';
-        }
-
+    loadConstituent(){
         return new Promise((resolve, reject) => {
         
             data = fetch(API_URL + '/user/loadconstituent', {
@@ -25,8 +19,7 @@ export default class Vultr{
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: username,
-                    id: id
+                    username: this.username
                 })
 
             }).then((result) => {
@@ -44,6 +37,7 @@ export default class Vultr{
     }
 
     signInWithEmailPassword(username, password) {
+        this.username = username;
         return new Promise((resolve, reject) => {
         
             data = fetch(API_URL + '/auth/login', {
@@ -66,7 +60,7 @@ export default class Vultr{
                 reject(res.error);
                 else{
                     //LOGIN WORKED
-                    this.loadConstituent(username)
+                    this.loadConstituent()
                     .then(() => {
                         resolve();
                     }).catch((err) => {
@@ -96,7 +90,7 @@ export default class Vultr{
                 })
             }).then((res) => {
                 this.data = data;
-                resolve('success');
+                resolve();
             }).catch((error) => {
                 reject(error);
             })
@@ -138,51 +132,10 @@ export default class Vultr{
                     category: category
                 })
             }).then((res) => {
-                //console.log(res.json())
                 resolve(res.json());
             }).catch((error) => {
                 reject(error);
             })
         });
     }
-/*
-    translateFromRE(result){
-        this.data = {
-            id: result.CnBio_ID,
-            stdNum: result.CnBio_ID2,
-            title: result.CnBio_Title,
-            firstName: result.CnBio_First_Name,
-            lastName: result.CnBio_Surname,
-            birthDate: result.CnBio_Birth_date,
-            maidenName: result.CnBio_Maiden_name,
-            address: result.CnAdrPrf_Address,
-            suburb: result.CnAdrPrf_Suburb,
-            state: result.CnAdrPrf_State,
-            country: result.CnAdrPrf_CountryLongDescription,
-            postcode: result.CnAdrPrf_Postcode,
-            email: result.CnPh_1_01_Phone_number,
-            emailOther: result.CnPh_1_02_Phone_number,
-            mobile: result.CnPh_1_04_Phone_number
-        };
-    }
-    translateToRE(result){
-        this.data = {
-            CnBio_ID: result.id,
-            CnBio_ID2: result.stdNum,
-            CnBio_Title: result.title,
-            CnBio_First_Name: result.firstName,
-            CnBio_Surname: result.lastName,
-            CnBio_Birth_date: result.birthDate,
-            CnBio_Maiden_name: result.maidenName,
-            CnAdrPrf_Address: result.address,
-            CnAdrPrf_Suburb: result.suburb,
-            CnAdrPrf_State: result.state,
-            CnAdrPrf_CountryLongDescription: result.country,
-            CnAdrPrf_Postcode: result.postcode,
-            CnPh_1_01_Phone_number: result.email,
-            CnPh_1_02_Phone_number: result.emailOther,
-            CnPh_1_04_Phone_number: result.mobile
-        };
-    }
-    */
 };

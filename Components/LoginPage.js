@@ -1,16 +1,11 @@
-
-
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, 
-    TextInput, Button, View, Image, 
-    TouchableHighlight, ActivityIndicator} from 'react-native'; 
-import { createStackNavigator } from 'react-navigation';
-import { Logo } from './Logo';
-import { DefaultButton } from './DefaultButton';
-import { SocialButton } from './SocialButton';
+import { StyleSheet, Text, TextInput, View, ActivityIndicator} from 'react-native'; 
+import { Logo } from './CustomProps/Logo';
+import { DefaultButton } from './CustomProps/DefaultButton';
+import { SocialButton } from './CustomProps/SocialButton';
 import { Facebook } from 'expo';
 
-const FACEBOOK_APP_ID = '1049993008511643';
+//const FACEBOOK_APP_ID = '1049993008511643';
 
 export default class Login extends React.Component {
     
@@ -18,30 +13,36 @@ export default class Login extends React.Component {
         username: 'ewarren',
         password: 'password',
         errorMessage: '',
-        isLoading: true,
+        isLoading: false,
     };
 
     componentDidMount(){
-        this.setState({isLoading: false, vultr: this.props.screenProps});
+        this.setState({
+            isLoading: false,
+            vultr: this.props.screenProps
+        });
     }
 
     loginPress() {
-        console.warn('attempting login');
-        this.setState({errorMessage: '', isLoading: true});
+        this.setState({
+            errorMessage: '',
+            isLoading: true
+        });
+        
         const {username, password } = this.state;
         try{
-        if(username != '' || password != ''){
-            this.state.vultr.signInWithEmailPassword(username, password)
-            .then((result) =>{
-                this.setState({isLoading: false});
-                this.props.navigation.navigate('Home');
-            })
-            .catch((error) =>{
-                this.setState({errorMessage: error, isLoading: false});
-            });
-        }
-    }catch(err){console.warn('try catch: ' + err);
-    this.setState({isLoading: false});}
+            if(username != '' || password != ''){
+                this.state.vultr.signInWithEmailPassword(username, password)
+                .then((result) =>{
+                    this.setState({isLoading: false});
+                    this.props.navigation.navigate('Home');
+                })
+                .catch((error) =>{
+                    this.setState({errorMessage: error, isLoading: false});
+                });
+            }
+        }catch(err){console.warn('try catch: ' + err);
+        this.setState({isLoading: false});}
     };
 
     signupPress() {
@@ -49,7 +50,7 @@ export default class Login extends React.Component {
     }
 
     async facebookLogin() {
-        console.warn('logging in with facebook');
+        /*
         this.setState({isLoading: true});
         try{
 
@@ -57,21 +58,14 @@ export default class Login extends React.Component {
                 permissions: ['public_profile', 'email']
             });
             if (type === 'success') {
-                //Firebase credential is created with the Facebook access token.
-                const credential = firebase.auth.FacebookAuthProvider.credential(token);
-                this.props.firebase.auth().signInAndRetrieveDataWithCredential(credential)
-                .then(() => {
-                    this.setState({ errorMessage: '', isLoading: false });
-                }).catch(error => {
-                    this.setState({ errorMessage: error.message, isLoading: false });
-                });
+                //user token
             }else{
                 this.setState({ errorMessage: 'Login Cancelled', isLoading: false });    
             }
         }catch(error){
             this.setState({ errorMessage: error.message, isLoading: false });
         }
-        
+        */
     }
     
 
@@ -88,10 +82,12 @@ export default class Login extends React.Component {
             <Text style={styles.errorText}>{this.state.errorMessage}</Text>
 
             <View style={styles.inputContainer}>
+                
                 <TextInput style={styles.inputBox}
                     placeholder="username" underlineColorAndroid='transparent' placeholderTextColor='grey'
                     onChangeText={(un) => this.setState({username:un})}
                     value={this.state.username} />
+                
                 <TextInput style={styles.inputBox}
                     placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='grey'
                     onChangeText={(pw) => this.setState({password:pw})} secureTextEntry
