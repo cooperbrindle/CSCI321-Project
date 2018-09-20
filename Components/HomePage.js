@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight} from 'react-native';
 
-import { DashButton } from './DashButton';
-import { Logo } from './Logo';
+import { DashButton } from './CustomProps/DashButton';
+import { Logo } from './CustomProps/Logo';
 
 const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');

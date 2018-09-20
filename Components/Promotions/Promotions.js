@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
-import { DashButton } from '../DashButton';
-import { Logo } from '../Logo';
+import { DashButton } from '../CustomProps/DashButton';
+import { Logo } from '../CustomProps/Logo';
 
 const dashTmp = require('../assets/dashTmp.png');
 

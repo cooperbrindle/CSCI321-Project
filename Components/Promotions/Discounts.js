@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
 
 import { EventSingle } from '../Events/EventSingleOld';
-import { DashButton } from '../DashButton';
+import { DashButton } from '../CustomProps/DashButton';
 import { Logo } from './discLogo';
 
 import Vultrsdk from '../Vultrsdk';

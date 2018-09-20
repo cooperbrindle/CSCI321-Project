@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
-import { DefaultButton } from '../DefaultButton';
+import { DefaultButton } from '../CustomProps/DefaultButton';
 
 const eventTmp = require('../assets/tree.jpg');
 

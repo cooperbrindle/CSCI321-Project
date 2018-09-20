@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
-import { styles } from './FormStyles';
-import { DefaultButton } from './DefaultButton';
-import { Logo } from './Logo.js';
+import { styles } from '../FormStyles';
+import { DefaultButton } from '../CustomProps/DefaultButton';
+import { Logo } from '../CustomProps/Logo.js';
 
 
 export default class SignUpFinish extends Component {

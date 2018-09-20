@@ -1,10 +1,8 @@
-
-
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, ActivityIndicator} from 'react-native'; 
-import { Logo } from './Logo';
-import { DefaultButton } from './DefaultButton';
-import { SocialButton } from './SocialButton';
+import { Logo } from './CustomProps/Logo';
+import { DefaultButton } from './CustomProps/DefaultButton';
+import { SocialButton } from './CustomProps/SocialButton';
 import { Facebook } from 'expo';
 
 //const FACEBOOK_APP_ID = '1049993008511643';
