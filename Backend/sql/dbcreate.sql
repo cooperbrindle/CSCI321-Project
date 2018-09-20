@@ -14,7 +14,7 @@ CREATE TABLE CONSTITUENT(
     firstName   VARCHAR(36)     NULL, /* First Name */
     nickname    VARCHAR(36)     NULL, /* Nickname */
     middleName  VARCHAR(36)     NULL, /* Middle Name */
-    surname     VARCHAR(64)     NOT NULL, /* Last Name/s */
+    lastName    VARCHAR(64)     NOT NULL, /* Last Name/s */
     maidenName  VARCHAR(64)     NULL, /* Maiden Name */
     orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
     position    VARCHAR(256)    NULL, /* Position Name */
@@ -42,7 +42,7 @@ CREATE TABLE CONSTITUENTEXPORT(
     firstName   VARCHAR(36)     NULL, /* First Name */
     nickname    VARCHAR(36)     NULL, /* Nickname */
     middleName  VARCHAR(36)     NULL, /* Middle Name */
-    surname     VARCHAR(64)     NOT NULL, /* Last Name/s */
+    lastName    VARCHAR(64)     NOT NULL, /* Last Name/s */
     maidenName  VARCHAR(64)     NULL, /* Maiden Name */
     orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
     position    VARCHAR(256)    NULL, /* Position Name */

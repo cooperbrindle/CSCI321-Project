@@ -147,7 +147,7 @@ export default class AccountForm extends Component {
                             value={this.state.month} editable={false}/>
                     </View>
                     <View style={styles.inputContYear}>
-                        <Text style={styles.inputText}>
+                        <Text style={styles.inputText}>bj
                             YYYY
                         </Text>
                         <TextInput style={styles.inputBoxDate}
@@ -169,5 +169,5 @@ export default class AccountForm extends Component {
                 </View>
 			</View>
 		);
-		}
-	};
+	}
+};
