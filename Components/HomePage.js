@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image} from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight} from 'react-native';
 
 import { DashButton } from './DashButton';
 import { Logo } from './Logo';

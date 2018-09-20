@@ -48,7 +48,7 @@ export default class AccountForm extends Component {
             data.title = this.state.title;
             data.firstName = this.state.firstName;
             data.lastName = this.state.lastName;
-            data.birthDate = this.state.day + this.state.month + this.state.year;
+            data.birthDate = this.state.day + '/' + this.state.month + '/' + this.state.year;
             data.stdNum = this.state.stdNum;
         }catch(err){
             console.warn('ERROR: '+ err.message);

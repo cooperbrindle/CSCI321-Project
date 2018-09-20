@@ -1,12 +1,6 @@
 
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native'; 
 
 import LoginPage from './Components/LoginPage';
 import HomePage from './Components/HomePage';
@@ -27,8 +21,6 @@ import Careers from './Components/Promotions/Careers';
 import CareerHub from './Components/Promotions/CareerHub';
 import EventsList from './Components/Events/EventsList.js'
 
-//import firebase from 'firebase';
-//import firebaseConfig from './Components/Database/DatabaseConfig';
 import Vultrsdk from './Components/Vultrsdk';
 
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
@@ -68,10 +60,7 @@ const RootStack = createSwitchNavigator({
 export default class App extends React.Component{
 
   componentWillMount(){
-    /*try{
-    firebase.initializeApp(firebaseConfig);
-    }catch(err){console.warn('App.js Firebase: ' + err.message);}
-    */
+    
   }
 
   render() {
