@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView, Image} from 'react-native';
+import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
 
 import Vultrsdk from '../Vultrsdk';
 
@@ -43,11 +43,10 @@ export default class EventsList extends Component {
 
     renderItem(item){
         var parts = item.startdate.split('/')
-        var d = new Date(parts[2], parts[1]-1, parts[0]);
         var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
         return(
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle')}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle', {data: item})}>
                 <View style={styles.itemView}>
                     <View style={styles.textView}>
                         <Text style={styles.text}>
@@ -103,19 +102,17 @@ export default class EventsList extends Component {
         },
 		itemView: {
             flexDirection: 'row',
-            borderWidth: 0.5,
-            //flex: 1,
-        },
-        image: {
-            flex: 1,
-            height: 140,
-            resizeMode: 'contain',
+            borderWidth: 1,
+            backgroundColor: '#ffffff',
+            margin: 5,
+            borderColor: 'white',
+            height: 100,
         },
         textView: {
             flex: 2,
         },
         text: {
-            color: 'white',
+            color: 'black',
             fontSize: 18,
             paddingLeft: 20,
             paddingTop: 20,

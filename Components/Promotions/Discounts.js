@@ -1,17 +1,9 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
-
-import { EventSingle } from '../Events/EventSingleOld';
-import { DashButton } from '../CustomProps/DashButton';
-import { Logo } from './discLogo';
+import { StyleSheet, Text, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
 
 import Vultrsdk from '../Vultrsdk';
-
-
-const tmpImg = require('../assets/dashTmp.png');
-
 
 export default class Discounts extends Component {
 	constructor(props){
@@ -52,7 +44,7 @@ export default class Discounts extends Component {
 
     renderItem(item){
         return(
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle')}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('DiscountCard')}>
                 <View style={styles.itemView}>
                     <Image
                         style={styles.image}
@@ -105,12 +97,13 @@ export default class Discounts extends Component {
 		itemView: {
             flexDirection: 'row',
             borderWidth: 0.5,
-            //flex: 1,
+            flex: 1,
+            margin: 5,
         },
         image: {
             backgroundColor: '#FFFFFF',
             flex: 1,
-            resizeMode: 'contain',
+            resizeMode: 'stretch',
         },
         textView: {
             flex: 2,

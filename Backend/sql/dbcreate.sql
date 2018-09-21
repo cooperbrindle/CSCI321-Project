@@ -88,7 +88,7 @@ CREATE TABLE EVENTS(
     locationname    VARCHAR(256)    NULL, /* Event Venue */
     address         VARCHAR(256)    NULL, /* Venue Address */
     city            VARCHAR(256)    NULL, /* Venue City */
-    State           VARCHAR(256)    NULL, /* Venue State */
+    state           VARCHAR(256)    NULL, /* Venue State */
     postcode        VARCHAR(256)    NULL, /* Venue Postcode */
     country         VARCHAR(256)    NULL, /* Event Country */
     regLink         VARCHAR(256)    NULL, /* Paid Event Rego Link */

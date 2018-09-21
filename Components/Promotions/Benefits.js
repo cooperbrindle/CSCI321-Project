@@ -7,13 +7,13 @@ import { Logo } from '../CustomProps/Logo';
 
 const dashTmp = require('../assets/dashTmp.png');
 
-export default class Promotions extends Component {
+export default class BenefitsMenu extends Component {
 	constructor(props){
 		super(props);
 	}
 	
 	static navigationOptions = {
-		title: 'Promotions',
+		title: 'Benefits',
 		headerStyle: {
 			backgroundColor: '#0C2340',
 		},
@@ -22,48 +22,10 @@ export default class Promotions extends Component {
 			fontWeight: 'bold',
 		},
 	}
-	renderHighlight(title, day, month){
-		return(
-			<TouchableHighlight style={styles.hlBtn}
-				onPress={() => this.props.navigation.navigate('EventSingle')}>
-				<View style={styles.hlBtnView}>
-					<View style={styles.hlCont}>
-						<Text style={styles.hlTitle}>
-							{title}
-						</Text>
-					</View>
-					<View style={styles.hlDate}>
-						<Text style={styles.hlDay}>
-							{day}
-						</Text>
-						<Text style={styles.hlMonth}>
-							{month}
-						</Text>
-					</View>
-				</View>
-            </TouchableHighlight>
-		)
-	}
 	renderDashBtnSchol(title){
 		return(
 			<TouchableHighlight style={styles.dashBtnSmall}
 					onPress={() => this.props.navigation.navigate('Scholarships')}>
-				<View style={styles.dashBtnContainerSmall}>
-					<Image
-                        style={styles.dashBtnImgSmall}
-                        source={dashTmp}
-                    />
-					<Text style={styles.dashTextSmall}>
-						{title}
-					</Text>
-				</View>
-            </TouchableHighlight>
-		)
-	}
-	renderDashBtnCar(title){
-		return(
-			<TouchableHighlight style={styles.dashBtnSmall}
-					onPress={() => this.props.navigation.navigate('Careers')}>
 				<View style={styles.dashBtnContainerSmall}>
 					<Image
                         style={styles.dashBtnImgSmall}
@@ -104,19 +66,16 @@ export default class Promotions extends Component {
 					<DashButton title='Discounts' img={dashTmp} nav={()=>this.props.navigation.navigate('Discounts')} />
 					<DashButton title='Library Membership' img={dashTmp} nav={()=>this.props.navigation.navigate('LibraryMem')} />
 				</View>
-
-				<View style={styles.dashboardSmall}>
-					{this.renderDashBtnCar("Careers")}
-					{this.renderdashBtnNA("Mentoring")}
-					{this.renderdashBtnNA("Volunteering")}
-					{this.renderDashBtnSchol("Scholarships")}
+				<View style={styles.dashboard}>
+					<DashButton title='Career Support' img={dashTmp} nav={()=>this.props.navigation.navigate('Careers')} />
+					<DashButton title='Volunteering and Mentoring' img={dashTmp} nav={()=>this.props.navigation.navigate('Volunteering')} />
 				</View>
 
-				<View style={styles.highlightsContainer}>
-					<Text style={styles.highlightHeading}>
-						Featured
-					</Text>
-					{this.renderHighlight("The Little Prince", "10%", "OFF", )}
+				<View style={styles.dashboardSmall}>
+					{this.renderDashBtnSchol("Scholarships")}
+					{this.renderdashBtnNA("TBA")}
+					{this.renderdashBtnNA("TBA")}
+					{this.renderdashBtnNA("TBA")}
 				</View>
 
 			</View>
@@ -170,13 +129,14 @@ export default class Promotions extends Component {
 dashboardSmall: {
 	flex: 0.75,
 	flexDirection: 'row',
-	marginLeft: 7,
-	marginRight: 7,
 	justifyContent: 'space-between',
+	margin: 5,
 },
 		dashBtnSmall: {
 			flex: 1,
-			margin: 5,
+			marginLeft: 5,
+			marginRight: 5,
+			marginBottom: 5,
 			backgroundColor: 'white',
 			justifyContent: 'center',
 			alignContent: 'center',
