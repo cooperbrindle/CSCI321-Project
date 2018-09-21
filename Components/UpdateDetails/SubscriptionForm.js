@@ -42,6 +42,7 @@ export default class SubscriptionForm extends Component {
 	}
 
 	render() {
+		var thing = 'This page will later include radio buttons, tick boxes, drop downs\n\n\n**Waiting on client**'
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>
@@ -50,7 +51,7 @@ export default class SubscriptionForm extends Component {
                 <ScrollView>
 
                 <Text style={styles.title}>
-                    This page will later include radio buttons, tick boxes, drop downs
+                    {thing}
                 </Text>
 				
                 </ScrollView>

@@ -97,6 +97,61 @@ export default class Vultr{
         });
     }
 
+    submitSignUp(data) {
+        return new Promise((resolve, reject) => {
+            
+            d = fetch(API_URL + '/auth/signUp', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: data
+                })
+            }).then((result) => {
+                if(!result.ok) reject('SERVER ERROR');
+                else return result.json();
+            }).then((res) => {
+                if(res.error && res.error != '')
+                    reject(res.error);
+                
+                resolve(res.data);
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }   
+
+    registerUser(email, password, id){
+        return new Promise((resolve, reject) => {
+            
+            d = fetch(API_URL + '/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    id: id,
+                })
+            }).then((result) => {
+                if(!result.ok) reject('SERVER ERROR');
+                else return result.json();
+            }).then((res) => {
+                if(res.error && res.error != '')
+                    reject(res.error);
+                this.signInWithEmailPassword(email, password)
+                .then(() => {
+                    resolve();
+                })
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
 
     static getDiscounts(category) {
         return new Promise((resolve, reject) => {
