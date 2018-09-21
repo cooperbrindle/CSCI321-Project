@@ -27,11 +27,11 @@ export default class EmploymentForm extends Component {
             console.error('NO DATA PASSED TO EMPLOYMENT FORM PAGE');
             this.props.navigation.goBack();
         }
-        this.state = {
+        this.setState({
             errorMessage: '',
             position: data.position,
             orgName: data.orgName,
-        };
+        });
     }
     //
 	/////////////////////////////////////

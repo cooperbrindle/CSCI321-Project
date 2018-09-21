@@ -25,14 +25,14 @@ export default class ContactForm extends Component {
             console.error('NO DATA PASSED TO CONTACT FORM PAGE');
             this.props.navigation.goBack();
         }
-        this.state = {
+        this.setState({
             errorMessage: '',
             email: data.email,
             emailOther: data.emailOther,
             mobile: data.mobile,
             address: data.address,
             city: data.city
-        };
+        });
     }
 
     saveChanges(){

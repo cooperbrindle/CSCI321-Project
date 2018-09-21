@@ -25,7 +25,7 @@ export default class EventSingle extends Component {
             console.error('NO DATA PASSED TO ACCOUNT FORM PAGE');
             this.props.navigation.goBack();
         }
-        this.state = {
+        this.setState({
             errorMessage: '',
             eventname: data.eventname,
 			eventgroup: data.eventgroup,
@@ -39,7 +39,7 @@ export default class EventSingle extends Component {
 			locstate: data.state,
 			postcode: data.postcode,
 			country: data.country,
-        };
+        });
     }
 	renderDescription(){
 		var parts = this.state.date.split('/');

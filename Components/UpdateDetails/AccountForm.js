@@ -26,7 +26,7 @@ export default class AccountForm extends Component {
             console.error('NO DATA PASSED TO ACCOUNT FORM PAGE');
             this.props.navigation.goBack();
         }
-        this.state = {
+        this.setState({
             errorMessage: '',
             title: data.title,
             firstName: data.firstName,
@@ -35,7 +35,7 @@ export default class AccountForm extends Component {
             month: data.birthDate.substr(3,2),
             year: data.birthDate.substr(6,4),
             stdNum: data.stdNum
-        };
+        });
     }
 
     saveChanges(){
@@ -147,7 +147,7 @@ export default class AccountForm extends Component {
                             value={this.state.month} editable={false}/>
                     </View>
                     <View style={styles.inputContYear}>
-                        <Text style={styles.inputText}>bj
+                        <Text style={styles.inputText}>
                             YYYY
                         </Text>
                         <TextInput style={styles.inputBoxDate}
