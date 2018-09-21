@@ -46,12 +46,9 @@ const navStack = createStackNavigator({
     Scholarships: { screen: Scholarships },
     Careers: { screen: Careers },
 	CareerHub: { screen: CareerHub },
-<<<<<<< HEAD
 	settings: { screen: settingsNav },
 	Volunteering: { screen: Volunteering },
 	DiscountCard: { screen: DiscountCard },
-=======
->>>>>>> bc6dd1fbf4037929ef3d1ca379a37a4a1bda5751
 },{ //options
 	initialRouteName: 'HomePage',
 });
