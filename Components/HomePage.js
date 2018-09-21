@@ -16,7 +16,9 @@ export default class HomePage extends Component {
 	constructor(props){
 		super(props);
 	}
-	static navigationOptions = {
+
+	static navigationOptions = ({navigation}) => {
+		return {
 		title: 'Home',
 		headerStyle: {
 			backgroundColor: '#0C2340',
@@ -24,25 +26,23 @@ export default class HomePage extends Component {
 		},
 		headerTintColor: 'white',
 		headerRight: (
-			<TouchableHighlight
-				onPress={() => console.log('touched')}
+			<TouchableHighlight 
+				onPress={navigation.getParam('toggleSettings')}
 			>
 				<Image source={settingsIcon}
-					style={{resizeMode: 'center', }}
+					style={{resizeMode: 'contain', width: 40, height: 40 }}
 				/>
 			</TouchableHighlight>	
 		),
-		// headerRightContainerStyle: {
-		// 	backgroundColour: 'white',
-		// 	alignItems: 'right',
-		// 	justifyContent: 'flex-end',
-		// 	flex: 0.2,
-		// 	padding: 10,
-		// 	margin: 10,
-		// },
-	};
+	}};//width: 40, height: 40
 
+	toggleSettings = () => {
+		this.props.navigation.toggleDrawer();;
+	}
 
+	componentDidMount(){
+		this.props.navigation.setParams({toggleSettings: this.toggleSettings})
+	 }
 	renderHighlight(title, day, month){
 		return(
 			<TouchableHighlight style={styles.hlBtn}

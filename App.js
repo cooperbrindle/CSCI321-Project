@@ -27,15 +27,11 @@ import Vultrsdk from './Components/Vultrsdk';
 
 import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
 
-const settingsNav = createDrawerNavigator({
-	//Routes
-	Password: {screen: HomePage},
-	FAQ: {screen: HomePage},
-});
+
 
 const navStack = createStackNavigator({
 	//Routes
-	Home: { screen: HomePage},
+	HomePage: { screen: HomePage},
 	OutlookMag: { screen: OutlookWebPage },
 	UDMenu: { screen: UpdateDetailsMenu },
 	AccForm: { screen: AccountForm },
@@ -50,19 +46,36 @@ const navStack = createStackNavigator({
     Scholarships: { screen: Scholarships },
     Careers: { screen: Careers },
 	CareerHub: { screen: CareerHub },
+<<<<<<< HEAD
 	settings: { screen: settingsNav },
 	Volunteering: { screen: Volunteering },
 	DiscountCard: { screen: DiscountCard },
+=======
+>>>>>>> bc6dd1fbf4037929ef3d1ca379a37a4a1bda5751
 },{ //options
-  	initialRouteName: 'Home',
+	initialRouteName: 'HomePage',
 });
 
+const drawerNav = createDrawerNavigator({
+	//Routes
+	Password: { screen: navStack },
+	FAQ: { screen: navStack },
+	Home: { screen: navStack },
+},{ //options
+	initialRouteName: 'Home',
+	drawerPosition: 'right',
+	contentOptions: {
+		activeBackgroundColor: '#0C2340',
+		activeTintColor: 'white',
+		inactiveTintColor: '#0C2340'
+	}
+});
 
 
 const RootStack = createSwitchNavigator({
   	//Routs
 	Login: { screen: LoginPage},
-	Home: { screen: navStack },
+	HomeDrawer: { screen: drawerNav },
 	SUForm: { screen: SignUpForm},
 	SUFinish: { screen: SignUpFinish},
   },{ //options

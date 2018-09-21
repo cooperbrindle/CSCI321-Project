@@ -35,7 +35,7 @@ export default class Login extends React.Component {
                 this.state.vultr.signInWithEmailPassword(username, password)
                 .then((result) =>{
                     this.setState({isLoading: false});
-                    this.props.navigation.navigate('Home');
+                    this.props.navigation.navigate('HomeDrawer');
                 })
                 .catch((error) =>{
                     this.setState({errorMessage: error, isLoading: false});

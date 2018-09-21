@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
+import { Platform, StyleSheet, ScrollView, Text, TextInput, View, Alert, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
 import { styles } from '../FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 
@@ -21,53 +21,74 @@ export default class SignUpForm extends Component {
     state = {
         errorMessage: '',
         isLoading: false,
-        firstName: 'balls',
+        firstName: '',
         lastName: '',
         stdNum: '',
         email: '',
+        day: '',
+        month: '',
+        year: '',
     };
 
     componentDidMount(){
-        this.props.firebase = this.props.screenProps;
+        this.props.vultr = this.props.screenProps;
     }
 
     handleSubmitResult(result){
-        /*if(result == null || result =='' || result.constitID == null || result.constitID == ''){
-            this.setState({errorMessage: 'No UOW Alumni found with those details...'});
-        }else{
-            */this.props.navigation.navigate('SUFinish', {
-                email: this.state.email,
-                //constitID: result.constitID, //TODO: add uis later maybe
-            });
-        //}
+        
+         this.props.navigation.navigate('SUFinish', {
+            email: result.email,
+            id: result.id,
+        });
     }
     
     submitForm() {
         this.setState({isLoading: true, errorMessage: ''});
         
+        
+        //Create JSON data from form
+        var data = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            stdNum: this.state.stdNum,
+            email: this.state.email,
+            birthDate: this.state.day + '/' + this.state.month + '/' + this.state.year,
+        };
+        if(data.birthDate == '//') data.birthDate = '';
         /////////////////////////////////////////////////////
         //////////// TODO: Possibly do some field checking to see if anything is filled out
         /////////////////////////////////////////////////////
-
-        //Create JSON data from form
-        /*const data = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            //TODO: DOB...
-            stdNum: this.state.stdNum,
-            email: this.state.email,
-        };*/
-
+        if(data.firstName == '' && data.lastName == '' && data.stdNum == ''
+        && data.email == '' && data.birthDate == ''){
+            this.setState({errorMessage: 'No fields entered', isLoading: false});
+            return;
+        }
         //send data to cloud function here
-        /*var checkUser = firebase.functions().httpsCallable('checkUser');
-        addMessage(data)
+        this.props.vultr.submitSignUp(data)
             .then((result) => {
                 this.setState({isLoading: false, errorMessage: ''});
-                */this.handleSubmitResult();/*
+                this.handleSubmitResult(result);
             
             }).catch(error => {
-                this.setState({isLoading: false, errorMessage: error.message});
-            });*/
+                if(error == 'Already a user' || error == 'Too many users'){
+                    this.setState({isLoading: false});
+                    var msg = '';
+                    if(error == 'Already a user')
+                        msg = 'A user already exists with these details'
+                    else if(error == 'Too many users')
+                        msg = 'Too many users have been found, please try refining your search ' +
+                            'or contact the Alumni Relations Team via alumni@uowmail.edu.au';
+                    Alert.alert(
+                        'Oops!',
+                        msg,
+                        [
+                            {text: 'OK', onPress: () => this.props.navigation.navigate('Login')},
+                        ],
+                        { cancelable: false }
+                    )
+                }
+                else this.setState({isLoading: false, errorMessage: error});
+            });
     }
 
 	renderInput(title, ph, stateValue){
@@ -109,21 +130,24 @@ export default class SignUpForm extends Component {
                             DD
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder='25' underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            placeholder={this.state.day} onChangeText={(t) => this.setState({day:t})} 
+                            underlineColorAndroid='transparent' placeholderTextColor='grey'/>
                     </View>
                     <View style={styles.inputContDate}>
                         <Text style={styles.inputText}>
                             MM
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder='05' underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            placeholder={this.state.month} onChangeText={(t) => this.setState({month:t})} 
+                            underlineColorAndroid='transparent' placeholderTextColor='grey'/>
                     </View>
                     <View style={styles.inputContYear}>
                         <Text style={styles.inputText}>
                             YYYY
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder='2018' underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            placeholder={this.state.year} onChangeText={(t) => this.setState({year:t})} 
+                            underlineColorAndroid='transparent' placeholderTextColor='grey'/>
                     </View>
                     
                 </View>

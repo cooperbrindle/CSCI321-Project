@@ -18,14 +18,11 @@ export default class SignUpFinish extends Component {
     };
 
     componentDidMount(){
-        this.props.firebase = this.props.screenProps;
+        this.props.vultr = this.props.screenProps;
         var emailProp = this.props.navigation.getParam('email', '**error passing email info**');
-        this.setState({email:  emailProp});
-        this.props.constitID = this.props.navigation.getParam('constitID', '');
-        if(this.props.constitID = ''){
-            //TODO: handle blank constitID error
-                //possibly show redirect button back to signupForm
-        }
+        id = this.props.navigation.getParam('id', '');
+        this.setState({email: emailProp, id: id});
+
     }
     
     submitForm() {
@@ -33,24 +30,16 @@ export default class SignUpFinish extends Component {
         this.setState({isLoading: true, errorMessage: ''});
         
         if(this.state.password != this.state.passwordConf){
-            this.setState({isLoading: true, errorMessage: 'Passwords do not match'});
+            this.setState({isLoading: false, errorMessage: 'Passwords do not match'});
         }else{
-            this.props.firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then((user) => {
+            this.props.vultr.registerUser(this.state.email, this.state.password, this.state.id)
+            .then((result) => {
                 /////////////////////////////////////////////////////
                 //////////// TODO: handle if user signs up with different email to alumni RE version
                 /////////////////////////////////////////////////////
                 
-                //create document in appUser linking new user to corresponding contituent
-                /*this.props.firebase.firestore().collection('appUser').doc(user.uid).set({
-                    constituentID: this.props.constitID,
-                    //possibly add date joined and other data
-                }).then(() => {
-                    */this.setState({isLoading: false, errorMessage: ''});    
-                    this.props.navigation.navigate('Home');/* 
-                }).catch((error) =>{
-                    // TODO: is this handled by the outer catch as well????????
-                });*/
+                this.setState({isLoading: false, errorMessage: ''});    
+                this.props.navigation.navigate('HomeDrawer');
             }).catch(error => {
                 this.setState({isLoading: false, errorMessage: error.message});
             });
