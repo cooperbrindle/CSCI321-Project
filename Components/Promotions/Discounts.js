@@ -3,13 +3,10 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
 
-<<<<<<< HEAD
-=======
 import { EventSingle } from '../Events/EventSingleOld';
 import { DashButton } from '../CustomProps/DashButton';
 import { Logo } from './discLogo';
 
->>>>>>> eaaa98dff94b19f5e8951b44fafb97cd42470381
 import Vultrsdk from '../Vultrsdk';
 
 

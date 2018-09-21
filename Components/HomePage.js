@@ -25,7 +25,7 @@ export default class HomePage extends Component {
 		headerTintColor: 'white',
 		headerRight: (
 			<TouchableHighlight
-				onClick={() => console.log('touched')}
+				onPress={() => console.log('touched')}
 			>
 				<Image source={settingsIcon}
 					style={{resizeMode: 'center', }}
