@@ -96,6 +96,27 @@ export default class Vultr{
             })
         });
     }
+    
+    updatePassword(newPassword) {
+        return new Promise((resolve, reject) => {
+            
+            d = fetch(API_URL + '/auth/updatepassword', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    newPassword: newPassword,
+                    id: this.data.id,
+                })
+            }).then((res) => {
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
 
     submitSignUp(data) {
         return new Promise((resolve, reject) => {
