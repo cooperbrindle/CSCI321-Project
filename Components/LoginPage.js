@@ -5,6 +5,8 @@ import { DefaultButton } from './CustomProps/DefaultButton';
 import { SocialButton } from './CustomProps/SocialButton';
 import { Facebook } from 'expo';
 
+import { baseStyles } from './BaseStyles';
+
 //const FACEBOOK_APP_ID = '1049993008511643';
 
 export default class Login extends React.Component {
@@ -79,7 +81,7 @@ export default class Login extends React.Component {
                 <Logo scale={1}/>
             </View>
             
-            <Text style={styles.errorText}>{this.state.errorMessage}</Text>
+            <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
 
             <View style={styles.inputContainer}>
                 
@@ -90,13 +92,13 @@ export default class Login extends React.Component {
                 
                 <TextInput style={styles.inputBox}
                     placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={(pw) => this.setState({password:pw})} secureTextEntry
+                    onChangeText={(pw) => this.setState({password:pw})} secureTextEntry autoCapitalize='none'
                     value={this.state.password}/>
                 
                 <DefaultButton title='Login' nav={() => this.loginPress()} />
                 <DefaultButton title='Sign Up' nav={() => this.signupPress()} />
                 
-                <View style={styles.activityView}>
+                <View style={baseStyles.activityView}>
                     {actInd}
                 </View>
             </View>

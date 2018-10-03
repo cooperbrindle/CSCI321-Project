@@ -22,6 +22,7 @@ import CareerHub from './Components/Promotions/CareerHub';
 import EventsList from './Components/Events/EventsList';
 import Volunteering from './Components/Promotions/Volunteering';
 import DiscountCard from './Components/Promotions/DiscountCard';
+import PasswordForm from './Components/UpdateDetails/PasswordForm'
 
 import Vultrsdk from './Components/Vultrsdk';
 
@@ -54,7 +55,7 @@ const navStack = createStackNavigator({
 
 const drawerNav = createDrawerNavigator({
 	//Routes
-	Password: { screen: navStack },
+	Password: { screen: PasswordForm },
 	FAQ: { screen: navStack },
 	Home: { screen: navStack },
 },{ //options

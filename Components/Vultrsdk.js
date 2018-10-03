@@ -97,7 +97,7 @@ export default class Vultr{
         });
     }
     
-    updatePassword(newPassword) {
+    updatePassword(newPassword, oldPassword) {
         return new Promise((resolve, reject) => {
             
             d = fetch(API_URL + '/auth/updatepassword', {
@@ -107,10 +107,16 @@ export default class Vultr{
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    oldPassword: oldPassword,
                     newPassword: newPassword,
                     id: this.data.id,
                 })
+            }).then((result) => {
+                if(!result.ok) reject('SERVER ERROR');
+                else return result.json();
             }).then((res) => {
+                if(res.error && res.error != '')
+                    reject(res.error);
                 resolve();
             }).catch((error) => {
                 reject(error);

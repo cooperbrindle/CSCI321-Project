@@ -12,7 +12,6 @@ dbconn.connect((err) => {
 });
 dbconn.query('use alumniapp', (err, result, fields) => {
 	if(err) throw err;
-	else console.log(result);
 }); 
 
 module.exports = dbconn;

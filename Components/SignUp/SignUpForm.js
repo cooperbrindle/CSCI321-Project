@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, Alert, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
 import { styles } from '../FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
-
+import { baseStyles } from '../BaseStyles';
 
 export default class SignUpForm extends Component {
 	/*static navigationOptions = {
@@ -114,11 +114,11 @@ export default class SignUpForm extends Component {
                     Please fill out as many fields as possible
                 </Text>
 
-                <Text style={stylesA.errorText}>
+                <Text style={baseStyles.errorText}>
                     {this.state.errorMessage}
                 </Text>
 
-                <View style={stylesA.activityView}>
+                <View style={baseStyles.activityView}>
                     {actInd}
                 </View>
 
@@ -171,12 +171,5 @@ export default class SignUpForm extends Component {
        
         topPadding: {
             flex: 0.1,
-        },
-        errorText: {
-            color: 'red',
-        },
-        activityView: {
-            justifyContent: 'center',
-            alignContent: 'center',
         },
     });

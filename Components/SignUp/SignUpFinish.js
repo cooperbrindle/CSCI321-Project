@@ -5,7 +5,7 @@ import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighl
 import { styles } from '../FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { Logo } from '../CustomProps/Logo.js';
-
+import { baseStyles } from '../BaseStyles';
 
 export default class SignUpFinish extends Component {
 	
@@ -82,11 +82,11 @@ export default class SignUpFinish extends Component {
                     Finalise Sign Up
                 </Text>
 
-                <Text style={stylesA.errorText}>
+                <Text style={baseStyles.errorText}>
                     {this.state.errorMessage}
                 </Text>
 
-                <View style={stylesA.activityView}>
+                <View style={baseStyles.activityView}>
                     {actInd}
                 </View>
                 <ScrollView>
@@ -106,14 +106,6 @@ export default class SignUpFinish extends Component {
     };
     
     const stylesA = StyleSheet.create({
-       
-       errorText: {color: 'red',},
-
-        activityView: {
-            justifyContent: 'center',
-            alignContent: 'center',
-        },
-
         logoCont: {
             flex: 0.5,
             marginTop: 50,

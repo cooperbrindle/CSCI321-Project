@@ -61,19 +61,26 @@ router.post('/updatepassword', (req, res) => {
 	if(!req.body.newPassword || typeof req.body.newPassword != "string")
 		res.status(400).send("400 Bad Request");
 
-	//TODO: do some password validation
-
-	//TODO: hash password
-	hash = req.body.newPassword;
+	
 	errorMsg = '';
-    
-	dbconn.query('UPDATE APPUSER SET passHash = \'' + hash + '\' WHERE id = \'' + req.body.id + '\'', (err, result) => {
-		
+	//TODO: do some password validation
+	dbconn.query('SELECT passHash FROM APPUSER WHERE id = \'' + req.body.id + '\'', (err, result) => {
 		if(err) throw err;
-		
-		//TODO: check errorMsg when it's set outside the query
-		res.json({error: errorMsg});
+		if(result[0].passHash != req.body.oldPassword){
+			res.json({error: 'Old password does not match'});
+			return;
+		}
+		//TODO: change to bcrypt.compare
+		//TODO: hash password
+		dbconn.query('UPDATE APPUSER SET passHash = \'' + req.body.newPassword + '\' WHERE id = \'' + req.body.id + '\'', (err, result) => {
+			
+			if(err) throw err;
+			
+			//TODO: check errorMsg when it's set outside the query
+			res.json({error: errorMsg});
+		});
 	});
+    
 	}catch(err){
 		log('ERROR: ' + err);
 	}

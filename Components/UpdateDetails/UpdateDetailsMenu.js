@@ -5,7 +5,7 @@ import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, Touchabl
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { DashButton } from '../CustomProps/DashButton';
 import { SocialButton } from '../CustomProps/SocialButton';
-
+import { baseStyles } from '../BaseStyles';
 
 const accountIcon = require('../assets/Account.png');
 const contactIcon = require('../assets/Contact.png');
