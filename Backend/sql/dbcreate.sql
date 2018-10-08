@@ -9,8 +9,8 @@
 CREATE TABLE CONSTITUENT(
     id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
     stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
-    birthDate   VARCHAR(10)     NOT NULL, /* Date of Birth */
-    title       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
+    birthDate   VARCHAR(10)     NULL, /* Date of Birth */
+    title       VARCHAR(10)     NULL, /* Title ie Mr Miss */
     firstName   VARCHAR(36)     NULL, /* First Name */
     nickname    VARCHAR(36)     NULL, /* Nickname */
     middleName  VARCHAR(36)     NULL, /* Middle Name */
@@ -18,17 +18,21 @@ CREATE TABLE CONSTITUENT(
     maidenName  VARCHAR(64)     NULL, /* Maiden Name */
     orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
     position    VARCHAR(256)    NULL, /* Position Name */
-    address     VARCHAR(256)    NOT NULL, /* Home Address */
-    suburb      VARCHAR(256)    NOT NULL, /* Home Suburb */
-    state       VARCHAR(256)    NOT NULL, /* Home State */
+    address     VARCHAR(256)    NULL, /* Home Address */
+    suburb      VARCHAR(256)    NULL, /* Home Suburb */
+    state       VARCHAR(256)    NULL, /* Home State */
     county      VARCHAR(256)    NULL, /* Home County */
-    postcode    VARCHAR(256)    NOT NULL, /* Home Postcode */
-    country     VARCHAR(256)    NOT NULL, /* Home Country */
-    email       VARCHAR(256)    NOT NULL, /* Preferred Email */
-    emailOther  VARCHAR(256)    NOT NULL, /* Other Email */
-    linkedIn    VARCHAR(256)    NOT NULL, /* LinkedIn URL */
-    mobile      VARCHAR(256)    NOT NULL, /* Mobile Number */
-    other       VARCHAR(256)    NOT NULL, /* Unknown */
+    postcode    VARCHAR(256)    NULL, /* Home Postcode */
+    country     VARCHAR(256)    NULL, /* Home Country */
+    email       VARCHAR(256)    NULL, /* Preferred Email */
+    emailOther  VARCHAR(256)    NULL, /* Other Email */
+    linkedIn    VARCHAR(256)    NULL, /* LinkedIn URL */
+    mobile      VARCHAR(256)    NULL, /* Mobile Number */
+    postSub     VARCHAR(10)     NOT NULL, /* Option to Recieve Postal Communications */
+    mobileSub   VARCHAR(10)     NOT NULL, /* Option to Recieve Mobile Communications */
+    emailSub    VARCHAR(10)     NOT NULL, /* Option to Recieve Email Communications */
+    promotions  VARCHAR(10)     NOT NULL, /* Option to Recieve Promotional Communications */
+    outlook     VARCHAR(10)     NOT NULL, /* Outlook Magazine Subscription */
 
     CONSTRAINT CONSTITUENTEXPORT_pkey PRIMARY KEY (id),
     CONSTRAINT CONSTITUENTEXPORT_uni UNIQUE (stdNum));
@@ -37,8 +41,8 @@ CREATE TABLE CONSTITUENT(
 CREATE TABLE CONSTITUENTEXPORT(
     id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
     stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
-    birthDate   VARCHAR(10)     NOT NULL, /* Date of Birth */
-    title       VARCHAR(10)     NOT NULL, /* Title ie Mr Miss */
+    birthDate   VARCHAR(10)     NULL, /* Date of Birth */
+    title       VARCHAR(10)     NULL, /* Title ie Mr Miss */
     firstName   VARCHAR(36)     NULL, /* First Name */
     nickname    VARCHAR(36)     NULL, /* Nickname */
     middleName  VARCHAR(36)     NULL, /* Middle Name */
@@ -46,17 +50,22 @@ CREATE TABLE CONSTITUENTEXPORT(
     maidenName  VARCHAR(64)     NULL, /* Maiden Name */
     orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
     position    VARCHAR(256)    NULL, /* Position Name */
-    address     VARCHAR(256)    NOT NULL, /* Home Address */
-    suburb      VARCHAR(256)    NOT NULL, /* Home Suburb */
-    state       VARCHAR(256)    NOT NULL, /* Home State */
+    address     VARCHAR(256)    NULL, /* Home Address */
+    suburb      VARCHAR(256)    NULL, /* Home Suburb */
+    state       VARCHAR(256)    NULL, /* Home State */
     county      VARCHAR(256)    NULL, /* Home County */
-    postcode    VARCHAR(256)    NOT NULL, /* Home Postcode */
-    country     VARCHAR(256)    NOT NULL, /* Home Country */
-    email       VARCHAR(256)    NOT NULL, /* Preferred Email */
-    emailOther  VARCHAR(256)    NOT NULL, /* Other Email */
-    linkedIn    VARCHAR(256)    NOT NULL, /* LinkedIn URL */
-    mobile      VARCHAR(256)    NOT NULL, /* Mobile Number */
-    other       VARCHAR(256)    NOT NULL, /* Unknown */
+    postcode    VARCHAR(256)    NULL, /* Home Postcode */
+    country     VARCHAR(256)    NULL, /* Home Country */
+    email       VARCHAR(256)    NULL, /* Preferred Email */
+    emailOther  VARCHAR(256)    NULL, /* Other Email */
+    linkedIn    VARCHAR(256)    NULL, /* LinkedIn URL */
+    mobile      VARCHAR(256)    NULL, /* Mobile Number */
+    other       VARCHAR(256)    NULL, /* Unknown */
+    postSub     VARCHAR(10)     NOT NULL, /* Option to Recieve Postal Communications */
+    mobileSub   VARCHAR(10)     NOT NULL, /* Option to Recieve Mobile Communications */
+    emailSub    VARCHAR(10)     NOT NULL, /* Option to Recieve Email Communications */
+    promotions  VARCHAR(10)     NOT NULL, /* Option to Recieve Promotional Communications */
+    outlook     VARCHAR(10)     NOT NULL, /* Outlook Magazine Subscription */
 
     CONSTRAINT CONSTITUENTEXPORT_pkey PRIMARY KEY (id),
     CONSTRAINT CONSTITUENTEXPORT_uni UNIQUE (stdNum));
