@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 
 import LoginPage from './Components/LoginPage';
+import Logout from './Components/Logout';
 import HomePage from './Components/HomePage';
 import SignUpForm from './Components/SignUp/SignUpForm';
 import SignUpFinish from './Components/SignUp/SignUpFinish';
@@ -61,9 +62,10 @@ const navStack = createStackNavigator({
 
 const drawerNav = createDrawerNavigator({
 	//Routes
+	Home: { screen: navStack },
 	Password: { screen: PasswordForm },
 	FAQ: { screen: navStack },
-	Home: { screen: navStack },
+	Logout: { screen: Logout },
 },{ //options
 	initialRouteName: 'Home',
 	drawerPosition: 'right',

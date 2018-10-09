@@ -21,8 +21,9 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
 /* Load Users */
-INSERT INTO APPUSER VALUES ('129062', 'sclaypole', 'password');
-INSERT INTO APPUSER VALUES ('165537', 'ewarren', 'password');
+INSERT INTO APPUSER VALUES ('129062', 'sclaypole', '$2a$10$8gLwf/ij/bd.7ah2MNu4Qe1UnZqG6qqN3gQjI7nWt1VvuMGRAZHi.');
+INSERT INTO APPUSER VALUES ('165537', 'ewarren', '$2a$10$5aHmX14Q7qXxPbuycGtLpeVoZTbUoMANk/avTVZOh1dCIenlYkT1u');
+                                                  
 /* Load Discounts */
 INSERT INTO DISCOUNTS VALUES ('unibar', 'uow', 'UNIBAR', 'card', 'Purchase event tickets at student prices!', 'https://unibar.uow.edu.au/content/groups/webasset/@web/documents/siteelement/img_unibar_logo.png');
 INSERT INTO DISCOUNTS VALUES ('studperf', 'uow', 'Student Performances', 'card', 'Discounted tickets to all theatre productions!', 'https://lha.uow.edu.au/content/groups/public/@web/@lha/@taem/documents/mm/uow222855.jpg');

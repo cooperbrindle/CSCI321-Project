@@ -9,7 +9,7 @@ export default class Vultr{
         this.data = null;
         this.username = '';
 
-        try{ this.token = await AsyncStorage.getItem('token');}
+        try{ this.token = AsyncStorage.getItem('token');}
         catch(err){console.log(err); this.token = null};
 
     }

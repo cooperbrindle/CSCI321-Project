@@ -62,7 +62,7 @@ export default class SignUpFinish extends Component {
                 </Text>
                 <TextInput style={styles.inputBox}
                     placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={stateValue} secureTextEntry={isSecure}
+                    onChangeText={stateValue} secureTextEntry={isSecure} autoCapitalize='none'
                 />
             </View>
 		);
