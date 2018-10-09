@@ -104,7 +104,7 @@ export default class EventSingle extends Component {
 					{this.renderPic()}
 					{this.renderInfo()}
 				<View style={styles.submitBtnCont}>
-                    <DefaultButton title='Register' nav={() => this.props.navigation.navigate('')} />
+                    <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego')} />
                 </View>
 			</View>
 		);

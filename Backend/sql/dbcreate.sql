@@ -136,3 +136,35 @@ CREATE TABLE APPUSER(
     CONSTRAINT APPUSER_uni UNIQUE (username),
     CONSTRAINT USER_fkey1 FOREIGN KEY (id)
         REFERENCES CONSTITUENT (id) );
+
+CREATE TABLE EVENTCONSTITUENT(
+    eventname   VARCHAR(256)    NOT NULL, /* Event Name */   
+    id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    title       VARCHAR(10)     NULL, /* Title ie Mr Miss */
+    firstName   VARCHAR(36)     NULL, /* First Name */
+    lastName    VARCHAR(64)     NOT NULL, /* Last Name/s */
+    orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
+    position    VARCHAR(256)    NULL, /* Position Name */
+    dietary     VARCHAR(256)    NULL,  /* Dietary Requirements */
+    mobility    VARCHAR(256)    NULL, /* Mobility Needs */
+    CONSTRAINT EVENTGUEST_pkey PRIMARY KEY (id, eventname, firstName, lastName),
+    CONSTRAINT EVENTGUEST_fkey1 FOREIGN KEY (id)
+        REFERENCES CONSTITUENT (id),
+    CONSTRAINT EVENTGUEST_fkey2 FOREIGN KEY (eventname)
+        REFERENCES EVENTS (eventname));
+
+CREATE TABLE EVENTGUEST(
+    eventname   VARCHAR(256)    NOT NULL, /* Event Name */   
+    id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    title       VARCHAR(10)     NULL, /* Title ie Mr Miss */
+    firstName   VARCHAR(36)     NULL, /* First Name */
+    lastName    VARCHAR(64)     NOT NULL, /* Last Name/s */
+    orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
+    position    VARCHAR(256)    NULL, /* Position Name */
+    dietary     VARCHAR(256)    NULL,  /* Dietary Requirements */
+    mobility    VARCHAR(256)    NULL, /* Mobility Needs */
+    CONSTRAINT EVENTGUEST_pkey PRIMARY KEY (id, eventname, firstName, lastName),
+    CONSTRAINT EVENTGUEST_fkey1 FOREIGN KEY (id)
+        REFERENCES CONSTITUENT (id),
+    CONSTRAINT EVENTGUEST_fkey2 FOREIGN KEY (eventname)
+        REFERENCES EVENTS (eventname));
