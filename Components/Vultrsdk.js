@@ -96,6 +96,27 @@ export default class Vultr{
             })
         });
     }
+
+    libraryReq(data) {
+        return new Promise((resolve, reject) => {
+            
+            d = fetch(API_URL + '/user/libraryreq', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: data
+                })
+            }).then((res) => {
+                this.data = data;
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
     
     updatePassword(newPassword, oldPassword) {
         return new Promise((resolve, reject) => {

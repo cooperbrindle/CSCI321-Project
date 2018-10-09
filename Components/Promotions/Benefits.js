@@ -22,6 +22,42 @@ export default class BenefitsMenu extends Component {
 			fontWeight: 'bold',
 		},
 	}
+
+	state = {
+		vultr: this.props.screenProps,
+		isLoading: true,
+		didLoad: false,
+		errorMessage: '',
+		successMessage: '',
+	};
+	
+	
+	componentWillMount(){
+		try{
+		
+		var vultr = this.props.screenProps;
+		this.setState({vultr: this.props.screenProps});
+		vultr.loadConstituent()
+		.then(() => {
+			const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
+			this.setState({
+				originalData: originalData,
+				data: vultr.data,
+				constituentRefID: vultr.data.id,
+				isLoading: false,
+				didLoad: true,
+			});
+
+		}).catch((err) => {
+			this.setState({
+				isLoading: false,
+				didLoad: false,
+			});
+		})
+
+
+		}catch(err){console.warn('try catch error: ' + err.message);}
+	}
 	renderDashBtnSchol(title){
 		return(
 			<TouchableHighlight style={styles.dashBtnSmall}
@@ -63,8 +99,8 @@ export default class BenefitsMenu extends Component {
 				</View>
 				
 				<View style={styles.dashboard}>
-					<DashButton title='Discounts' img={dashTmp} nav={()=>this.props.navigation.navigate('Discounts')} />
-					<DashButton title='Library Membership' img={dashTmp} nav={()=>this.props.navigation.navigate('LibraryMem')} />
+					<DashButton title='Discounts Program' img={dashTmp} nav={()=>this.props.navigation.navigate('Discounts')} />
+					<DashButton title='Library Membership' img={dashTmp} nav={()=>this.props.navigation.navigate('LibraryMem', {data: this.state.data})} />
 				</View>
 				<View style={styles.dashboard}>
 					<DashButton title='Career Support' img={dashTmp} nav={()=>this.props.navigation.navigate('Careers')} />

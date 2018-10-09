@@ -80,7 +80,7 @@ export default class HomePage extends Component {
 
 				<View style={styles.dashboard}>
 					<DashButton title='Events' img={eventsIcon} nav={()=>this.props.navigation.navigate('EventsList')} />
-					<DashButton title='Promotions' img={promoIcon} nav={()=>this.props.navigation.navigate('Benefits')} />
+					<DashButton title='Benefits' img={promoIcon} nav={()=>this.props.navigation.navigate('Benefits')} />
 				</View>
 
 				<View style={styles.highlightsContainer}>
