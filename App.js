@@ -4,25 +4,28 @@ import React, { Component } from 'react';
 
 import LoginPage from './Components/LoginPage';
 import HomePage from './Components/HomePage';
+import SignUpForm from './Components/SignUp/SignUpForm';
+import SignUpFinish from './Components/SignUp/SignUpFinish';
+import EventsList from './Components/Events/EventsList';
 import EventSingle from './Components/Events/EventSingle';
-import BenefitsMenu from './Components/Promotions/Benefits';
+import OutlookWebPage from './Components/Outlook/OutlookWeb';
 import UpdateDetailsMenu from './Components/UpdateDetails/UpdateDetailsMenu';
 import AccountForm from './Components/UpdateDetails/AccountForm';
 import ContactForm from './Components/UpdateDetails/ContactForm';
+import PasswordForm from './Components/UpdateDetails/PasswordForm';
 import EmploymentForm from './Components/UpdateDetails/EmploymentForm';
 import SubscriptionForm from './Components/UpdateDetails/SubscriptionForm';
-import SignUpForm from './Components/SignUp/SignUpForm';
-import SignUpFinish from './Components/SignUp/SignUpFinish';
-import OutlookWebPage from './Components/Outlook/OutlookWeb';
+import BenefitsMenu from './Components/Promotions/Benefits';
 import LibraryMembership from './Components/Promotions/LibraryMembership';
 import Discounts from './Components/Promotions/Discounts';
 import Scholarships from './Components/Promotions/Scholarships';
 import Careers from './Components/Promotions/Careers';
 import CareerHub from './Components/Promotions/CareerHub';
-import EventsList from './Components/Events/EventsList';
+import FurtherStudy from './Components/Promotions/FurtherStudy';
 import Volunteering from './Components/Promotions/Volunteering';
+import Mentoring from './Components/Promotions/Mentoring';
+import Networking from './Components/Promotions/Networking';
 import DiscountCard from './Components/Promotions/DiscountCard';
-import PasswordForm from './Components/UpdateDetails/PasswordForm'
 
 import Vultrsdk from './Components/Vultrsdk';
 
@@ -49,6 +52,9 @@ const navStack = createStackNavigator({
 	CareerHub: { screen: CareerHub },
 	Volunteering: { screen: Volunteering },
 	DiscountCard: { screen: DiscountCard },
+	FurtherStudy: { screen: FurtherStudy },
+	Mentoring: { screen: Mentoring },
+	Networking: { screen: Networking },
 },{ //options
 	initialRouteName: 'HomePage',
 });

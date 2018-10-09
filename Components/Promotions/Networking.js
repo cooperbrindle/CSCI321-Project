@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import { StyleSheet, View, WebView, ActivityIndicator} from 'react-native';
 
 
-export default class Volunteering extends Component {
+export default class Networking extends Component {
 	
 	static navigationOptions = {
-		title: 'Volunteer Opportunities',
+		title: 'Networks and Groups',
 		headerStyle: {
 			backgroundColor: '#0C2340',
 		},
@@ -32,7 +32,7 @@ export default class Volunteering extends Component {
 			<View style={styles.container}>
                 {actInd}
 				<WebView
-                    source={{uri: 'https://www.uow.edu.au/alumni/benefits/volunteer/index.html'}}
+                    source={{uri: 'https://www.uow.edu.au/alumni/networks/index.html'}}
                     style={styles.webStyle}
                     onLoadEnd={() => this.pageDidLoad()}
                 />

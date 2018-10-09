@@ -6,6 +6,14 @@ import { DashButton } from '../CustomProps/DashButton';
 import { Logo } from '../CustomProps/Logo';
 
 const dashTmp = require('../assets/dashTmp.png');
+const Library = require('../assets/Library.png');
+const Discounts = require('../assets/Discounts.png');
+const Mentoring = require('../assets/Mentoring.png');
+const Volunteering = require('../assets/Volunteering.png');
+const Networking = require('../assets/Networks.png');
+const Study = require('../assets/Study.png');
+const ScholarshipsImg = require('../assets/Scholarships.png');
+const Careers = require('../assets/Careers.png');
 
 export default class BenefitsMenu extends Component {
 	constructor(props){
@@ -22,30 +30,50 @@ export default class BenefitsMenu extends Component {
 			fontWeight: 'bold',
 		},
 	}
-	renderDashBtnSchol(title){
-		return(
-			<TouchableHighlight style={styles.dashBtnSmall}
-					onPress={() => this.props.navigation.navigate('Scholarships')}>
-				<View style={styles.dashBtnContainerSmall}>
-					<Image
-                        style={styles.dashBtnImgSmall}
-                        source={dashTmp}
-                    />
-					<Text style={styles.dashTextSmall}>
-						{title}
-					</Text>
-				</View>
-            </TouchableHighlight>
-		)
+
+	state = {
+		vultr: this.props.screenProps,
+		isLoading: true,
+		didLoad: false,
+		errorMessage: '',
+		successMessage: '',
+	};
+	
+	
+	componentWillMount(){
+		try{
+		
+		var vultr = this.props.screenProps;
+		this.setState({vultr: this.props.screenProps});
+		vultr.loadConstituent()
+		.then(() => {
+			const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
+			this.setState({
+				originalData: originalData,
+				data: vultr.data,
+				constituentRefID: vultr.data.id,
+				isLoading: false,
+				didLoad: true,
+			});
+
+		}).catch((err) => {
+			this.setState({
+				isLoading: false,
+				didLoad: false,
+			});
+		})
+
+
+		}catch(err){console.warn('try catch error: ' + err.message);}
 	}
-	renderdashBtnNA(title){
+	renderdashBtn(title, page, img){
 		return(
 			<TouchableHighlight style={styles.dashBtnSmall}
-					onPress={() => this.props.navigation.navigate('Home')}>
+					onPress={() => this.props.navigation.navigate(page)}>
 				<View style={styles.dashBtnContainerSmall}>
 					<Image
                         style={styles.dashBtnImgSmall}
-                        source={dashTmp}
+                        source={img}
                     />
 					<Text style={styles.dashTextSmall}>
 						{title}
@@ -63,19 +91,19 @@ export default class BenefitsMenu extends Component {
 				</View>
 				
 				<View style={styles.dashboard}>
-					<DashButton title='Discounts' img={dashTmp} nav={()=>this.props.navigation.navigate('Discounts')} />
-					<DashButton title='Library Membership' img={dashTmp} nav={()=>this.props.navigation.navigate('LibraryMem')} />
+					<DashButton title='Discounts Program' img={Discounts} nav={()=>this.props.navigation.navigate('Discounts')} />
+					<DashButton title='Library Membership' img={Library} nav={()=>this.props.navigation.navigate('LibraryMem', {data: this.state.data})} />
 				</View>
 				<View style={styles.dashboard}>
-					<DashButton title='Career Support' img={dashTmp} nav={()=>this.props.navigation.navigate('Careers')} />
-					<DashButton title='Volunteering and Mentoring' img={dashTmp} nav={()=>this.props.navigation.navigate('Volunteering')} />
+					<DashButton title='Career Support' img={Careers} nav={()=>this.props.navigation.navigate('Careers')} />
+					<DashButton title='Networks & Groups' img={Networking} nav={()=>this.props.navigation.navigate('Networking')} />
 				</View>
 
 				<View style={styles.dashboardSmall}>
-					{this.renderDashBtnSchol("Scholarships")}
-					{this.renderdashBtnNA("TBA")}
-					{this.renderdashBtnNA("TBA")}
-					{this.renderdashBtnNA("TBA")}
+					{this.renderdashBtn("Further Study", 'FurtherStudy', Study)}
+					{this.renderdashBtn("Scholarships", 'Scholarships', ScholarshipsImg)}
+					{this.renderdashBtn("Volunteer Opportunities", 'Volunteering', Volunteering)}
+					{this.renderdashBtn("Mentor Opportunities", 'Mentoring', Mentoring)}
 				</View>
 
 			</View>

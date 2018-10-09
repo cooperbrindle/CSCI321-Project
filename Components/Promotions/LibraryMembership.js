@@ -30,27 +30,22 @@ export default class LibraryMembership extends Component {
     
     /////////////////////////////////////
     //
-    setState(){
-        //TODO: Check if already submitted a request?
-        /*
+    componentWillMount(){
         const data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
             console.error('NO DATA PASSED TO ACCOUNT FORM PAGE');
             this.props.navigation.goBack();
         }
-        this.state = {
+        this.setState({
             errorMessage: '',
+            title: data.title,
             firstName: data.firstName,
-            keyName: data.keyName,
+            lastName: data.lastName,
             day: data.birthDate.substr(0,2),
-            month: data.birthDate.substr(2,2),
-            year: data.birthDate.substr(4,4),
-            ssn: data.ssn
-            preferredEmail: '',
-        };*/
-        this.state = {
-            preferredEmail: '',
-        };
+            month: data.birthDate.substr(3,2),
+            year: data.birthDate.substr(6,4),
+            stdNum: data.stdNum
+        });
     }
 
     submit(){
@@ -63,6 +58,23 @@ export default class LibraryMembership extends Component {
             { cancelable: false }
 
         )
+        this.setState({errorMessage: '', isLoading: true});
+		try{
+			var vultr = this.props.screenProps;
+			console.warn('starting submit');
+			vultr.libraryReq(this.state.data)
+			.then(() => {
+				this.setState({errorMessage: '',
+					successMessage: 'Successfully updated',
+					isLoading: false
+				});
+			}).catch(() => {
+				this.setState({errorMessage: 'Error updating libraryMem',
+					successMessage: '',
+					isLoading: false
+				});
+			})
+		}catch(err){console.warn('catch error: '+ err.message);}
         //TODO: submit request
     }
     

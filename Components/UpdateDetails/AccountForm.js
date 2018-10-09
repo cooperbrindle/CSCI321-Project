@@ -65,31 +65,6 @@ export default class AccountForm extends Component {
             this.setState({errorMessage: 'Empty Input'});
             return false;
         }
-
-        ////////////////Date Validation
-        /*try{
-        const ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
-        const day = parseInt(this.state.day);
-        const month = parseInt(this.state.month);
-        const year = parseInt(this.state.year);
-        if(month < 1 || month > 12){
-            this.setState({errorMessage: 'Invalid Date'});
-            return false;
-        }
-        else if(day < 1 || day > ListofDays[month]){
-            this.setState({errorMessage: 'Invalid Date'});
-            return false;
-        }
-        else if(year > Date.getYear()){
-            this.setState({errorMessage: 'Invalid Date'});
-            return false;
-        }
-
-        }catch(err){
-            this.setState({errorMessage: 'Invalid Date'});
-            return false;
-        }*/
-
         return true;
     }
     //
