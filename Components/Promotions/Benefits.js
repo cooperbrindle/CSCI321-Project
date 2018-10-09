@@ -38,34 +38,6 @@ export default class BenefitsMenu extends Component {
 		errorMessage: '',
 		successMessage: '',
 	};
-	
-	
-	componentWillMount(){
-		try{
-		
-		var vultr = this.props.screenProps;
-		this.setState({vultr: this.props.screenProps});
-		vultr.loadConstituent()
-		.then(() => {
-			const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
-			this.setState({
-				originalData: originalData,
-				data: vultr.data,
-				constituentRefID: vultr.data.id,
-				isLoading: false,
-				didLoad: true,
-			});
-
-		}).catch((err) => {
-			this.setState({
-				isLoading: false,
-				didLoad: false,
-			});
-		})
-
-
-		}catch(err){console.warn('try catch error: ' + err.message);}
-	}
 	renderdashBtn(title, page, img){
 		return(
 			<TouchableHighlight style={styles.dashBtnSmall}
