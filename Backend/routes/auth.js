@@ -1,6 +1,7 @@
 var router = require('express').Router();
-var dbconn = require('../sqlConnection');
+var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
+var tokenAuth = require('../lib/tokenAuth');
 var bcrypt = require('bcryptjs');
 
 const saltRounds = 10;
@@ -8,7 +9,7 @@ const saltRounds = 10;
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
-router.post('/login', (req, res) => {
+router.post('/login', async(req, res) => {
 	log(' Request made to: /login');
 
 	try{
@@ -19,8 +20,10 @@ router.post('/login', (req, res) => {
     
     const sentUsername = req.body.username;
 	const sentPassword = req.body.password;
-
-	dbconn.query('SELECT username, passHash FROM APPUSER WHERE username = \'' + sentUsername + '\'', (err, result, fields) => {
+	const qry = 'SELECT username, passHash FROM APPUSER WHERE username = \'' + sentUsername + '\'';
+	
+	//var {err, result} = await queryAsync(qry);
+	dbconn.query(qry, (err, result, fields) => {
 		
 		if(err) throw err;
         if(result.length > 1) throw 'MORE THAN ONE USER FOUND';
@@ -32,16 +35,19 @@ router.post('/login', (req, res) => {
 			res.json({error: 'No user found'});
 			return;
 		}
-		var errorMsg = '';
+		var errorMsg = '', token = '';
 		if(sentPassword != result[0].passHash){
 			console.warn('Incorrect password');
 			errorMsg = 'Incorrect username or password';
 		}else{
 			console.warn('Correct Password');
 			errorMsg = '';
+			token = tokenAuth.createToken({
+				id: result[0].id
+			})
 		}
-		
-		res.json({error: errorMsg});
+
+		res.json({error: errorMsg, token: token});
 	});
 	}catch(err){
 		log('ERROR: ' + err);
@@ -52,40 +58,7 @@ router.post('/login', (req, res) => {
 
 
 
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
-router.post('/updatepassword', (req, res) => {
-	log(' Request made to: /updatepassword ');
 
-	try{
-	if(!req.body.newPassword || typeof req.body.newPassword != "string")
-		res.status(400).send("400 Bad Request");
-
-	
-	errorMsg = '';
-	//TODO: do some password validation
-	dbconn.query('SELECT passHash FROM APPUSER WHERE id = \'' + req.body.id + '\'', (err, result) => {
-		if(err) throw err;
-		if(result[0].passHash != req.body.oldPassword){
-			res.json({error: 'Old password does not match'});
-			return;
-		}
-		//TODO: change to bcrypt.compare
-		//TODO: hash password
-		dbconn.query('UPDATE APPUSER SET passHash = \'' + req.body.newPassword + '\' WHERE id = \'' + req.body.id + '\'', (err, result) => {
-			
-			if(err) throw err;
-			
-			//TODO: check errorMsg when it's set outside the query
-			res.json({error: errorMsg});
-		});
-	});
-    
-	}catch(err){
-		log('ERROR: ' + err);
-	}
-		
-})
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
@@ -193,6 +166,52 @@ router.post('/register', (req, res) => {
 		
 
 	});
+	}catch(err){
+		log('ERROR: ' + err);
+	}
+		
+})
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+router.post('/updatepassword', (req, res) => {
+	log(' Request made to: /updatepassword ');
+
+	try{
+	if(!req.body.newPassword || typeof req.body.newPassword != "string")
+		res.status(400).send("400 Bad Request");
+
+	
+	errorMsg = '';
+	//TODO: do some password validation
+	dbconn.query('SELECT passHash FROM APPUSER WHERE id = \'' + req.body.id + '\'', (err, result) => {
+		if(err) throw err;
+		if(result[0].passHash != req.body.oldPassword){
+			res.json({error: 'Old password does not match'});
+			return;
+		}
+		//TODO: change to bcrypt.compare
+		//TODO: hash password
+		dbconn.query('UPDATE APPUSER SET passHash = \'' + req.body.newPassword + '\' WHERE id = \'' + req.body.id + '\'', (err, result) => {
+			
+			if(err) throw err;
+			
+			//TODO: check errorMsg when it's set outside the query
+			res.json({error: errorMsg});
+		});
+	});
+    
 	}catch(err){
 		log('ERROR: ' + err);
 	}

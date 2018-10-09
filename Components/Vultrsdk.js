@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 
 const API_URL = 'http://149.28.172.13';
 
@@ -7,26 +8,17 @@ export default class Vultr{
         this.token = null;
         this.data = null;
         this.username = '';
+
+        /*try{ this.token = await AsyncStorage.getItem('token');}
+        catch(err){console.log(err); this.token = null};*/
+
     }
 
     loadConstituent(){
+        console.log('loading constit');
         return new Promise((resolve, reject) => {
-        
-            data = fetch(API_URL + '/user/loadconstituent', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: this.username
-                })
-
-            }).then((result) => {
-                if(!result.ok) reject('SERVER ERROR');
-                else return result.json();
-            
-            }).then((res) => {
+            this.makeAuthRequest('/user/loadconstituent', 'POST', {username: this.username}
+            ).then((res) => {
                 this.data = res[0];
                 console.log(res[0]);
                 resolve();
@@ -39,27 +31,20 @@ export default class Vultr{
     signInWithEmailPassword(username, password) {
         this.username = username;
         return new Promise((resolve, reject) => {
-        
-            data = fetch(API_URL + '/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
+            this.makeRequest('/auth/login', 'POST', {
                     username: username,
                     password: password
-                })
-            
-            }).then((result) => {
-                if(!result.ok) reject('SERVER ERROR');
-                else return result.json();
-            
-            }).then((res) => {
+                }
+            ).then((res) => {
+                console.log(res.token);
+                if(res.error) console.log('kk');
                 if(res.error && res.error != '')
-                reject(res.error);
+                    reject(res.error);
                 else{
                     //LOGIN WORKED
+                    //console.log(worked);
+                    //this.saveToken(res.token);
+                    this.token = res.token;
                     this.loadConstituent()
                     .then(() => {
                         resolve();
@@ -78,17 +63,9 @@ export default class Vultr{
 
     updateDetails(data) {
         return new Promise((resolve, reject) => {
-            
-            d = fetch(API_URL + '/user/updatedetails', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data: data
-                })
-            }).then((res) => {
+            this.makeAuthRequest('/user/updatedetails', 'POST',
+                {data: data}
+            ).then((res) => {
                 this.data = data;
                 resolve();
             }).catch((error) => {
@@ -99,22 +76,13 @@ export default class Vultr{
     
     updatePassword(newPassword, oldPassword) {
         return new Promise((resolve, reject) => {
-            
-            d = fetch(API_URL + '/auth/updatepassword', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
+            this.makeAuthRequest('/auth/updatepassword', 'POST',
+                {
                     oldPassword: oldPassword,
                     newPassword: newPassword,
                     id: this.data.id,
-                })
-            }).then((result) => {
-                if(!result.ok) reject('SERVER ERROR');
-                else return result.json();
-            }).then((res) => {
+                }
+            ).then((res) => {
                 if(res.error && res.error != '')
                     reject(res.error);
                 resolve();
@@ -126,23 +94,11 @@ export default class Vultr{
 
     submitSignUp(data) {
         return new Promise((resolve, reject) => {
-            
-            d = fetch(API_URL + '/auth/signUp', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data: data
-                })
-            }).then((result) => {
-                if(!result.ok) reject('SERVER ERROR');
-                else return result.json();
-            }).then((res) => {
+            this.makeRequest('/auth/signUp', 'POST',
+                {data: data}
+            ).then((res) => {
                 if(res.error && res.error != '')
                     reject(res.error);
-                
                 resolve(res.data);
             }).catch((error) => {
                 reject(error);
@@ -152,22 +108,13 @@ export default class Vultr{
 
     registerUser(email, password, id){
         return new Promise((resolve, reject) => {
-            
-            d = fetch(API_URL + '/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
+            this.makeRequest('/auth/register', 'POST',
+                {
                     email: email,
                     password: password,
                     id: id,
-                })
-            }).then((result) => {
-                if(!result.ok) reject('SERVER ERROR');
-                else return result.json();
-            }).then((res) => {
+                }
+            ).then((res) => {
                 if(res.error && res.error != '')
                     reject(res.error);
                 this.signInWithEmailPassword(email, password)
@@ -182,17 +129,9 @@ export default class Vultr{
 
     static getDiscounts(category) {
         return new Promise((resolve, reject) => {
-            
-            data = fetch(API_URL + '/promotions/discounts', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    category: category
-                })
-            }).then((res) => {
+            this.makeRequest('/promotions/discounts', 'POST',
+                { category: category }
+            ).then((res) => {
                 resolve(res.json());
             }).catch((error) => {
                 reject(error);
@@ -203,22 +142,58 @@ export default class Vultr{
 
     static getEvents(category) {
         return new Promise((resolve, reject) => {
-            
-            data = fetch(API_URL + '/events/eventslist', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    category: category
-                })
-            }).then((res) => {
+            this.makeRequest('/events/eventslist', 'POST',
+                { category: category}
+            ).then((res) => {
                 resolve(res.json());
             }).catch((error) => {
                 reject(error);
             })
         });
+    }
+
+    makeAuthRequest(url, method, body){
+        return new Promise((resolve, reject) => {
+            data = fetch(API_URL + url, {
+                method: method,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': this.token
+                },
+                body: JSON.stringify(body)
+            }).then((result) => {
+                if(!result.ok) reject('SERVER ERROR');
+                else resolve(result.json());
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
+
+    makeRequest(url, method, body){
+        return new Promise((resolve, reject) => {
+            data = fetch(API_URL + url, {
+                method: method,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body)
+            }).then((result) => {
+                if(!result.ok){reject('SERVER ERROR');}
+                else resolve(result.json());
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
+
+    saveToken(token){
+        this.token = token;
+        try{
+            AsyncStorage.setItem('token', token);
+        }catch(err){console.log('ERROR SAVING TOKEN: '+err)}
     }
 };
 

@@ -1,7 +1,7 @@
 const log = require('./lib/log').log;
 const express = require('express');
 const bodyParser = require('body-parser');
-var dbconn = require('./sqlConnection');
+var dbconn = require('./lib/sqlConnection');
 const app = express();
 
 app.use(bodyParser.json());

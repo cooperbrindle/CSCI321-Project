@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var dbconn = require('../sqlConnection');
+var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
 
 
