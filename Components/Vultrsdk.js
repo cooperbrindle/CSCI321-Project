@@ -9,7 +9,7 @@ export default class Vultr{
         this.data = null;
         this.username = '';
 
-        try{ this.token = await AsyncStorage.getItem('token');}
+        try{ this.token = AsyncStorage.getItem('token');}
         catch(err){console.log(err); this.token = null};
 
     }
@@ -72,20 +72,16 @@ export default class Vultr{
         });
     }
 
-    libraryReq(data) {
+    libraryReq() {
+        console.log(this.data.id);
         return new Promise((resolve, reject) => {
-            
-            d = fetch(API_URL + '/user/libraryreq', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    data: data
-                })
-            }).then((res) => {
-                this.data = data;
+            this.makeAuthRequest('/user/libraryReq', 'POST',
+                {
+                    id: this.data.id,
+                    stdNum: this.data.stdNum,
+                    email: this.data.email,
+                }
+            ).then(() => {
                 resolve();
             }).catch((error) => {
                 reject(error);

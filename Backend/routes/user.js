@@ -99,33 +99,23 @@ router.post('/loadconstituent', (req, res) => {
 router.post('/libraryreq', (req, res) => {
     
     log(' Request made to: /libraryreq');
-	try{
-        if(!req.body.data || typeof req.body.username != "string")
-            res.status(400).send("400 Bad Request");
-            
-        var data = req.body.data;
+	try{            
+        var data = req.body;
         console.log(data);
         
         //check ctx row exists and drop
-        //dbconn.query('SELECT id FROM CONSTITUENTEXPORT WHERE id = \'' + data.id + '\'', (err, result) => {
-        //    if(err) return;
-        //    if(result.length > 0){
-        //        console.warn('DELETING FROM CTX');
-                dbconn.query('DELETE FROM LIBRARYMEM WHERE id = \'' + data.id + '\'', (err, result) => {
+                dbconn.query('DELETE FROM LIBRARYMEMEXPORT WHERE id = \'' + data.id + '\'', (err, result) => {
                     
                     console.warn('Okey Dokey');
                     //insert new row
-                    dbconn.query('INSERT INTO CONSTITUENTEXPORT SET ?', data, (err, result) => {
+                    dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
                         if(err) throw err;
-                        log('Updated constituent ' + data.id);
+                        log('Updated libraryexport ' + data.email);
                     });
 
                 });
         //    }
         //});
-        
-
-        
 	}catch(err){
 		log('ERROR: ' + err);
 	}

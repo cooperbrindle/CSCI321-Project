@@ -30,46 +30,24 @@ export default class LibraryMembership extends Component {
     
     /////////////////////////////////////
     //
-	componentWillMount(){
-		try{
-		
-		var vultr = this.props.screenProps;
-		this.setState({vultr: this.props.screenProps});
-		vultr.loadConstituent()
-		.then(() => {
-			this.setState({
-				data: vultr.data,
-				constituentRefID: vultr.data.id,
-				isLoading: false,
-				didLoad: true,
-			});
-
-		}).catch((err) => {
-			this.setState({
-				isLoading: false,
-				didLoad: false,
-			});
-        })
-    }catch(err){console.warn('try catch error: ' + err.message);}
-}
-
     submit(){
         this.setState({errorMessage: '', isLoading: true});
-            try{
-                var vultr = this.props.screenProps;
-                console.warn('starting submit');
-                vultr.libraryReq(this.state.data)
-                .then(() => {
-                    this.setState({errorMessage: '',
-                        successMessage: 'Successfully updated',
-                        isLoading: false
-                    });
-                }).catch(() => {
-                    this.setState({errorMessage: 'Error updating libraryMem',
-                        successMessage: '',
-                        isLoading: false
-                    });
-                })
+        try{
+            var vultr = this.props.screenProps;
+            console.warn('starting submit');
+            vultr.libraryReq()
+            .then(() => {
+                this.setState({errorMessage: '',
+                    successMessage: 'Successfully updated',
+                    isLoading: false
+                });
+            }).catch(() => {
+                this.setState({errorMessage: 'Error updating libraryMem',
+                    successMessage: '',
+                    isLoading: false
+                });
+            })
+        }catch(err){console.warn('catch error: '+ err.message);}
         Alert.alert(
             'Submitted',
             blurbEnd,
@@ -78,8 +56,6 @@ export default class LibraryMembership extends Component {
             ],
             { cancelable: false }
         )
-
-		}catch(err){console.warn('catch error: '+ err.message);}
         //TODO: submit request
     }
     
