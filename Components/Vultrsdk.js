@@ -1,4 +1,4 @@
-import { AsyncStorage, Alert } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 const API_URL = 'http://149.28.172.13';
 
@@ -9,8 +9,8 @@ export default class Vultr{
         this.data = null;
         this.username = '';
 
-        /*try{ this.token = await AsyncStorage.getItem('token');}
-        catch(err){console.log(err); this.token = null};*/
+        try{ this.token = await AsyncStorage.getItem('token');}
+        catch(err){console.log(err); this.token = null};
 
     }
 
@@ -42,10 +42,7 @@ export default class Vultr{
                 if(res.error && res.error != '')
                     reject(res.error);
                 else{
-                    //LOGIN WORKED
-                    //console.log(worked);
-                    //this.saveToken(res.token);
-                    this.token = res.token;
+                    this.saveToken(res.token);
                     this.loadConstituent()
                     .then(() => {
                         resolve();
@@ -188,9 +185,11 @@ export default class Vultr{
                 if(!result.ok) reject('SERVER ERROR');
                 else return(result.json());
             }).then((result) => {
-                console.log('ERROR: ' + result.error);
+                //console.log('ERROR: ' + result.error);
                 if(result.error && result.error == 'TokenExpiredError'){
-                    console.log('EXPIRED!')
+                    console.log('EXPIRED!');
+                    this.logout();
+                    reject(result.error)
                 }else resolve(result);
             }).catch((error) => {
                 reject(error);
@@ -220,7 +219,14 @@ export default class Vultr{
         this.token = token;
         try{
             AsyncStorage.setItem('token', token);
-        }catch(err){console.log('ERROR SAVING TOKEN: '+err)}
+        }catch(err){console.log('ERROR SAVING TOKEN: ' + err)}
+    }
+
+    logout(){
+        this.token = null;
+        try{
+            AsyncStorage.removeItem('token');
+        }catch(err){console.log('ERROR REMOVING TOKEN: ' + err)}
     }
 };
 

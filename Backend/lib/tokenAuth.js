@@ -5,18 +5,18 @@ const config = require('../config');
 
 exports.createToken = (payload) => {
     var token = jwt.sign(payload, config.tokenSecret, { 
-                        expiresIn: config.defaultTokenExpiry,
+                        //expiresIn: config.defaultTokenExpiry,
                         issuer: config.issuer,
                     });
-    console.log(token);
+    //console.log(token);
     return token;
 }
 
 exports.verifyToken = async(token) => {
-    console.log('verifying...');
+    //console.log('verifying...');
     try{
     var decoded = await jwt.verify(token, config.tokenSecret, {issuer: config.issuer})
-        console.log('verified');
+        //console.log('verified');
         return '';
     }catch(err){
         console.log(err.name + ':\n\n' + err.message);
@@ -31,7 +31,7 @@ exports.checkRequestToken = async(req, res, next) => {
 	if (token) {
         var err = await this.verifyToken(token);
 		if(err && err != ''){
-            console.log(err);
+            //console.log(err);
 			res.json({error: err});
         }else next();
 	} else {
