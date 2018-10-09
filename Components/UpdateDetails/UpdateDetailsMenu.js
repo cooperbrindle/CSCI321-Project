@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, Button, FlatList, View, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Alert} from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { DashButton } from '../CustomProps/DashButton';
 import { SocialButton } from '../CustomProps/SocialButton';
@@ -86,13 +86,20 @@ export default class UpdateDetailsMenu extends Component {
 		this.setState({errorMessage: '', isLoading: true});
 		try{
 			var vultr = this.props.screenProps;
-			console.warn('starting update');
 			vultr.updateDetails(this.state.data)
 			.then(() => {
 				this.setState({errorMessage: '',
-					successMessage: 'Successfully updated',
+					successMessage: '',
 					isLoading: false
 				});
+				Alert.alert(
+					'Success!',
+					'Successfully updated',
+					[
+						{text: 'OK', onPress: () => this.props.navigation.navigate('HomePage')},
+					],
+					{ cancelable: false }
+				)
 			}).catch(() => {
 				this.setState({errorMessage: 'Error updating details',
 					successMessage: '',

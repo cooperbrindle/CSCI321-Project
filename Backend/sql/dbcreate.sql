@@ -34,8 +34,8 @@ CREATE TABLE CONSTITUENT(
     promotions  VARCHAR(10)     NOT NULL, /* Option to Recieve Promotional Communications */
     outlook     VARCHAR(10)     NOT NULL, /* Outlook Magazine Subscription */
 
-    CONSTRAINT CONSTITUENTEXPORT_pkey PRIMARY KEY (id),
-    CONSTRAINT CONSTITUENTEXPORT_uni UNIQUE (stdNum));
+    CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (id),
+    CONSTRAINT CONSTITUENT_uni UNIQUE (stdNum));
 
 
 CREATE TABLE CONSTITUENTEXPORT(
