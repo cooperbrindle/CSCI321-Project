@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Alert } from 'react-native';
 
 const API_URL = 'http://149.28.172.13';
 
@@ -23,6 +23,7 @@ export default class Vultr{
                 console.log(res[0]);
                 resolve();
             }).catch((error) => {
+                console.log('top err" ' + error);
                 reject(error);
             })
         });
@@ -148,12 +149,12 @@ export default class Vultr{
         });
     }
 
-    static getDiscounts(category) {
+    getDiscounts(category) {
         return new Promise((resolve, reject) => {
             this.makeRequest('/promotions/discounts', 'POST',
                 { category: category }
             ).then((res) => {
-                resolve(res.json());
+                resolve(res);
             }).catch((error) => {
                 reject(error);
             })
@@ -161,12 +162,12 @@ export default class Vultr{
     }
 
 
-    static getEvents(category) {
+    getEvents(category) {
         return new Promise((resolve, reject) => {
             this.makeRequest('/events/eventslist', 'POST',
                 { category: category}
             ).then((res) => {
-                resolve(res.json());
+                resolve(res);
             }).catch((error) => {
                 reject(error);
             })
@@ -185,7 +186,12 @@ export default class Vultr{
                 body: JSON.stringify(body)
             }).then((result) => {
                 if(!result.ok) reject('SERVER ERROR');
-                else resolve(result.json());
+                else return(result.json());
+            }).then((result) => {
+                console.log('ERROR: ' + result.error);
+                if(result.error && result.error == 'TokenExpiredError'){
+                    console.log('EXPIRED!')
+                }else resolve(result);
             }).catch((error) => {
                 reject(error);
             })

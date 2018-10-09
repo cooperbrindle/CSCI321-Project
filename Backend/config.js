@@ -1,5 +1,5 @@
 module.exports = {
     tokenSecret: 'alumniApp',
-    defaultTokenExpiry: '1d',
+    defaultTokenExpiry: '5s',
     issuer: 'UOWAlumni',
 }

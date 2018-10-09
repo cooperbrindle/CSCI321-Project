@@ -28,7 +28,7 @@ export default class Discounts extends Component {
     }
     
     componentDidMount(){ 
-        Vultrsdk.getDiscounts('category')
+        this.props.screenProps.getDiscounts('category')
         .then((res) => {
             this.setState({data: res, isLoading: false, errorMessage: ''});
 

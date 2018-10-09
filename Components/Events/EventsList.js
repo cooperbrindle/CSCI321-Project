@@ -27,7 +27,7 @@ export default class EventsList extends Component {
     }
     
     componentDidMount(){ 
-        Vultrsdk.getEvents('events')
+        this.props.screenProps.getEvents('events')
         .then((res) => {
             this.setState({data: res, isLoading: false, errorMessage: ''});
 
