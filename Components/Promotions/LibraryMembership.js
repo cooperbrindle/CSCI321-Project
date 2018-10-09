@@ -30,25 +30,46 @@ export default class LibraryMembership extends Component {
     
     /////////////////////////////////////
     //
-    componentWillMount(){
-        const data = this.props.navigation.getParam('data', 'NoData');
-        if(data == 'NoData'){
-            console.error('NO DATA PASSED TO ACCOUNT FORM PAGE');
-            this.props.navigation.goBack();
-        }
-        this.setState({
-            errorMessage: '',
-            title: data.title,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            day: data.birthDate.substr(0,2),
-            month: data.birthDate.substr(3,2),
-            year: data.birthDate.substr(6,4),
-            stdNum: data.stdNum
-        });
-    }
+	componentWillMount(){
+		try{
+		
+		var vultr = this.props.screenProps;
+		this.setState({vultr: this.props.screenProps});
+		vultr.loadConstituent()
+		.then(() => {
+			this.setState({
+				data: vultr.data,
+				constituentRefID: vultr.data.id,
+				isLoading: false,
+				didLoad: true,
+			});
+
+		}).catch((err) => {
+			this.setState({
+				isLoading: false,
+				didLoad: false,
+			});
+        })
+    }catch(err){console.warn('try catch error: ' + err.message);}
+}
 
     submit(){
+        this.setState({errorMessage: '', isLoading: true});
+            try{
+                var vultr = this.props.screenProps;
+                console.warn('starting submit');
+                vultr.libraryReq(this.state.data)
+                .then(() => {
+                    this.setState({errorMessage: '',
+                        successMessage: 'Successfully updated',
+                        isLoading: false
+                    });
+                }).catch(() => {
+                    this.setState({errorMessage: 'Error updating libraryMem',
+                        successMessage: '',
+                        isLoading: false
+                    });
+                })
         Alert.alert(
             'Submitted',
             blurbEnd,
@@ -56,24 +77,8 @@ export default class LibraryMembership extends Component {
                 {text: 'OK', onPress: () => this.props.navigation.goBack()},
             ],
             { cancelable: false }
-
         )
-        this.setState({errorMessage: '', isLoading: true});
-		try{
-			var vultr = this.props.screenProps;
-			console.warn('starting submit');
-			vultr.libraryReq(this.state.data)
-			.then(() => {
-				this.setState({errorMessage: '',
-					successMessage: 'Successfully updated',
-					isLoading: false
-				});
-			}).catch(() => {
-				this.setState({errorMessage: 'Error updating libraryMem',
-					successMessage: '',
-					isLoading: false
-				});
-			})
+
 		}catch(err){console.warn('catch error: '+ err.message);}
         //TODO: submit request
     }

@@ -84,6 +84,17 @@ CREATE TABLE LIBRARYMEM(
     CONSTRAINT LIBRARYMEM_fkey2 FOREIGN KEY (stdNum)
         REFERENCES CONSTITUENT (stdNum) );
 
+CREATE TABLE LIBRARYMEMEXPORT(
+    id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
+    email       VARCHAR(256)    NOT NULL, /* Email Address */
+
+    CONSTRAINT LIBRARYMEMEXPORT_pkey PRIMARY KEY (id),
+    CONSTRAINT LIBRARYMEMEXPORT_fkey1 FOREIGN KEY (id)
+        REFERENCES CONSTITUENT (id),
+    CONSTRAINT LIBRARYMEMEXPORT_fkey2 FOREIGN KEY (stdNum)
+        REFERENCES CONSTITUENT (stdNum) );
+
 /* Cooper 06/09/2018 */
 CREATE TABLE EVENTS(
     eventname       VARCHAR(256)    NOT NULL, /* Event Name */
