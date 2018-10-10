@@ -26,13 +26,16 @@ router.post('/updatedetails', (req, res) => {
         var data = req.body.data;
         console.log(data);
         
-        dbconn.query('DELETE FROM CONSTITUENTEXPORT WHERE id = \'' + data.id + '\'', (err, result) => {
+        dbconn.query('DELETE FROM CONSTITUENTEXPORT WHERE id = ?', data.id, (err, result) => {
+            
+            console.warn('Okey Dokey');
             //insert new row
             dbconn.query('INSERT INTO CONSTITUENTEXPORT SET ?', data, (err, result) => {
                 if(err) throw err;
                 log('Updated constituent ' + data.id);
                 res.json('ok');
             });
+
         });
         
 	}catch(err){
@@ -43,9 +46,9 @@ router.post('/updatedetails', (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
-router.post('/loadconstituent', (req, res) => {
+router.post('/loadconstituent', async(req, res) => {
     
-    log('Request made to: loading constituent');
+    log('loading constituent');
 
 	try{
 
@@ -53,50 +56,41 @@ router.post('/loadconstituent', (req, res) => {
             res.status(400).send("400 Bad Request");
         
         var query = '';
-        
+        var err, result;
         //CHECK CTX FOR MORE RECENT UPDATES
-        if(req.body.id && req.body.id != '')
-            query = 'SELECT * FROM CONSTITUENTEXPORT WHERE id = \'' + req.body.id + '\'';
-        else {
+        if(req.body.id && req.body.id != ''){
+            query = 'SELECT * FROM CONSTITUENTEXPORT WHERE id = ?';
+            err, result = await dbconn.query(qry, req.body.id);
+        }else {
             qry = 'SELECT * FROM CONSTITUENTEXPORT WHERE id = ('+
-            'SELECT id FROM APPUSER WHERE username = \'' + req.body.username + '\')';
+            'SELECT id FROM APPUSER WHERE username = ?)';
+            err, result = await dbconn.query(qry, req.body.username);
         }
-        
-        dbconn.query(qry, (err, result) => {
+        if(err) throw err;
+        if(result.length > 0){
+            res.json(result);
+        }
+        else{
+            //NO CTX ROW
+            //Load from normal constituent
+            if(req.body.id && req.body.id != ''){
+                query = 'SELECT * FROM CONSTITUENT WHERE id = ?';
+                err, result = await dbconn.query(qry, req.body.id);
+            }else {
+                qry = 'SELECT * FROM CONSTITUENT WHERE id = ('+
+                'SELECT id FROM APPUSER WHERE username = ?)';
+                err, result = await dbconn.query(qry, req.body.username);
+            }
             if(err) throw err;
-            if(result.length > 0){
+            if(result.length > 0)
                 res.json(result);
-            }
-            else{
-                //NO CTX ROW
-                //Load from normal constituent
-                if(req.body.id && req.body.id != '')
-                    query = 'SELECT * FROM CONSTITUENT WHERE id = \'' + req.body.id + '\'';
-                else {
-                    qry = 'SELECT * FROM CONSTITUENT WHERE id = ('+
-                    'SELECT id FROM APPUSER WHERE username = \'' + req.body.username + '\')';
-                }
-                
-                dbconn.query(qry, (err, result) => {
-                    if(err) throw err;
-                    if(result.length > 0)
-                        res.json(result);
-                    return;
-                });
-            }
-        });
-
-
+        }
 
 	}catch(err){
 		log('ERROR: ' + err);
 	}
 });
 
-
-
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
 router.post('/libraryreq', (req, res) => {
     
     log(' Request made to: /libraryreq');
@@ -105,16 +99,39 @@ router.post('/libraryreq', (req, res) => {
         console.log(data);
         
         //check ctx row exists and drop
-        dbconn.query('DELETE FROM LIBRARYMEMEXPORT WHERE id = \'' + data.id + '\'', (err, result) => {
-            //insert new row
-            dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
-                if(err) throw err;
-                log('Updated libraryexport ' + data.email);
-            });
+                dbconn.query('DELETE FROM LIBRARYMEMEXPORT WHERE id = ?', data.id, (err, result) => {
+                    //insert new row
+                    dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
+                        if(err) throw err;
+                        log('Updated libraryexport ' + data.email);
+                        res.json('ok');
+                    });
 
-        });
-        //    }
-        //});
+                });
+	}catch(err){
+		log('ERROR: ' + err);
+	}
+		
+})
+
+router.post('/registerConst', (req, res) => {
+    
+    log(' Request made to: /registerConst');
+	try{
+        var data = req.body;
+        console.log(data);
+        
+        //check ctx row exists and drop
+                
+                dbconn.query('DELETE FROM EVENTCONSTITUENT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
+                    //insert new row
+                    dbconn.query('INSERT INTO EVENTCONSTITUENT SET ?', data, (err, result) => {
+                        if(err) throw err;
+                        log('Updated eventconstituent ' + data.eventname + ' ' + data.id);
+                        res.json('ok');
+                    });
+
+                });
 	}catch(err){
 		log('ERROR: ' + err);
 	}

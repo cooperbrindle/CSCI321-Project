@@ -20,9 +20,9 @@ router.post('/login', async(req, res) => {
     
     const sentUsername = req.body.username;
 	const sentPassword = req.body.password;
-	const qry = 'SELECT username, passHash FROM APPUSER WHERE username = \'' + sentUsername + '\'';
+	const qry = 'SELECT username, passHash FROM APPUSER WHERE username = ?';
 	
-	dbconn.query(qry, (err, result, fields) => {
+	dbconn.query(qry, sentUsername, (err, result, fields) => {
 		
 		if(err) throw err;
         if(result.length > 1) throw 'MORE THAN ONE USER FOUND';
@@ -112,7 +112,7 @@ router.post('/signUp', async(req, res) => {
 	
 	console.log(qry);
 
-	var {err, result1} = await dbconn.query(qry);
+	var err, result1 = await dbconn.query(qry);
 	if(err) throw err;
 	
 	var errorMsg = '';
@@ -157,12 +157,12 @@ router.post('/register', (req, res) => {
 		res.status(400).send("400 Bad Request");
     
 	var salt = bcrypt.genSaltSync(saltRounds);
-	var hash = bcrypt.hashSync(req.body.password, salt);
+	req.body.password = bcrypt.hashSync(req.body.password, salt);
 	
-	var qry = 'INSERT INTO APPUSER VALUES (\'' + req.body.id + '\', \'' + req.body.email + '\', \'' + hash + '\')';
+	var qry = 'INSERT INTO APPUSER VALUES SET ?';
 
 	
-	dbconn.query(qry, (err, result1) => {
+	dbconn.query(qry, req.body, (err, result1) => {
 		if(err) throw err;
 		res.json('ok');
 	});
@@ -189,23 +189,25 @@ router.post('/updatepassword', async(req, res) => {
 	log(' Request made to: /updatepassword ');
 
 	try{
-	if(!req.body.newPassword || typeof req.body.newPassword != "string")
+	if(!req.body.newPassword || typeof req.body.newPassword != "string"){
 		res.status(400).send("400 Bad Request");
-
+		return;
+	}
 	
 	errorMsg = '';
 	
-	var {err, result} = await dbconn.query('SELECT passHash FROM APPUSER WHERE id = \'' + req.body.id + '\'');
-	
+	var err, result = await dbconn.query('SELECT passHash FROM APPUSER WHERE id = ?', req.body.id);
 	if(err) throw err;
+
 	if(!bcrypt.compareSync(req.body.oldPassword, result[0].passHash)){
 		res.json({error: 'Old password does not match'});
 		return;
 	}
-	
+
 	var salt = bcrypt.genSaltSync(saltRounds);
 	var hash = bcrypt.hashSync(req.body.newPassword, salt);
-	dbconn.query('UPDATE APPUSER SET passHash = \'' + hash + '\' WHERE id = \'' + req.body.id + '\'', (err, result) => {
+	
+	dbconn.query('UPDATE APPUSER SET passHash = ? WHERE id = ?', [hash, req.body.id], (err, result) => {
 		if(err) throw err;
 		res.json({error: errorMsg});
 	});
