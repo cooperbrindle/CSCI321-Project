@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import LoginPage from './Components/LoginPage';
 import Logout from './Components/Logout';
+import ForgotPassword from './Components/ForgotPassword';
 import HomePage from './Components/HomePage';
 import SignUpForm from './Components/SignUp/SignUpForm';
 import SignUpFinish from './Components/SignUp/SignUpFinish';
@@ -88,6 +89,7 @@ const RootStack = createSwitchNavigator({
 	HomeDrawer: { screen: drawerNav },
 	SUForm: { screen: SignUpForm},
 	SUFinish: { screen: SignUpFinish},
+	ForgotPassword: { screen: ForgotPassword },
   },{ //options
   initialRouteName: 'Login',
 });
@@ -96,12 +98,12 @@ export default class App extends React.Component{
 
 	componentWillMount(){
 		//check token
-		this.props.vultr = new Vultrsdk();
+		this.vultr = new Vultrsdk();
 	}
 
 	render() {
 		
-			return <RootStack screenProps={this.props.vultr}/>;
+			return <RootStack screenProps={this.vultr}/>;
 	}
 }
 

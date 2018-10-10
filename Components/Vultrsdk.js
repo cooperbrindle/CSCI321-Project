@@ -237,6 +237,23 @@ export default class Vultr{
         });
     }
 
+
+    resetPassword(email, fn, ln) {
+        return new Promise((resolve, reject) => {
+            this.makeRequest('/auth/resetpassword', 'POST',
+                { 
+                    email: email,
+                    firstName: fn, 
+                    lastName: ln,
+                }
+            ).then((res) => {
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
+
     makeAuthRequest(url, method, body){
         return new Promise((resolve, reject) => {
             data = fetch(API_URL + url, {

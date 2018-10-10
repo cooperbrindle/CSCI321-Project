@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, ActivityIndicator, TouchableOpacity} from 'react-native'; 
+import { StyleSheet, Text, TextInput, View, ActivityIndicator, TouchableOpacity, Modal, Alert} from 'react-native'; 
 import { Logo } from './CustomProps/Logo';
 import { DefaultButton } from './CustomProps/DefaultButton';
 import { SocialButton } from './CustomProps/SocialButton';
@@ -15,11 +15,11 @@ export default class Login extends React.Component {
         password: '',
         errorMessage: '',
         isLoading: false,
+        modalVisible: false,
     };
 
     componentDidMount(){
         var vultr = this.props.screenProps;
-
         this.setState({
             isLoading: false,
             vultr: this.props.screenProps,
@@ -40,6 +40,7 @@ export default class Login extends React.Component {
     }
 
     loginPress() {
+        
         this.setState({
             errorMessage: '',
             isLoading: true
@@ -48,7 +49,7 @@ export default class Login extends React.Component {
         const {username, password } = this.state;
         try{
             if(username != '' && password != ''){
-                this.state.vultr.signInWithEmailPassword(username, password)
+               this.state.vultr.signInWithEmailPassword(username, password)
                 .then((result) =>{
                     this.setState({isLoading: false});
                     this.props.navigation.navigate('HomeDrawer');
@@ -96,7 +97,7 @@ export default class Login extends React.Component {
                 <DefaultButton title='Login' nav={() => this.loginPress()} />
                 <DefaultButton title='Sign Up' nav={() => this.signupPress()} />
 
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={() => {this.props.navigation.navigate('ForgotPassword')}}>
                     <Text style={styles.forgotText}>
                         Forgot password?
                     </Text>
@@ -104,6 +105,7 @@ export default class Login extends React.Component {
             </View>);
         
     }
+
     
 
     render() {

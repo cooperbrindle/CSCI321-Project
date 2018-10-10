@@ -11,3 +11,8 @@ exports.sqlConfig = {
     password: "Balotelli45",
     database: 'alumniapp'
 }
+
+exports.passwordResetConfig = {
+    possible: 'abcdefghijklmnopqrstuvwxyz1234567890',
+    maxLength: 10,
+}

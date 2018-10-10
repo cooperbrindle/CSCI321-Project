@@ -3,6 +3,7 @@ var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
 var tokenAuth = require('../lib/tokenAuth');
 var bcrypt = require('bcryptjs');
+var passwordConfig = require('../config').passwordResetConfig;
 
 const saltRounds = 10;
 
@@ -173,7 +174,47 @@ router.post('/register', (req, res) => {
 })
 
 
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+router.post('/resetpassword', async(req, res) => {
+	log(' Request made to: /resetpassword');
 
+	try{
+
+	var qry = 'SELECT id FROM APPUSER WHERE id = (' + 
+				'SELECT id FROM CONSTITUENT WHERE email = ? AND firstName = ? AND lastName = ?)';
+
+	var err, result = await dbconn.query(qry, [req.body.email, req.body.firstName, req.body.lastName]);
+	
+	if(err) throw err;
+	if(result.length < 1 || result.length > 1){
+		console.log('NO MATCH');
+		res.json({error:'no match'});
+		return;
+	}
+	
+	var password = '';
+	for(i=0; i < passwordConfig.maxLength; i++){
+		password += passwordConfig.possible[Math.floor((Math.random() * passwordConfig.possible.length))];
+	}
+	console.log('TEMP PASSWORD: ' + password);
+
+	var salt = bcrypt.genSaltSync(saltRounds);
+	var hash = bcrypt.hashSync(password, salt);
+	
+	qry = 'UPDATE APPUSER SET passHash = ? WHERE username = ?';
+
+	
+	// dbconn.query(qry, [hash, req.body.email], (err, result1) => {
+	// 	if(err) throw err;
+	// 	res.json('ok');
+	// });
+
+	}catch(err){
+		log('ERROR: ' + err);
+	}
+		
+})
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
