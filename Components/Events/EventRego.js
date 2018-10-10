@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
+import { Text, TextInput, View, Alert} from 'react-native';
 import { styles } from '../FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -34,6 +34,7 @@ export default class EventRego extends Component {
                 eventname: pageData.eventname,
                 constData: vultr.data,
                 constituentRefID: vultr.data.id,
+                constName: vultr.data.firstName,
                 position: vultr.data.position,
                 orgName: vultr.data.orgName,
                 dietary: '',
@@ -59,12 +60,23 @@ export default class EventRego extends Component {
             orgName: this.state.orgName, 
             dietary: this.state.dietary, 
             wheelchair: this.state.wheelchair,
-            guests: this.state.guests,
         }
         this.props.screenProps.registerConst(this.state.eventData, constInfo)
         .then(() => {
-            this.setState({isLoading: false, errorMessage: ''});    
-            this.props.navigation.navigate('GuestRego', {data: this.state.eventData});
+            this.setState({isLoading: false, errorMessage: ''});
+            if(this.state.guests != '0'){
+                this.props.navigation.navigate('GuestRego', {data: this.state.eventData});
+            }
+            else{
+                Alert.alert(
+                    'Submitted',
+                    'You have been successfully registered for the ' + this.state.eventname,
+                    [
+                        {text: 'OK', onPress: () => this.props.navigation.navigate('HomePage')},
+                    ],
+                    { cancelable: false }
+                )
+            }
         }).catch(error => {
             this.setState({isLoading: false, errorMessage: error.message});
         });
