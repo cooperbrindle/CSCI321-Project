@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import LoginPage from './Components/LoginPage';
 import Logout from './Components/Logout';
+import FAQs from './Components/Drawer/faq';
 import HomePage from './Components/HomePage';
 import SignUpForm from './Components/SignUp/SignUpForm';
 import SignUpFinish from './Components/SignUp/SignUpFinish';
@@ -65,11 +66,18 @@ const navStack = createStackNavigator({
 	initialRouteName: 'HomePage',
 });
 
+const passwordStack = createStackNavigator({
+	Password: { screen: PasswordForm }
+  });
+  const faqStack = createStackNavigator({
+	FAQs: { screen: FAQs }
+  });
+
 const drawerNav = createDrawerNavigator({
 	//Routes
 	Home: { screen: navStack },
-	Password: { screen: PasswordForm },
-	FAQ: { screen: navStack },
+	Password: { screen: passwordStack },
+	FAQs: { screen: faqStack },
 	Logout: { screen: Logout },
 },{ //options
 	initialRouteName: 'Home',
@@ -96,12 +104,12 @@ export default class App extends React.Component{
 
 	componentWillMount(){
 		//check token
-		this.props.vultr = new Vultrsdk();
+		this.vultr = new Vultrsdk();
 	}
 
 	render() {
 		
-			return <RootStack screenProps={this.props.vultr}/>;
+			return <RootStack screenProps={this.vultr}/>;
 	}
 }
 
