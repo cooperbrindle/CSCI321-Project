@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import LoginPage from './Components/LoginPage';
 import Logout from './Components/Logout';
+import ForgotPassword from './Components/ForgotPassword';
 import FAQs from './Components/Drawer/faq';
 import HomePage from './Components/HomePage';
 import SignUpForm from './Components/SignUp/SignUpForm';
@@ -98,6 +99,7 @@ const RootStack = createSwitchNavigator({
 	HomeDrawer: { screen: drawerNav },
 	SUForm: { screen: SignUpForm},
 	SUFinish: { screen: SignUpFinish},
+	ForgotPassword: { screen: ForgotPassword },
   },{ //options
   initialRouteName: 'Login',
 });
