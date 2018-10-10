@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-log('Session Started');
+log('\n\n**Session Started**\n');
 
 
 

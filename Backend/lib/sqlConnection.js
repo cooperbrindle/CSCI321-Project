@@ -1,20 +1,33 @@
 const mysql = require('mysql');
+const sqlConfig = require('../config').sqlConfig;
+var util = require('util');
 
-const dbconn = mysql.createConnection({
-	host: "localhost",
-	user: "cooperb",
-	password: "Balotelli45"
+const dbconn = mysql.createPool({
+	connectionLimit: sqlConfig.connectionPoolLimit,
+	host: sqlConfig.host,
+	user: sqlConfig.user,
+	password: sqlConfig.password,
+	database: sqlConfig.database,
 });
 
-dbconn.connect((err) => {
-	if (err) throw err;
-	console.log("Connected!");
-});
-dbconn.query('use alumniapp', (err, result, fields) => {
-	if(err) throw err;
-}); 
+dbconn.getConnection((err, connection) => {
+    if (err) {
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            console.error('Database connection was closed.');
+        }
+        if (err.code === 'ER_CON_COUNT_ERROR') {
+            console.error('Database has too many connections.');
+        }
+        if (err.code === 'ECONNREFUSED') {
+            console.error('Database connection was refused.');
+        }
+    }
+	if (connection) connection.release();
 
+    return
+})
 
+dbconn.query = util.promisify(dbconn.query);
 
 
 module.exports = dbconn;
