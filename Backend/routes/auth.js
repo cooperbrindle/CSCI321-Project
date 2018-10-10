@@ -22,7 +22,6 @@ router.post('/login', async(req, res) => {
 	const sentPassword = req.body.password;
 	const qry = 'SELECT username, passHash FROM APPUSER WHERE username = \'' + sentUsername + '\'';
 	
-	//var {err, result} = await queryAsync(qry);
 	dbconn.query(qry, (err, result, fields) => {
 		
 		if(err) throw err;
@@ -62,7 +61,7 @@ router.post('/login', async(req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
-router.post('/signUp', (req, res) => {
+router.post('/signUp', async(req, res) => {
 	log(' Request made to: /signUp');
 	try{
 	if(!req.body.data)
@@ -113,33 +112,30 @@ router.post('/signUp', (req, res) => {
 	
 	console.log(qry);
 
-	dbconn.query(qry, (err, result1) => {
-		if(err) throw err;
-		
-		var errorMsg = '';
+	var {err, result1} = await dbconn.query(qry);
+	if(err) throw err;
+	
+	var errorMsg = '';
+	if(result1.length != 1){
 		if(result1.length > 1)
 			errorMsg = 'Too many users';
 		if(result1.length < 1)
 			errorMsg = 'No Match Found';
-		if(result1.length == 1)
-			errorMsg = '';
 		
-		if(errorMsg != ''){
-			res.json({error: errorMsg});
-			return;
-		}
-		console.log('LENGTH: '+result1.length);
-		//check if already a user
-		qry = 'SELECT * FROM APPUSER WHERE id = \'' + result1[0].id + '\'';
-		dbconn.query(qry, (err, result2) => {
-			if(err) throw err;
-			if(result2.length > 0)
-				errorMsg = 'Already a user';
-			//resolve
-			res.json({error: errorMsg, data: result1[0]});
-		});
-
+		res.json({error: errorMsg});
+		return;
+	}
+	
+	//check if already a user
+	qry = 'SELECT * FROM APPUSER WHERE id = \'' + result1[0].id + '\'';
+	dbconn.query(qry, (err, result2) => {
+		if(err) throw err;
+		if(result2.length > 0)
+			errorMsg = 'Already a user';
+		//resolve
+		res.json({error: errorMsg, data: result1[0]});
 	});
+
 	}catch(err){
 		log('ERROR: ' + err);
 	}
@@ -169,8 +165,6 @@ router.post('/register', (req, res) => {
 	dbconn.query(qry, (err, result1) => {
 		if(err) throw err;
 		res.json('ok');
-		
-
 	});
 	}catch(err){
 		log('ERROR: ' + err);
@@ -191,7 +185,7 @@ router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
-router.post('/updatepassword', (req, res) => {
+router.post('/updatepassword', async(req, res) => {
 	log(' Request made to: /updatepassword ');
 
 	try{
@@ -201,24 +195,21 @@ router.post('/updatepassword', (req, res) => {
 	
 	errorMsg = '';
 	
-	dbconn.query('SELECT passHash FROM APPUSER WHERE id = \'' + req.body.id + '\'', (err, result) => {
+	var {err, result} = await dbconn.query('SELECT passHash FROM APPUSER WHERE id = \'' + req.body.id + '\'');
+	
+	if(err) throw err;
+	if(!bcrypt.compareSync(req.body.oldPassword, result[0].passHash)){
+		res.json({error: 'Old password does not match'});
+		return;
+	}
+	
+	var salt = bcrypt.genSaltSync(saltRounds);
+	var hash = bcrypt.hashSync(req.body.newPassword, salt);
+	dbconn.query('UPDATE APPUSER SET passHash = \'' + hash + '\' WHERE id = \'' + req.body.id + '\'', (err, result) => {
 		if(err) throw err;
-		if(!bcrypt.compareSync(req.body.oldPassword, result[0].passHash)){
-			res.json({error: 'Old password does not match'});
-			return;
-		}
-		
-		var salt = bcrypt.genSaltSync(saltRounds);
-		var hash = bcrypt.hashSync(req.body.newPassword, salt);
-		dbconn.query('UPDATE APPUSER SET passHash = \'' + hash + '\' WHERE id = \'' + req.body.id + '\'', (err, result) => {
-			
-			if(err) throw err;
-			
-			//TODO: check errorMsg when it's set outside the query
-			res.json({error: errorMsg});
-		});
+		res.json({error: errorMsg});
 	});
-    
+	
 	}catch(err){
 		log('ERROR: ' + err);
 	}

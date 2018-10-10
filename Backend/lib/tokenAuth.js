@@ -1,12 +1,12 @@
 var dbconn = require('./sqlConnection');
 var jwt = require('jsonwebtoken');
 const log = require('./log').log;
-const config = require('../config');
+const tokenConfig = require('../config').tokenConfig;
 
 exports.createToken = (payload) => {
-    var token = jwt.sign(payload, config.tokenSecret, { 
+    var token = jwt.sign(payload, tokenConfig.tokenSecret, { 
                         //expiresIn: config.defaultTokenExpiry,
-                        issuer: config.issuer,
+                        issuer: tokenConfig.issuer,
                     });
     //console.log(token);
     return token;
@@ -15,7 +15,7 @@ exports.createToken = (payload) => {
 exports.verifyToken = async(token) => {
     //console.log('verifying...');
     try{
-    var decoded = await jwt.verify(token, config.tokenSecret, {issuer: config.issuer})
+    var decoded = await jwt.verify(token, tokenConfig.tokenSecret, {issuer: tokenConfig.issuer})
         //console.log('verified');
         return '';
     }catch(err){

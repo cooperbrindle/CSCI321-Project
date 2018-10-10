@@ -1,9 +1,9 @@
 var { dbconn } = require('./sqlConnection');
 
-var queryAsync = (sqlstr) => {
+var querySync = (sqlstr) => {
 	dbconn.query(sqlstr, (error, result) => {
 		return {error, result};
 	})
 }
 
-module.exports = queryAsync;
+module.exports = querySync;

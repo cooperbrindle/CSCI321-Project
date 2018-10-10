@@ -1,5 +1,13 @@
-module.exports = {
+exports.tokenConfig = {
     tokenSecret: 'alumniApp',
-    defaultTokenExpiry: '5s',
+    defaultTokenExpiry: '1d',
     issuer: 'UOWAlumni',
+}
+
+exports.sqlConfig = {
+    connectionPoolLimit: 50,
+    host: 'localhost',
+    user: "cooperb",
+    password: "Balotelli45",
+    database: 'alumniapp'
 }

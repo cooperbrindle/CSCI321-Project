@@ -27,15 +27,12 @@ router.post('/updatedetails', (req, res) => {
         console.log(data);
         
         dbconn.query('DELETE FROM CONSTITUENTEXPORT WHERE id = \'' + data.id + '\'', (err, result) => {
-            
-            console.warn('Okey Dokey');
             //insert new row
             dbconn.query('INSERT INTO CONSTITUENTEXPORT SET ?', data, (err, result) => {
                 if(err) throw err;
                 log('Updated constituent ' + data.id);
                 res.json('ok');
             });
-
         });
         
 	}catch(err){
@@ -48,7 +45,7 @@ router.post('/updatedetails', (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/loadconstituent', (req, res) => {
     
-    log('loading constituent');
+    log('Request made to: loading constituent');
 
 	try{
 
@@ -96,6 +93,10 @@ router.post('/loadconstituent', (req, res) => {
 	}
 });
 
+
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 router.post('/libraryreq', (req, res) => {
     
     log(' Request made to: /libraryreq');
@@ -104,16 +105,14 @@ router.post('/libraryreq', (req, res) => {
         console.log(data);
         
         //check ctx row exists and drop
-                dbconn.query('DELETE FROM LIBRARYMEMEXPORT WHERE id = \'' + data.id + '\'', (err, result) => {
-                    
-                    console.warn('Okey Dokey');
-                    //insert new row
-                    dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
-                        if(err) throw err;
-                        log('Updated libraryexport ' + data.email);
-                    });
+        dbconn.query('DELETE FROM LIBRARYMEMEXPORT WHERE id = \'' + data.id + '\'', (err, result) => {
+            //insert new row
+            dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
+                if(err) throw err;
+                log('Updated libraryexport ' + data.email);
+            });
 
-                });
+        });
         //    }
         //});
 	}catch(err){
