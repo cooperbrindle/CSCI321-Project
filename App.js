@@ -7,6 +7,7 @@ import Logout from './Components/Logout';
 import FAQs from './Components/Drawer/faq';
 import HomePage from './Components/HomePage';
 import SignUpForm from './Components/SignUp/SignUpForm';
+import Conditions from './Components/SignUp/Conditions';
 import SignUpFinish from './Components/SignUp/SignUpFinish';
 import EventsList from './Components/Events/EventsList';
 import EventSingle from './Components/Events/EventSingle';
@@ -61,6 +62,7 @@ const navStack = createStackNavigator({
 	Networking: { screen: Networking },
 	EventRego: { screen: EventRego },
 	GuestRego: { screen: GuestRego },
+	Conditions: { screen: Conditions },
 
 },{ //options
 	initialRouteName: 'HomePage',

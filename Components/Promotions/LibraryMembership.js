@@ -8,8 +8,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 
 const libraryLogo = require('../assets/libraryLogo.jpg');
-const blurbStart = 'You are entitled to an Alumni Membership for the UOW Library.\n'+
-            'With a membership, you can:\n\n';
 
 const blurbPoints = '-  Access a wide range of online resources, including e-journals and databases\n\n'+
             '-  Borrow 30 items for 28 days at the Wollongong location, or five items at other locations\n\n'+
@@ -28,14 +26,29 @@ export default class LibraryMembership extends Component {
 		},
     }
     
+    /////////////////////////////////////////////////////////
+    /////////////////////
+    componentWillMount(){
+        try{
+            var vultr = this.props.screenProps;
+            this.setState({vultr: this.props.screenProps});
+            this.setState({
+                email: vultr.data.email, 
+            });
+            }catch(err){console.warn('try catch error: ' + err.message);}
+        
+        this.setState({
+            errorMessage: '',
+            
+        });
+    }
     /////////////////////////////////////
     //
     submit(){
         this.setState({errorMessage: '', isLoading: true});
         try{
-            var vultr = this.props.screenProps;
             console.warn('starting submit');
-            vultr.libraryReq()
+            this.state.vultr.libraryReq(this.state.email)
             .then(() => {
                 this.setState({errorMessage: '',
                     successMessage: 'Successfully updated',
@@ -56,7 +69,6 @@ export default class LibraryMembership extends Component {
             ],
             { cancelable: false }
         )
-        //TODO: submit request
     }
     
 	renderInput(title, ph, onChangeT, v, edita){
@@ -91,7 +103,7 @@ export default class LibraryMembership extends Component {
                     </Text>
                 </ScrollView>
                 
-                {/*this.renderInput('Preferred Email', '', (a) => this.setState({preferredEmail:a}), this.state.preferredEmail, true)*/}
+                {this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true)}
 				
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Claim Now' nav={() => this.submit()} />
@@ -117,23 +129,19 @@ export default class LibraryMembership extends Component {
         blurbView: {
             flex:1,
             backgroundColor: '#0C2340',
-            paddingLeft: 20,
-            paddingRight: 20,
+            paddingLeft: 10,
+            paddingRight: 10,
             marginTop: 20,
-            marginBottom: 30,
+            marginBottom: 10,
         },
         logo: {
             flex:0.5,
             alignSelf: 'center',
             resizeMode: 'center',
         },
-        blurbTextStart: {
-            color:'white',
-            fontSize: 18,
-        },
         blurbTextPoints: {
             color:'white',
-            fontSize: 22,
+            fontSize: 18,
             paddingLeft: 20,
         },
         blurbTextEnd: {
