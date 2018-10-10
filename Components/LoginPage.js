@@ -7,22 +7,36 @@ import { Facebook } from 'expo';
 
 import { baseStyles } from './BaseStyles';
 
-//const FACEBOOK_APP_ID = '1049993008511643';
 
 export default class Login extends React.Component {
     
     state = {
-        username: 'ewarren',
-        password: 'password',
+        username: '',
+        password: '',
         errorMessage: '',
         isLoading: false,
     };
 
     componentDidMount(){
+        var vultr = this.props.screenProps;
+
         this.setState({
             isLoading: false,
-            vultr: this.props.screenProps
+            vultr: this.props.screenProps,
+            username: vultr.username,
         });
+
+		if(vultr.isLoggedIn()){
+            vultr.loadConstituent();
+            this.props.navigation.navigate('HomeDrawer');
+        }
+        else{
+            //TODO: REMOVE THIS ELSE - ONLY FOR TESTING
+            this.setState({
+                username: 'ewarren',
+                password: 'password',
+            })
+        }
     }
 
     loginPress() {
@@ -41,6 +55,11 @@ export default class Login extends React.Component {
                 })
                 .catch((error) =>{
                     this.setState({errorMessage: error, isLoading: false});
+                });
+            }else{
+                this.setState({
+                    errorMessage: 'Empty Fields',
+                    isLoading: false
                 });
             }
         }catch(err){console.warn('try catch: ' + err);

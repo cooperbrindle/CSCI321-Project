@@ -8,19 +8,37 @@ export default class Vultr{
         this.token = null;
         this.data = null;
         this.username = '';
-
-        try{ this.token = AsyncStorage.getItem('token');}
-        catch(err){console.log(err); this.token = null};
+        this.loadData();
+        
 
     }
 
+    async loadData(){
+        try{ 
+            this.token = await AsyncStorage.getItem('token');
+            this.username = await AsyncStorage.getItem('username');}
+        catch(err){
+            console.log(err); 
+            this.token = null;
+            this.username = null;
+        };
+    }
+
+    isLoggedIn(){
+        if(this.token == null)
+            return false
+        else return true;
+    }
+
     loadConstituent(){
-        console.log('loading constit');
         return new Promise((resolve, reject) => {
             this.makeAuthRequest('/user/loadconstituent', 'POST', {username: this.username}
             ).then((res) => {
                 this.data = res[0];
                 console.log(res[0]);
+                try{
+                    AsyncStorage.setItem('username', this.username);
+                }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
                 resolve();
             }).catch((error) => {
                 console.log('top err" ' + error);
