@@ -26,4 +26,38 @@ router.post('/eventslist', (req, res) => {
 		
 })
 
+
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
+
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+router.post('/registerconst', (req, res) => {
+    
+    log(' Request made to: /registerconst');
+	try{
+        var data = req.body;
+        console.log(data);
+        
+        //check ctx row exists and drop
+                
+                dbconn.query('DELETE FROM EVENTCONSTITUENT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
+                    //insert new row
+                    dbconn.query('INSERT INTO EVENTCONSTITUENT SET ?', data, (err, result) => {
+                        if(err) throw err;
+                        log('Updated eventconstituent ' + data.eventname + ' ' + data.id);
+                        res.json('ok');
+                    });
+
+                });
+	}catch(err){
+		log('ERROR: ' + err);
+	}
+		
+})
+
+
 module.exports = router;

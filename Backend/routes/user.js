@@ -91,6 +91,10 @@ router.post('/loadconstituent', async(req, res) => {
 	}
 });
 
+
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 router.post('/libraryreq', (req, res) => {
     
     log(' Request made to: /libraryreq');
@@ -104,30 +108,6 @@ router.post('/libraryreq', (req, res) => {
                     dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
                         if(err) throw err;
                         log('Updated libraryexport ' + data.email);
-                        res.json('ok');
-                    });
-
-                });
-	}catch(err){
-		log('ERROR: ' + err);
-	}
-		
-})
-
-router.post('/registerConst', (req, res) => {
-    
-    log(' Request made to: /registerConst');
-	try{
-        var data = req.body;
-        console.log(data);
-        
-        //check ctx row exists and drop
-                
-                dbconn.query('DELETE FROM EVENTCONSTITUENT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
-                    //insert new row
-                    dbconn.query('INSERT INTO EVENTCONSTITUENT SET ?', data, (err, result) => {
-                        if(err) throw err;
-                        log('Updated eventconstituent ' + data.eventname + ' ' + data.id);
                         res.json('ok');
                     });
 

@@ -148,7 +148,7 @@ export default class Vultr{
                 this.data.orgName = constInfo.orgName;
                 this.updateDetails(this.data);
             }
-            this.makeAuthRequest('/user/registerConst', 'POST',
+            this.makeAuthRequest('/user/registerconst', 'POST',
                 {
                     eventname: eventData.eventname,
                     id: this.data.id,
