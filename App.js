@@ -94,13 +94,14 @@ const RootStack = createSwitchNavigator({
 
 export default class App extends React.Component{
 
-  componentWillMount(){
-    
-  }
+	componentWillMount(){
+		//check token
+		this.props.vultr = new Vultrsdk();
+	}
 
-  render() {
-    vultr = new Vultrsdk();
-	  return <RootStack screenProps={vultr}/>;
-  }
+	render() {
+		
+			return <RootStack screenProps={this.props.vultr}/>;
+	}
 }
 
