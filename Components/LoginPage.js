@@ -33,7 +33,7 @@ export default class Login extends React.Component {
         
         const {username, password } = this.state;
         try{
-            if(username != '' || password != ''){
+            if(username != '' && password != ''){
                 this.state.vultr.signInWithEmailPassword(username, password)
                 .then((result) =>{
                     this.setState({isLoading: false});

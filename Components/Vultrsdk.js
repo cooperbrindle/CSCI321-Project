@@ -148,7 +148,7 @@ export default class Vultr{
                 this.data.orgName = constInfo.orgName;
                 this.updateDetails(this.data);
             }
-            this.makeAuthRequest('/user/registerconst', 'POST',
+            this.makeAuthRequest('/events/registerconst', 'POST',
                 {
                     eventname: eventData.eventname,
                     id: this.data.id,
@@ -160,6 +160,29 @@ export default class Vultr{
                     position: this.data.position,
                     dietary: constInfo.dietary,
                     mobility: constInfo.wheelchair,
+                }
+            ).then((res) => {
+                if(res.error && res.error != '')
+                    reject(res.error);
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
+    registerGuest(eventData, guestData){
+        return new Promise((resolve, reject) => {
+            this.makeAuthRequest('/events/registerguest', 'POST',
+                {
+                    eventname: eventData.eventname,
+                    id: this.data.id,
+                    title: guestData.title,
+                    firstName: guestData.firstName,
+                    lastName: guestData.lastName,
+                    orgName: guestData.orgName,
+                    position: guestData.position,
+                    dietary: guestData.dietary,
+                    mobility: guestData.wheelchair,
                 }
             ).then((res) => {
                 if(res.error && res.error != '')

@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Alert} from 'react-native';
 import { styles } from '../FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -44,6 +44,7 @@ export default class GuestRego extends Component {
                 eventData: pageData,
                 eventname: pageData.eventname,
                 constData: vultr.data.id,
+                constName: vultr.data.firstName,
                 isLoading: false,
                 didLoad: true,
             });
@@ -58,32 +59,54 @@ export default class GuestRego extends Component {
 	/////////////////////////////////////
 
 	submitRego(){
-        this.setState({isLoading: true, errorMessage: ''});
-        var guestData = {
-            title: this.state.title,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            position: this.state.position,
-            orgName: this.state.orgName,
-            dietary: this.state.dietary,
-            wheelchair: this.state.wheelchair,
+        if(!this.validateData()){
+            Alert.alert(
+                'Invalid Input',
+                'First and Last Name Must Not Be Blank',
+                [
+                    {text: 'OK', onPress: () => {return}},
+                ],
+                { cancelable: false }
+            )
+            
         }
-        this.props.screenProps.registerConst(this.state.eventData, guestData)
-        .then(() => {
-            this.setState({isLoading: false, errorMessage: ''});
+        else{
+            this.setState({isLoading: true, errorMessage: ''});
+            var guestData = {
+                title: this.state.title,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                position: this.state.position,
+                orgName: this.state.orgName,
+                dietary: this.state.dietary,
+                wheelchair: this.state.wheelchair,
+            }
+            this.props.screenProps.registerGuest(this.state.eventData, guestData)
+            .then(() => {
+                this.setState({isLoading: false, errorMessage: ''});
 
-        }).catch(error => {
-            this.setState({isLoading: false, errorMessage: error.message});
-        });
-        Alert.alert(
-            'Submitted',
-            [
-                {text: 'OK', onPress: () => this.props.navigation.navigate('Home')},
-            ],
-            { cancelable: false }
-        )
+            }).catch(error => {
+                this.setState({isLoading: false, errorMessage: error.message});
+            });
+            Alert.alert(
+                'Submitted',
+                this.state.constName + ' and ' + this.state.firstName + ' have been successfully registered for the ' + this.state.eventname,
+                [
+                    {text: 'OK', onPress: () => this.props.navigation.navigate('HomePage')},
+                ],
+                { cancelable: false }
+            )
+        }
 	}
-	
+    
+    validateData(){
+        ////////////////Empty Input validation
+        if(this.state.firstName == '' || this.state.lastName == ''){
+            return false;
+        }
+        return true;
+    }
+    
 	renderInput(title, ph, onChangeT, v, edita){
 		return(
 			<View style={styles.inputCont}>
