@@ -9,7 +9,7 @@ import { baseStyles } from '../BaseStyles';
 
 export default class PasswordForm extends Component {
     static navigationOptions = {
-		title: 'Password',
+		title: 'Update Password',
 		headerStyle: {
 			backgroundColor: '#0C2340',
 		},
@@ -93,8 +93,8 @@ export default class PasswordForm extends Component {
                 {this.renderInput('Confirm Password', '', (a) => this.setState({newPassword2:a}), this.state.newPassword2)}
 				
                 <View style={styles.submitBtnCont}>
-					<DefaultButton title='Save' nav={() => this.saveChanges()} />
-                    <DefaultButton title='Discard' nav={() => this.props.navigation.navigate('Home')} />
+					<DefaultButton title='Submit' nav={() => this.saveChanges()} />
+                    <DefaultButton title='Cancel' nav={() => this.props.navigation.navigate('Home')} />
                 </View>
 			</View>
 		);

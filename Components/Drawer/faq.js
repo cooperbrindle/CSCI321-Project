@@ -30,7 +30,7 @@ export default class FAQs extends Component {
 			<View style={styles.container}>
                 {actInd}
 				<WebView
-                    source={{uri: 'https://www.uow.edu.au/alumni/benefits/postgrad/index.html'}}
+                    source={{uri: 'https://www.uow.edu.au/alumni/faqs/index.html'}}
                     style={styles.webStyle}
                     onLoadEnd={() => this.pageDidLoad()}
                 />
