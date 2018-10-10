@@ -10,6 +10,7 @@ import SignUpFinish from './Components/SignUp/SignUpFinish';
 import EventsList from './Components/Events/EventsList';
 import EventSingle from './Components/Events/EventSingle';
 import EventRego from './Components/Events/EventRego';
+import GuestRego from './Components/Events/GuestRego';
 import OutlookWebPage from './Components/Outlook/OutlookWeb';
 import UpdateDetailsMenu from './Components/UpdateDetails/UpdateDetailsMenu';
 import AccountForm from './Components/UpdateDetails/AccountForm';
@@ -58,6 +59,8 @@ const navStack = createStackNavigator({
 	Mentoring: { screen: Mentoring },
 	Networking: { screen: Networking },
 	EventRego: { screen: EventRego },
+	GuestRego: { screen: GuestRego },
+
 },{ //options
 	initialRouteName: 'HomePage',
 });

@@ -141,6 +141,35 @@ export default class Vultr{
             })
         });
     }
+    registerConst(eventData, constInfo){
+        return new Promise((resolve, reject) => {
+            if(constInfo.position != this.data.position || constInfo.orgName != this.data.orgName){
+                this.data.position = constInfo.position;
+                this.data.orgName = constInfo.orgName;
+                this.updateDetails(this.data);
+            }
+            this.makeAuthRequest('/user/registerConst', 'POST',
+                {
+                    eventname: eventData.eventname,
+                    id: this.data.id,
+                    stdNum: this.data.stdNum,
+                    title: this.data.title,
+                    firstName: this.data.firstName,
+                    lastName: this.data.lastName,
+                    orgName: this.data.orgName,
+                    position: this.data.position,
+                    dietary: constInfo.dietary,
+                    mobility: constInfo.wheelchair,
+                }
+            ).then((res) => {
+                if(res.error && res.error != '')
+                    reject(res.error);
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
 
     getDiscounts(category) {
         return new Promise((resolve, reject) => {

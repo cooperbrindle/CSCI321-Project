@@ -22,11 +22,12 @@ export default class EventSingle extends Component {
 	componentWillMount(){
         const data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
-            console.error('NO DATA PASSED TO ACCOUNT FORM PAGE');
+            console.error('NO DATA PASSED TO EVENT PAGE');
             this.props.navigation.goBack();
         }
         this.setState({
-            errorMessage: '',
+			errorMessage: '',
+			data: data,
             eventname: data.eventname,
 			eventgroup: data.eventgroup,
 			date: data.startdate,
@@ -104,7 +105,7 @@ export default class EventSingle extends Component {
 					{this.renderPic()}
 					{this.renderInfo()}
 				<View style={styles.submitBtnCont}>
-                    <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego')} />
+                    <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego', {data: this.state.data})} />
                 </View>
 			</View>
 		);

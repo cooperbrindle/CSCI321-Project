@@ -7,16 +7,27 @@ import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
-export default class EventRego extends Component {
+export default class GuestRego extends Component {
 	static navigationOptions = {
-		title: 'Event Registration',
+		title: 'Guest Registration',
 		headerStyle: {
 			backgroundColor: '#0C2340',
 		},
 		headerTintColor: 'white',
 		headerTitleStyle: {
 		},
-	}
+    }
+    state = {
+        errorMessage: '',
+        isLoading: false,
+        title: '',
+        firstName: '',
+        lastName: '',
+        position: '',
+        orgName: '',
+        dietary: '',
+        wheelchair: '',
+    };
 
 	/////////////////////////////////////
     //
@@ -32,13 +43,7 @@ export default class EventRego extends Component {
             this.setState({
                 eventData: pageData,
                 eventname: pageData.eventname,
-                constData: vultr.data,
-                constituentRefID: vultr.data.id,
-                position: vultr.data.position,
-                orgName: vultr.data.orgName,
-                dietary: '',
-                wheelchair: '',
-                guests: '0',
+                constData: vultr.data.id,
                 isLoading: false,
                 didLoad: true,
             });
@@ -54,20 +59,29 @@ export default class EventRego extends Component {
 
 	submitRego(){
         this.setState({isLoading: true, errorMessage: ''});
-        var constInfo = {
-            position: this.state.position, 
-            orgName: this.state.orgName, 
-            dietary: this.state.dietary, 
+        var guestData = {
+            title: this.state.title,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            position: this.state.position,
+            orgName: this.state.orgName,
+            dietary: this.state.dietary,
             wheelchair: this.state.wheelchair,
-            guests: this.state.guests,
         }
-        this.props.screenProps.registerConst(this.state.eventData, constInfo)
+        this.props.screenProps.registerConst(this.state.eventData, guestData)
         .then(() => {
-            this.setState({isLoading: false, errorMessage: ''});    
-            this.props.navigation.navigate('GuestRego', {data: this.state.eventData});
+            this.setState({isLoading: false, errorMessage: ''});
+
         }).catch(error => {
             this.setState({isLoading: false, errorMessage: error.message});
         });
+        Alert.alert(
+            'Submitted',
+            [
+                {text: 'OK', onPress: () => this.props.navigation.navigate('Home')},
+            ],
+            { cancelable: false }
+        )
 	}
 	
 	renderInput(title, ph, onChangeT, v, edita){
@@ -91,11 +105,31 @@ export default class EventRego extends Component {
                     {this.state.eventname}
                 </Text>
                 <KeyboardAwareScrollView>
+                <View style={guestStyles.topInputCont}>
+                    <View style={guestStyles.titleView}>
+                        <Text style={styles.inputText}>
+                            Title
+                        </Text>
+                        <TextInput style={guestStyles.titleInput}
+                            placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
+                            onChangeText={(t) => this.setState({title:t})}
+                            value={this.state.title} />
+                    </View>
+                    <View style={guestStyles.fnView}>
+                        <Text style={styles.inputText}>
+                            First Name
+                        </Text>
+                            <TextInput style={guestStyles.firstNameInput}
+                                placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
+                                onChangeText={(t) => this.setState({firstname:t})}
+                                value={this.state.firstname} />
+                    </View>
+                </View>
+                {this.renderInput('Last Name', '', (a) => this.setState({lastname:a}), this.state.lastname, true)}
                 {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
                 {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
                 {this.renderInput('Dietary Requirements (if any)', '', (a) => this.setState({dietary:a}), this.state.dietary, true)}
                 {this.renderInput('Wheelchair Access Required', '', (a) => this.setState({wheelchair:a}), this.state.wheelchair, true)}
-                {this.renderInput('Number of Guests', '', (a) => this.setState({guests:a}), this.state.guests, true)}
                 </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Submit' nav={() => this.submitRego()} />
@@ -104,3 +138,36 @@ export default class EventRego extends Component {
 		);
 	}
 };
+
+const guestStyles = StyleSheet.create({
+    
+    topInputCont: {
+        flexDirection: 'row',
+    },
+
+    titleView: {
+        flex: 1,
+        flexDirection: 'column',
+        marginRight: 20,
+    },
+
+    fnView: {
+        flex: 2,
+        flexDirection: 'column',
+    },
+
+    firstNameInput: {
+        color: 'grey',
+        paddingLeft: 10,
+        backgroundColor:'#d9d9d6',
+        height: 50,
+        borderRadius:5,
+    },
+    titleInput: {
+        color: 'grey',
+        paddingLeft: 10,
+        backgroundColor:'#d9d9d6',
+        height: 50,
+        borderRadius:5,
+    }
+});
