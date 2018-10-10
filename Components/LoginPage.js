@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, ActivityIndicator} from 'react-native'; 
+import { StyleSheet, Text, TextInput, View, ActivityIndicator, TouchableOpacity} from 'react-native'; 
 import { Logo } from './CustomProps/Logo';
 import { DefaultButton } from './CustomProps/DefaultButton';
 import { SocialButton } from './CustomProps/SocialButton';
@@ -88,11 +88,28 @@ export default class Login extends React.Component {
         }
         */
     }
+
+    renderButtons(){
+        if(this.state.isLoading)
+            return <View/>;
+        else return (<View>
+                <DefaultButton title='Login' nav={() => this.loginPress()} />
+                <DefaultButton title='Sign Up' nav={() => this.signupPress()} />
+
+                <TouchableOpacity onPress={() => {}}>
+                    <Text style={styles.forgotText}>
+                        Forgot password?
+                    </Text>
+                </TouchableOpacity>
+            </View>);
+        
+    }
     
 
     render() {
 
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
+        
         return (
         <View style={styles.container}>
             
@@ -114,8 +131,7 @@ export default class Login extends React.Component {
                     onChangeText={(pw) => this.setState({password:pw})} secureTextEntry autoCapitalize='none'
                     value={this.state.password}/>
                 
-                <DefaultButton title='Login' nav={() => this.loginPress()} />
-                <DefaultButton title='Sign Up' nav={() => this.signupPress()} />
+                {this.renderButtons()}
                 
                 <View style={baseStyles.activityView}>
                     {actInd}
@@ -175,4 +191,17 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
     },
+
+    /////////////////////////////////////////FORGOT STYLES
+    forgotView: {
+        flex: 1,
+        marginLeft: 5,
+        marginRight: 5,
+    },
+    forgotText: {
+        color: '#0047BB',
+        fontSize: 14,
+        alignSelf: 'center',
+        paddingTop: 20,
+    }
 });
