@@ -1,7 +1,7 @@
 var dbconn = require('./sqlConnection');
 var jwt = require('jsonwebtoken');
 const log = require('./log').log;
-const tokenConfig = require('../config').tokenConfig;
+const tokenConfig = require('../config').token;
 
 exports.createToken = (payload) => {
     var token = jwt.sign(payload, tokenConfig.tokenSecret, { 

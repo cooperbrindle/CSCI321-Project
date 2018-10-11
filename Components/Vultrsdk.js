@@ -247,6 +247,8 @@ export default class Vultr{
                     lastName: ln,
                 }
             ).then((res) => {
+                if(res.error && res.error != '')
+                    reject(res.error);
                 resolve();
             }).catch((error) => {
                 reject(error);
