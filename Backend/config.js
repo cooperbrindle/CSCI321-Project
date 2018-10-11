@@ -13,8 +13,10 @@ exports.sql = {
 }
 
 exports.tempPassword = {
-    possible: 'abcdefghijklmnopqrstuvwxyz1234567890',
-    maxLength: 10,
+    //possible: 'abcdefghijklmnopqrstuvwxyz1234567890',
+    //maxLength: 10,
+    possible: 'abc',
+    maxLength: 3,
 }
 
 exports.email = {
