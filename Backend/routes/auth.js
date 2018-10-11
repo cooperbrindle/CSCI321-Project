@@ -206,7 +206,7 @@ router.post('/resetpassword', async(req, res) => {
 	var hash = bcrypt.hashSync(password, salt);
 
 	//SEND EMAIL
-	emailer.sendPassword(password, 'daniel.mckinnell43@gmail.com')
+	emailer.sendPassword(password, req.body.email)
 	.then((info)=>{
 		//UPDATE TEMP PASSWORD IN DB
 		qry = 'UPDATE APPUSER SET passHash = ? WHERE id = ?';
