@@ -6,10 +6,17 @@
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+
+/* Delete all rows that have already been re-imported from RE */
 DELETE FROM EVENTCONSTITUENTEXPORT 
 WHERE (id, eventname)
        IN
       (SELECT id, eventname  FROM EVENTCONSTITUENT);
+
+DELETE FROM EVENTGUESTEXPORT 
+WHERE (id, eventname)
+       IN
+      (SELECT id, eventname  FROM EVENTGUEST);
 
 DELETE FROM LIBRARYMEMEXPORT
 WHERE (id)
@@ -24,8 +31,29 @@ WHERE (id, stdNum, birthDate, title, firstName, nickname, middleName, lastName, 
        IN
       (SELECT * FROM CONSTITUENT);
 
+/* Export tables to a .csv file */
+
 SELECT *
-FROM CONSTITUENTEXPORT
-INTO OUTFILE '/root/export.csv' 
-FIELDS TERMINATED BY ','
-LINES TERMINATED BY '\r\n';
+FROM EVENTCONSTITUENTEXPORT
+INTO OUTFILE '/tmp/eventconexport.csv' 
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+
+SELECT *
+INTO OUTFILE '/tmp/eventguestexport.csv' 
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+FROM EVENTGUESTEXPORT;
+
+SELECT *
+INTO OUTFILE '/tmp/libmemexport.csv' 
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+FROM LIBRARYMEMEXPORT;
+
+SELECT *
+INTO OUTFILE '/tmp/constexport.csv' 
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+FROM CONSTITUENTEXPORT;
+
