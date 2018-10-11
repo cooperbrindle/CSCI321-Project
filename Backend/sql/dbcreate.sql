@@ -212,6 +212,6 @@ CREATE TABLE EVENTGUEST(
 
 CREATE TABLE MAGAZINEHIGHLIGHTS(
     title       VARCHAR(128)    NOT NULL, /* Name of the magazine article */
-    descripton  VARCHAR(256)    NOT NULL, /* Description of article */
+    description  VARCHAR(256)    NOT NULL, /* Description of article */
     link        VARCHAR(256)    NOT NULL, /* Link to Website */
     CONSTRAINT MAGAZINEHIGHLIGHTS_pkey PRIMARY KEY (title));

@@ -124,7 +124,7 @@ export default class HomePage extends Component {
 								{item.data.title}
 							</Text>
 							<Text style={homeStyles.highlightBlurb}>
-								{item.data.desc}
+								{item.data.description}
 							</Text>
 						</View>
 						
