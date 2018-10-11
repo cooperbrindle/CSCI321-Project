@@ -52,6 +52,9 @@ export default class EventsList extends Component {
                         <Text style={styles.text}>
                             {item.eventname}
                         </Text>
+                        <Text style={styles.textBlurb}>
+                            {item.blurb}
+                        </Text>
                     </View>
                     <View style={styles.hlDate}>
                         <Text style={styles.hlDay}>
@@ -115,8 +118,17 @@ export default class EventsList extends Component {
             color: 'black',
             fontSize: 18,
             paddingLeft: 20,
-            paddingTop: 20,
+            paddingTop: 10,
             paddingRight: 10,
+        },
+        textBlurb: {
+            color: 'black',
+            textAlign: 'center',
+            fontSize: 12,
+            paddingLeft: 20,
+            paddingTop: 5,
+            paddingRight: 10,
+            paddingBottom: 5,
         },
         hlBtn: {
 			flex: 1,
