@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 
 import LoginPage from './Components/LoginPage';
-import Logout from './Components/Logout';
+import Logout from './Components/Drawer/Logout';
 import ForgotPassword from './Components/ForgotPassword';
 import FAQs from './Components/Drawer/faq';
 import HomePage from './Components/HomePage';
@@ -19,7 +19,7 @@ import OutlookWebPage from './Components/Outlook/OutlookWeb';
 import UpdateDetailsMenu from './Components/UpdateDetails/UpdateDetailsMenu';
 import AccountForm from './Components/UpdateDetails/AccountForm';
 import ContactForm from './Components/UpdateDetails/ContactForm';
-import PasswordForm from './Components/UpdateDetails/PasswordForm';
+import PasswordForm from './Components/Drawer/PasswordForm';
 import EmploymentForm from './Components/UpdateDetails/EmploymentForm';
 import SubscriptionForm from './Components/UpdateDetails/SubscriptionForm';
 import BenefitsMenu from './Components/Promotions/Benefits';

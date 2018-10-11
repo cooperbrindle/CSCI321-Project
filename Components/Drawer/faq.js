@@ -1,22 +1,36 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, WebView, ActivityIndicator} from 'react-native';
+import { Platform, StyleSheet, Text, View, WebView, ActivityIndicator, TouchableHighlight, Image} from 'react-native';
 
+const settingsIcon = require('../assets/Settings.png');
 
 export default class FAQs extends Component {
 	
-	static navigationOptions = {
+	static navigationOptions = ({navigation}) => {
+		return {
 		title: 'Frequently Asked Questions',
 		headerStyle: {
 			backgroundColor: '#0C2340',
+			
 		},
 		headerTintColor: 'white',
-		headerTitleStyle: {
-			fontWeight: 'bold',
-		},
+		headerRight: (
+			<TouchableHighlight 
+				onPress={navigation.getParam('toggleSettings')}
+			>
+				<Image source={settingsIcon}
+					style={{resizeMode: 'contain', width: 40, height: 40 }}
+				/>
+			</TouchableHighlight>	
+		),
+	}};//width: 40, height: 40
+
+	toggleSettings = () => {
+		this.props.navigation.toggleDrawer();;
 	}
 
 	componentWillMount(){
-        this.setState({isLoading: true});
+		this.setState({isLoading: true});
+		this.props.navigation.setParams({toggleSettings: this.toggleSettings})
 		
     }
     

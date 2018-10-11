@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ActivityIndicator} from 'react-native'; 
-import { baseStyles } from './styles/BaseStyles';
+import { baseStyles } from '../styles/BaseStyles';
 
 export default class Logout extends Component {
 	
