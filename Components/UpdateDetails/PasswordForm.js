@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
-import { styles } from '../FormStyles';
+import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 
-import { baseStyles } from '../BaseStyles';
+import { baseStyles } from '../styles/BaseStyles';
 
 export default class PasswordForm extends Component {
     static navigationOptions = {

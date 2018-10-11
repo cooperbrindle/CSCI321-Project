@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, ActivityIndicator, Alert} from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { DashButton } from '../CustomProps/DashButton';
 import { SocialButton } from '../CustomProps/SocialButton';
-import { baseStyles } from '../BaseStyles';
+import { baseStyles } from '../styles/BaseStyles';
 
 const accountIcon = require('../assets/Account.png');
 const contactIcon = require('../assets/Contact.png');

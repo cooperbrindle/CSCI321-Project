@@ -5,7 +5,7 @@ import { DefaultButton } from './CustomProps/DefaultButton';
 import { SocialButton } from './CustomProps/SocialButton';
 import { Facebook } from 'expo';
 
-import { baseStyles } from './BaseStyles';
+import { baseStyles } from './styles/BaseStyles';
 
 
 export default class Login extends React.Component {
