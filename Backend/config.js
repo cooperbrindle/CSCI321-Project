@@ -23,8 +23,8 @@ exports.email = {
     host: 'pod51008.outlook.com',
     post: '587',
     auth: {
-        user: 'dm431@uowmail.edu.au',
-        pass: 'Dan_380',
+        user: '',
+        pass: '',
     },
     from: 'no-reply@uowtest.edu.au',
 
