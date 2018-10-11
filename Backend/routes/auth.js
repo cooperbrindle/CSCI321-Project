@@ -4,7 +4,7 @@ const log = require('../lib/log').log;
 var tokenAuth = require('../lib/tokenAuth');
 var bcrypt = require('bcryptjs');
 var passwordConfig = require('../config').tempPassword;
-var emailer = require('../lib/emailer');
+//var emailer = require('../lib/emailer');
 
 const saltRounds = 10;
 
@@ -206,20 +206,20 @@ router.post('/resetpassword', async(req, res) => {
 	var hash = bcrypt.hashSync(password, salt);
 
 	//SEND EMAIL
-	emailer.sendPassword(password, req.body.email)
-	.then((info)=>{
-		//UPDATE TEMP PASSWORD IN DB
-		qry = 'UPDATE APPUSER SET passHash = ? WHERE id = ?';
-		dbconn.query(qry, [hash, id], (err, result1) => {
-			if(err) throw err;
-			res.json('ok');
-		});
+	// emailer.sendPassword(password, req.body.email)
+	// .then((info)=>{
+	// 	//UPDATE TEMP PASSWORD IN DB
+	// 	qry = 'UPDATE APPUSER SET passHash = ? WHERE id = ?';
+	// 	dbconn.query(qry, [hash, id], (err, result1) => {
+	// 		if(err) throw err;
+	// 		res.json('ok');
+	// 	});
 	
-	}).catch((error)=>{
-		console.log('EMAIL FAILED');
-		res.json({error: error});
-		return;
-	})
+	// }).catch((error)=>{
+	// 	console.log('EMAIL FAILED');
+	// 	res.json({error: error});
+	// 	return;
+	// })
 	
 
 	}catch(err){
