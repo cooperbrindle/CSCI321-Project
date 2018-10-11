@@ -28,6 +28,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.7.2",
     "react-native-maps": "^0.21.0",
     "react-native-settings-components": "0.0.1",
+    "react-native-snap-carousel": "^3.7.5",
     "react-navigation": "^2.0.4",
     "watchman": "^1.0.0"
   }
