@@ -3,7 +3,8 @@ var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
 var tokenAuth = require('../lib/tokenAuth');
 var bcrypt = require('bcryptjs');
-var passwordConfig = require('../config').passwordResetConfig;
+var passwordConfig = require('../config').tempPassword;
+var emailer = require('../lib/emailer');
 
 const saltRounds = 10;
 
@@ -192,7 +193,9 @@ router.post('/resetpassword', async(req, res) => {
 		res.json({error:'no match'});
 		return;
 	}
-	
+	var id = result[0].id;
+
+	//CREATE TEMP PASSWORD
 	var password = '';
 	for(i=0; i < passwordConfig.maxLength; i++){
 		password += passwordConfig.possible[Math.floor((Math.random() * passwordConfig.possible.length))];
@@ -201,14 +204,23 @@ router.post('/resetpassword', async(req, res) => {
 
 	var salt = bcrypt.genSaltSync(saltRounds);
 	var hash = bcrypt.hashSync(password, salt);
-	
-	qry = 'UPDATE APPUSER SET passHash = ? WHERE username = ?';
 
+	//SEND EMAIL
+	emailer.sendPassword(password, 'daniel.mckinnell43@gmail.com')
+	.then((info)=>{
+		//UPDATE TEMP PASSWORD IN DB
+		qry = 'UPDATE APPUSER SET passHash = ? WHERE id = ?';
+		dbconn.query(qry, [hash, id], (err, result1) => {
+			if(err) throw err;
+			res.json('ok');
+		});
 	
-	// dbconn.query(qry, [hash, req.body.email], (err, result1) => {
-	// 	if(err) throw err;
-	// 	res.json('ok');
-	// });
+	}).catch((error)=>{
+		console.log('EMAIL FAILED');
+		res.json({error: error});
+		return;
+	})
+	
 
 	}catch(err){
 		log('ERROR: ' + err);

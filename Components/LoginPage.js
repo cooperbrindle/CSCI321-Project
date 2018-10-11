@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, ActivityIndicator, TouchableOpacity, Modal, Alert} from 'react-native'; 
+import { StyleSheet, Text, TextInput, View, ActivityIndicator, TouchableOpacity, AsyncStorage} from 'react-native'; 
 import { Logo } from './CustomProps/Logo';
 import { DefaultButton } from './CustomProps/DefaultButton';
 import { SocialButton } from './CustomProps/SocialButton';
@@ -18,17 +18,35 @@ export default class Login extends React.Component {
         modalVisible: false,
     };
 
-    componentDidMount(){
+    async componentDidMount(){
         var vultr = this.props.screenProps;
         this.setState({
-            isLoading: false,
+            isLoading: true,
             vultr: this.props.screenProps,
             username: vultr.username,
         });
 
-		if(vultr.isLoggedIn()){
+
+        //LOAD TOKEN
+        var token, username;
+		try{ 
+            console.log('loading token');
+            token = await AsyncStorage.getItem('token');
+            username = await AsyncStorage.getItem('username');
+            console.log('loaded token ' + token);
+        }catch(err){
+            console.log(err); 
+            token = null;
+            username = null;
+        };
+		vultr.loadData(token, username);
+		
+
+
+        if(vultr.isLoggedIn()){
             vultr.loadConstituent();
             this.props.navigation.navigate('HomeDrawer');
+            return;
         }
         else{
             //TODO: REMOVE THIS ELSE - ONLY FOR TESTING
@@ -37,6 +55,7 @@ export default class Login extends React.Component {
                 password: 'password',
             })
         }
+        this.setState({isLoading: false});
     }
 
     loginPress() {

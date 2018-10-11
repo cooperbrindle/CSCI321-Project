@@ -74,7 +74,7 @@ export default class ForgotPassword extends Component {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>
-                    Update Password
+                    Reset your password
                 </Text>
 
                 <Text style={baseStyles.errorText}>

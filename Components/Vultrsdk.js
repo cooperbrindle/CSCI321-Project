@@ -1,6 +1,6 @@
-import { AsyncStorage } from 'react-native';
 
 const API_URL = 'http://149.28.172.13';
+import { AsyncStorage } from 'react-native';
 
 export default class Vultr{
     
@@ -8,23 +8,18 @@ export default class Vultr{
         this.token = null;
         this.data = null;
         this.username = '';
-        this.loadData();
+        //this.loadData();
         
 
     }
 
-    async loadData(){
-        try{ 
-            this.token = await AsyncStorage.getItem('token');
-            this.username = await AsyncStorage.getItem('username');}
-        catch(err){
-            console.log(err); 
-            this.token = null;
-            this.username = null;
-        };
+    loadData(token, username){
+        this.token = token;
+        this.username = username;
     }
 
     isLoggedIn(){
+        console.log('checking login. token: '+ this.token);
         if(this.token == null)
             return false
         else return true;
@@ -251,6 +246,8 @@ export default class Vultr{
                     lastName: ln,
                 }
             ).then((res) => {
+                if(res.error && res.error != '')
+                    reject(res.error);
                 resolve();
             }).catch((error) => {
                 reject(error);
