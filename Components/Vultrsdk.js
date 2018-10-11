@@ -229,6 +229,17 @@ export default class Vultr{
         });
     }
 
+    getHighlights() {
+        return new Promise((resolve, reject) => {
+            this.makeRequest('/promotions/highlights', 'POST',
+                {}
+            ).then((res) => {
+                resolve(res);
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
 
     resetPassword(email, fn, ln) {
         return new Promise((resolve, reject) => {
