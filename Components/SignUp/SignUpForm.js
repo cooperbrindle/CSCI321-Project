@@ -31,12 +31,12 @@ export default class SignUpForm extends Component {
     };
 
     componentDidMount(){
-        this.props.vultr = this.props.screenProps;
+        this.vultr = this.props.screenProps;
     }
 
     handleSubmitResult(result){
         
-         this.props.navigation.navigate('SUFinish', {
+         this.props.navigation.navigate('Conditions', {
             email: result.email,
             id: result.id,
         });
@@ -64,7 +64,7 @@ export default class SignUpForm extends Component {
             return;
         }
         //send data to cloud function here
-        this.props.vultr.submitSignUp(data)
+        this.vultr.submitSignUp(data)
             .then((result) => {
                 this.setState({isLoading: false, errorMessage: ''});
                 this.handleSubmitResult(result);

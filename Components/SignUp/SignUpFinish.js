@@ -22,7 +22,6 @@ export default class SignUpFinish extends Component {
         var emailProp = this.props.navigation.getParam('email', '**error passing email info**');
         id = this.props.navigation.getParam('id', '');
         this.setState({email: emailProp, id: id});
-
     }
     
     submitForm() {

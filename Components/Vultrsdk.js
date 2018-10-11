@@ -90,8 +90,12 @@ export default class Vultr{
         });
     }
 
-    libraryReq() {
+    libraryReq(email) {
         console.log(this.data.id);
+        if(email != this.data.email){
+            this.data.email = email;
+            this.updateDetails(this.data);
+        }
         return new Promise((resolve, reject) => {
             this.makeAuthRequest('/user/libraryReq', 'POST',
                 {
