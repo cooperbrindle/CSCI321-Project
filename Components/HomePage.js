@@ -73,10 +73,10 @@ export default class HomePage extends Component {
 			console.log('rendering event');
 			var parts = item.data.startdate.split('/')
         	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
+			
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
-					onPress={(item) => this.props.navigation.navigate('EventSingle', {data: item.data})}>
+					onPress={() => this.props.navigation.navigate('EventSingle', {data: item.data})}>
                 <View style={homeStyles.highlightView}>
                     <View style={homeStyles.highlightTextView}>
                         <Text style={homeStyles.highlightText}>
@@ -140,7 +140,7 @@ export default class HomePage extends Component {
 				<Carousel
 					ref={(c) => {this.carousel = c}}
 					data={this.state.highlightData}
-					renderItem={this.renderHighlight}
+					renderItem={this.renderHighlight.bind(this)}
 					layout={'default'}
 					sliderWidth={Dimensions.get('window').width}
 					itemWidth={Dimensions.get('window').width/1.2}
