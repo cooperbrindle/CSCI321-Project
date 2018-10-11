@@ -35,7 +35,7 @@ CREATE TABLE CONSTITUENT(
     outlook     VARCHAR(10)     NOT NULL, /* Outlook Magazine Subscription */
 
     CONSTRAINT CONSTITUENT_pkey PRIMARY KEY (id),
-    CONSTRAINT CONSTITUENT_uni UNIQUE (stdNum)),
+    CONSTRAINT CONSTITUENT_uni UNIQUE (stdNum),
     CONSTRAINT CONSTITUENT_uni2 UNIQUE (firstName, lastName, email));
 
 
@@ -69,7 +69,7 @@ CREATE TABLE CONSTITUENTEXPORT(
     outlook     VARCHAR(10)     NOT NULL, /* Outlook Magazine Subscription */
 
     CONSTRAINT CONSTITUENTEXPORT_pkey PRIMARY KEY (id),
-    CONSTRAINT CONSTITUENTEXPORT_uni UNIQUE (stdNum)),
+    CONSTRAINT CONSTITUENTEXPORT_uni UNIQUE (stdNum),
     CONSTRAINT CONSTITUENTEXPORT_uni2 UNIQUE (firstName, lastName, email));
 
 /* Cooper 06/09/2018 */
@@ -115,7 +115,8 @@ CREATE TABLE EVENTS(
     country         VARCHAR(256)    NULL, /* Event Country */
     regLink         VARCHAR(256)    NULL, /* Paid Event Rego Link */
     mapsLink        VARCHAR(256)    NULL, /* Google maps API Link */
-    onApp           VARCHAR(3)      NOT NULL, /* To be displayed */
+    cost            VARCHAR(256)    NULL, /* To be displayed */
+    blurb           VARCHAR(256)    NULL, /* Descriptive Blurb */
     CONSTRAINT EVENTS_pkey PRIMARY KEY (eventname) );
 
 /* Cooper 31/08/2018 */

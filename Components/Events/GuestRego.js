@@ -144,11 +144,11 @@ export default class GuestRego extends Component {
                         </Text>
                             <TextInput style={guestStyles.firstNameInput}
                                 placeholder='' underlineColorAndroid='transparent' placeholderTextColor='grey'
-                                onChangeText={(t) => this.setState({firstname:t})}
-                                value={this.state.firstname} />
+                                onChangeText={(t) => this.setState({firstName:t})}
+                                value={this.state.firstName} />
                     </View>
                 </View>
-                {this.renderInput('Last Name', '', (a) => this.setState({lastname:a}), this.state.lastname, true)}
+                {this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName, true)}
                 {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
                 {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
                 {this.renderInput('Dietary Requirements (if any)', '', (a) => this.setState({dietary:a}), this.state.dietary, true)}
