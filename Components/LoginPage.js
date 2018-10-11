@@ -30,10 +30,8 @@ export default class Login extends React.Component {
         //LOAD TOKEN
         var token, username;
 		try{ 
-            console.log('loading token');
             token = await AsyncStorage.getItem('token');
             username = await AsyncStorage.getItem('username');
-            console.log('loaded token ' + token);
         }catch(err){
             console.log(err); 
             token = null;
@@ -41,8 +39,6 @@ export default class Login extends React.Component {
         };
 		vultr.loadData(token, username);
 		
-
-
         if(vultr.isLoggedIn()){
             vultr.loadConstituent();
             this.props.navigation.navigate('HomeDrawer');

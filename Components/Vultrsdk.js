@@ -8,9 +8,6 @@ export default class Vultr{
         this.token = null;
         this.data = null;
         this.username = '';
-        //this.loadData();
-        
-
     }
 
     loadData(token, username){
@@ -19,7 +16,6 @@ export default class Vultr{
     }
 
     isLoggedIn(){
-        console.log('checking login. token: '+ this.token);
         if(this.token == null)
             return false
         else return true;
@@ -36,7 +32,6 @@ export default class Vultr{
                 }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
                 resolve();
             }).catch((error) => {
-                console.log('top err" ' + error);
                 reject(error);
             })
         });
@@ -50,8 +45,6 @@ export default class Vultr{
                     password: password
                 }
             ).then((res) => {
-                console.log(res.token);
-                if(res.error) console.log('kk');
                 if(res.error && res.error != '')
                     reject(res.error);
                 else{
