@@ -102,8 +102,8 @@ CREATE TABLE EVENTS(
     eventname       VARCHAR(256)    NOT NULL, /* Event Name */
     eventgroup      VARCHAR(64)     NOT NULL, /* Organising Department */
     eventtype       VARCHAR(64)     NOT NULL, /* Purpose of Event */
-    startdate       VARCHAR(10)            NOT NULL, /* Start of Event */
-    enddate         VARCHAR(10)            NOT NULL, /* End of Event */
+    startdate       VARCHAR(10)     NOT NULL, /* Start of Event */
+    enddate         VARCHAR(10)     NOT NULL, /* End of Event */
     starttime       VARCHAR(10)     NOT NULL, /* Start Time */
     endtime         VARCHAR(10)     NOT NULL, /* End Time */
     capacity        DECIMAL(4)      NOT NULL, /* Max number of attendants */
@@ -140,6 +140,41 @@ CREATE TABLE APPUSER(
     CONSTRAINT USER_fkey1 FOREIGN KEY (id)
         REFERENCES CONSTITUENT (id) );
 
+CREATE TABLE EVENTCONSTITUENTEXPORT(
+    eventname   VARCHAR(256)    NOT NULL, /* Event Name */   
+    id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
+    title       VARCHAR(10)     NULL, /* Title ie Mr Miss */
+    firstName   VARCHAR(36)     NULL, /* First Name */
+    lastName    VARCHAR(64)     NOT NULL, /* Last Name/s */
+    orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
+    position    VARCHAR(256)    NULL, /* Position Name */
+    dietary     VARCHAR(256)    NULL,  /* Dietary Requirements */
+    mobility    VARCHAR(256)    NULL, /* Mobility Needs */
+    CONSTRAINT EVENTCONSTITUENTEXPORT_pkey PRIMARY KEY (id, eventname),
+    CONSTRAINT EVENTCONSTITUENTEXPORT_fkey1 FOREIGN KEY (id)
+        REFERENCES CONSTITUENT (id),
+    CONSTRAINT EVENTCONSTITUENTEXPORT_fkey2 FOREIGN KEY (stdNum)
+        REFERENCES CONSTITUENT (stdNum),
+    CONSTRAINT EVENTCONSTITUENTEXPORT_fkey3 FOREIGN KEY (eventname)
+        REFERENCES EVENTS (eventname));
+
+CREATE TABLE EVENTGUESTEXPORT(
+    eventname   VARCHAR(256)    NOT NULL, /* Event Name */   
+    id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
+    title       VARCHAR(10)     NULL, /* Title ie Mr Miss */
+    firstName   VARCHAR(36)     NULL, /* First Name */
+    lastName    VARCHAR(64)     NOT NULL, /* Last Name/s */
+    orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
+    position    VARCHAR(256)    NULL, /* Position Name */
+    dietary     VARCHAR(256)    NULL,  /* Dietary Requirements */
+    mobility    VARCHAR(256)    NULL, /* Mobility Needs */
+    CONSTRAINT EVENTGUESTEXPORT_pkey PRIMARY KEY (id, eventname),
+    CONSTRAINT EVENTGUESTEXPORT_fkey1 FOREIGN KEY (id)
+        REFERENCES CONSTITUENT (id),
+    CONSTRAINT EVENTGUESTEXPORT_fkey2 FOREIGN KEY (eventname)
+        REFERENCES EVENTS (eventname));
+
 CREATE TABLE EVENTCONSTITUENT(
     eventname   VARCHAR(256)    NOT NULL, /* Event Name */   
     id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
@@ -174,3 +209,9 @@ CREATE TABLE EVENTGUEST(
         REFERENCES CONSTITUENT (id),
     CONSTRAINT EVENTGUEST_fkey2 FOREIGN KEY (eventname)
         REFERENCES EVENTS (eventname));
+
+CREATE TABLE MAGAZINEHIGHLIGHTS(
+    title       VARCHAR(128)    NOT NULL, /* Name of the magazine article */
+    descripton  VARCHAR(256)    NOT NULL, /* Description of article */
+    link        VARCHAR(256)    NOT NULL, /* Link to Website */
+    CONSTRAINT MAGAZINEHIGHLIGHTS_pkey PRIMARY KEY (title));

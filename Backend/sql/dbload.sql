@@ -7,18 +7,24 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /* Load Constituents */
-LOAD DATA LOCAL INFILE 'constituent.csv' 
+LOAD DATA LOCAL INFILE './constituent.csv' 
 INTO TABLE CONSTITUENT 
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
 /* Load Events */
-LOAD DATA LOCAL INFILE 'event.csv' 
+LOAD DATA LOCAL INFILE './event.csv'
 INTO TABLE EVENTS 
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
+
+/* Load Test Data */
+INSERT INTO EVENTCONSTITUENT VALUES('2018 New York Alumni Event', '123412', '5113416', '', '', 'Brindle', '', '', '', '');
+INSERT INTO EVENTCONSTITUENTEXPORT VALUES('2018 New York Alumni Event', '123412', '5113416', '', '', 'Brindle', '', '', '', '');
+INSERT INTO EVENTCONSTITUENTEXPORT VALUES('2018 New York Alumni Event', '696969', '5643612', '', '', 'McKinnell', '', '', '', '');
+INSERT INTO MAGAZINEHIGHLIGHTS VALUES('UOW Alumni Events', 'The UOW Alumni Relations Team has been travelling the globe to meet you, our alumni community.', 'https://www.uow.edu.au/alumni/outlook/UOW245285.html');
 
 /* Load Users */
 INSERT INTO APPUSER VALUES ('129062', 'sclaypole', '$2a$10$8gLwf/ij/bd.7ah2MNu4Qe1UnZqG6qqN3gQjI7nWt1VvuMGRAZHi.');

@@ -44,9 +44,9 @@ router.post('/registerconst', (req, res) => {
         
         //check ctx row exists and drop
                 
-                dbconn.query('DELETE FROM EVENTCONSTITUENT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
+                dbconn.query('DELETE FROM EVENTCONSTITUENTEXPORT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
                     //insert new row
-                    dbconn.query('INSERT INTO EVENTCONSTITUENT SET ?', data, (err, result) => {
+                    dbconn.query('INSERT INTO EVENTCONSTITUENTEXPORT SET ?', data, (err, result) => {
                         if(err) throw err;
                         log('Updated eventconstituent ' + data.eventname + ' ' + data.id);
                         res.json('ok');
@@ -71,9 +71,9 @@ router.post('/registerguest', (req, res) => {
         
         //check ctx row exists and drop
                 
-                dbconn.query('DELETE FROM EVENTGUEST WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
+                dbconn.query('DELETE FROM EVENTGUESTEXPORT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
                     //insert new row
-                    dbconn.query('INSERT INTO EVENTGUEST SET ?', data, (err, result) => {
+                    dbconn.query('INSERT INTO EVENTGUESTEXPORT SET ?', data, (err, result) => {
                         if(err) throw err;
                         log('Updated eventguest ' + data.eventname + ' ' + data.id);
                         res.json('ok');
