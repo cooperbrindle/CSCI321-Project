@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 
+
 import LoginPage from './Components/LoginPage';
 import Logout from './Components/Logout';
 import ForgotPassword from './Components/ForgotPassword';
@@ -75,6 +76,9 @@ const passwordStack = createStackNavigator({
   const faqStack = createStackNavigator({
 	FAQs: { screen: FAQs }
   });
+  const ForgotPasswordStack = createStackNavigator({
+	ForgotPasswordPage: { screen: ForgotPassword }
+  });
 
 const drawerNav = createDrawerNavigator({
 	//Routes
@@ -99,21 +103,24 @@ const RootStack = createSwitchNavigator({
 	HomeDrawer: { screen: drawerNav },
 	SUForm: { screen: SignUpForm},
 	SUFinish: { screen: SignUpFinish},
-	ForgotPassword: { screen: ForgotPassword },
+	ForgotPassword: { screen: ForgotPasswordStack },
   },{ //options
   initialRouteName: 'Login',
 });
 
 export default class App extends React.Component{
 
+	constructor(){
+		super();
+		this.isLoading = true;
+	}
 	componentWillMount(){
-		//check token
 		this.vultr = new Vultrsdk();
+		
 	}
 
 	render() {
-		
-			return <RootStack screenProps={this.vultr}/>;
+		return <RootStack screenProps={this.vultr}/>;
 	}
 }
 

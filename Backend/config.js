@@ -20,12 +20,12 @@ exports.tempPassword = {
 }
 
 exports.email = {
-    host: 'pod51008.outlook.com',
-    post: '587',
+    host: 'smtp.telstra.com',
+    post: '465',
     auth: {
         user: '',
         pass: '',
     },
-    from: 'no-reply@uowtest.edu.au',
+    from: '',
 
 }
