@@ -25,11 +25,29 @@ export default class EventSingle extends Component {
 		},
 	}
 	componentWillMount(){
-        const data = this.props.navigation.getParam('data', 'NoData');
+        var data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
             console.error('NO DATA PASSED TO EVENT PAGE');
             this.props.navigation.goBack();
-        }
+		}
+		if(data.geocode == ''){
+			var vultr = this.props.screenProps;
+			this.setState({vultr: this.props.screenProps});
+			vultr.geocodeAddress(data)
+			.then(() => {
+				this.setState({
+					isLoading: false,
+					didLoad: true,
+					//data: vultr.data,
+				});
+	
+			}).catch((err) => {
+				this.setState({
+					isLoading: false,
+					didLoad: false,
+				});
+			})
+		}
         this.setState({
 			errorMessage: '',
 			data: data,
@@ -47,12 +65,12 @@ export default class EventSingle extends Component {
 			country: data.country,
 			cost: data.cost,
 			blurb: data.blurb,
+			geocode: data.geocode,
+			viewport: data.viewport,
 			image: 'https://www.youruowcommunity.edu.au/image/web/event-forms/Event-Page-Banner.jpg',
         });
     }
 	renderDescription(){
-		var parts = this.state.date.split('/');
-        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		return(
 			<View style={eventStyles.heading}>
 				<Text style={eventStyles.headTitle}>
