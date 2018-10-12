@@ -116,7 +116,7 @@ export default class HomePage extends Component {
 		if(item.type == 'mag')
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
-						onPress={(item) => {}}>
+						onPress={() => {this.props.navigation.navigate('OutlookArticles', {data: item.data})}}>
 					<View style={homeStyles.highlightView}>
 						<View style={homeStyles.highlightTextView}>
 							<Text style={homeStyles.highlightText}>
