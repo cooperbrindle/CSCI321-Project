@@ -9,32 +9,18 @@ import { DashButton } from './CustomProps/DashButton';
 import { Logo } from './CustomProps/Logo';
 import Carousel from 'react-native-snap-carousel';
 
+import {navigationOptionsFunc} from './styles/navOptions';
+
 const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
 const promoIcon = require('./assets/Promotions.png');
-const settingsIcon = require('./assets/Settings.png');
 
 export default class HomePage extends Component {
 	
 	static navigationOptions = ({navigation}) => {
-		return {
-		title: 'Home',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-			
-		},
-		headerTintColor: 'white',
-		headerRight: (
-			<TouchableHighlight 
-				onPress={navigation.getParam('toggleSettings')}
-			>
-				<Image source={settingsIcon}
-					style={{resizeMode: 'contain', width: 40, height: 40 }}
-				/>
-			</TouchableHighlight>	
-		),
-	}};//width: 40, height: 40
+		return navigationOptionsFunc('Home', navigation, true);
+	}
 
 	toggleSettings = () => {
 		this.props.navigation.toggleDrawer();;

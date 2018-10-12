@@ -5,17 +5,11 @@ import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighl
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class ContactForm extends Component {
-    static navigationOptions = {
-		title: 'Update Details',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
+    static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Update Details', navigation, false);
 	}
 
 	/////////////////////////////////////
@@ -102,12 +96,12 @@ export default class ContactForm extends Component {
                 {this.renderInput('Address', 'This field will be expanded out in the future', (a) => this.setState({address:a}), this.state.address)}
                 {this.renderInput('City', 'Wollongong', (a) => this.setState({city:a}), this.state.city)}
 				
+            </View>
+            </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
 					<DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
-            </View>
-            </KeyboardAwareScrollView>
 			</View>
 		);
 		}

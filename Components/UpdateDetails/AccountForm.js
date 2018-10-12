@@ -5,18 +5,12 @@ import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighl
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class AccountForm extends Component {
-	static navigationOptions = {
-		title: 'Update Details',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
-    }
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Update Details', navigation, false);
+	}
     
     /////////////////////////////////////
     //
@@ -138,12 +132,12 @@ export default class AccountForm extends Component {
                 {this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName, true)}
                 {this.renderInput('Student Number', '', (a) => this.setState({stdNum:a}), this.state.stdNum, false)}
 				
+            </View>
+            </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
-            </View>
-            </KeyboardAwareScrollView>
 			</View>
 		);
 	}

@@ -1,11 +1,10 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import { Text, View, ScrollView} from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import MapView from 'react-native-maps';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 import {eventStyles} from '../styles/EventStyles';
-import {baseStyles} from '../styles/BaseStyles';
 import {styles} from '../styles/FormStyles';
 
 const eventTmp = require('../assets/Event-Page-Banner.jpg');
@@ -14,15 +13,8 @@ export default class EventSingle extends Component {
 	constructor(props){
 		super(props);
 	}
-	static navigationOptions = {
-		title: 'Event Information',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-			fontWeight: 'bold',
-		},
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Event Info', navigation, false);
 	}
 	componentWillMount(){
         var data = this.props.navigation.getParam('data', 'NoData');

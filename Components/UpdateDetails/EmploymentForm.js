@@ -5,23 +5,16 @@ import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighl
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class EmploymentForm extends Component {
-	static navigationOptions = {
-		title: 'Update Details',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Update Details', navigation, false);
 	}
 
 	/////////////////////////////////////
     //
     componentWillMount(){
-        console.warn('Component Mounting');
         const data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
             console.error('NO DATA PASSED TO EMPLOYMENT FORM PAGE');
@@ -72,12 +65,12 @@ export default class EmploymentForm extends Component {
                 {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
                 {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
 				
+            </View>
+            </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
-            </View>
-            </KeyboardAwareScrollView>
 			</View>
 		);
 	}

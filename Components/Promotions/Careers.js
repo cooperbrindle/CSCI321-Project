@@ -5,7 +5,7 @@ import { StyleSheet, ScrollView, Text, View, Image} from 'react-native';
 
 import { styles } from '../styles/FormStyles';
 import { baseStyles } from '../styles/BaseStyles';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 
 
@@ -17,15 +17,9 @@ const blurbPoints = 'Career Consultations - Schedule an appointment with our exp
             'Advertise Jobs- Have an employment oppotunity for UOW Students? Post it to CareerHub\n\n';
 
 export default class Careers extends Component {
-	static navigationOptions = {
-		title: 'Career Support',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
-    }
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Careers', navigation, false);
+	}
 
 	render() {
 		return (
@@ -40,7 +34,7 @@ export default class Careers extends Component {
                 </ScrollView>
 				
                 <View style={styles.submitBtnCont}>
-                    <DefaultButton title='Login to CareerHub' nav={() => this.props.navigation.navigate('CareerHub',
+                    <DefaultButton title='Login to CareerHub' nav={() => this.props.navigation.navigate('WebViewPage',
                             {link: 'https://careerhub.uow.edu.au/students/login?ReturnUrl=%2f',
                             title: 'CareerHub'})} />
                 </View>

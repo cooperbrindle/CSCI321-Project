@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 import { listStyles } from '../styles/EventStyles';
 import { baseStyles } from '../styles/BaseStyles';
 
@@ -10,16 +10,9 @@ export default class EventsList extends Component {
         super(props);
     }
     
-	static navigationOptions = {
-        title: 'Events',
-		headerStyle: {
-            backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-            
-        },
-    }
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Events', navigation, false);
+	}
     
     state = {
         isLoading: true,

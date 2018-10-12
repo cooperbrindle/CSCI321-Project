@@ -4,19 +4,12 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image, Switch} from 'react-native';
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
-import {SettingsDividerShort, SettingsDividerLong, SettingsEditText, SettingsCategoryHeader, SettingsSwitch, SettingsPicker} from 'react-native-settings-components';
-
+import { SettingsSwitch } from 'react-native-settings-components';
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class SubscriptionForm extends Component {
-	static navigationOptions = {
-		title: 'Subscriptions',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-			fontWeight: 'bold',
-		},
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Update Details', navigation, false);
 	}
 	
 	/////////////////////////////////////
