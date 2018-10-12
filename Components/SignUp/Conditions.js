@@ -1,10 +1,12 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, Alert, Image} from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Alert} from 'react-native';
+
 import { styles } from '../styles/FormStyles';
+import { baseStyles } from '../styles/BaseStyles';
+
 import { DefaultButton } from '../CustomProps/DefaultButton';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 const blurbPoints = '-  Access a wide range of online resources, including e-journals and databases\n\n'+
@@ -61,7 +63,7 @@ export default class Conditions extends Component {
 
 	render() {
 		return (
-			<View style={thisStyles.container}>
+			<View style={baseStyles.container}>
 				<ScrollView style={thisStyles.blurbView}>         
                     <Text style={thisStyles.blurbTextPoints}>
                         {blurbPoints}
@@ -78,17 +80,7 @@ export default class Conditions extends Component {
     };
     
     const thisStyles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: '#0C2340',
-        },
-        title: {
-            alignSelf: 'center',
-            textAlign: 'center',
-            fontSize: 36,
-            color: 'white',
-            marginBottom: 10,
-        },
+        
         blurbView: {
             flex:1,
             backgroundColor: '#0C2340',
@@ -97,18 +89,9 @@ export default class Conditions extends Component {
             marginTop: 10,
             marginBottom: 10,
         },
-        logo: {
-            flex:0.5,
-            alignSelf: 'center',
-            resizeMode: 'center',
-        },
         blurbTextPoints: {
             color:'white',
             fontSize: 10,
             paddingLeft: 20,
-        },
-        blurbTextEnd: {
-            color:'white',
-            fontSize: 14,
         },
     });

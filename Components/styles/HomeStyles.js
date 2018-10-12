@@ -1,16 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const homeStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#0C2340',
-    },
-
-    /////////////////////////////////////////LOGO
-    logoCont: {
-        flex: 1,
-        marginBottom: 15,
-    },
+    
     
     /////////////////////////////////////////DASH BOARD
     dashboard: {
@@ -99,3 +90,47 @@ export const homeStyles = StyleSheet.create({
         resizeMode: 'center',
     },
 });
+
+export const smallDashStyles = StyleSheet.create({
+		
+    /////////////////////////////////////////DASH BOARD    SMALL
+    dashboardSmall: {
+        flex: 0.75,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: 5,
+    },
+            dashBtnSmall: {
+                flex: 1,
+                marginLeft: 5,
+                marginRight: 5,
+                marginBottom: 5,
+                backgroundColor: 'white',
+                justifyContent: 'center',
+                alignContent: 'center',
+            },
+            dashBtnNA: {
+                flex: 1,
+                margin: 5,
+                opacity: 0.5,
+                backgroundColor: 'black',
+                justifyContent: 'center',
+                alignContent: 'center',
+            },
+            dashBtnContainerSmall: {
+                justifyContent: 'center',
+                alignContent: 'center',
+            },
+                    dashBtnImgSmall: {
+                        width: 30,
+                        height: 30,
+                        alignSelf: 'center',
+                    },
+                    dashTextSmall: {
+                        color: '#0C2340',
+                        fontSize: 12,
+                        marginTop: 10,
+                        textAlign: 'center',
+                        alignSelf: 'center',
+                    },
+        });

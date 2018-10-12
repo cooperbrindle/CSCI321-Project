@@ -1,11 +1,13 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
+import { Text, View, TouchableHighlight, Image} from 'react-native';
 import { DashButton } from '../CustomProps/DashButton';
 import { Logo } from '../CustomProps/Logo';
 
-const dashTmp = require('../assets/dashTmp.png');
+import { baseStyles } from '../styles/BaseStyles';
+import { homeStyles, smallDashStyles } from '../styles/HomeStyles';
+
 const Library = require('../assets/Library.png');
 const Discounts = require('../assets/Discounts.png');
 const Mentoring = require('../assets/Mentoring.png');
@@ -38,16 +40,16 @@ export default class BenefitsMenu extends Component {
 		errorMessage: '',
 		successMessage: '',
 	};
-	renderdashBtn(title, page, img){
+	renderdashBtn(title, page, img, navOptions){
 		return(
-			<TouchableHighlight style={styles.dashBtnSmall}
-					onPress={() => this.props.navigation.navigate(page)}>
-				<View style={styles.dashBtnContainerSmall}>
+			<TouchableHighlight style={smallDashStyles.dashBtnSmall}
+					onPress={() => this.props.navigation.navigate(page, navOptions)}>
+				<View style={smallDashStyles.dashBtnContainerSmall}>
 					<Image
-                        style={styles.dashBtnImgSmall}
+                        style={smallDashStyles.dashBtnImgSmall}
                         source={img}
                     />
-					<Text style={styles.dashTextSmall}>
+					<Text style={smallDashStyles.dashTextSmall}>
 						{title}
 					</Text>
 				</View>
@@ -57,25 +59,39 @@ export default class BenefitsMenu extends Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-				<View style={styles.logoCont}>
+			<View style={baseStyles.container}>
+				<View style={baseStyles.logoCont}>
 					<Logo scale={1} />
 				</View>
 				
-				<View style={styles.dashboard}>
-					<DashButton title='Discounts Program' img={Discounts} nav={()=>this.props.navigation.navigate('Discounts')} />
+				<View style={homeStyles.dashboard}>
+					<DashButton title='Discounts Program' img={Discounts} nav={()=>this.props.navigation.navigate('Discounts', {})} />
 					<DashButton title='Library Membership' img={Library} nav={()=>this.props.navigation.navigate('LibraryMem', {data: this.state.data})} />
 				</View>
-				<View style={styles.dashboard}>
-					<DashButton title='Career Support' img={Careers} nav={()=>this.props.navigation.navigate('Careers')} />
-					<DashButton title='Networks & Groups' img={Networking} nav={()=>this.props.navigation.navigate('Networking')} />
+				<View style={homeStyles.dashboard}>
+					<DashButton title='Career Support' img={Careers} nav={()=>this.props.navigation.navigate('Careers', {})} />
+					<DashButton title='Networks & Groups' img={Networking} nav={()=>this.props.navigation.navigate('Networking', 
+								{title: 'Networks and Groups',
+								link: 'https://www.uow.edu.au/alumni/networks/index.html',})} />
 				</View>
 
-				<View style={styles.dashboardSmall}>
-					{this.renderdashBtn("Further Study", 'FurtherStudy', Study)}
-					{this.renderdashBtn("Scholarships", 'Scholarships', ScholarshipsImg)}
-					{this.renderdashBtn("Volunteer Opportunities", 'Volunteering', Volunteering)}
-					{this.renderdashBtn("Mentor Opportunities", 'Mentoring', Mentoring)}
+				<View style={smallDashStyles.dashboardSmall}>
+					{this.renderdashBtn("Further Study", 'WebViewPage', Study, {
+						title: 'Further Study',
+						link: 'https://www.uow.edu.au/future/postgrad/index.html'
+					} )}
+					{this.renderdashBtn("Scholarships", 'WebViewPage', ScholarshipsImg, {
+						title: 'Alumni Scholarships',
+						link: 'https://www.uow.edu.au/alumni/benefits/postgrad/index.html',
+					})}
+					{this.renderdashBtn("Volunteer Opportunities", 'WebViewPage', Volunteering, {
+						title: 'Volunteer Opportunities',
+						link: 'https://www.uow.edu.au/alumni/benefits/volunteer/index.html',
+					})}
+					{this.renderdashBtn("Mentor Opportunities", 'WebViewPage', Mentoring, {
+						title: 'Mentor Opportunities',
+						link: 'https://www.uow.edu.au/alumni/benefits/mentoring/index.html',
+					})}
 				</View>
 
 			</View>
@@ -83,138 +99,4 @@ export default class BenefitsMenu extends Component {
 		}
 	};
 	
-	const styles = StyleSheet.create({
-		container: {
-			flex: 1,
-			backgroundColor: '#0C2340',
-		},
-
-		/////////////////////////////////////////LOGO
-		logoCont: {
-			//marginTop: 10,
-			flex: 1,
-		},
-		logo: {
-			width: 180,
-			height: 72,
-			flexDirection: 'row',
-			alignSelf: 'center',
-		},
-		banner: {
-			//marginTop: 8,
-			backgroundColor: 'white',
-			margin: 0,
-			justifyContent: 'center',
-			padding: 5,
-			paddingBottom: 10,
-			flexDirection: 'row',
-			marginBottom: 10,
-		},
-		bannerText: {
-			fontSize: 18,
-			color: '#0C2340',
-			fontWeight: 'bold',
-		},
-		
-
-		/////////////////////////////////////////DASH BOARD
-		dashboard: {
-			flex: 1,
-			flexDirection: 'row',
-			marginLeft: 7,
-			marginRight: 7,
-			justifyContent: 'space-between',
-		},
-/////////////////////////////////////////DASH BOARD    SMALL
-dashboardSmall: {
-	flex: 0.75,
-	flexDirection: 'row',
-	justifyContent: 'space-between',
-	margin: 5,
-},
-		dashBtnSmall: {
-			flex: 1,
-			marginLeft: 5,
-			marginRight: 5,
-			marginBottom: 5,
-			backgroundColor: 'white',
-			justifyContent: 'center',
-			alignContent: 'center',
-		},
-		dashBtnNA: {
-			flex: 1,
-			margin: 5,
-			opacity: 0.5,
-			backgroundColor: 'black',
-			justifyContent: 'center',
-			alignContent: 'center',
-		},
-		dashBtnContainerSmall: {
-			justifyContent: 'center',
-			alignContent: 'center',
-		},
-				dashBtnImgSmall: {
-					width: 30,
-					height: 30,
-					alignSelf: 'center',
-				},
-				dashTextSmall: {
-					color: '#0C2340',
-					fontSize: 12,
-					marginTop: 10,
-					textAlign: 'center',
-					alignSelf: 'center',
-				},
-
-		/////////////////////////////////////////HIGHLIGHTS
-		highlightsContainer: {
-			flex: 1.5,
-		},
-		highlightHeading: {
-			color: 'white',
-			marginLeft: 10,
-			marginTop: 20,
-			marginBottom: 20,
-			fontSize: 28,
-		},
-		/////////////Button
-		hlBtn: {
-			flex: 1,
-			backgroundColor: 'white',
-			borderWidth: 2,
-			borderColor: 'white',
-			marginBottom: 20,
-			marginLeft: 10,
-			marginRight: 10,
-		},
-		hlBtnView: {
-			flex: 1,
-			flexDirection: 'row',
-		},
-				hlCont: {
-					flex: 2.5,
-					padding: 20,
-				},
-						hlTitle: {
-							fontSize: 24,
-							color: '#0C2340',
-							//margin: 30,
-						},
-				hlDate: {
-					flex: 1,
-					backgroundColor: '#0C2340',
-					justifyContent: 'center',
-				},
-						hlDay: {
-							fontSize: 36,
-							textAlign: 'center',
-							color: 'white',
-							margin: 0,
-						},
-						hlMonth: {
-							fontSize: 18,
-							textAlign: 'center',
-							color: '#cc0000',
-							margin: 0,
-						},
-	});
+	

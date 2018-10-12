@@ -38,7 +38,9 @@ export default class Careers extends Component {
                 </ScrollView>
 				
                 <View style={styles.submitBtnCont}>
-                    <DefaultButton title='Login to CareerHub' nav={() => this.props.navigation.navigate('CareerHub')} />
+                    <DefaultButton title='Login to CareerHub' nav={() => this.props.navigation.navigate('CareerHub',
+                            {link: 'https://careerhub.uow.edu.au/students/login?ReturnUrl=%2f',
+                            title: 'CareerHub'})} />
                 </View>
 
 			</View>

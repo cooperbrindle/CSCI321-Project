@@ -72,7 +72,7 @@ export default class ForgotPassword extends Component {
 	render() {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
 		return (
-			<View style={styles.container}>
+			<View style={baseStyles.container}>
 				<Text style={styles.title}>
                     Reset your password
                 </Text>

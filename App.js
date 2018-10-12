@@ -1,6 +1,6 @@
 
 
-import React, { Component } from 'react';
+import React from 'react';
 
 
 import LoginPage from './Components/LoginPage';
@@ -15,8 +15,6 @@ import EventsList from './Components/Events/EventsList';
 import EventSingle from './Components/Events/EventSingle';
 import EventRego from './Components/Events/EventRego';
 import GuestRego from './Components/Events/GuestRego';
-import OutlookWebPage from './Components/Outlook/OutlookWeb';
-import OutlookArticles from './Components/Outlook/OutlookArticles';
 import UpdateDetailsMenu from './Components/UpdateDetails/UpdateDetailsMenu';
 import AccountForm from './Components/UpdateDetails/AccountForm';
 import ContactForm from './Components/UpdateDetails/ContactForm';
@@ -26,14 +24,9 @@ import SubscriptionForm from './Components/UpdateDetails/SubscriptionForm';
 import BenefitsMenu from './Components/Promotions/Benefits';
 import LibraryMembership from './Components/Promotions/LibraryMembership';
 import Discounts from './Components/Promotions/Discounts';
-import Scholarships from './Components/Promotions/Scholarships';
 import Careers from './Components/Promotions/Careers';
-import CareerHub from './Components/Promotions/CareerHub';
-import FurtherStudy from './Components/Promotions/FurtherStudy';
-import Volunteering from './Components/Promotions/Volunteering';
-import Mentoring from './Components/Promotions/Mentoring';
-import Networking from './Components/Promotions/Networking';
 import DiscountCard from './Components/Promotions/DiscountCard';
+import WebViewPage from './Components/WebView/WebViewPage';
 
 import Vultrsdk from './Components/Vultrsdk';
 
@@ -44,8 +37,6 @@ import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } fr
 const navStack = createStackNavigator({
 	//Routes
 	HomePage: { screen: HomePage},
-	OutlookMag: { screen: OutlookWebPage },
-	OutlookArticles: { screen: OutlookArticles },
 	UDMenu: { screen: UpdateDetailsMenu },
 	AccForm: { screen: AccountForm },
 	ContForm: { screen: ContactForm },
@@ -56,17 +47,12 @@ const navStack = createStackNavigator({
     Benefits: { screen: BenefitsMenu },
     LibraryMem: { screen: LibraryMembership },
     Discounts: { screen: Discounts },
-    Scholarships: { screen: Scholarships },
     Careers: { screen: Careers },
-	CareerHub: { screen: CareerHub },
-	Volunteering: { screen: Volunteering },
 	DiscountCard: { screen: DiscountCard },
-	FurtherStudy: { screen: FurtherStudy },
-	Mentoring: { screen: Mentoring },
-	Networking: { screen: Networking },
 	EventRego: { screen: EventRego },
 	GuestRego: { screen: GuestRego },
 	Conditions: { screen: Conditions },
+	WebViewPage: { screen: WebViewPage },
 
 },{ //options
 	initialRouteName: 'HomePage',

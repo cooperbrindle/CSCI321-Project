@@ -2,19 +2,7 @@ import { StyleSheet } from 'react-native';
 
 
 export const udStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#0C2340',
-    },
-
-    errorView: {
-        backgroundColor: 'red',
-    },
-
-    errorText: {
-        color: 'white',
-    },
-
+    
     /////////////////////////////////////////DASH BOARD
     dashboard: {
         flex: 1,
@@ -31,15 +19,5 @@ export const udStyles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         justifyContent: 'center',
-    },
-
-    /////////////////////////////////////////SUBMIT BUTTONS
-    submitBtnCont: {
-        flex: 1,
-        marginLeft: 5,
-        marginRight: 5,
-        marginBottom: 10,
-        alignContent: 'flex-start',
-        justifyContent: 'flex-end',
     },
 });
