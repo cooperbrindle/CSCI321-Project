@@ -6,7 +6,11 @@ export const baseStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#0C2340',
     },
-
+    /////////////////////////////////////////LOGO
+    logoCont: {
+        flex: 1,
+        marginBottom: 15,
+    },
     errorText: {
         color: 'red',
     },

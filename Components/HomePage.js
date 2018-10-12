@@ -58,7 +58,7 @@ export default class HomePage extends Component {
 		var vultr = this.props.screenProps;
 		vultr.getHighlights()
 		.then(res => {
-				console.log(res);
+				//console.log(res);
 				this.setState({
 					isLoading: false,
 					highlightData: res,
@@ -152,14 +152,18 @@ export default class HomePage extends Component {
 		const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View style={homeStyles.carouselView}/>;
         
 		return (
-			<View style={homeStyles.container}>
-				<View style={homeStyles.logoCont}>
+			<View style={baseStyles.container}>
+				<View style={baseStyles.logoCont}>
 					<Logo scale={1} />
 				</View>
 
 				<View style={homeStyles.dashboard}>
 					<DashButton title='Update Details' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('UDMenu')} />
-					<DashButton title='Outlook' img={outlookIcon} nav={()=>this.props.navigation.navigate('OutlookMag')} />
+					<DashButton title='Outlook' img={outlookIcon} nav={
+						()=>this.props.navigation.navigate('WebViewPage', 
+								{title: 'UOW Outlook Magazine', 
+								link: 'https://www.uow.edu.au/alumni/outlook/index.html'})
+						} />
 				</View>
 
 				<View style={homeStyles.dashboard}>

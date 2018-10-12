@@ -6,6 +6,7 @@ import { DefaultButton } from '../CustomProps/DefaultButton';
 import { DashButton } from '../CustomProps/DashButton';
 import { SocialButton } from '../CustomProps/SocialButton';
 import { baseStyles } from '../styles/BaseStyles';
+import { styles } from '../styles/FormStyles';
 import { udStyles } from '../styles/udStyles';
 
 const accountIcon = require('../assets/Account.png');
@@ -159,7 +160,7 @@ export default class UpdateDetailsMenu extends Component {
                     <SocialButton title='Import from' nav={{}} />
                 </View>
 
-                <View style={udStyles.submitBtnCont}>
+                <View style={styles.submitBtnCont}>
                     <DefaultButton title='Save Changes' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard Changes' nav={() => this.discardChanges()} />   
                 </View>
@@ -173,7 +174,7 @@ export default class UpdateDetailsMenu extends Component {
 	render() {
 
 		return (
-			<View style={udStyles.container}>
+			<View style={baseStyles.container}>
 				{this.renderMessages()}
 				<View style={baseStyles.activityView}>
 				{this.renderLoading()}

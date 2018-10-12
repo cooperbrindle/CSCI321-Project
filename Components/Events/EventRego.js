@@ -7,6 +7,7 @@ import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
+
 export default class EventRego extends Component {
 	static navigationOptions = {
 		title: 'Event Registration',

@@ -6,7 +6,7 @@ import MapView from 'react-native-maps';
 
 import eventStyles from '../styles/EventStyles';
 import baseStyles from '../styles/BaseStyles';
-import formStyles from '../styles/'
+import formStyles from '../styles/FormStyles';
 
 const eventTmp = require('../assets/Event-Page-Banner.jpg');
 

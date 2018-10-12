@@ -130,7 +130,7 @@ export default class Login extends React.Component {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
         
         return (
-        <View style={loginStyles.container}>
+        <View style={baseStyles.container}>
             
             <View style={loginStyles.logoCont} >
                 <Logo scale={1}/>

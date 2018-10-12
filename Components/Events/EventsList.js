@@ -3,7 +3,7 @@ import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator
 
 import { listStyles } from '../styles/EventStyles';
 import baseStyles from '../styles/BaseStyles';
-import formStyles from '../styles/'
+import formStyles from '../styles/FormStyles';
 
 
 export default class EventsList extends Component {
