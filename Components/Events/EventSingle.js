@@ -2,13 +2,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
-import eventStyles from '../styles/EventStyles';
-import baseStyles from '../styles/BaseStyles';
-import formStyles from '../styles/FormStyles';
-
-const eventTmp = require('../assets/Event-Page-Banner.jpg');
+import {eventStyles} from '../styles/EventStyles';
+import {baseStyles} from '../styles/BaseStyles';
+import {formStyles} from '../styles/FormStyles';
 
 export default class EventSingle extends Component {
 	constructor(props){
@@ -30,7 +28,9 @@ export default class EventSingle extends Component {
             console.error('NO DATA PASSED TO EVENT PAGE');
             this.props.navigation.goBack();
 		}
-		if(data.geocode == ''){
+		console.log(data.state);
+		if(data.latitude == 0){
+			console.warn('No Geocode');
 			var vultr = this.props.screenProps;
 			this.setState({vultr: this.props.screenProps});
 			vultr.geocodeAddress(data)
@@ -38,7 +38,7 @@ export default class EventSingle extends Component {
 				this.setState({
 					isLoading: false,
 					didLoad: true,
-					//data: vultr.data,
+					data: vultr.data,
 				});
 	
 			}).catch((err) => {
@@ -65,9 +65,8 @@ export default class EventSingle extends Component {
 			country: data.country,
 			cost: data.cost,
 			blurb: data.blurb,
-			geocode: data.geocode,
-			viewport: data.viewport,
-			image: 'https://www.youruowcommunity.edu.au/image/web/event-forms/Event-Page-Banner.jpg',
+			longitude: data.longitude,
+			latitude: data.latitude,
         });
     }
 	renderDescription(){
@@ -121,12 +120,20 @@ export default class EventSingle extends Component {
 			<View style={eventStyles.mapCont}>
 				<MapView style={eventStyles.map}
 					initialRegion={{
-					latitude: 37.78825,
-					longitude: -122.4324,
-					latitudeDelta: 0.0922,
-					longitudeDelta: 0.0421,
+					latitude: this.state.latitude,
+					longitude: this.state.longitude,
+					latitudeDelta: 0.0150,
+					longitudeDelta: 0.0150,
+					}}
+				>
+				<Marker
+					title={this.state.location}
+					coordinate={{
+						latitude: this.state.latitude,
+						longitude: this.state.longitude
 					}}
 				/>
+				</MapView>
 			</View>
 		);
 	}

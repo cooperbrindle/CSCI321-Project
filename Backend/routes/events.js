@@ -2,7 +2,7 @@ var router = require('express').Router();
 var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
 var tokenAuth = require('../lib/tokenAuth');
-
+var googleMapsClient = require('./key.js');
 
 
 router.post('/eventslist', (req, res) => {
@@ -84,6 +84,37 @@ router.post('/registerguest', (req, res) => {
 		log('ERROR: ' + err);
 	}
 		
+})
+
+router.post('/geocodeaddress', (req, res) => {
+    
+    console.log(' Request made to: /geocodeaddress');
+	try{
+        var data = req.body.data;
+        console.log(data.state);    
+        var state = data.state.toUpperCase();
+        googleMapsClient.geocode({
+            address: data.address + ', ' + data.city + ', ' + state,
+          }, function(err, response) {
+            if (!err) {
+              var longitude = response.json.results[0].geometry.location.lng;
+              var latitude = response.json.results[0].geometry.location.lat;
+              dbconn.query('UPDATE EVENTS SET latitude = ?, longitude = ? WHERE eventname = ?', [latitude,longitude, data.eventname], (err, result) => {
+                if(err) throw err;
+                console.log('Updated events ' + data.eventname);
+                console.log(latitude + ' ' + longitude);
+                res.json({latitude, longitude});
+            });
+            }
+            else{
+                console.log('Error?');
+                res.json();
+            }
+          });
+    }
+    catch(err){
+        log('ERROR: ' + err);
+    }
 })
 
 module.exports = router;

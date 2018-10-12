@@ -206,14 +206,16 @@ export default class Vultr{
 
     geocodeAddress(eventData){
         return new Promise((resolve, reject) => {
-            this.makeAuthRequest('/events/geocode', 'POST',
+            this.makeAuthRequest('/events/geocodeaddress', 'POST',
                 {
                     data: eventData,
                 }
             ).then((res) => {
                 if(res.error && res.error != '')
                     reject(res.error);
-                resolve();
+                eventData.latitude = res.latitude;
+                eventData.longitude = res.longitude;
+                resolve(eventData);
             }).catch((error) => {
                 reject(error);
             })

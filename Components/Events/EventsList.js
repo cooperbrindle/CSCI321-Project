@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
 
 import { listStyles } from '../styles/EventStyles';
-import baseStyles from '../styles/BaseStyles';
+import {baseStyles} from '../styles/BaseStyles';
 import formStyles from '../styles/FormStyles';
 
 
