@@ -1,10 +1,12 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, Alert, Image} from 'react-native';
+import { StyleSheet, ScrollView, Text, View, Image} from 'react-native';
+
 import { styles } from '../styles/FormStyles';
+import { baseStyles } from '../styles/BaseStyles';
+
 import { DefaultButton } from '../CustomProps/DefaultButton';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 const libraryLogo = require('../assets/careerSmart.jpg');
@@ -27,7 +29,7 @@ export default class Careers extends Component {
 
 	render() {
 		return (
-			<View style={thisStyles.container}>
+			<View style={baseStyles.container}>
                     <Image style={thisStyles.logo}
                         source={libraryLogo} />
 				<ScrollView style={thisStyles.blurbView}>
@@ -49,10 +51,6 @@ export default class Careers extends Component {
     };
     
     const thisStyles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: '#0C2340',
-        },
         blurbView: {
             flex:1,
             backgroundColor: '#0C2340',
@@ -66,17 +64,9 @@ export default class Careers extends Component {
             alignSelf: 'center',
             resizeMode: 'center',
         },
-        blurbTextStart: {
-            color:'white',
-            fontSize: 18,
-        },
         blurbTextPoints: {
             color:'white',
             fontSize: 18,
             paddingLeft: 20,
-        },
-        blurbTextEnd: {
-            color:'white',
-            fontSize: 14,
         },
     });

@@ -16,16 +16,7 @@ const promoIcon = require('./assets/Promotions.png');
 const settingsIcon = require('./assets/Settings.png');
 
 export default class HomePage extends Component {
-	constructor(props){
-		super(props);
-		this.highlightData = [
-			{a:'Hey C0op3r'},
-			{a:'h4y AYM33'},
-			{a:'Im tired'},
-			{a:'but sn4kz'},
-		];
-	}
-
+	
 	static navigationOptions = ({navigation}) => {
 		return {
 		title: 'Home',
@@ -117,7 +108,7 @@ export default class HomePage extends Component {
 		if(item.type == 'mag')
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
-						onPress={() => {this.props.navigation.navigate('OutlookArticles', {data: item.data})}}>
+						onPress={(item) => {}}>
 					<View style={homeStyles.highlightView}>
 						<View style={homeStyles.highlightTextView}>
 							<Text style={homeStyles.highlightText}>

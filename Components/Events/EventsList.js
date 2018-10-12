@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
+import { Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
 
 import { listStyles } from '../styles/EventStyles';
-import baseStyles from '../styles/BaseStyles';
-import formStyles from '../styles/FormStyles';
+import { baseStyles } from '../styles/BaseStyles';
 
 
 export default class EventsList extends Component {

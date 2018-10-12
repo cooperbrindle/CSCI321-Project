@@ -4,9 +4,9 @@ import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import MapView from 'react-native-maps';
 
-import eventStyles from '../styles/EventStyles';
-import baseStyles from '../styles/BaseStyles';
-import formStyles from '../styles/FormStyles';
+import {eventStyles} from '../styles/EventStyles';
+import {baseStyles} from '../styles/BaseStyles';
+import {styles} from '../styles/FormStyles';
 
 const eventTmp = require('../assets/Event-Page-Banner.jpg');
 
@@ -116,11 +116,11 @@ export default class EventSingle extends Component {
 
 	render() {
 		return (
-			<View style={baseStyles.container}>
+			<View style={eventStyles.container}>
 				{this.renderDescription()}
 				{this.renderInfo()}
 				{this.renderMap()}
-				<View style={formStyles.submitBtnCont}>
+				<View style={styles.submitBtnCont}>
                     <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego', {data: this.state.data})} />
                 </View>
 			</View>
