@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, ActivityIndicator, TouchableOpacity, AsyncStorage} from 'react-native'; 
+
 import { Logo } from './CustomProps/Logo';
 import { DefaultButton } from './CustomProps/DefaultButton';
 import { SocialButton } from './CustomProps/SocialButton';
 import { Facebook } from 'expo';
 
+import { loginStyles } from './styles/LoginStyles';
 import { baseStyles } from './styles/BaseStyles';
 
 
@@ -113,7 +115,7 @@ export default class Login extends React.Component {
                 <DefaultButton title='Sign Up' nav={() => this.signupPress()} />
 
                 <TouchableOpacity onPress={() => {this.props.navigation.navigate('ForgotPassword')}}>
-                    <Text style={styles.forgotText}>
+                    <Text style={loginStyles.forgotText}>
                         Forgot password?
                     </Text>
                 </TouchableOpacity>
@@ -128,22 +130,22 @@ export default class Login extends React.Component {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
         
         return (
-        <View style={styles.container}>
+        <View style={loginStyles.container}>
             
-            <View style={styles.logoCont} >
+            <View style={loginStyles.logoCont} >
                 <Logo scale={1}/>
             </View>
             
             <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
 
-            <View style={styles.inputContainer}>
+            <View style={loginStyles.inputContainer}>
                 
-                <TextInput style={styles.inputBox}
+                <TextInput style={loginStyles.inputBox}
                     placeholder="username" underlineColorAndroid='transparent' placeholderTextColor='grey'
                     onChangeText={(un) => this.setState({username:un})}
                     value={this.state.username} />
                 
-                <TextInput style={styles.inputBox}
+                <TextInput style={loginStyles.inputBox}
                     placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='grey'
                     onChangeText={(pw) => this.setState({password:pw})} secureTextEntry autoCapitalize='none'
                     value={this.state.password}/>
@@ -156,7 +158,7 @@ export default class Login extends React.Component {
             </View>
             
 
-            <View style={styles.socialContainer}>
+            <View style={loginStyles.socialContainer}>
                 <SocialButton title='Continue with' fbOnClick={()=>this.facebookLogin()} />
             </View>
         </View>
@@ -164,61 +166,3 @@ export default class Login extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#0C2340',
-    },
-
-    logoCont: {
-        marginTop: 50,
-        flex: 2,
-    },
-    
-    errorText: {color: 'red',},
-
-    activityView: {
-        justifyContent: 'center',
-        alignContent: 'center',
-    },
-    /////////////////////////////////////////INPUT STYLES
-    inputContainer: {
-        flex: 2.5,
-        marginLeft: 5,
-        marginRight: 5,
-        marginBottom: 60,
-        alignContent: 'flex-start',
-    },
-    inputBox: {
-        alignItems: 'center',
-        color: 'grey',
-        marginBottom: 0,
-        marginTop: 0,
-        paddingLeft: 10,
-        backgroundColor:'#d9d9d6',
-        height: 50,
-        borderRadius:5,
-        borderWidth: 1,
-    },
-
-    /////////////////////////////////////////SOCIAL STYLES
-    socialContainer: {
-        flex: 1,
-        marginBottom: 30,
-        marginLeft: 5,
-        marginRight: 5,
-    },
-
-    /////////////////////////////////////////FORGOT STYLES
-    forgotView: {
-        flex: 1,
-        marginLeft: 5,
-        marginRight: 5,
-    },
-    forgotText: {
-        color: '#0047BB',
-        fontSize: 14,
-        alignSelf: 'center',
-        paddingTop: 20,
-    }
-});

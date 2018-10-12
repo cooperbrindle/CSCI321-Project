@@ -1,11 +1,12 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Alert} from 'react-native';
+import { Text, View, ActivityIndicator, Alert} from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { DashButton } from '../CustomProps/DashButton';
 import { SocialButton } from '../CustomProps/SocialButton';
 import { baseStyles } from '../styles/BaseStyles';
+import { udStyles } from '../styles/udStyles';
 
 const accountIcon = require('../assets/Account.png');
 const contactIcon = require('../assets/Contact.png');
@@ -123,17 +124,15 @@ export default class UpdateDetailsMenu extends Component {
 	renderMessages(){
 		if(this.state.errorMessage != ''){
 			return(
-				<View style={styles.errorView}>
-					<Text style={styles.errorText}>
-						{this.state.errorMessage}
-					</Text>
-				</View>
+				<Text style={baseStyles.errorText}>
+					{this.state.errorMessage}
+				</Text>
 			);
 		}
 		else if(this.state.successMessage != ''){
 			return(
-				<View style={styles.SuccessView}>
-					<Text style={styles.successText}>
+				<View style={udStyles.SuccessView}>
+					<Text style={udStyles.successText}>
 						{this.state.successMessage}
 					</Text>
 				</View>
@@ -145,22 +144,22 @@ export default class UpdateDetailsMenu extends Component {
 	renderDashBoard(){
 		if(this.state.didLoad)
 			return(
-				<View style={styles.container}>
-				<View style={styles.dashboard}>
+				<View style={udStyles.container}>
+				<View style={udStyles.dashboard}>
 					<DashButton title='Account' img={accountIcon} nav={()=>this.props.navigation.navigate('AccForm', {data: this.state.data})} />
 					<DashButton title='Contact' img={contactIcon} nav={()=>this.props.navigation.navigate('ContForm', {data: this.state.data})} />
 				</View>
 
-				<View style={styles.dashboard}>
+				<View style={udStyles.dashboard}>
 					<DashButton title='Employment' img={employmentIcon} nav={()=>this.props.navigation.navigate('EmpForm', {data: this.state.data})} />
 					<DashButton title='Subscriptions' img={subscripIcon} nav={()=>this.props.navigation.navigate('SubForm', {data: this.state.data})} />
 				</View>
 
-                <View style={styles.socialContainer}>
+                <View style={udStyles.socialContainer}>
                     <SocialButton title='Import from' nav={{}} />
                 </View>
 
-                <View style={styles.submitBtnCont}>
+                <View style={udStyles.submitBtnCont}>
                     <DefaultButton title='Save Changes' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard Changes' nav={() => this.discardChanges()} />   
                 </View>
@@ -174,55 +173,16 @@ export default class UpdateDetailsMenu extends Component {
 	render() {
 
 		return (
-			<View style={styles.container}>
+			<View style={udStyles.container}>
 				{this.renderMessages()}
+				<View style={baseStyles.activityView}>
 				{this.renderLoading()}
+				</View>
 				{this.renderDashBoard()}
 
 			</View>
 		);
 		}
-	};
+};
 	
-	const styles = StyleSheet.create({
-		container: {
-			flex: 1,
-			backgroundColor: '#0C2340',
-		},
-
-		errorView: {
-			backgroundColor: 'red',
-		},
-
-		errorText: {
-			color: 'white',
-		},
-
-		/////////////////////////////////////////DASH BOARD
-		dashboard: {
-			flex: 1,
-			flexDirection: 'row',
-			marginLeft: 7,
-			marginRight: 7,
-			justifyContent: 'space-between',
-		},
-
-		/////////////////////////////////////////SOCIAL STYLES
-        socialContainer: {
-            flex: 1,
-            marginBottom: 30,
-            marginLeft: 5,
-            marginRight: 5,
-            justifyContent: 'center',
-        },
-
-        /////////////////////////////////////////SUBMIT BUTTONS
-        submitBtnCont: {
-            flex: 1,
-            marginLeft: 5,
-            marginRight: 5,
-            marginBottom: 10,
-            alignContent: 'flex-start',
-            justifyContent: 'flex-end',
-        },
-	});
+	

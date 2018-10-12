@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
 
-import Vultrsdk from '../Vultrsdk';
+import { listStyles } from '../styles/EventStyles';
+import baseStyles from '../styles/BaseStyles';
+import formStyles from '../styles/'
 
 
 export default class EventsList extends Component {
@@ -47,20 +49,20 @@ export default class EventsList extends Component {
 
         return(
             <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle', {data: item})}>
-                <View style={styles.itemView}>
-                    <View style={styles.textView}>
-                        <Text style={styles.text}>
+                <View style={listStyles.itemView}>
+                    <View style={listStyles.textView}>
+                        <Text style={listStyles.text}>
                             {item.eventname}
                         </Text>
-                        <Text style={styles.textBlurb}>
+                        <Text style={listStyles.textBlurb}>
                             {item.blurb}
                         </Text>
                     </View>
-                    <View style={styles.hlDate}>
-                        <Text style={styles.hlDay}>
+                    <View style={listStyles.hlDate}>
+                        <Text style={listStyles.hlDay}>
                             {parts[0]}
                         </Text>
-                        <Text style={styles.hlMonth}>
+                        <Text style={listStyles.hlMonth}>
                             {months[parts[1]-1]}
                         </Text>
                     </View>
@@ -73,8 +75,8 @@ export default class EventsList extends Component {
             return <View/>;
         
         else return(
-            <ScrollView style={styles.scrollView}>
-                <FlatList style={styles.fList}
+            <ScrollView style={listStyles.scrollView}>
+                <FlatList style={listStyles.fList}
                     data={this.state.data}
                     renderItem={({item}) => this.renderItem(item)}
                     keyExtractor={(item, index) => index}
@@ -84,89 +86,14 @@ export default class EventsList extends Component {
     }
 	render() {
 		return (
-			<View style={styles.container}>
+			<View style={baseStyles.container}>
+            <View style={baseStyles.activityView}>
                 {this.renderActivityIndicator()}
+            </View>
 				{this.renderList()}
 			</View>
 		);
 		}
 };
 	
-	const styles = StyleSheet.create({
-		container: {
-			flex: 1,
-			backgroundColor: '#0C2340',
-        },
-        scrollView: {
-            //flex: 1,
-        },
-        fList: {
-            flex: 1,
-        },
-		itemView: {
-            flexDirection: 'row',
-            borderWidth: 1,
-            backgroundColor: '#ffffff',
-            margin: 5,
-            borderColor: 'white',
-            height: 100,
-        },
-        textView: {
-            flex: 2,
-        },
-        text: {
-            color: 'black',
-            fontSize: 18,
-            paddingLeft: 20,
-            paddingTop: 10,
-            paddingRight: 10,
-        },
-        textBlurb: {
-            color: 'black',
-            textAlign: 'center',
-            fontSize: 12,
-            paddingLeft: 20,
-            paddingTop: 5,
-            paddingRight: 10,
-            paddingBottom: 5,
-        },
-        hlBtn: {
-			flex: 1,
-			backgroundColor: 'white',
-			borderWidth: 2,
-			borderColor: 'white',
-			marginBottom: 20,
-			marginLeft: 10,
-			marginRight: 10,
-		},
-		hlBtnView: {
-			flex: 1,
-			flexDirection: 'row',
-		},
-				hlCont: {
-					flex: 2.5,
-					padding: 20,
-				},
-						hlTitle: {
-							fontSize: 24,
-							color: '#0C2340',
-							//margin: 30,
-						},
-				hlDate: {
-					flex: 1,
-					backgroundColor: '#0C2340',
-					justifyContent: 'center',
-				},
-						hlDay: {
-							fontSize: 36,
-							textAlign: 'center',
-							color: 'white',
-							margin: 0,
-						},
-						hlMonth: {
-							fontSize: 18,
-							textAlign: 'center',
-							color: '#cc0000',
-							margin: 0,
-						},
-	});
+	
