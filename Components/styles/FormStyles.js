@@ -83,6 +83,7 @@ export const formStyles = StyleSheet.create({
 
     /////////////////////////////////////////SUBMIT BUTTONS
     submitBtnCont: {
+        flex: 1,
         marginLeft: 5,
         marginRight: 5,
         marginBottom: 10,

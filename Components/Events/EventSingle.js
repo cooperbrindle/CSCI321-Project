@@ -1,26 +1,18 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import { Text, View, ScrollView} from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import MapView, { Marker } from 'react-native-maps';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 import {eventStyles} from '../styles/EventStyles';
-import {baseStyles} from '../styles/BaseStyles';
-import {formStyles} from '../styles/FormStyles';
+import {styles} from '../styles/FormStyles';
 
 export default class EventSingle extends Component {
 	constructor(props){
 		super(props);
 	}
-	static navigationOptions = {
-		title: 'Event Information',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-			fontWeight: 'bold',
-		},
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Event Info', navigation, false);
 	}
 	componentWillMount(){
         var data = this.props.navigation.getParam('data', 'NoData');
@@ -141,11 +133,11 @@ export default class EventSingle extends Component {
 
 	render() {
 		return (
-			<View style={baseStyles.container}>
+			<View style={eventStyles.container}>
 				{this.renderDescription()}
 				{this.renderInfo()}
 				{this.renderMap()}
-				<View style={formStyles.submitBtnCont}>
+				<View style={styles.submitBtnCont}>
                     <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego', {data: this.state.data})} />
                 </View>
 			</View>

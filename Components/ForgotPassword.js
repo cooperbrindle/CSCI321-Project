@@ -1,21 +1,17 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
+import { Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
 import { styles } from './styles/FormStyles';
 import { DefaultButton } from './CustomProps/DefaultButton';
+import { navigationOptionsFunc } from './styles/navOptions';
 
 import { baseStyles } from './styles/BaseStyles';
 
 export default class ForgotPassword extends Component {
-    static navigationOptions = {
-		title: 'Forgot Password',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
+    
+    static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Forgot Password', navigation, false);
 	}
 
 	/////////////////////////////////////

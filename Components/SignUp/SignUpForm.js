@@ -7,16 +7,6 @@ import { DefaultButton } from '../CustomProps/DefaultButton';
 import { baseStyles } from '../styles/BaseStyles';
 
 export default class SignUpForm extends Component {
-	/*static navigationOptions = {
-		title: 'Sign Up',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-			fontWeight: 'bold',
-		},
-    }*/
 
     state = {
         errorMessage: '',

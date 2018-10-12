@@ -1,28 +1,12 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, WebView, ActivityIndicator, TouchableHighlight, Image} from 'react-native';
-
-const settingsIcon = require('../assets/Settings.png');
+import { StyleSheet, View, WebView, ActivityIndicator } from 'react-native';
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class FAQs extends Component {
 	
 	static navigationOptions = ({navigation}) => {
-		return {
-		title: 'Frequently Asked Questions',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-			
-		},
-		headerTintColor: 'white',
-		headerRight: (
-			<TouchableHighlight 
-				onPress={navigation.getParam('toggleSettings')}
-			>
-				<Image source={settingsIcon}
-					style={{resizeMode: 'contain', width: 40, height: 40 }}
-				/>
-			</TouchableHighlight>	
-		),
-	}};//width: 40, height: 40
+		return navigationOptionsFunc('Frequently asked Questions', navigation, true);
+	}
 
 	toggleSettings = () => {
 		this.props.navigation.toggleDrawer();;

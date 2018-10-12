@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, Image} from 'react-native';
 import { DashButton } from '../CustomProps/DashButton';
 import { Logo } from '../CustomProps/Logo';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 import { baseStyles } from '../styles/BaseStyles';
 import { homeStyles, smallDashStyles } from '../styles/HomeStyles';
 
@@ -22,15 +22,8 @@ export default class BenefitsMenu extends Component {
 		super(props);
 	}
 	
-	static navigationOptions = {
-		title: 'Benefits',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-			fontWeight: 'bold',
-		},
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Benefits', navigation, false);
 	}
 
 	state = {
@@ -70,7 +63,7 @@ export default class BenefitsMenu extends Component {
 				</View>
 				<View style={homeStyles.dashboard}>
 					<DashButton title='Career Support' img={Careers} nav={()=>this.props.navigation.navigate('Careers', {})} />
-					<DashButton title='Networks & Groups' img={Networking} nav={()=>this.props.navigation.navigate('Networking', 
+					<DashButton title='Networks & Groups' img={Networking} nav={()=>this.props.navigation.navigate('WebViewPage', 
 								{title: 'Networks and Groups',
 								link: 'https://www.uow.edu.au/alumni/networks/index.html',})} />
 				</View>

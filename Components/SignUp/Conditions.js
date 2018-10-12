@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text, View, Alert} from 'react-native';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 import { styles } from '../styles/FormStyles';
 import { baseStyles } from '../styles/BaseStyles';
 
@@ -16,15 +16,9 @@ const blurbPoints = '-  Access a wide range of online resources, including e-jou
 const blurbEnd = 'New membership applications will be processed and confirmed within 5-7 business days via return email.';
 
 export default class Conditions extends Component {
-	static navigationOptions = {
-		title: 'Terms and Conditions',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
-    }
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Terms and Conditions', navigation, false);
+	}
 
     state = {
         errorMessage: '',

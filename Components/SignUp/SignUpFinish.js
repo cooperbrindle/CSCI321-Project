@@ -7,6 +7,7 @@ import { Logo } from '../CustomProps/Logo.js';
 
 import { styles } from '../styles/FormStyles';
 import { baseStyles } from '../styles/BaseStyles';
+import { homeStyles } from '../styles/HomeStyles';
 
 export default class SignUpFinish extends Component {
 	
@@ -33,11 +34,7 @@ export default class SignUpFinish extends Component {
             this.setState({isLoading: false, errorMessage: 'Passwords do not match'});
         }else{
             this.props.vultr.registerUser(this.state.email, this.state.password, this.state.id)
-            .then((result) => {
-                /////////////////////////////////////////////////////
-                //////////// TODO: handle if user signs up with different email to alumni RE version
-                /////////////////////////////////////////////////////
-                
+            .then((result) => {                
                 this.setState({isLoading: false, errorMessage: ''});    
                 this.props.navigation.navigate('HomeDrawer');
             }).catch(error => {
@@ -54,7 +51,7 @@ export default class SignUpFinish extends Component {
     //////////////////////////////////// UI /////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
 
-	renderInput(title, ph, stateValue, isSecure){
+	renderInput(title, ph, stateValue, isSecure, isEditable){
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
@@ -62,7 +59,7 @@ export default class SignUpFinish extends Component {
                 </Text>
                 <TextInput style={styles.inputBox}
                     placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={stateValue} secureTextEntry={isSecure} autoCapitalize='none'
+                    onChangeText={stateValue} secureTextEntry={isSecure} autoCapitalize='none' editable={isEditable}
                 />
             </View>
 		);
@@ -73,8 +70,8 @@ export default class SignUpFinish extends Component {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
 		return (
 			<View style={styles.container}>
-
-                <View style={stylesA.logoCont}>
+                <View style={{marginTop:50}}/>
+                <View style={homeStyles.logoCont}>
                     <Logo scale={1}/>
                 </View>
 
@@ -89,13 +86,11 @@ export default class SignUpFinish extends Component {
                 <View style={baseStyles.activityView}>
                     {actInd}
                 </View>
-                <ScrollView>
 
-                {this.renderInput('email', this.state.email, (value) => this.setState({email: value}), false )}
-                {this.renderInput('password', '', (value) => this.setState({password: value}), true )}
-                {this.renderInput('confirm password', '', (value) => this.setState({passwordConf: value}), true )}
+                {this.renderInput('email', this.state.email, (value) => this.setState({email: value}), false, false )}
+                {this.renderInput('password', '', (value) => this.setState({password: value}), true, true )}
+                {this.renderInput('confirm password', '', (value) => this.setState({passwordConf: value}), true, true )}
 				
-                </ScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Continue' nav={() => this.submitForm()} />
                     <DefaultButton title='Back' nav={() => this.props.navigation.navigate('Login')} />

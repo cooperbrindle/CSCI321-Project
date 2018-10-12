@@ -2,24 +2,16 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
-
-import Vultrsdk from '../Vultrsdk';
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class Discounts extends Component {
 	constructor(props){
         super(props);
     }
     
-	static navigationOptions = {
-        title: 'Discounts',
-		headerStyle: {
-            backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-            
-        },
-    }
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Discounts', navigation, false);
+	}
     
     state = {
         isLoading: true,

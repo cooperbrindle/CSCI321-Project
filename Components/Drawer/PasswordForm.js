@@ -1,32 +1,17 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, TouchableHighlight, Text, TextInput, View, Alert, ActivityIndicator, Image} from 'react-native';
+import { Text, TextInput, View, Alert, ActivityIndicator } from 'react-native';
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 import { baseStyles } from '../styles/BaseStyles';
-const settingsIcon = require('../assets/Settings.png');
 
 export default class PasswordForm extends Component {
     static navigationOptions = ({navigation}) => {
-		return {
-		title: 'Password',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-			
-		},
-		headerTintColor: 'white',
-		headerRight: (
-			<TouchableHighlight 
-				onPress={navigation.getParam('toggleSettings')}
-			>
-				<Image source={settingsIcon}
-					style={{resizeMode: 'contain', width: 40, height: 40 }}
-				/>
-			</TouchableHighlight>	
-		),
-	}};//width: 40, height: 40
+		return navigationOptionsFunc('Update Password', navigation, true);
+	}
 
 	toggleSettings = () => {
 		this.props.navigation.toggleDrawer();;

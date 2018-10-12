@@ -8,6 +8,7 @@ import { SocialButton } from '../CustomProps/SocialButton';
 import { baseStyles } from '../styles/BaseStyles';
 import { styles } from '../styles/FormStyles';
 import { udStyles } from '../styles/udStyles';
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 const accountIcon = require('../assets/Account.png');
 const contactIcon = require('../assets/Contact.png');
@@ -16,15 +17,8 @@ const subscripIcon = require('../assets/Subscriptions.png');
 
 export default class UpdateDetailsMenu extends Component {
 	
-	static navigationOptions = {
-		title: 'Update Details',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-			
-		},
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Update Details', navigation, false);
 	}
 
 	state = {
@@ -145,7 +139,7 @@ export default class UpdateDetailsMenu extends Component {
 	renderDashBoard(){
 		if(this.state.didLoad)
 			return(
-				<View style={udStyles.container}>
+				<View style={baseStyles.container}>
 				<View style={udStyles.dashboard}>
 					<DashButton title='Account' img={accountIcon} nav={()=>this.props.navigation.navigate('AccForm', {data: this.state.data})} />
 					<DashButton title='Contact' img={contactIcon} nav={()=>this.props.navigation.navigate('ContForm', {data: this.state.data})} />

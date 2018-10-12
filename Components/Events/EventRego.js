@@ -5,18 +5,12 @@ import { Text, TextInput, View, Alert} from 'react-native';
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 
 export default class EventRego extends Component {
-	static navigationOptions = {
-		title: 'Event Registration',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Event Registration', navigation, false);
 	}
 
 	/////////////////////////////////////

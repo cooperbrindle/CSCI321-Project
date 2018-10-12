@@ -1,11 +1,10 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, Alert, Image} from 'react-native';
+import { StyleSheet, ScrollView, Text, TextInput, View, Alert, Image} from 'react-native';
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 const libraryLogo = require('../assets/libraryLogo.jpg');
 
@@ -16,15 +15,9 @@ const blurbPoints = '-  Access a wide range of online resources, including e-jou
 const blurbEnd = 'New membership applications will be processed and confirmed within 5-7 business days via return email.';
 
 export default class LibraryMembership extends Component {
-	static navigationOptions = {
-		title: 'Library Membership',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
-    }
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Library Membership', navigation, false);
+	}
     
     /////////////////////////////////////////////////////////
     /////////////////////
