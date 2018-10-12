@@ -204,6 +204,22 @@ export default class Vultr{
         });
     }
 
+    geocodeAddress(eventData){
+        return new Promise((resolve, reject) => {
+            this.makeAuthRequest('/events/geocode', 'POST',
+                {
+                    data: eventData,
+                }
+            ).then((res) => {
+                if(res.error && res.error != '')
+                    reject(res.error);
+                resolve();
+            }).catch((error) => {
+                reject(error);
+            })
+        });
+    }
+
     getDiscounts(category) {
         return new Promise((resolve, reject) => {
             this.makeRequest('/promotions/discounts', 'POST',

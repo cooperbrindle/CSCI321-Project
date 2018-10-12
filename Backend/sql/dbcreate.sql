@@ -114,9 +114,10 @@ CREATE TABLE EVENTS(
     postcode        VARCHAR(256)    NULL, /* Venue Postcode */
     country         VARCHAR(256)    NULL, /* Event Country */
     regLink         VARCHAR(256)    NULL, /* Paid Event Rego Link */
-    mapsLink        VARCHAR(256)    NULL, /* Google maps API Link */
     cost            VARCHAR(256)    NULL, /* To be displayed */
     blurb           VARCHAR(256)    NULL, /* Descriptive Blurb */
+    geocode         VARCHAR(256)    NULL, /* Google maps API code */
+    viewport        VARCHAR(256)    NULL, /* Viewport for maps */
     CONSTRAINT EVENTS_pkey PRIMARY KEY (eventname) );
 
 /* Cooper 31/08/2018 */
