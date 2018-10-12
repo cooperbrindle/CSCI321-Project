@@ -56,6 +56,8 @@ export default class SubscriptionForm extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+			<ScrollView>
+			<View>
 				<SettingsSwitch
 					title={'Allow communication via post'}
 					onSaveValue={(value) => {
@@ -111,10 +113,13 @@ export default class SubscriptionForm extends Component {
 						value={this.state.outlookValue}
 						thumbTintColor={(this.state.outlookValue) ? colors.switchEnabled : colors.switchDisabled}
 				/>
+			</View>
+			</ScrollView>
 				<View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
+
          	</View>
 		);
 		}

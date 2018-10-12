@@ -64,18 +64,20 @@ export default class EmploymentForm extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+            <KeyboardAwareScrollView>
+            <View>
 				<Text style={styles.title}>
                     Employment Info
                 </Text>
-                <KeyboardAwareScrollView>
                 {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
                 {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
 				
-                </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
+            </View>
+            </KeyboardAwareScrollView>
 			</View>
 		);
 	}

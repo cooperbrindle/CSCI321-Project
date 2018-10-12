@@ -55,9 +55,6 @@ export default class SignUpForm extends Component {
             birthDate: this.state.day + '/' + this.state.month + '/' + this.state.year,
         };
         if(data.birthDate == '//') data.birthDate = '';
-        /////////////////////////////////////////////////////
-        //////////// TODO: Possibly do some field checking to see if anything is filled out
-        /////////////////////////////////////////////////////
         if(data.firstName == '' && data.lastName == '' && data.stdNum == ''
         && data.email == '' && data.birthDate == ''){
             this.setState({errorMessage: 'No fields entered', isLoading: false});

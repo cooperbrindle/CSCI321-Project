@@ -6,6 +6,7 @@ import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+
 export default class ContactForm extends Component {
     static navigationOptions = {
 		title: 'Update Details',
@@ -88,11 +89,9 @@ export default class ContactForm extends Component {
 
 	render() {
 		return (
-                <KeyboardAwareScrollView
-                style={{ backgroundColor: '#0C2340' }}
-                resetScrollToCoords={{ x: 0, y: 0 }}
-                >
-			<View style={styles.container}>
+            <View style={styles.container}>
+            <KeyboardAwareScrollView>
+            <View>
 				<Text style={styles.title}>
                     Contact Info
                 </Text>
@@ -107,8 +106,9 @@ export default class ContactForm extends Component {
 					<DefaultButton title='Save' nav={() => this.saveChanges()} />
                     <DefaultButton title='Discard' nav={() => this.props.navigation.goBack()} />
                 </View>
+            </View>
+            </KeyboardAwareScrollView>
 			</View>
-                </KeyboardAwareScrollView>
 		);
 		}
 	};

@@ -70,7 +70,6 @@ export default class HomePage extends Component {
 	
 	renderHighlight({item, index}){
 		if(item.type == 'event'){
-			console.log('rendering event');
 			var parts = item.data.startdate.split('/')
         	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 			
