@@ -16,6 +16,7 @@ import EventSingle from './Components/Events/EventSingle';
 import EventRego from './Components/Events/EventRego';
 import GuestRego from './Components/Events/GuestRego';
 import OutlookWebPage from './Components/Outlook/OutlookWeb';
+import OutlookArticles from './Components/Outlook/OutlookArticles';
 import UpdateDetailsMenu from './Components/UpdateDetails/UpdateDetailsMenu';
 import AccountForm from './Components/UpdateDetails/AccountForm';
 import ContactForm from './Components/UpdateDetails/ContactForm';
@@ -44,6 +45,7 @@ const navStack = createStackNavigator({
 	//Routes
 	HomePage: { screen: HomePage},
 	OutlookMag: { screen: OutlookWebPage },
+	OutlookArticles: { screen: OutlookArticles },
 	UDMenu: { screen: UpdateDetailsMenu },
 	AccForm: { screen: AccountForm },
 	ContForm: { screen: ContactForm },
