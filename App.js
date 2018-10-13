@@ -55,7 +55,7 @@ const navStack = createStackNavigator({
 	WebViewPage: { screen: WebViewPage },
 
 },{ //options
-	initialRouteName: 'HomePage',
+	initialRouteName: 'UDMenu',
 });
 
 const passwordStack = createStackNavigator({
@@ -93,7 +93,7 @@ const RootStack = createSwitchNavigator({
 	SUFinish: { screen: SignUpFinish},
 	ForgotPassword: { screen: ForgotPasswordStack },
   },{ //options
-  initialRouteName: 'Login',
+  initialRouteName: 'HomeDrawer',
 });
 
 export default class App extends React.Component{

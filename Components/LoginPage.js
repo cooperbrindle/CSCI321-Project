@@ -107,6 +107,7 @@ export default class Login extends React.Component {
         */
     }
 
+
     renderButtons(){
         if(this.state.isLoading)
             return <View/>;
