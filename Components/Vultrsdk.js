@@ -16,8 +16,7 @@ export default class Vultr{
     }
 
     isLoggedIn(){
-        if(this.token == null)
-            return false
+        if(this.token == null) return false
         else return true;
     }
 
@@ -31,9 +30,7 @@ export default class Vultr{
                     AsyncStorage.setItem('username', this.username);
                 }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
                 resolve();
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => { reject(error);})
         });
     }
 
@@ -50,16 +47,10 @@ export default class Vultr{
                 else{
                     this.saveToken(res.token);
                     this.loadConstituent()
-                    .then(() => {
-                        resolve();
-                    }).catch((err) => {
-                        reject(err);
-                    })
+                    .then(() => {resolve();
+                    }).catch((err) => { reject(err);})
                 }
-            
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => {reject(error);})
         });
         
     }
@@ -72,9 +63,7 @@ export default class Vultr{
             ).then((res) => {
                 this.data = data;
                 resolve();
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => {reject(error);})
         });
     }
 
@@ -91,11 +80,8 @@ export default class Vultr{
                     stdNum: this.data.stdNum,
                     email: this.data.email,
                 }
-            ).then(() => {
-                resolve();
-            }).catch((error) => {
-                reject(error);
-            })
+            ).then(() => {resolve();
+            }).catch((error) => {reject(error); })
         });
     }
     
@@ -108,12 +94,9 @@ export default class Vultr{
                     id: this.data.id,
                 }
             ).then((res) => {
-                if(res.error && res.error != '')
-                    reject(res.error);
+                if(res.error && res.error != '') reject(res.error);
                 resolve();
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => {reject(error); })
         });
     }
 
@@ -122,12 +105,9 @@ export default class Vultr{
             this.makeRequest('/auth/signUp', 'POST',
                 {data: data}
             ).then((res) => {
-                if(res.error && res.error != '')
-                    reject(res.error);
+                if(res.error && res.error != '') reject(res.error);
                 resolve(res.data);
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => { reject(error);})
         });
     }   
 
@@ -140,15 +120,10 @@ export default class Vultr{
                     id: id,
                 }
             ).then((res) => {
-                if(res.error && res.error != '')
-                    reject(res.error);
+                if(res.error && res.error != '') reject(res.error);
                 this.signInWithEmailPassword(email, password)
-                .then(() => {
-                    resolve();
-                })
-            }).catch((error) => {
-                reject(error);
-            })
+                .then(() => {resolve();})
+            }).catch((error) => {reject(error);})
         });
     }
     registerConst(eventData, constInfo){
@@ -172,12 +147,9 @@ export default class Vultr{
                     mobility: constInfo.wheelchair,
                 }
             ).then((res) => {
-                if(res.error && res.error != '')
-                    reject(res.error);
+                if(res.error && res.error != '') reject(res.error);
                 resolve();
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => {reject(error);})
         });
     }
     registerGuest(eventData, guestData){
@@ -195,30 +167,22 @@ export default class Vultr{
                     mobility: guestData.wheelchair,
                 }
             ).then((res) => {
-                if(res.error && res.error != '')
-                    reject(res.error);
+                if(res.error && res.error != '') reject(res.error);
                 resolve();
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => {reject(error);})
         });
     }
 
     geocodeAddress(eventData){
         return new Promise((resolve, reject) => {
             this.makeAuthRequest('/events/geocodeaddress', 'POST',
-                {
-                    data: eventData,
-                }
+                {data: eventData,}
             ).then((res) => {
-                if(res.error && res.error != '')
-                    reject(res.error);
+                if(res.error && res.error != '') reject(res.error);
                 eventData.latitude = res.latitude;
                 eventData.longitude = res.longitude;
                 resolve(eventData);
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => {reject(error);})
         });
     }
 
@@ -226,11 +190,8 @@ export default class Vultr{
         return new Promise((resolve, reject) => {
             this.makeRequest('/promotions/discounts', 'POST',
                 { category: category }
-            ).then((res) => {
-                resolve(res);
-            }).catch((error) => {
-                reject(error);
-            })
+            ).then((res) => { resolve(res);
+            }).catch((error) => {reject(error);})
         });
     }
 
@@ -239,23 +200,16 @@ export default class Vultr{
         return new Promise((resolve, reject) => {
             this.makeRequest('/events/eventslist', 'POST',
                 { category: category}
-            ).then((res) => {
-                resolve(res);
-            }).catch((error) => {
-                reject(error);
-            })
+            ).then((res) => {resolve(res);
+            }).catch((error) => {reject(error);})
         });
     }
 
     getHighlights() {
         return new Promise((resolve, reject) => {
-            this.makeRequest('/promotions/highlights', 'POST',
-                {}
-            ).then((res) => {
-                resolve(res);
-            }).catch((error) => {
-                reject(error);
-            })
+            this.makeRequest('/promotions/highlights', 'POST', {})
+            .then((res) => {resolve(res);
+            }).catch((error) => {reject(error);})
         });
     }
 
@@ -268,12 +222,9 @@ export default class Vultr{
                     lastName: ln,
                 }
             ).then((res) => {
-                if(res.error && res.error != '')
-                    reject(res.error);
+                if(res.error && res.error != '') reject(res.error);
                 resolve();
-            }).catch((error) => {
-                reject(error);
-            })
+            }).catch((error) => {reject(error);})
         });
     }
 

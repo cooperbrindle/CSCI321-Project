@@ -13,23 +13,18 @@ export default class EventRego extends Component {
 		return navigationOptionsFunc('Event Registration', navigation, false);
 	}
 
-	/////////////////////////////////////
-    //
+	
     componentWillMount(){
         try{
-            const pageData = this.props.navigation.getParam('data', 'NoData');
-            if(pageData == 'NoData'){
+            const eventData = this.props.navigation.getParam('eventData', 'NoData');
+            if(eventData == 'NoData'){
                 console.error('NO DATA PASSED TO EVENT PAGE');
                 this.props.navigation.goBack();
             }
-            var vultr = this.props.screenProps;
+
             this.setState({vultr: this.props.screenProps});
             this.setState({
-                eventData: pageData,
-                eventname: pageData.eventname,
-                constData: vultr.data,
-                constituentRefID: vultr.data.id,
-                constName: vultr.data.firstName,
+                eventData: eventData,
                 position: vultr.data.position,
                 orgName: vultr.data.orgName,
                 dietary: '',
@@ -40,13 +35,9 @@ export default class EventRego extends Component {
             });
             }catch(err){console.warn('try catch error: ' + err.message);}
         
-        this.setState({
-            errorMessage: '',
-            
-        });
+        this.setState({ errorMessage: '',});
     }
-    //
-	/////////////////////////////////////
+
 
 	submitRego(){
         this.setState({isLoading: true, errorMessage: ''});
@@ -65,7 +56,7 @@ export default class EventRego extends Component {
             else{
                 Alert.alert(
                     'Submitted',
-                    'You have been successfully registered for the ' + this.state.eventname,
+                    'You have been successfully registered for the ' + this.state.eventData.eventname,
                     [
                         {text: 'OK', onPress: () => this.props.navigation.navigate('HomePage')},
                     ],
@@ -95,7 +86,7 @@ export default class EventRego extends Component {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>
-                    {this.state.eventname}
+                    {this.state.eventData.eventname}
                 </Text>
                 <KeyboardAwareScrollView>
                 {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}

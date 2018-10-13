@@ -14,25 +14,23 @@ export default class EventSingle extends Component {
 	static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Event Info', navigation, false);
 	}
+
 	componentWillMount(){
-        var data = this.props.navigation.getParam('data', 'NoData');
-        if(data == 'NoData'){
-            console.error('NO DATA PASSED TO EVENT PAGE');
-            this.props.navigation.goBack();
-		}
-		console.log(data.state);
-		if(data.latitude == 0){
-			console.warn('No Geocode');
+        var eventData = this.props.navigation.getParam('eventData', 'NoData');
+        if(eventData == 'NoData')
+			this.props.navigation.goBack();
+			
+		if(eventData.latitude == 0){
+			console.log('No Geocode');
 			var vultr = this.props.screenProps;
 			this.setState({vultr: this.props.screenProps});
-			vultr.geocodeAddress(data)
+			
+			vultr.geocodeAddress(eventData)
 			.then(() => {
 				this.setState({
 					isLoading: false,
 					didLoad: true,
-					data: vultr.data,
 				});
-	
 			}).catch((err) => {
 				this.setState({
 					isLoading: false,
@@ -42,30 +40,14 @@ export default class EventSingle extends Component {
 		}
         this.setState({
 			errorMessage: '',
-			data: data,
-            eventname: data.eventname,
-			eventgroup: data.eventgroup,
-			date: data.startdate,
-			type: data.eventtype,
-			starttime: data.starttime,
-			endtime: data.endtime,
-			location: data.locationname,
-			address: data.address,
-			city: data.city,
-			locstate: data.state,
-			postcode: data.postcode,
-			country: data.country,
-			cost: data.cost,
-			blurb: data.blurb,
-			longitude: data.longitude,
-			latitude: data.latitude,
+			eventData: eventData,
         });
     }
 	renderDescription(){
 		return(
 			<View style={eventStyles.heading}>
 				<Text style={eventStyles.headTitle}>
-					{this.state.eventname}
+					{this.state.eventData.eventname}
 				</Text>
             </View>
 		)
@@ -78,7 +60,7 @@ export default class EventSingle extends Component {
 						Time
 					</Text>
 					<Text style={eventStyles.infoText}>
-						{this.state.starttime} - {this.state.endtime}
+						{this.state.eventData.starttime} - {this.state.eventData.endtime}
 					</Text>
 				</View>
 				<View style={eventStyles.rowCont} >
@@ -86,9 +68,9 @@ export default class EventSingle extends Component {
 						Venue
 					</Text>
 					<Text style={eventStyles.infoText}>
-						{this.state.location + '\n' + this.state.address + '\n' + 
-							this.state.city + ' ' +  this.state.locstate + '\n' + 
-							this.state.postcode + ' ' + this.state.country}
+						{this.state.eventData.location + '\n' + this.state.eventData.address + '\n' + 
+							this.state.eventData.city + ' ' +  this.state.eventData.locstate + '\n' + 
+							this.state.eventData.postcode + ' ' + this.state.eventData.country}
 					</Text>
 				</View>
 				<View style={eventStyles.rowCont} >
@@ -96,11 +78,11 @@ export default class EventSingle extends Component {
 						Cost
 					</Text>
 					<Text style={eventStyles.infoText}>
-						{this.state.cost}
+						{this.state.eventData.cost}
 					</Text>
 				</View>
 				<Text style={eventStyles.blurbText}>
-					{this.state.blurb}
+					{this.state.eventData.blurb}
 				</Text>
 				
 			</ScrollView>
@@ -112,17 +94,17 @@ export default class EventSingle extends Component {
 			<View style={eventStyles.mapCont}>
 				<MapView style={eventStyles.map}
 					initialRegion={{
-					latitude: this.state.latitude,
-					longitude: this.state.longitude,
+					latitude: this.state.eventData.latitude,
+					longitude: this.state.eventData.longitude,
 					latitudeDelta: 0.0150,
 					longitudeDelta: 0.0150,
 					}}
 				>
 				<Marker
-					title={this.state.location}
+					title={this.state.eventData.location}
 					coordinate={{
-						latitude: this.state.latitude,
-						longitude: this.state.longitude
+						latitude: this.state.eventData.latitude,
+						longitude: this.state.eventData.longitude,
 					}}
 				/>
 				</MapView>
@@ -138,7 +120,7 @@ export default class EventSingle extends Component {
 				{this.renderInfo()}
 				{this.renderMap()}
 				<View style={styles.submitBtnCont}>
-                    <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego', {data: this.state.data})} />
+                    <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego', {eventData: this.state.eventData})} />
                 </View>
 			</View>
 		);
