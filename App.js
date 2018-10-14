@@ -55,18 +55,19 @@ const navStack = createStackNavigator({
 	WebViewPage: { screen: WebViewPage },
 
 },{ //options
-	initialRouteName: 'UDMenu',
+	initialRouteName: 'HomePage',
 });
 
 const passwordStack = createStackNavigator({
 	Password: { screen: PasswordForm }
-  });
-  const faqStack = createStackNavigator({
+});
+const faqStack = createStackNavigator({
 	FAQs: { screen: FAQs }
-  });
-  const ForgotPasswordStack = createStackNavigator({
+});
+const ForgotPasswordStack = createStackNavigator({
 	ForgotPasswordPage: { screen: ForgotPassword }
-  });
+});
+
 
 const drawerNav = createDrawerNavigator({
 	//Routes
@@ -85,30 +86,34 @@ const drawerNav = createDrawerNavigator({
 });
 
 
-const RootStack = createSwitchNavigator({
+
+const RootStack = createStackNavigator({
   	//Routs
 	Login: { screen: LoginPage},
-	HomeDrawer: { screen: drawerNav },
+	
 	SUForm: { screen: SignUpForm},
 	SUFinish: { screen: SignUpFinish},
 	ForgotPassword: { screen: ForgotPasswordStack },
   },{ //options
-  initialRouteName: 'HomeDrawer',
+  initialRouteName: 'Login',
+});
+
+const RootSwitch = createSwitchNavigator({
+	//Routs
+  LoginRoot: { screen: RootStack},
+  HomeDrawer: { screen: drawerNav },
+},{ //options
+initialRouteName: 'LoginRoot',
 });
 
 export default class App extends React.Component{
 
-	constructor(){
-		super();
-		this.isLoading = true;
-	}
 	componentWillMount(){
 		this.vultr = new Vultrsdk();
-		
 	}
 
 	render() {
-		return <RootStack screenProps={this.vultr}/>;
+		return <RootSwitch screenProps={this.vultr}/>;
 	}
 }
 

@@ -19,7 +19,8 @@ export default class EventSingle extends Component {
         var eventData = this.props.navigation.getParam('eventData', 'NoData');
         if(eventData == 'NoData')
 			this.props.navigation.goBack();
-			
+		
+		console.log(eventData);
 		if(eventData.latitude == 0){
 			console.log('No Geocode');
 			var vultr = this.props.screenProps;

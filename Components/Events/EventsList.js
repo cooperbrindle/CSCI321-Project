@@ -40,7 +40,7 @@ export default class EventsList extends Component {
         var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
         return(
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle', {data: item})}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('EventSingle', {eventData: item})}>
                 <View style={listStyles.itemView}>
                     <View style={listStyles.textView}>
                         <Text style={listStyles.text}>

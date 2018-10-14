@@ -11,7 +11,7 @@ import { udStyles } from '../styles/udStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
 import LinkedInModal from 'react-native-linkedin';
-import {linkedInConfig} from '../socialConfig';
+import { linkedInConfig } from '../socialConfig';
 
 const accountIcon = require('../assets/Account.png');
 const contactIcon = require('../assets/Contact.png');
@@ -38,23 +38,23 @@ export default class UpdateDetailsMenu extends Component {
 		try{
 		var vultr = this.props.screenProps;
 		this.setState({vultr: this.props.screenProps});
-		// vultr.loadConstituent()
-		// .then(() => {
-		// 	const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
+		vultr.loadConstituent()
+		.then(() => {
+			const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
 		 	this.setState({
-		// 		originalData: originalData,
-		// 		data: vultr.data,
-		// 		constituentRefID: vultr.data.id,
+				originalData: originalData,
+				data: vultr.data,
+				constituentRefID: vultr.data.id,
 		 		isLoading: false,
 		 		didLoad: true,
 		 	});
 
-		// }).catch((err) => {
-		// 	this.setState({
-		// 		isLoading: false,
-		// 		didLoad: false,
-		// 	});
-		// })
+		}).catch((err) => {
+			this.setState({
+				isLoading: false,
+				didLoad: false,
+			});
+		})
 
 
 		}catch(err){console.warn('try catch error: ' + err.message);}

@@ -12,6 +12,10 @@ import { baseStyles } from './styles/BaseStyles';
 
 export default class Login extends React.Component {
     
+    static navigationOptions = {
+        header: null,
+    };
+    
     state = {
         username: '',
         password: '',

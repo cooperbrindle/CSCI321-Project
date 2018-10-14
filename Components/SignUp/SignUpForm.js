@@ -1,12 +1,18 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, Alert, TouchableHighlight, Image, ActivityIndicator} from 'react-native';
+import { StyleSheet, ScrollView, Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { baseStyles } from '../styles/BaseStyles';
 
+import { navigationOptionsFunc } from '../styles/navOptions';
+
 export default class SignUpForm extends Component {
+
+    static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Sign Up', navigation, false);
+	}
 
     state = {
         errorMessage: '',
@@ -147,7 +153,7 @@ export default class SignUpForm extends Component {
                 </ScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Continue' nav={() => this.submitForm()} />
-                    <DefaultButton title='Back' nav={() => this.props.navigation.navigate('Login')} />
+                    {/*<DefaultButton title='Back' nav={() => this.props.navigation.navigate('Login')} />*/}
                 </View>
 			</View>
 		);

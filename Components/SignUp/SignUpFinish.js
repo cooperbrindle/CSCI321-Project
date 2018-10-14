@@ -9,8 +9,14 @@ import { styles } from '../styles/FormStyles';
 import { baseStyles } from '../styles/BaseStyles';
 import { homeStyles } from '../styles/HomeStyles';
 
+import { navigationOptionsFunc } from '../styles/navOptions';
+
 export default class SignUpFinish extends Component {
-	
+    
+    static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Sign Up', navigation, false);
+	}
+    
     state = {
         errorMessage: '',
         isLoading: false,
@@ -70,11 +76,11 @@ export default class SignUpFinish extends Component {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
 		return (
 			<View style={styles.container}>
-                <View style={{marginTop:50}}/>
+                <View style={{marginTop:0}}/>
                 <View style={homeStyles.logoCont}>
                     <Logo scale={1}/>
                 </View>
-
+                <View style={{marginTop:20}}/>
 				<Text style={styles.title}>
                     Finalise Sign Up
                 </Text>

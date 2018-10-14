@@ -94,7 +94,10 @@ export default class HomePage extends Component {
 		if(item.type == 'mag')
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
-						onPress={(item) => {}}>
+						onPress={() => {this.props.navigation.navigate('WebViewPage', 
+							{title: 'UOW Outlook Magazine', 
+							link: item.data.link})
+						}}>
 					<View style={homeStyles.highlightView}>
 						<View style={homeStyles.highlightTextView}>
 							<Text style={homeStyles.highlightText}>
