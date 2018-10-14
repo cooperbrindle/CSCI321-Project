@@ -20,16 +20,20 @@ export default class Vultr{
         else return true;
     }
 
-    loadConstituent(){
+    loadConstituent(password){
+        if(!password || password == null) password = null;
         return new Promise((resolve, reject) => {
-            this.makeAuthRequest('/user/loadconstituent', 'POST', {username: this.username}
+            this.makeAuthRequest('/user/loadconstituent', 'POST', {username: this.username, password: password}
             ).then((res) => {
-                this.data = res[0];
-                console.log(res[0]);
-                try{
-                    AsyncStorage.setItem('username', this.username);
-                }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
-                resolve();
+                if(res.error == 'Incorrect password'){reject(res.error)}
+                else{
+                    this.data = res[0];
+                    console.log(res[0]);
+                    try{
+                        AsyncStorage.setItem('username', this.username);
+                    }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
+                    resolve();
+                }
             }).catch((error) => { reject(error);})
         });
     }

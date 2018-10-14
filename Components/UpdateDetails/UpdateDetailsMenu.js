@@ -67,6 +67,7 @@ export default class UpdateDetailsMenu extends Component {
 					didLoad: false,
 					errorMessage: err,
 				});
+				console.log(err);
 				if(err == 'Incorrect password') 
 					this.setState({modalVisible: true, password: ''})
 			})
