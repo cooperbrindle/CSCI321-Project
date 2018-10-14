@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
 import { navigationOptionsFunc } from '../styles/navOptions';
+import { baseStyles } from '../styles/BaseStyles';
+import { listStyles } from '../styles/EventStyles'
 
 export default class Discounts extends Component {
 	constructor(props){
@@ -37,13 +39,13 @@ export default class Discounts extends Component {
     renderItem(item){
         return(
             <TouchableHighlight onPress={() => this.props.navigation.navigate('DiscountCard')}>
-                <View style={styles.itemView}>
+                <View style={listStyles.itemView}>
                     <Image
-                        style={styles.image}
+                        style={discountStyles.image}
                         source={{uri: item.imageURL}}
                     />
-                    <View style={styles.textView}>
-                        <Text style={styles.text}>
+                    <View style={listStyles.textView}>
+                        <Text style={listStyles.text}>
                             {item.blurb}
                         </Text>
                     </View>
@@ -56,8 +58,8 @@ export default class Discounts extends Component {
             return <View/>;
         
         else return(
-            <ScrollView style={styles.scrollView}>
-                <FlatList style={styles.fList}
+            <ScrollView style={listStyles.scrollView}>
+                <FlatList style={listStyles.fList}
                     data={this.state.data}
                     renderItem={({item}) => this.renderItem(item)}
                     keyExtractor={(item, index) => index}
@@ -67,7 +69,7 @@ export default class Discounts extends Component {
     }
 	render() {
 		return (
-			<View style={styles.container}>
+			<View style={baseStyles.container}>
                 {this.renderActivityIndicator()}
 				{this.renderList()}
 			</View>
@@ -75,37 +77,11 @@ export default class Discounts extends Component {
 		}
 };
 	
-	const styles = StyleSheet.create({
-		container: {
-			flex: 1,
-			backgroundColor: '#0C2340',
-        },
-        scrollView: {
-            //flex: 1,
-        },
-        fList: {
-            //flex: 1,
-        },
-		itemView: {
-            flexDirection: 'row',
-            borderWidth: 0.5,
-            flex: 1,
-            margin: 5,
-        },
+	const discountStyles = StyleSheet.create({
         image: {
             backgroundColor: '#FFFFFF',
             flex: 1,
-            resizeMode: 'stretch',
+            resizeMode: 'center',
+            padding: 5,
         },
-        textView: {
-            flex: 2,
-        },
-        text: {
-            color: 'white',
-            fontSize: 18,
-            paddingLeft: 20,
-            paddingTop: 20,
-            paddingBottom: 20,
-            paddingRight: 10,
-        }
 	});
