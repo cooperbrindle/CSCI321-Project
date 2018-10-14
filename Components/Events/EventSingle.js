@@ -20,12 +20,15 @@ export default class EventSingle extends Component {
         if(eventData == 'NoData')
 			this.props.navigation.goBack();
 
+		/* Incase any of the data is NULL rather than 0, NULL murders the mapview */ 
 		if(eventData.latitude == 0 || eventData.latitude == null || eventData.latitude == ''){
 			if(eventData.latitude == null || eventData.longitude == null){
 				eventData.longitude = 0;
 				eventData.latitude = 0;
 			}
 		}
+
+		/* set eventData state and longitude and latitude */
 		this.setState({
 			errorMessage: '',
 			eventData: eventData,
@@ -39,7 +42,7 @@ export default class EventSingle extends Component {
 			this.setState({vultr: this.props.screenProps});
 			vultr.geocodeAddress(eventData)
 			.then((res) => {
-				console.log(res.longitude);
+				/* Sets state longitude and latitude to new value for the mapview and then the eventData for passing back to list */
 				this.setState({
 					isLoading: false,
 					didLoad: true,
