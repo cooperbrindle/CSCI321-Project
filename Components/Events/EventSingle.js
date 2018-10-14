@@ -19,18 +19,26 @@ export default class EventSingle extends Component {
         var eventData = this.props.navigation.getParam('eventData', 'NoData');
         if(eventData == 'NoData')
 			this.props.navigation.goBack();
-		
+
+		this.setState({
+			errorMessage: '',
+			eventData: eventData,
+			longitude: eventData.longitude,
+			latitude: eventData.latitude,
+		});
 		console.log(eventData);
 		if(eventData.latitude == 0){
 			console.log('No Geocode');
 			var vultr = this.props.screenProps;
 			this.setState({vultr: this.props.screenProps});
-			
 			vultr.geocodeAddress(eventData)
-			.then(() => {
+			.then((res) => {
+				console.log(res.longitude);
 				this.setState({
 					isLoading: false,
 					didLoad: true,
+					longitude: res.longitude,
+					latitude: res.latitude,
 				});
 			}).catch((err) => {
 				this.setState({
@@ -39,10 +47,7 @@ export default class EventSingle extends Component {
 				});
 			})
 		}
-        this.setState({
-			errorMessage: '',
-			eventData: eventData,
-        });
+        
     }
 	renderDescription(){
 		return(
@@ -69,8 +74,8 @@ export default class EventSingle extends Component {
 						Venue
 					</Text>
 					<Text style={eventStyles.infoText}>
-						{this.state.eventData.location + '\n' + this.state.eventData.address + '\n' + 
-							this.state.eventData.city + ' ' +  this.state.eventData.locstate + '\n' + 
+						{this.state.eventData.locationname + '\n' + this.state.eventData.address + '\n' + 
+							this.state.eventData.city + ' ' +  this.state.eventData.state + '\n' + 
 							this.state.eventData.postcode + ' ' + this.state.eventData.country}
 					</Text>
 				</View>
@@ -94,9 +99,9 @@ export default class EventSingle extends Component {
 		return(
 			<View style={eventStyles.mapCont}>
 				<MapView style={eventStyles.map}
-					initialRegion={{
-					latitude: this.state.eventData.latitude,
-					longitude: this.state.eventData.longitude,
+					region={{
+					latitude: this.state.latitude,
+					longitude: this.state.longitude,
 					latitudeDelta: 0.0150,
 					longitudeDelta: 0.0150,
 					}}
@@ -104,8 +109,8 @@ export default class EventSingle extends Component {
 				<Marker
 					title={this.state.eventData.location}
 					coordinate={{
-						latitude: this.state.eventData.latitude,
-						longitude: this.state.eventData.longitude,
+						latitude: this.state.latitude,
+						longitude: this.state.longitude,
 					}}
 				/>
 				</MapView>

@@ -20,20 +20,16 @@ export default class Vultr{
         else return true;
     }
 
-    loadConstituent(password){
-        if(!password) password = null;
+    loadConstituent(){
         return new Promise((resolve, reject) => {
-            this.makeAuthRequest('/user/loadconstituent', 'POST', {username: this.username, password: password}
+            this.makeAuthRequest('/user/loadconstituent', 'POST', {username: this.username}
             ).then((res) => {
-                if(res.error && res.error == 'Incorrect password'){ reject(res.error);}
-                else{
-                    this.data = res[0];
-                    console.log(res[0]);
-                    try{
-                        AsyncStorage.setItem('username', this.username);
-                    }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
-                    resolve();
-                }
+                this.data = res[0];
+                console.log(res[0]);
+                try{
+                    AsyncStorage.setItem('username', this.username);
+                }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
+                resolve();
             }).catch((error) => { reject(error);})
         });
     }
@@ -50,8 +46,7 @@ export default class Vultr{
                     reject(res.error);
                 else{
                     this.saveToken(res.token);
-                    console.log("PASSWORD INSIDE LOGIN CALL BACK: " + password)
-                    this.loadConstituent(password)
+                    this.loadConstituent()
                     .then(() => {resolve();
                     }).catch((err) => { reject(err);})
                 }
@@ -185,9 +180,7 @@ export default class Vultr{
                 {data: eventData,}
             ).then((res) => {
                 if(res.error && res.error != '') reject(res.error);
-                eventData.latitude = res.latitude;
-                eventData.longitude = res.longitude;
-                resolve(eventData);
+                resolve(res);
             }).catch((error) => {reject(error);})
         });
     }
