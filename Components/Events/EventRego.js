@@ -21,7 +21,7 @@ export default class EventRego extends Component {
                 console.error('NO DATA PASSED TO EVENT PAGE');
                 this.props.navigation.goBack();
             }
-
+            var vultr = this.props.screenProps;
             this.setState({vultr: this.props.screenProps});
             this.setState({
                 eventData: eventData,
