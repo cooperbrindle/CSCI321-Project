@@ -33,7 +33,7 @@ export default class Careers extends Component {
                     </Text>
                 </ScrollView>
 				
-                <View style={styles.submitBtnCont}>
+                <View style={thisStyles.submitBtnCont}>
                     <DefaultButton title='Login to CareerHub' nav={() => this.props.navigation.navigate('WebViewPage',
                             {link: 'https://careerhub.uow.edu.au/students/login?ReturnUrl=%2f',
                             title: 'CareerHub'})} />
@@ -45,6 +45,14 @@ export default class Careers extends Component {
     };
     
     const thisStyles = StyleSheet.create({
+        submitBtnCont: {
+            flex: 0.4,
+            marginLeft: 5,
+            marginRight: 5,
+            marginBottom: 10,
+            alignContent: 'flex-start',
+            justifyContent: 'flex-end',
+        },
         blurbView: {
             flex:1,
             backgroundColor: '#0C2340',

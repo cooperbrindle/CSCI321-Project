@@ -5,6 +5,7 @@ import { StyleSheet, ScrollView, Text, TextInput, View, Alert, Image} from 'reac
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { navigationOptionsFunc } from '../styles/navOptions';
+import { staticStyles } from '../styles/BenefitsStyles';
 
 const libraryLogo = require('../assets/libraryLogo.jpg');
 
@@ -80,25 +81,25 @@ export default class LibraryMembership extends Component {
 
 	render() {
 		return (
-			<View style={thisStyles.container}>
-                    <Image style={thisStyles.logo}
+			<View style={staticStyles.container}>
+                    <Image style={staticStyles.logo}
                         source={libraryLogo} />
                 
 
-                <Text style={thisStyles.title}>
+                <Text style={staticStyles.title}>
                     Claim your library card!
                 </Text>
 
-				<ScrollView style={thisStyles.blurbView}>
+				<ScrollView style={staticStyles.blurbView}>
                     
-                    <Text style={thisStyles.blurbTextPoints}>
+                    <Text style={staticStyles.blurbTextPoints}>
                         {blurbPoints}
                     </Text>
                 </ScrollView>
                 
                 {this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true)}
 				
-                <View style={styles.submitBtnCont}>
+                <View style={staticStyles.submitBtnCont}>
                     <DefaultButton title='Claim Now' nav={() => this.submit()} />
                 </View>
 
@@ -106,39 +107,3 @@ export default class LibraryMembership extends Component {
 		);
 		}
     };
-    
-    const thisStyles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: '#0C2340',
-        },
-        title: {
-            alignSelf: 'center',
-            textAlign: 'center',
-            fontSize: 36,
-            color: 'white',
-            marginBottom: 10,
-        },
-        blurbView: {
-            flex:1,
-            backgroundColor: '#0C2340',
-            paddingLeft: 10,
-            paddingRight: 10,
-            marginTop: 20,
-            marginBottom: 10,
-        },
-        logo: {
-            flex:0.5,
-            alignSelf: 'center',
-            resizeMode: 'center',
-        },
-        blurbTextPoints: {
-            color:'white',
-            fontSize: 18,
-            paddingLeft: 20,
-        },
-        blurbTextEnd: {
-            color:'white',
-            fontSize: 14,
-        },
-    });
