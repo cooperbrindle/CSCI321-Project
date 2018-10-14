@@ -115,9 +115,9 @@ export default class Vultr{
         return new Promise((resolve, reject) => {
             this.makeRequest('/auth/register', 'POST',
                 {
-                    email: email,
-                    password: password,
                     id: id,
+                    username: email,
+                    passHash: password,
                 }
             ).then((res) => {
                 if(res.error && res.error != '') reject(res.error);
@@ -126,6 +126,7 @@ export default class Vultr{
             }).catch((error) => {reject(error);})
         });
     }
+
     registerConst(eventData, constInfo){
         return new Promise((resolve, reject) => {
             if(constInfo.position != this.data.position || constInfo.orgName != this.data.orgName){

@@ -155,13 +155,14 @@ router.post('/register', (req, res) => {
 	log(' Request made to: /register');
 
 	try{
-	if(!req.body.email || !req.body.password || !req.body.id)
+	if(!req.body.username || !req.body.passHash || !req.body.id)
 		res.status(400).send("400 Bad Request");
     
 	var salt = bcrypt.genSaltSync(saltRounds);
-	req.body.password = bcrypt.hashSync(req.body.password, salt);
+	var hash = bcrypt.hashSync(req.body.passHash, salt);
+	req.body.passHash = hash;
 	
-	var qry = 'INSERT INTO APPUSER VALUES SET ?';
+	var qry = 'INSERT INTO APPUSER SET ?';
 
 	
 	dbconn.query(qry, req.body, (err, result1) => {

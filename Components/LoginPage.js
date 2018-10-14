@@ -53,7 +53,7 @@ export default class Login extends React.Component {
         else{
             //TODO: REMOVE THIS ELSE - ONLY FOR TESTING
             this.setState({
-                username: 'ewarren',
+                //username: 'ewarren',
                 password: 'password',
             })
         }
@@ -76,7 +76,7 @@ export default class Login extends React.Component {
                     this.props.navigation.navigate('HomeDrawer');
                 })
                 .catch((error) =>{
-                    this.setState({errorMessage: error, isLoading: false});
+                    this.setState({errorMessage: [error], isLoading: false});
                 });
             }else{
                 this.setState({

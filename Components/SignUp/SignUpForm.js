@@ -5,7 +5,7 @@ import { StyleSheet, ScrollView, Text, TextInput, View, Alert, ActivityIndicator
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { baseStyles } from '../styles/BaseStyles';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class SignUpForm extends Component {
@@ -102,6 +102,8 @@ export default class SignUpForm extends Component {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
 		return (
 			<View style={styles.container}>
+            <KeyboardAwareScrollView>
+            <View>
                 <View style={stylesA.topPadding}/>
 				<Text style={styles.title}>
                     Please fill out as many fields as possible
@@ -115,7 +117,6 @@ export default class SignUpForm extends Component {
                     {actInd}
                 </View>
 
-                <ScrollView>
                 <View style={styles.topInput}>
                     
                     <View style={styles.inputContDate}>
@@ -150,7 +151,8 @@ export default class SignUpForm extends Component {
                 {this.renderInput('Student Number', '', (value) => this.setState({stdNum: value}) )}
                 {this.renderInput('UOW email', '',      (value) => this.setState({email: value}) )}
 				
-                </ScrollView>
+            </View>
+            </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Continue' nav={() => this.submitForm()} />
                     {/*<DefaultButton title='Back' nav={() => this.props.navigation.navigate('Login')} />*/}
