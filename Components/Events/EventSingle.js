@@ -20,6 +20,12 @@ export default class EventSingle extends Component {
         if(eventData == 'NoData')
 			this.props.navigation.goBack();
 
+		if(eventData.latitude == 0 || eventData.latitude == null || eventData.latitude == ''){
+			if(eventData.latitude == null || eventData.longitude == null){
+				eventData.longitude = 0;
+				eventData.latitude = 0;
+			}
+		}
 		this.setState({
 			errorMessage: '',
 			eventData: eventData,
