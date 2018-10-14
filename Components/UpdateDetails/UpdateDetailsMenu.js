@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { Text, View, ActivityIndicator, Alert, AsyncStorage} from 'react-native';
+import { Text, View, ActivityIndicator, Alert, AsyncStorage, Modal, TextInput, Dimensions} from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { DashButton } from '../CustomProps/DashButton';
 import { SocialButton } from '../CustomProps/SocialButton';
@@ -9,7 +9,7 @@ import { baseStyles } from '../styles/BaseStyles';
 import { styles } from '../styles/FormStyles';
 import { udStyles } from '../styles/udStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import LinkedInModal from 'react-native-linkedin';
 import { linkedInConfig } from '../socialConfig';
 
@@ -26,37 +26,50 @@ export default class UpdateDetailsMenu extends Component {
 
 	state = {
 		vultr: this.props.screenProps,
-		isLoading: true,
+		isLoading: false,
 		didLoad: false,
 		errorMessage: '',
 		successMessage: '',
 		showLinkedIn: false,
+		password: '',
+		modalVisible: true,
 	};
 	
 	
 	componentWillMount(){
+	}
+
+	load(){
 		try{
-		var vultr = this.props.screenProps;
-		this.setState({vultr: this.props.screenProps});
-		vultr.loadConstituent()
-		.then(() => {
-			const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
-		 	this.setState({
-				originalData: originalData,
-				data: vultr.data,
-				constituentRefID: vultr.data.id,
-		 		isLoading: false,
-		 		didLoad: true,
-		 	});
+			var vultr = this.props.screenProps;
+			if(this.state.password == ''){
+				this.setState({errorMessage: 'Please enter password'});
+				return;
+			}
+			this.setState({vultr: this.props.screenProps, modalVisible: false});
+			vultr.loadConstituent(this.state.password)
+			.then(() => {
+				const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
+				this.setState({
+					originalData: originalData,
+					data: vultr.data,
+					constituentRefID: vultr.data.id,
+					isLoading: false,
+					didLoad: true,
+					modalVisible: false,
+					password: '',
+					errorMessage: '',
+				});
 
-		}).catch((err) => {
-			this.setState({
-				isLoading: false,
-				didLoad: false,
-			});
-		})
-
-
+			}).catch((err) => {
+				this.setState({
+					isLoading: false,
+					didLoad: false,
+					errorMessage: err,
+				});
+				if(err == 'Incorrect password') 
+					this.setState({modalVisible: true, password: ''})
+			})
 		}catch(err){console.warn('try catch error: ' + err.message);}
 	}
 
@@ -169,8 +182,6 @@ export default class UpdateDetailsMenu extends Component {
 	}
 	
 
-
-
 	renderLoading(){
 		if(this.state.isLoading)
 			return (<ActivityIndicator size='large' color='#cc0000'/>);
@@ -198,9 +209,30 @@ export default class UpdateDetailsMenu extends Component {
 	}
 
 	renderDashBoard(){
-		if(this.state.didLoad)
+		if(this.state.modalVisible){
 			return(
 				<View style={baseStyles.container}>
+					<Text style={styles.title}>
+						Enter Password
+					</Text>
+
+					<View style={styles.inputCont}>
+						<Text style={styles.inputText}>
+							Password
+						</Text>
+						<TextInput style={styles.inputBox}
+							underlineColorAndroid='transparent' placeholderTextColor='grey'
+							onChangeText={(a) => this.setState({password: a})}
+							value={this.state.password} secureTextEntry={true} autoCapitalize='none'/> 
+					</View>
+					<DefaultButton title='Submit' nav={() => this.load()} />
+				</View>
+			);
+		
+		}else if(this.state.didLoad)
+			return(
+				<View style={baseStyles.container}>
+				
 				<View style={udStyles.dashboard}>
 					<DashButton title='Account' img={accountIcon} nav={()=>this.props.navigation.navigate('AccForm', {data: this.state.data})} />
 					<DashButton title='Contact' img={contactIcon} nav={()=>this.props.navigation.navigate('ContForm', {data: this.state.data})} />
@@ -231,10 +263,9 @@ export default class UpdateDetailsMenu extends Component {
 			<View style={baseStyles.container}>
 				{this.renderMessages()}
 				<View style={baseStyles.activityView}>
-				{this.renderLoading()}
+					{this.renderLoading()}
 				</View>
 				{this.renderDashBoard()}
-
 			</View>
 		);
 		}

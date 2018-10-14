@@ -2,7 +2,7 @@ var router = require('express').Router();
 var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
 var tokenAuth = require('../lib/tokenAuth');
-
+var bcrypt = require('bcryptjs');
 
 
 
@@ -24,7 +24,7 @@ router.post('/updatedetails', (req, res) => {
             res.status(400).send("400 Bad Request");
             
         var data = req.body.data;
-        console.log(data);
+        //console.log(data);
         
         dbconn.query('DELETE FROM CONSTITUENTEXPORT WHERE id = ?', data.id, (err, result) => {
             
@@ -51,37 +51,43 @@ router.post('/loadconstituent', async(req, res) => {
     log('loading constituent');
 
 	try{
-
-        if((!req.body.username || typeof req.body.username != "string") && (!req.body.id || typeof req.body.id != "string"))
-            res.status(400).send("400 Bad Request");
         
-        var query = '';
-        var err, result;
-        //CHECK CTX FOR MORE RECENT UPDATES
-        if(req.body.id && req.body.id != ''){
-            query = 'SELECT * FROM CONSTITUENTEXPORT WHERE id = ?';
-            err, result = await dbconn.query(qry, req.body.id);
-        }else {
-            qry = 'SELECT * FROM CONSTITUENTEXPORT WHERE id = ('+
-            'SELECT id FROM APPUSER WHERE username = ?)';
-            err, result = await dbconn.query(qry, req.body.username);
+        //CHECK PASSWORD
+        if(req.body.password && req.body.password != null){
+            var err, result = await dbconn.query('SELECT id, passHash FROM APPUSER WHERE id = ('+
+                'SELECT id FROM APPUSER WHERE username = ?)', req.body.username);
+            if(err) throw err;
+            
+            const id = result[0].id;
+            const passHash = result[0].passHash;
+
+            if(!bcrypt.compareSync(req.body.password, passHash)){
+                console.warn('Incorrect password at update details');
+                res.json({error: 'Incorrect password'});
+                return;
+            }else{
+                console.warn('Correct Password at update details');
+            }
         }
+        else{console.log('NO PASSWORD SUPPLIED')}
+
+        var qry = '';
+        //CHECK CTX FOR MORE RECENT UPDATES
+        qry = 'SELECT * FROM CONSTITUENTEXPORT WHERE id = ('+
+            'SELECT id FROM APPUSER WHERE username = ?)';
+        err, result = await dbconn.query(qry, req.body.username);
         if(err) throw err;
+        
         if(result.length > 0){
             res.json(result);
         }
         else{
             //NO CTX ROW
-            //Load from normal constituent
-            if(req.body.id && req.body.id != ''){
-                query = 'SELECT * FROM CONSTITUENT WHERE id = ?';
-                err, result = await dbconn.query(qry, req.body.id);
-            }else {
-                qry = 'SELECT * FROM CONSTITUENT WHERE id = ('+
+            qry = 'SELECT * FROM CONSTITUENT WHERE id = ('+
                 'SELECT id FROM APPUSER WHERE username = ?)';
-                err, result = await dbconn.query(qry, req.body.username);
-            }
+            err, result = await dbconn.query(qry, req.body.username);
             if(err) throw err;
+
             if(result.length > 0)
                 res.json(result);
         }

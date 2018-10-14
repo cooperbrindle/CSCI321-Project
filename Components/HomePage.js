@@ -41,7 +41,7 @@ export default class HomePage extends Component {
 					highlightData: res,
 				});
 		}).catch(err =>{
-			this.setState({isLoading: false});
+			//this.setState({isLoading: false});
 		})
 	}
 
@@ -156,7 +156,7 @@ export default class HomePage extends Component {
 				</Text>
 				<View style={homeStyles.carouselView}>
 					{this.renderCarousel()}
-					{actInd}
+					<View style={baseStyles.activityView}>{actInd}</View>
 				</View>
 				
 			</View>
