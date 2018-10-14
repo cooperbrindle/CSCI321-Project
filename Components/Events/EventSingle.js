@@ -46,6 +46,8 @@ export default class EventSingle extends Component {
 					longitude: res.longitude,
 					latitude: res.latitude,
 				});
+				eventData.longitude = res.longitude;
+				eventData.latitude = res.latitude;
 			}).catch((err) => {
 				this.setState({
 					isLoading: false,
@@ -53,7 +55,6 @@ export default class EventSingle extends Component {
 				});
 			})
 		}
-        
     }
 	renderDescription(){
 		return(
