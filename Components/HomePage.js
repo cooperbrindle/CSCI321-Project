@@ -14,7 +14,7 @@ import {navigationOptionsFunc} from './styles/navOptions';
 const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
-const promoIcon = require('./assets/Promotions.png');
+const promoIcon = require('./assets/Benefits.png');
 
 export default class HomePage extends Component {
 	
