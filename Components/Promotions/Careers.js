@@ -5,6 +5,7 @@ import { ScrollView, Text, View, Image} from 'react-native';
 import { baseStyles } from '../styles/BaseStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
 import { DefaultButton } from '../CustomProps/DefaultButton';
+import { staticStyles } from '../styles/BenefitsStyles'
 
 
 const libraryLogo = require('../assets/careerSmart.jpg');
