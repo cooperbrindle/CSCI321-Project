@@ -33,7 +33,7 @@ export default class GuestRego extends Component {
     //
     componentWillMount(){
         try{
-            const pageData = this.props.navigation.getParam('data', 'NoData');
+            const pageData = this.props.navigation.getParam('eventData', 'NoData');
             if(pageData == 'NoData'){
                 console.error('NO DATA PASSED TO EVENT PAGE');
                 this.props.navigation.goBack();

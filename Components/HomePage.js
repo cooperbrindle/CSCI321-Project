@@ -53,7 +53,7 @@ export default class HomePage extends Component {
 			
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
-					onPress={() => this.props.navigation.navigate('EventSingle', {data: item.data})}>
+					onPress={() => this.props.navigation.navigate('EventSingle', {eventData: item.data})}>
                 <View style={homeStyles.highlightView}>
                     <View style={homeStyles.highlightTextView}>
                         <Text style={homeStyles.highlightText}>
