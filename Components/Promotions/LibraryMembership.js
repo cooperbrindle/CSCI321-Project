@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, Text, TextInput, View, Alert, Image} from 'react-native';
+import { ScrollView, Text, TextInput, View, Alert, Image} from 'react-native';
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { navigationOptionsFunc } from '../styles/navOptions';

@@ -14,7 +14,7 @@ import {navigationOptionsFunc} from './styles/navOptions';
 const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
-const promoIcon = require('./assets/Promotions.png');
+const promoIcon = require('./assets/Benefits.png');
 
 export default class HomePage extends Component {
 	
@@ -53,7 +53,7 @@ export default class HomePage extends Component {
 			
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
-					onPress={() => this.props.navigation.navigate('EventSingle', {eventData: item.data})}>
+					onPress={() => this.props.navigation.navigate('EventSingle', {eventDataas: item.data})}>
                 <View style={homeStyles.highlightView}>
                     <View style={homeStyles.highlightTextView}>
                         <Text style={homeStyles.highlightText}>
