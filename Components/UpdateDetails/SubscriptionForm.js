@@ -1,11 +1,12 @@
 
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image, Switch} from 'react-native';
+import { ScrollView, View, Switch, Text} from 'react-native';
 import { styles } from '../styles/FormStyles';
+import { udStyles } from '../styles/udStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
-import { SettingsSwitch } from 'react-native-settings-components';
 import { navigationOptionsFunc } from '../styles/navOptions';
+
 
 export default class SubscriptionForm extends Component {
 	static navigationOptions = ({navigation}) => {
@@ -13,7 +14,7 @@ export default class SubscriptionForm extends Component {
 	}
 	
 	/////////////////////////////////////
-    //
+    //Load data
     componentWillMount(){
         const data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
@@ -29,7 +30,7 @@ export default class SubscriptionForm extends Component {
 			outlookValue: (data.outlook == "true"),
 		});
     }
-    //
+    //Save Changes to Switches
 	/////////////////////////////////////
 	saveChanges(){
 
@@ -44,69 +45,78 @@ export default class SubscriptionForm extends Component {
             console.warn('ERROR: '+ err.message);
         }
         this.props.navigation.goBack();
-    }
-
+	}
+	//When switch value changes
+	////////////////////////////////////////////////////////////////////
+	videoKilledTheRadioStar(post, mobile, email){
+		this.setState({
+			postValue: post, 
+			mobileValue: mobile,
+			emailValue: email, 
+		});
+	}
+	//
+	//////////////////////////////////////////////////////////////////////
 	render() {
 		return (
+			
 			<View style={styles.container}>
 			<ScrollView>
-			<View>
-				<SettingsSwitch
-					title={'Allow communication via post'}
-					onSaveValue={(value) => {
-						console.log('Allow communication via post:', value);
-						this.setState({
-							postValue: value
-						});
-						}}
-						value={this.state.postValue}
-						thumbTintColor={(this.state.postValue) ? colors.switchEnabled : colors.switchDisabled}
-				/>
-				<SettingsSwitch
-					title={'Allow communication via text'}
-					onSaveValue={(value) => {
-						console.log('Allow communication via text:', value);
-						this.setState({
-							mobileValue: value
-						});
-						}}
-						value={this.state.mobileValue}
-						thumbTintColor={(this.state.mobileValue) ? colors.switchEnabled : colors.switchDisabled}
-				/>
-				<SettingsSwitch
-					title={'Allow communication via email'}
-					onSaveValue={(value) => {
-						console.log('Allow communication via email:', value);
-						this.setState({
-							emailValue: value
-						});
-						}}
-						value={this.state.emailValue}
-						thumbTintColor={(this.state.emailValue) ? colors.switchEnabled : colors.switchDisabled}
-				/>
-				<SettingsSwitch style={styles.inputCont}
-					title={'Allow promotional material to be sent'}
-					onSaveValue={(value) => {
-						console.log('Allow promotional material to be sent:', value);
-						this.setState({
-							promotionsValue: value
-						});
-						}}
-						value={this.state.promotionsValue}
-						thumbTintColor={(this.state.promotionsValue) ? colors.switchEnabled : colors.switchDisabled}
-				/>
-				<SettingsSwitch
-					title={'Recieve Outlook Magazine (Quarterly)'}
-					onSaveValue={(value) => {
-						console.log('Recieve Outlook Magazine (Quarterly)', value);
-						this.setState({
-							outlookValue: value
-						});
-						}}
-						value={this.state.outlookValue}
-						thumbTintColor={(this.state.outlookValue) ? colors.switchEnabled : colors.switchDisabled}
-				/>
-			</View>
+				<View style={udStyles.switchView}>
+					<View style={udStyles.textSwitch}>
+						<Text style={udStyles.switchText}>
+							Allow communitcation via post
+						</Text>
+					</View>
+					<Switch
+						disabled = {false}
+						value = {this.state.postValue}
+						onValueChange ={(value) => {this.videoKilledTheRadioStar(value, false, false)}}/>
+				</View>
+				<View style={udStyles.switchView}>
+					<View style={udStyles.textSwitch}>
+						<Text style={udStyles.switchText}>
+							Allow communitcation via mobile
+						</Text>
+					</View>
+					<Switch
+						disabled = {false}
+						value = {this.state.mobileValue}
+						onValueChange ={(value) => {this.videoKilledTheRadioStar(false, value, false)}}/>
+				</View>
+				<View style={udStyles.switchView}>
+					<View style={udStyles.textSwitch}>
+						<Text style={udStyles.switchText}>
+							Allow communitcation via email
+						</Text>
+					</View>
+					<Switch
+						disabled = {false}
+						value = {this.state.emailValue}
+						onValueChange ={(value) => {this.videoKilledTheRadioStar(false, false, value)}}/>
+				</View>
+				<View style={udStyles.switchView}>
+					<View style={udStyles.textSwitch}>
+						<Text style={udStyles.switchText}>
+							Allow promotional material to be sent
+						</Text>
+					</View>
+					<Switch
+						disabled = {false}
+						value = {this.state.promotionsValue}
+						onValueChange ={(value) => {this.setState({promotionsValue: value})}}/>
+				</View>
+				<View style={udStyles.switchView}>
+					<View style={udStyles.textSwitch}>
+						<Text style={udStyles.switchText}>
+							Recieve Outlook Magazine (Quarterly)
+						</Text>
+					</View>
+					<Switch
+						disabled = {false}
+						value = {this.state.outlookValue}
+						onValueChange ={(value) => {this.setState({outlookValue: value})}}/>
+				</View>
 			</ScrollView>
 				<View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />
@@ -118,12 +128,3 @@ export default class SubscriptionForm extends Component {
 		}
 	};
 
-	const colors = {
-		iosSettingsBackground: '#0C2340',
-		white: '#0C2340',
-		monza: '#C70039',
-		switchEnabled: (Platform.OS === 'android') ? '#CC0000' : null,
-		switchDisabled: (Platform.OS === 'android') ? '#D9D9D6' : null,
-		switchOnTintColor: (Platform.OS === 'android') ? 'rgba(199, 0, 57, 0.6)' : null,
-		blueGem: '#27139A',
-	  };
