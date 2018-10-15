@@ -21,6 +21,7 @@ export default class SignUpFinish extends Component {
         errorMessage: '',
         isLoading: false,
         email: '',
+        username: '',
         password: '',
         passwordConf: '',
     };
@@ -29,22 +30,26 @@ export default class SignUpFinish extends Component {
         this.setState({vultr: this.props.screenProps});
         var emailProp = this.props.navigation.getParam('email', '**error passing email info**');
         id = this.props.navigation.getParam('id', '');
-        this.setState({email: emailProp, id: id});
+        var un = '';
+        try{
+            un = emailProp.substr(0, emailProp.indexOf('@'));
+        }catch(err){un = '';};
+        this.setState({email: emailProp, id: id, username: un});
     }
     
     submitForm() {
         
         this.setState({isLoading: true, errorMessage: ''});
         
-        if(this.state.password != this.state.passwordConf){
+        if(this.state.password != this.state.passwordConf || (this.state.password == '' || this.state.passwordConf == '')){
             this.setState({isLoading: false, errorMessage: 'Passwords do not match'});
         }else{
-            this.state.vultr.registerUser(this.state.email, this.state.password, this.state.id)
+            this.state.vultr.registerUser(this.state.username, this.state.password, this.state.id)
             .then((result) => {                
                 this.setState({isLoading: false, errorMessage: ''});    
                 this.props.navigation.navigate('HomeDrawer');
             }).catch(error => {
-                this.setState({isLoading: false, errorMessage: error.message});
+                this.setState({isLoading: false, errorMessage: error});
             });
         }
     }
@@ -57,15 +62,15 @@ export default class SignUpFinish extends Component {
     //////////////////////////////////// UI /////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
 
-	renderInput(title, ph, stateValue, isSecure, isEditable){
+	renderInput(title, ph, setValue, stateValue, isSecure, isEditable){
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
                     {title}
                 </Text>
                 <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={stateValue} secureTextEntry={isSecure} autoCapitalize='none' editable={isEditable}
+                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey' value={stateValue}
+                    onChangeText={setValue} secureTextEntry={isSecure} autoCapitalize='none' editable={isEditable}
                 />
             </View>
 		);
@@ -95,9 +100,9 @@ export default class SignUpFinish extends Component {
                     {actInd}
                 </View>
 
-                {this.renderInput('email', this.state.email, (value) => this.setState({email: value}), false, false )}
-                {this.renderInput('password', '', (value) => this.setState({password: value}), true, true )}
-                {this.renderInput('confirm password', '', (value) => this.setState({passwordConf: value}), true, true )}
+                {this.renderInput('username', '', (value) => this.setState({username: value}), this.state.username, false, true )}
+                {this.renderInput('password', '', (value) => this.setState({password: value}), this.state.password, true, true )}
+                {this.renderInput('confirm password', '', (value) => this.setState({passwordConf: value}), this.state.passwordConf, true, true )}
 			</View>
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>

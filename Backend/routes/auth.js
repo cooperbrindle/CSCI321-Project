@@ -15,10 +15,14 @@ router.post('/login', async(req, res) => {
 	log(' Request made to: /login');
 	
 	try{
-	if(!req.body.username || typeof req.body.username != "string")
+	if(!req.body.username || typeof req.body.username != "string"){
 		res.status(400).send("400 Bad Request");
-    if(!req.body.password || typeof req.body.password != "string")
+		return;
+	}
+    if(!req.body.password || typeof req.body.password != "string"){
 		res.status(400).send("400 Bad Request");
+		return;
+	}
     
     const sentUsername = req.body.username;
 	const sentPassword = req.body.password;
@@ -151,18 +155,25 @@ router.post('/signUp', async(req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
-router.post('/register', (req, res) => {
+router.post('/register', async(req, res) => {
 	log(' Request made to: /register');
 
 	try{
-	if(!req.body.username || !req.body.passHash || !req.body.id)
-		res.status(400).send("400 Bad Request");
+
+	var qry = 'SELECT username FROM APPUSER WHERE username = ?';
+	var err, result = await dbconn.query(qry, req.body.username);
+	if(err) throw err;
+	console.log('USERS FOUND: ' + result.length);
+	if(result.length > 0){
+		res.json({error: 'username already exists'})
+		return;
+	}
     
 	var salt = bcrypt.genSaltSync(saltRounds);
 	var hash = bcrypt.hashSync(req.body.passHash, salt);
 	req.body.passHash = hash;
 	
-	var qry = 'INSERT INTO APPUSER SET ?';
+	qry = 'INSERT INTO APPUSER SET ?';
 
 	
 	dbconn.query(qry, req.body, (err, result1) => {

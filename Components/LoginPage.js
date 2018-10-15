@@ -93,22 +93,6 @@ export default class Login extends React.Component {
     }
 
     async facebookLogin() {
-        /*
-        this.setState({isLoading: true});
-        try{
-
-            const { type, token } = await Facebook.logInWithReadPermissionsAsync(FACEBOOK_APP_ID, {
-                permissions: ['public_profile', 'email']
-            });
-            if (type === 'success') {
-                //user token
-            }else{
-                this.setState({ errorMessage: 'Login Cancelled', isLoading: false });    
-            }
-        }catch(error){
-            this.setState({ errorMessage: error.message, isLoading: false });
-        }
-        */
     }
 
 
