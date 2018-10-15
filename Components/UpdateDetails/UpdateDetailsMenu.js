@@ -135,7 +135,7 @@ export default class UpdateDetailsMenu extends Component {
 				isLoading: false,
 				didLoad: true,
 			});
-			//this.replaceData(result);
+			this.replaceData(result);
 		}).catch((error) => {
 			console.log('ERROR: ' + error);
 			this.setState({
@@ -148,18 +148,37 @@ export default class UpdateDetailsMenu extends Component {
 
 	replaceData(result){
 		var data = this.state.data;
-		data.firstName = result.firstName;
-		data.lastName = result.lastName;
-		data.email = result.emailAddress;
+		var str = '';
+		if(data.firstName != result.firstName){
+			data.firstName = result.firstName;
+			str += 'First Name: ' + result.firstName + '\n';
+		}
+		if(data.lastName != result.lastName){
+			data.lastName = result.lastName;
+			str += 'Last Name: ' + result.lastName + '\n';
+		}
+		if(data.email != result.emailAddress){
+			data.email = result.emailAddress;
+			str += 'Email: ' + result.emailAddress + '\n';
+		}
+		if(result.maidenName && result.maidenName != '' && result.maidenName != null 
+			&& data.maidenName != result.maidenName){
+			data.maidenName = result.maidenName;
+			str += 'Maiden Name: ' + result.maidenName + '\n';
+		}
+		if(data.orgName != result.positions.values[0].company.name){
+			data.orgName = result.positions.values[0].company.name;
+			str += 'orgName: ' + result.positions.values[0].company.name + '\n';
+		}
+		if(data.position != result.positions.values[0].title){
+			data.position = result.positions.values[0].title;
+			str += 'Position: ' + result.positions.values[0].title + '\n';
+		}
 		data.linkedIn = result.publicProfileUrl;
-		data.maidenName = result.maidenName;
-		data.orgName = result.positions.values[0].company.name;
-		data.position = result.positions.values[0].title;
 
-		//TODO: SHOW WHICH FIELDS WERE UPDATED
 		Alert.alert(
 			'Success!',
-			'Successfully updated profile from linkedIn',
+			str,
 			[
 				{text: 'OK', onPress: () => {}},
 			],
@@ -180,6 +199,17 @@ export default class UpdateDetailsMenu extends Component {
                 onSuccess={accessToken => this.loadLinkedInUser(accessToken)}
             />
         );
+	}
+
+	facebookImport(){
+		Alert.alert(
+			'Sorry!',
+			'This feature will be coming soon :(\nTry Linkedin instead',
+			[
+				{text: 'OK', onPress: () => {}},
+			],
+			{ cancelable: false }
+		);
 	}
 	
 
@@ -245,7 +275,7 @@ export default class UpdateDetailsMenu extends Component {
 				</View>
 
                 <View style={udStyles.socialContainer}>
-                    <SocialButton title='Import from' liOnClick={() => {this.modal.open()}} />
+                    <SocialButton title='Import from' liOnClick={() => {this.modal.open()}} fbOnClick={() => {this.facebookImport()}}/>
                 </View>
 				{this.renderLinkedInModal()}
 

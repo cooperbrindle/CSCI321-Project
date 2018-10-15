@@ -115,18 +115,23 @@ export default class Vultr{
         });
     }   
 
-    registerUser(email, password, id){
+    registerUser(username, password, id){
         return new Promise((resolve, reject) => {
             this.makeRequest('/auth/register', 'POST',
                 {
                     id: id,
-                    username: email,
+                    username: username,
                     passHash: password,
                 }
             ).then((res) => {
-                if(res.error && res.error != '') reject(res.error);
-                this.signInWithEmailPassword(email, password)
-                .then(() => {resolve();})
+                if(res.error && res.error != ''){
+                    if(typeof res.error !== 'string') res.error = res.error.message;
+                    reject(res.error);
+                } 
+                else{
+                    this.signInWithEmailPassword(username, password)
+                    .then(() => {resolve();})
+                }
             }).catch((error) => {reject(error);})
         });
     }
