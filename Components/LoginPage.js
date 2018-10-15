@@ -32,7 +32,6 @@ export default class Login extends React.Component {
             username: vultr.username,
         });
 
-
         //LOAD TOKEN
         var token, username;
 		try{ 
@@ -53,7 +52,7 @@ export default class Login extends React.Component {
         else{
             //TODO: REMOVE THIS ELSE - ONLY FOR TESTING
             this.setState({
-                //username: 'ewarren',
+                username: 'ewarren',
                 password: 'password',
             })
         }
@@ -76,7 +75,7 @@ export default class Login extends React.Component {
                     this.props.navigation.navigate('HomeDrawer');
                 })
                 .catch((error) =>{
-                    this.setState({errorMessage: [error], isLoading: false});
+                    this.setState({errorMessage: error, isLoading: false});
                 });
             }else{
                 this.setState({
@@ -148,7 +147,7 @@ export default class Login extends React.Component {
             
 
             <View style={loginStyles.socialContainer}>
-                <SocialButton title='Continue with' fbOnClick={()=>this.facebookLogin()} />
+                <SocialButton title='Continue with' />
             </View>
         </View>
         );

@@ -22,10 +22,8 @@ export default class EventSingle extends Component {
 
 		/* Incase any of the data is NULL rather than 0, NULL murders the mapview */ 
 		if(eventData.latitude == 0 || eventData.latitude == null || eventData.latitude == ''){
-			if(eventData.latitude == null || eventData.longitude == null){
-				eventData.longitude = 0;
-				eventData.latitude = 0;
-			}
+			eventData.longitude = 0;
+			eventData.latitude = 0;
 		}
 
 		/* set eventData state and longitude and latitude */

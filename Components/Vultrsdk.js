@@ -25,15 +25,15 @@ export default class Vultr{
         return new Promise((resolve, reject) => {
             this.makeAuthRequest('/user/loadconstituent', 'POST', {username: this.username, password: password}
             ).then((res) => {
-                if(res.error == 'Incorrect password'){reject(res.error)}
-                else{
+                //if(res.error == 'Incorrect password'){reject(res.error)}
+                //else{
                     this.data = res[0];
                     console.log(res[0]);
                     try{
                         AsyncStorage.setItem('username', this.username);
                     }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
                     resolve();
-                }
+                //}
             }).catch((error) => { reject(error);})
         });
     }
@@ -46,14 +46,13 @@ export default class Vultr{
                     password: password
                 }
             ).then((res) => {
-                if(res.error && res.error != '')
-                    reject(res.error);
-                else{
+                //if(res.error && res.error != '') reject(res.error);
+                //else{
                     this.saveToken(res.token);
                     this.loadConstituent()
                     .then(() => {resolve();
                     }).catch((err) => { reject(err);})
-                }
+                //}
             }).catch((error) => {reject(error);})
         });
         
@@ -98,7 +97,7 @@ export default class Vultr{
                     id: this.data.id,
                 }
             ).then((res) => {
-                if(res.error && res.error != '') reject(res.error);
+                //if(res.error && res.error != '') reject(res.error);
                 resolve();
             }).catch((error) => {reject(error); })
         });
@@ -109,7 +108,7 @@ export default class Vultr{
             this.makeRequest('/auth/signUp', 'POST',
                 {data: data}
             ).then((res) => {
-                if(res.error && res.error != '') reject(res.error);
+                //if(res.error && res.error != '') reject(res.error);
                 resolve(res.data);
             }).catch((error) => { reject(error);})
         });
@@ -124,14 +123,8 @@ export default class Vultr{
                     passHash: password,
                 }
             ).then((res) => {
-                if(res.error && res.error != ''){
-                    if(typeof res.error !== 'string') res.error = res.error.message;
-                    reject(res.error);
-                } 
-                else{
-                    this.signInWithEmailPassword(username, password)
-                    .then(() => {resolve();})
-                }
+                this.signInWithEmailPassword(username, password)
+                .then(() => {resolve();})
             }).catch((error) => {reject(error);})
         });
     }
@@ -157,7 +150,7 @@ export default class Vultr{
                     mobility: constInfo.wheelchair,
                 }
             ).then((res) => {
-                if(res.error && res.error != '') reject(res.error);
+                //if(res.error && res.error != '') reject(res.error);
                 resolve();
             }).catch((error) => {reject(error);})
         });
@@ -177,7 +170,7 @@ export default class Vultr{
                     mobility: guestData.wheelchair,
                 }
             ).then((res) => {
-                if(res.error && res.error != '') reject(res.error);
+                //if(res.error && res.error != '') reject(res.error);
                 resolve();
             }).catch((error) => {reject(error);})
         });
@@ -188,7 +181,7 @@ export default class Vultr{
             this.makeAuthRequest('/events/geocodeaddress', 'POST',
                 {data: eventData,}
             ).then((res) => {
-                if(res.error && res.error != '') reject(res.error);
+                //if(res.error && res.error != '') reject(res.error);
                 resolve(res);
             }).catch((error) => {reject(error);})
         });
@@ -230,7 +223,7 @@ export default class Vultr{
                     lastName: ln,
                 }
             ).then((res) => {
-                if(res.error && res.error != '') reject(res.error);
+                //if(res.error && res.error != '') reject(res.error);
                 resolve();
             }).catch((error) => {reject(error);})
         });
@@ -247,16 +240,19 @@ export default class Vultr{
                 },
                 body: JSON.stringify(body)
             }).then((result) => {
-                if(!result.ok) reject('SERVER ERROR');
+                if(!result.ok) reject('SERVER REQUEST ERROR');
                 else return(result.json());
-            }).then((result) => {
-                //console.log('ERROR: ' + result.error);
-                if(result.error && result.error == 'TokenExpiredError'){
-                    console.log('EXPIRED!');
-                    this.logout();
-                    reject(result.error)
-                }else resolve(result);
+            }).then((res) => {
+                if(res.error && res.error != ''){
+                    if(typeof res.error !== 'string')
+                        res.error = res.error.message;
+                    reject(res.error);
+                }else resolve(res);
             }).catch((error) => {
+                if(error != ''){
+                    if(typeof error !== 'string')
+                        error = error.message;
+                }
                 reject(error);
             })
         });
@@ -273,8 +269,18 @@ export default class Vultr{
                 body: JSON.stringify(body)
             }).then((result) => {
                 if(!result.ok){reject('SERVER ERROR');}
-                else resolve(result.json());
+                else return(result.json());
+            }).then((res) => {
+                if(res.error && res.error != ''){
+                    if(typeof res.error !== 'string')
+                        res.error = res.error.message;
+                    reject(res.error);
+                }else resolve(res);
             }).catch((error) => {
+                if(error != ''){
+                    if(typeof error !== 'string')
+                        error = error.message;
+                }
                 reject(error);
             })
         });

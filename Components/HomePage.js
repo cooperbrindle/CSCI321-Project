@@ -26,23 +26,31 @@ export default class HomePage extends Component {
 		this.props.navigation.toggleDrawer();;
 	}
 
-	state = {isLoading: false, highlightData: []};
+	state = {
+		isLoading: false,
+		didLoad: false,
+		highlightData: [],
+		errorMessage: '',
+	};
 
 	componentDidMount(){
 		this.props.navigation.setParams({toggleSettings: this.toggleSettings})
 
-		this.setState({isLoading: true, highlightData: null});
+		this.setState({isLoading: true, didLoad: false, highlightData: null});
+		try{
 		var vultr = this.props.screenProps;
 		vultr.getHighlights()
 		.then(res => {
-				//console.log(res);
 				this.setState({
 					isLoading: false,
 					highlightData: res,
+					didLoad: true,
 				});
 		}).catch(err =>{
-			//this.setState({isLoading: false});
+			this.setState({isLoading: false, didLoad: false, errorMessage: err});
 		})
+		}catch(err){console.warn('try catch: ' + err);
+			this.setState({isLoading: false});}
 	}
 
 	
@@ -53,7 +61,7 @@ export default class HomePage extends Component {
 			
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
-					onPress={() => this.props.navigation.navigate('EventSingle', {eventDataas: item.data})}>
+					onPress={() => this.props.navigation.navigate('EventSingle', {eventData: item.data})}>
                 <View style={homeStyles.highlightView}>
                     <View style={homeStyles.highlightTextView}>
                         <Text style={homeStyles.highlightText}>
@@ -114,7 +122,7 @@ export default class HomePage extends Component {
 	}
 
 	renderCarousel(){
-		if(this.state.isLoading) return (<View/>);
+		if(this.state.isLoading || !this.state.didLoad) return (<View/>);
 		else 
 			return (
 				<Carousel
@@ -129,7 +137,7 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View style={homeStyles.carouselView}/>;
+		const actInd = this.state.isLoading? <ActivityIndicator size='large' color='#cc0000'/> : <View style={homeStyles.carouselView}/>;
         
 		return (
 			<View style={baseStyles.container}>
@@ -155,6 +163,7 @@ export default class HomePage extends Component {
 					Highlights
 				</Text>
 				<View style={homeStyles.carouselView}>
+					<Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
 					{this.renderCarousel()}
 					<View style={baseStyles.activityView}>{actInd}</View>
 				</View>

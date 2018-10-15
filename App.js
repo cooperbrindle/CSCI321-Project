@@ -64,9 +64,6 @@ const passwordStack = createStackNavigator({
 const faqStack = createStackNavigator({
 	FAQs: { screen: FAQs }
 });
-const ForgotPasswordStack = createStackNavigator({
-	ForgotPasswordPage: { screen: ForgotPassword }
-});
 
 
 const drawerNav = createDrawerNavigator({
@@ -90,10 +87,9 @@ const drawerNav = createDrawerNavigator({
 const RootStack = createStackNavigator({
   	//Routs
 	Login: { screen: LoginPage},
-	
 	SUForm: { screen: SignUpForm},
 	SUFinish: { screen: SignUpFinish},
-	ForgotPassword: { screen: ForgotPasswordStack },
+	ForgotPassword: { screen: ForgotPassword },
   },{ //options
   initialRouteName: 'Login',
 });
