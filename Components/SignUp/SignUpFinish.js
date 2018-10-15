@@ -40,8 +40,9 @@ export default class SignUpFinish extends Component {
     submitForm() {
         
         this.setState({isLoading: true, errorMessage: ''});
-        
-        if(this.state.password != this.state.passwordConf || (this.state.password == '' || this.state.passwordConf == '')){
+        if(this.state.username == ''){
+            this.setState({isLoading: false, errorMessage: 'No username'});
+        }else if(this.state.password != this.state.passwordConf || (this.state.password == '' || this.state.passwordConf == '')){
             this.setState({isLoading: false, errorMessage: 'Passwords do not match'});
         }else{
             this.state.vultr.registerUser(this.state.username, this.state.password, this.state.id)
