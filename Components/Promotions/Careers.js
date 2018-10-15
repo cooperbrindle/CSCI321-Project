@@ -24,16 +24,16 @@ export default class Careers extends Component {
 	render() {
 		return (
 			<View style={baseStyles.container}>
-                    <Image style={thisStyles.logo}
+                    <Image style={staticStyles.logo}
                         source={libraryLogo} />
-				<ScrollView style={thisStyles.blurbView}>
+				<ScrollView style={staticStyles.blurbView}>
                     
-                    <Text style={thisStyles.blurbTextPoints}>
+                    <Text style={staticStyles.blurbTextPoints}>
                         {blurbPoints}
                     </Text>
                 </ScrollView>
 				
-                <View style={thisStyles.submitBtnCont}>
+                <View style={staticStyles.submitBtnCont}>
                     <DefaultButton title='Login to CareerHub' nav={() => this.props.navigation.navigate('WebViewPage',
                             {link: 'https://careerhub.uow.edu.au/students/login?ReturnUrl=%2f',
                             title: 'CareerHub'})} />
@@ -43,32 +43,3 @@ export default class Careers extends Component {
 		);
 		}
     };
-    
-    const thisStyles = StyleSheet.create({
-        submitBtnCont: {
-            flex: 0.4,
-            marginLeft: 5,
-            marginRight: 5,
-            marginBottom: 10,
-            alignContent: 'flex-start',
-            justifyContent: 'flex-end',
-        },
-        blurbView: {
-            flex:1,
-            backgroundColor: '#0C2340',
-            paddingLeft: 20,
-            paddingRight: 20,
-            marginTop: 20,
-            marginBottom: 30,
-        },
-        logo: {
-            flex:0.5,
-            alignSelf: 'center',
-            resizeMode: 'center',
-        },
-        blurbTextPoints: {
-            color:'white',
-            fontSize: 18,
-            paddingLeft: 20,
-        },
-    });
