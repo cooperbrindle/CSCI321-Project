@@ -10,6 +10,8 @@ import { staticStyles } from '../styles/BenefitsStyles'
 
 const libraryLogo = require('../assets/careerSmart.jpg');
 
+////////////////////////////////////////////////////////////////////////////////////////////
+//Text to be displayed
 const blurbPoints = 'Career Consultations - Schedule an appointment with our experienced counsellors and consultants\n\n'+
             'Resume Review - Have our qualified team review your Resume\n\n'+
             'Workshops - Check out the workshop timetable and register online\n\n' +
@@ -20,6 +22,8 @@ export default class Careers extends Component {
 		return navigationOptionsFunc('Career Support', navigation, false);
 	}
 
+    //////////////////////////////////////////////////////////////////////////////////////
+    //Display the text and buttons
 	render() {
 		return (
 			<View style={baseStyles.container}>

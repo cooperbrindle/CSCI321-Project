@@ -8,6 +8,8 @@ import { navigationOptionsFunc } from '../styles/navOptions';
 import { baseStyles } from '../styles/BaseStyles';
 import { homeStyles, smallDashStyles } from '../styles/HomeStyles';
 
+///////////////////////////////////////////////////////////////////////////////////
+//Declaration for all dash pictures
 const Library = require('../assets/Library.png');
 const Discounts = require('../assets/Discounts.png');
 const Mentoring = require('../assets/Mentoring.png');
@@ -33,6 +35,9 @@ export default class BenefitsMenu extends Component {
 		errorMessage: '',
 		successMessage: '',
 	};
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	//Renders the display for dash buttons with a page redirect
 	renderdashBtn(title, page, img, navOptions){
 		return(
 			<TouchableHighlight style={smallDashStyles.dashBtnSmall}
@@ -50,6 +55,8 @@ export default class BenefitsMenu extends Component {
 		)
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	//Renders display
 	render() {
 		return (
 			<View style={baseStyles.container}>
