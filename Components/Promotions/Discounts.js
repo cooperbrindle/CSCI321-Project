@@ -26,6 +26,8 @@ export default class Discounts extends Component {
         modalVisible: false,
     }
     
+    //////////////////////////////////////////////////////////////////////////////////
+    //Calls the getDiscounts function in the Vultrsdk, then loads the data into this.state
     componentDidMount(){ 
         this.props.screenProps.getDiscounts('category')
         .then((res) => {
@@ -37,14 +39,20 @@ export default class Discounts extends Component {
         })
     }
 
+    /////////////////////////////////////////////////////////////////////
+    //Loading wheel
     renderActivityIndicator(){
         return this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
     }
 
+    ////////////////////////////////////////////////////////////////////////////
+    //Sets the discount card to visible or not
     setModalVisible(value) {
         this.setState({modalVisible: value});
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    //Renders each discount (item) and loads a different view based on type
     renderItem(item){
         if(item.discountType == 'card'){
             return(
@@ -102,6 +110,9 @@ export default class Discounts extends Component {
             )
         }  
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    //Renders the list items
     renderList(){
         if(this.state.isLoading)
             return <View/>;
@@ -116,6 +127,9 @@ export default class Discounts extends Component {
             </ScrollView>
         )
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //Modal View and calls to renderList is here
 	render() {
 		return (
             <View style={baseStyles.container}>
@@ -142,6 +156,8 @@ export default class Discounts extends Component {
 		}
 };
 
+/////////////////////////////////////////////////////////////////////////////////////
+//Styling for discount card modal
 const modalStyle = StyleSheet.create({
     image: {
         resizeMode: 'stretch',
