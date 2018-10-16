@@ -48,12 +48,22 @@ export default class SubscriptionForm extends Component {
 	}
 	//When switch value changes
 	////////////////////////////////////////////////////////////////////
-	videoKilledTheRadioStar(post, mobile, email){
-		this.setState({
-			postValue: post, 
-			mobileValue: mobile,
-			emailValue: email, 
-		});
+	videoKilledTheRadioStar(value, type){
+		if(type=='post'){
+			this.setState({
+				postValue: value
+			});
+		}
+		if(type=='mobile'){
+			this.setState({
+				mobileValue: value
+			});
+		}
+		if(type=='email'){
+			this.setState({
+				emailValue: value
+			});
+		}
 	}
 	//
 	//////////////////////////////////////////////////////////////////////
@@ -71,7 +81,7 @@ export default class SubscriptionForm extends Component {
 					<Switch
 						disabled = {false}
 						value = {this.state.postValue}
-						onValueChange ={(value) => {this.videoKilledTheRadioStar(value, false, false)}}/>
+						onValueChange ={(value) => {this.videoKilledTheRadioStar(value, 'post')}}/>
 				</View>
 				<View style={udStyles.switchView}>
 					<View style={udStyles.textSwitch}>
@@ -82,7 +92,7 @@ export default class SubscriptionForm extends Component {
 					<Switch
 						disabled = {false}
 						value = {this.state.mobileValue}
-						onValueChange ={(value) => {this.videoKilledTheRadioStar(false, value, false)}}/>
+						onValueChange ={(value) => {this.videoKilledTheRadioStar(value, 'mobile')}}/>
 				</View>
 				<View style={udStyles.switchView}>
 					<View style={udStyles.textSwitch}>
@@ -93,7 +103,7 @@ export default class SubscriptionForm extends Component {
 					<Switch
 						disabled = {false}
 						value = {this.state.emailValue}
-						onValueChange ={(value) => {this.videoKilledTheRadioStar(false, false, value)}}/>
+						onValueChange ={(value) => {this.videoKilledTheRadioStar(value, 'email')}}/>
 				</View>
 				<View style={udStyles.switchView}>
 					<View style={udStyles.textSwitch}>

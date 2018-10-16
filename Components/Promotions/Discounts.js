@@ -1,10 +1,12 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
+import { Text, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
 import { navigationOptionsFunc } from '../styles/navOptions';
 import { baseStyles } from '../styles/BaseStyles';
 import { listStyles } from '../styles/EventStyles'
+import { staticStyles } from '../styles/BenefitsStyles';
+import Overlay from 'react-native-modal-overlay';
 
 export default class Discounts extends Component {
 	constructor(props){
@@ -36,12 +38,29 @@ export default class Discounts extends Component {
         return this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
     }
 
+    overlayFunc(){
+        <Overlay visible={this.state.modalVisible}
+            closeOnTouchOutside animationType="zoomIn"
+            containerStyle={{backgroundColor: 'rgba(37, 8, 10, 0.78)'}}
+            childrenWrapperStyle={{backgroundColor: '#eee'}}
+            animationDuration={500}>
+            <Text>Some Modal Content</Text>
+        </Overlay>
+    }
+
     renderItem(item){
+        var option;
+        if(item.discountType == 'card'){
+            option = this.overlayFunc();
+        }
+        else {
+            option = this.props.navigation.navigate('DiscountCard');
+        }
         return(
-            <TouchableHighlight onPress={() => this.props.navigation.navigate('DiscountCard')}>
+            <TouchableHighlight onPress={() => {option}}>
                 <View style={listStyles.itemView}>
                     <Image
-                        style={discountStyles.image}
+                        style={staticStyles.image}
                         source={{uri: item.imageURL}}
                     />
                     <View style={listStyles.textView}>
@@ -76,12 +95,3 @@ export default class Discounts extends Component {
 		);
 		}
 };
-	
-	const discountStyles = StyleSheet.create({
-        image: {
-            backgroundColor: '#FFFFFF',
-            flex: 1,
-            resizeMode: 'center',
-            padding: 5,
-        },
-	});

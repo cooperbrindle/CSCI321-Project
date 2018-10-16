@@ -124,7 +124,7 @@ CREATE TABLE DISCOUNTS(
     titleID         VARCHAR(24)     NOT NULL, /* Short Hand Unique Name for Discounts */
     partnerType     VARCHAR(24)     NOT NULL, /* UOW, Local, National, Global */
     displayName     VARCHAR(256)    NOT NULL, /* Full display name for Discount */
-    discountType    VARCHAR(4)      NOT NULL, /* dc = display card, co = checkout code, em = email, li = link */
+    discountType    VARCHAR(4)      NOT NULL, /* card = display card, code = checkout code, link */
     blurb           VARCHAR(1028)   NOT NULL, /* To be displayed on discount page */
     imageURL        VARCHAR(256)    NULL, /* URL for Logo to be Displayed */
     CONSTRAINT DISCOUNTS_pkey PRIMARY KEY (titleID) );
