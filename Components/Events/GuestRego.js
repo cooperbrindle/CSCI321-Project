@@ -35,7 +35,7 @@ export default class GuestRego extends Component {
         try{
             const pageData = this.props.navigation.getParam('eventData', 'NoData');
             if(pageData == 'NoData'){
-                console.error('NO DATA PASSED TO EVENT PAGE');
+                console.error('NO DATA PASSED TO GUEST PAGE');
                 this.props.navigation.goBack();
             }
             var vultr = this.props.screenProps;
@@ -152,7 +152,7 @@ export default class GuestRego extends Component {
                 {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
                 {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
                 {this.renderInput('Dietary Requirements (if any)', '', (a) => this.setState({dietary:a}), this.state.dietary, true)}
-                {this.renderInput('Wheelchair Access Required', '', (a) => this.setState({wheelchair:a}), this.state.wheelchair, true)}
+                {this.renderInput('Mobility Requirements (if any)', '', (a) => this.setState({wheelchair:a}), this.state.wheelchair, true)}
                 </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Submit' nav={() => this.submitRego()} />

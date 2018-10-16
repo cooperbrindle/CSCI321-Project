@@ -51,7 +51,7 @@ export default class EventRego extends Component {
         .then(() => {
             this.setState({isLoading: false, errorMessage: ''});
             if(this.state.guests != '0'){
-                this.props.navigation.navigate('GuestRego', {data: this.state.eventData});
+                this.props.navigation.navigate('GuestRego', {eventData: this.state.eventData});
             }
             else{
                 Alert.alert(
@@ -68,7 +68,8 @@ export default class EventRego extends Component {
         });
 	}
 	
-	renderInput(title, ph, onChangeT, v, edita){
+	renderInput(title, ph, onChangeT, v, edita, keyboardType){
+        if(!keyboardType) keyboardType = 'default';
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
@@ -76,7 +77,7 @@ export default class EventRego extends Component {
                 </Text>
                 <TextInput style={styles.inputBox}
                     placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT}
+                    onChangeText={onChangeT} keyboardType={keyboardType}
                     value={v} editable = {edita}/>
             </View>
 		)
@@ -92,8 +93,8 @@ export default class EventRego extends Component {
                 {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
                 {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
                 {this.renderInput('Dietary Requirements (if any)', '', (a) => this.setState({dietary:a}), this.state.dietary, true)}
-                {this.renderInput('Wheelchair Access Required', '', (a) => this.setState({wheelchair:a}), this.state.wheelchair, true)}
-                {this.renderInput('Number of Guests', '', (a) => this.setState({guests:a}), this.state.guests, true)}
+                {this.renderInput('Mobility Requirements (if any)', '', (a) => this.setState({wheelchair:a}), this.state.wheelchair, true)}
+                {this.renderInput('Number of Guests', '', (a) => this.setState({guests:a}), this.state.guests, true, 'numeric')}
                 </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Submit' nav={() => this.submitRego()} />

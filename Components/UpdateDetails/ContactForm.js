@@ -67,7 +67,8 @@ export default class ContactForm extends Component {
     /////////////////////////////////////
 	
 	
-	renderInput(title, ph, onChangeT, v){
+	renderInput(title, ph, onChangeT, v, keyboardType){
+        if(!keyboardType) keyboardType = 'default';
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
@@ -75,7 +76,7 @@ export default class ContactForm extends Component {
                 </Text>
                 <TextInput style={styles.inputBox}
                     placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT}
+                    onChangeText={onChangeT} keyboardType={keyboardType}
                     value={v} />
             </View>
 		)
@@ -84,19 +85,19 @@ export default class ContactForm extends Component {
 	render() {
 		return (
             <View style={styles.container}>
-            <KeyboardAwareScrollView>
-            <View>
+            <KeyboardAwareScrollView >
+            
 				<Text style={styles.title}>
                     Contact Info
                 </Text>
 
-				{this.renderInput('email (preferred)', 'js@uowmail.edu.au', (a) => this.setState({email:a}), this.state.email)}
-				{this.renderInput('Other email', '', (a) => this.setState({emailOther:a}), this.state.emailOther)}
-                {this.renderInput('Mobile', '0441234567', (a) => this.setState({mobile:a}), this.state.mobile)}
+				{this.renderInput('email (preferred)', 'js@uowmail.edu.au', (a) => this.setState({email:a}), this.state.email, 'email-address')}
+				{this.renderInput('Other email', '', (a) => this.setState({emailOther:a}), this.state.emailOther, 'email-address')}
+                {this.renderInput('Mobile', '0441234567', (a) => this.setState({mobile:a}), this.state.mobile, 'numeric')}
                 {this.renderInput('Address', 'This field will be expanded out in the future', (a) => this.setState({address:a}), this.state.address)}
                 {this.renderInput('City', 'Wollongong', (a) => this.setState({city:a}), this.state.city)}
 				
-            </View>
+            
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
 					<DefaultButton title='Save' nav={() => this.saveChanges()} />

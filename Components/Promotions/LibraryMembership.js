@@ -65,7 +65,8 @@ export default class LibraryMembership extends Component {
         )
     }
     
-	renderInput(title, ph, onChangeT, v, edita){
+	renderInput(title, ph, onChangeT, v, edita, keyboardType){
+        if(!keyboardType) keyboardType = 'default';
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
@@ -73,7 +74,7 @@ export default class LibraryMembership extends Component {
                 </Text>
                 <TextInput style={styles.inputBox}
                     placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT}
+                    onChangeText={onChangeT} keyboardType={keyboardType}
                     value={v} editable = {edita}/>
             </View>
 		)
@@ -97,7 +98,7 @@ export default class LibraryMembership extends Component {
                     </Text>
                 </ScrollView>
                 
-                {this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true)}
+                {this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true, 'email-address')}
 				
                 <View style={staticStyles.submitBtnCont}>
                     <DefaultButton title='Claim Now' nav={() => this.submit()} />

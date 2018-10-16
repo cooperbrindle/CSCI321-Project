@@ -83,7 +83,7 @@ export default class SignUpFinish extends Component {
 		return (
 			<View style={styles.container}>
             <KeyboardAwareScrollView>
-            <View>
+            <ScrollView>
                 <View style={{marginTop:0}}/>
                 <View style={homeStyles.logoCont}>
                     <Logo scale={1}/>
@@ -104,11 +104,10 @@ export default class SignUpFinish extends Component {
                 {this.renderInput('username', '', (value) => this.setState({username: value}), this.state.username, false, true )}
                 {this.renderInput('password', '', (value) => this.setState({password: value}), this.state.password, true, true )}
                 {this.renderInput('confirm password', '', (value) => this.setState({passwordConf: value}), this.state.passwordConf, true, true )}
-			</View>
+			</ScrollView>
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Continue' nav={() => this.submitForm()} />
-                    <DefaultButton title='Back' nav={() => this.props.navigation.navigate('Login')} />
                 </View>
 			</View>
 		);
