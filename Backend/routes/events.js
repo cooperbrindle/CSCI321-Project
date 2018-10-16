@@ -35,24 +35,29 @@ router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
-router.post('/registerconst', (req, res) => {
+router.post('/registerconst', async(req, res) => {
     
-    log(' Request made to: /registerconst');
+    log('Request made to: /registerconst');
 	try{
         var data = req.body;
-        console.log(data);
+        //console.log(data);
         
-        //check ctx row exists and drop
-                
-                dbconn.query('DELETE FROM EVENTCONSTITUENTEXPORT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
-                    //insert new row
-                    dbconn.query('INSERT INTO EVENTCONSTITUENTEXPORT SET ?', data, (err, result) => {
-                        if(err) throw err;
-                        log('Updated eventconstituent ' + data.eventname + ' ' + data.id);
-                        res.json('ok');
-                    });
+        //Check if already registered
+        var qry = 'SELECT id FROM EVENTCONSTITUENTEXPORT WHERE id = ? && eventname = ?'
+        var err, result = await dbconn.query(qry, [data.id, data.eventname]);
+        if(err) throw err;
+        console.log('LENGTH: ' + result.length);
+        if(result.length > 0){
+            res.json({error: 'Already Registered'});
+            return;
+        }
 
-                });
+        //insert new row
+        dbconn.query('INSERT INTO EVENTCONSTITUENTEXPORT SET ?', data, (err, result) => {
+            if(err) throw err;
+            log('Updated eventconstituent ' + data.eventname + ' ' + data.id);
+            res.json('ok');
+        });
 	}catch(err){
 		log('ERROR: ' + err);
 	}

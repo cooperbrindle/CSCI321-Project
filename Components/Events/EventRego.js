@@ -1,8 +1,9 @@
 
 
 import React, { Component } from 'react';
-import { Text, TextInput, View, Alert} from 'react-native';
+import { Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
 import { styles } from '../styles/FormStyles';
+import { baseStyles } from '../styles/BaseStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { navigationOptionsFunc } from '../styles/navOptions';
@@ -64,7 +65,15 @@ export default class EventRego extends Component {
                 )
             }
         }).catch(error => {
-            this.setState({isLoading: false, errorMessage: error.message});
+            this.setState({isLoading: false, errorMessage: error});
+            Alert.alert(
+                'Oops!',
+                'You have already registered for this event',
+                [
+                    {text: 'OK', onPress: () => this.props.navigation.goBack()},
+                ],
+                { cancelable: false }
+            )
         });
 	}
 	
@@ -81,24 +90,39 @@ export default class EventRego extends Component {
                     value={v} editable = {edita}/>
             </View>
 		)
-	}
-
-	render() {
-		return (
-			<View style={styles.container}>
-				<Text style={styles.title}>
-                    {this.state.eventData.eventname}
-                </Text>
-                <KeyboardAwareScrollView>
+    }
+    renderForm(){
+        if(this.state.isLoading)
+            return (
+                <View style={baseStyles.activityView}>
+                    <ActivityIndicator size='large' color='#cc0000'/>
+                </View>
+            )
+        else return (
+            <KeyboardAwareScrollView>
                 {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
                 {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
                 {this.renderInput('Dietary Requirements (if any)', '', (a) => this.setState({dietary:a}), this.state.dietary, true)}
                 {this.renderInput('Mobility Requirements (if any)', '', (a) => this.setState({wheelchair:a}), this.state.wheelchair, true)}
                 {this.renderInput('Number of Guests', '', (a) => this.setState({guests:a}), this.state.guests, true, 'numeric')}
-                </KeyboardAwareScrollView>
-                <View style={styles.submitBtnCont}>
-                    <DefaultButton title='Submit' nav={() => this.submitRego()} />
-                </View>
+            </KeyboardAwareScrollView>
+        )
+    }
+
+	render() {
+        var subBtn;
+        if(this.state.isLoading)subBtn = <View/>
+        else subBtn = (<View style={styles.submitBtnCont}>
+                <DefaultButton title='Submit' nav={() => this.submitRego()} />
+            </View>)
+		return (
+			<View style={styles.container}>
+				<Text style={styles.title}>
+                    {this.state.eventData.eventname}
+                </Text>
+                <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
+                {this.renderForm()}
+                {subBtn}
 			</View>
 		);
 	}

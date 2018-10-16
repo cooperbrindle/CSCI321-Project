@@ -1,22 +1,18 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Alert} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
 import { styles } from '../styles/FormStyles';
+import { baseStyles } from '../styles/BaseStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class GuestRego extends Component {
-	static navigationOptions = {
-		title: 'Guest Registration',
-		headerStyle: {
-			backgroundColor: '#0C2340',
-		},
-		headerTintColor: 'white',
-		headerTitleStyle: {
-		},
+	static navigationOptions = ({navigation}) => {
+		return navigationOptionsFunc('Guest Registration', navigation, false);
     }
+    
     state = {
         errorMessage: '',
         isLoading: false,
@@ -84,18 +80,18 @@ export default class GuestRego extends Component {
             this.props.screenProps.registerGuest(this.state.eventData, guestData)
             .then(() => {
                 this.setState({isLoading: false, errorMessage: ''});
+                Alert.alert(
+                    'Submitted',
+                    this.state.constName + ' and ' + this.state.firstName + ' have been successfully registered for the ' + this.state.eventname,
+                    [
+                        {text: 'OK', onPress: () => this.props.navigation.navigate('HomePage')},
+                    ],
+                    { cancelable: false }
+                )
 
             }).catch(error => {
-                this.setState({isLoading: false, errorMessage: error.message});
+                this.setState({isLoading: false, errorMessage: error});
             });
-            Alert.alert(
-                'Submitted',
-                this.state.constName + ' and ' + this.state.firstName + ' have been successfully registered for the ' + this.state.eventname,
-                [
-                    {text: 'OK', onPress: () => this.props.navigation.navigate('HomePage')},
-                ],
-                { cancelable: false }
-            )
         }
 	}
     
@@ -119,15 +115,17 @@ export default class GuestRego extends Component {
                     value={v} editable = {edita}/>
             </View>
 		)
-	}
-
-	render() {
-		return (
-			<View style={styles.container}>
-				<Text style={styles.title}>
-                    {this.state.eventname}
-                </Text>
-                <KeyboardAwareScrollView>
+    }
+    
+    renderForm(){
+        if(this.state.isLoading)
+            return (
+                <View style={baseStyles.activityView}>
+                    <ActivityIndicator size='large' color='#cc0000'/>
+                </View>
+            )
+        else return (
+            <KeyboardAwareScrollView>
                 <View style={guestStyles.topInputCont}>
                     <View style={guestStyles.titleView}>
                         <Text style={styles.inputText}>
@@ -153,10 +151,24 @@ export default class GuestRego extends Component {
                 {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
                 {this.renderInput('Dietary Requirements (if any)', '', (a) => this.setState({dietary:a}), this.state.dietary, true)}
                 {this.renderInput('Mobility Requirements (if any)', '', (a) => this.setState({wheelchair:a}), this.state.wheelchair, true)}
-                </KeyboardAwareScrollView>
-                <View style={styles.submitBtnCont}>
-                    <DefaultButton title='Submit' nav={() => this.submitRego()} />
-                </View>
+            </KeyboardAwareScrollView>
+        )
+    }
+
+	render() {
+        var subBtn;
+        if(this.state.isLoading)subBtn = <View/>
+        else subBtn = (<View style={styles.submitBtnCont}>
+                <DefaultButton title='Submit' nav={() => this.submitRego()} />
+            </View>)
+		return (
+			<View style={styles.container}>
+				<Text style={styles.title}>
+                    {this.state.eventname}
+                </Text>
+                <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
+                {this.renderForm()}
+                {subBtn}
 			</View>
 		);
 	}

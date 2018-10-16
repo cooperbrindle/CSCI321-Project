@@ -1,8 +1,9 @@
 
 
 import React, { Component } from 'react';
-import { ScrollView, Text, TextInput, View, Alert, Image} from 'react-native';
+import { ScrollView, Text, TextInput, View, Alert, Image, ActivityIndicator} from 'react-native';
 import { styles } from '../styles/FormStyles';
+import { baseStyles } from '../styles/BaseStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { navigationOptionsFunc } from '../styles/navOptions';
 import { staticStyles } from '../styles/BenefitsStyles';
@@ -33,7 +34,7 @@ export default class LibraryMembership extends Component {
         
         this.setState({
             errorMessage: '',
-            
+            isLoading: false,
         });
     }
     /////////////////////////////////////
@@ -41,28 +42,36 @@ export default class LibraryMembership extends Component {
     submit(){
         this.setState({errorMessage: '', isLoading: true});
         try{
-            console.warn('starting submit');
             this.state.vultr.libraryReq(this.state.email)
             .then(() => {
-                this.setState({errorMessage: '',
-                    successMessage: 'Successfully updated',
+                this.setState({
+                    errorMessage: '',
                     isLoading: false
                 });
-            }).catch(() => {
-                this.setState({errorMessage: 'Error updating libraryMem',
-                    successMessage: '',
+                Alert.alert(
+                    'Success!',
+                    blurbEnd,
+                    [
+                        {text: 'OK', onPress: () => this.props.navigation.goBack()},
+                    ],
+                    { cancelable: false }
+                )
+            }).catch((err) => {
+                this.setState({
+                    errorMessage: err,
                     isLoading: false
                 });
+                if(err == 'Already registered')
+                    Alert.alert(
+                        'Oops!',
+                        err,
+                        [
+                            {text: 'OK', onPress: () => this.props.navigation.goBack()},
+                        ],
+                        { cancelable: false }
+                    )
             })
         }catch(err){console.warn('catch error: '+ err.message);}
-        Alert.alert(
-            'Submitted',
-            blurbEnd,
-            [
-                {text: 'OK', onPress: () => this.props.navigation.goBack()},
-            ],
-            { cancelable: false }
-        )
     }
     
 	renderInput(title, ph, onChangeT, v, edita, keyboardType){
@@ -78,7 +87,28 @@ export default class LibraryMembership extends Component {
                     value={v} editable = {edita}/>
             </View>
 		)
-	}
+    }
+    
+    renderForm(){
+        var subBtn;
+        if(this.state.isLoading)
+            return (
+                <View style={baseStyles.activityView}>
+                    <ActivityIndicator size='large' color='#cc0000'/>
+                </View>
+            );
+        else return (
+            this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true, 'email-address')
+		);
+    }
+    renderBtn(){
+        if(this.state.isLoading) return <View/>
+        else return (
+            <View style={staticStyles.submitBtnCont}>
+                <DefaultButton title='Claim Now' nav={() => this.submit()} />
+            </View>
+        );
+    }
 
 	render() {
 		return (
@@ -90,20 +120,15 @@ export default class LibraryMembership extends Component {
                 <Text style={staticStyles.title}>
                     Claim your library card!
                 </Text>
-
+                <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
 				<ScrollView style={staticStyles.blurbView}>
                     
                     <Text style={staticStyles.blurbTextPoints}>
                         {blurbPoints}
                     </Text>
                 </ScrollView>
-                
-                {this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true, 'email-address')}
-				
-                <View style={staticStyles.submitBtnCont}>
-                    <DefaultButton title='Claim Now' nav={() => this.submit()} />
-                </View>
-
+                {this.renderForm()}
+                {this.renderBtn()}
 			</View>
 		);
 		}

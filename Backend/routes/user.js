@@ -101,23 +101,27 @@ router.post('/loadconstituent', async(req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
-router.post('/libraryreq', (req, res) => {
+router.post('/libraryreq', async(req, res) => {
     
-    log(' Request made to: /libraryreq');
+    log('Request made to: /libraryreq');
 	try{            
         var data = req.body;
-        console.log(data);
+        //console.log(data);
         
-        //check ctx row exists and drop
-                dbconn.query('DELETE FROM LIBRARYMEMEXPORT WHERE id = ?', data.id, (err, result) => {
-                    //insert new row
-                    dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
-                        if(err) throw err;
-                        log('Updated libraryexport ' + data.email);
-                        res.json('ok');
-                    });
+        //Check already registered
+        var qry = 'SELECT id FROM LIBRARYMEMEXPORT WHERE id = ?';
+        var err, result = await dbconn.query(qry, data.id);
+        if(err) throw err;
+        if(result.length > 0){
+            res.json({error: 'Already registered'})
+            return;
+        }
 
-                });
+        dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
+            if(err) throw err;
+            log('Updated libraryexport ' + data.email);
+            res.json('ok');
+        });
 	}catch(err){
 		log('ERROR: ' + err);
 	}
