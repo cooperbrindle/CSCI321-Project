@@ -51,7 +51,8 @@ export default class ForgotPassword extends Component {
         })
     }
 
-	renderInput(title, ph, onChangeT, v, auto){
+	renderInput(title, ph, onChangeT, v, auto, keyboardType){
+        if(!keyboardType) keyboardType = 'default'
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
@@ -59,7 +60,7 @@ export default class ForgotPassword extends Component {
                 </Text>
                 <TextInput style={styles.inputBox}
                     placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT} autoCapitalize={auto}
+                    onChangeText={onChangeT} autoCapitalize={auto} keyboardType={keyboardType}
                     value={v} />
             </View>
 		)
@@ -80,13 +81,12 @@ export default class ForgotPassword extends Component {
                     {actInd}
                 </View>
 
-                {this.renderInput('Email', '', (a) => this.setState({email:a}), this.state.email, 'none')}
+                {this.renderInput('Email', '', (a) => this.setState({email:a}), this.state.email, 'none', 'email-address')}
                 {this.renderInput('First Name', '', (a) => this.setState({firstName:a}), this.state.firstName, 'sentences')}
 				{this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName, 'sentences')}
 				
                 <View style={styles.submitBtnCont}>
 					<DefaultButton title='Submit' nav={() => this.saveChanges()} />
-                    <DefaultButton title='Back' nav={() => this.props.navigation.navigate('Login')} />
                 </View>
 			</View>
 		);

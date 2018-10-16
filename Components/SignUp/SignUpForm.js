@@ -84,7 +84,8 @@ export default class SignUpForm extends Component {
             });
     }
 
-	renderInput(title, ph, stateValue){
+	renderInput(title, ph, stateValue, keyboardType){
+        if(!keyboardType) keyboardType = 'default'
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
@@ -92,7 +93,7 @@ export default class SignUpForm extends Component {
                 </Text>
                 <TextInput style={styles.inputBox}
                     placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={stateValue}/>
+                    onChangeText={stateValue} keyboardType={keyboardType}/> 
             </View>
 		)
 	}
@@ -103,7 +104,7 @@ export default class SignUpForm extends Component {
 		return (
 			<View style={styles.container}>
             <KeyboardAwareScrollView>
-            <View>
+            <ScrollView>
                 <View style={stylesA.topPadding}/>
 				<Text style={styles.title}>
                     Please fill out as many fields as possible
@@ -125,7 +126,7 @@ export default class SignUpForm extends Component {
                         </Text>
                         <TextInput style={styles.inputBoxDate}
                             placeholder={this.state.day} onChangeText={(t) => this.setState({day:t})} 
-                            underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'}/>
                     </View>
                     <View style={styles.inputContDate}>
                         <Text style={styles.inputText}>
@@ -133,7 +134,7 @@ export default class SignUpForm extends Component {
                         </Text>
                         <TextInput style={styles.inputBoxDate}
                             placeholder={this.state.month} onChangeText={(t) => this.setState({month:t})} 
-                            underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'}/>
                     </View>
                     <View style={styles.inputContYear}>
                         <Text style={styles.inputText}>
@@ -141,21 +142,20 @@ export default class SignUpForm extends Component {
                         </Text>
                         <TextInput style={styles.inputBoxDate}
                             placeholder={this.state.year} onChangeText={(t) => this.setState({year:t})} 
-                            underlineColorAndroid='transparent' placeholderTextColor='grey'/>
+                            underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'}/>
                     </View>
                     
                 </View>
 
                 {this.renderInput('First Name', '',     (value) => this.setState({firstName: value}) )}
                 {this.renderInput('Last Name', '',      (value) => this.setState({lastName: value}) )}
-                {this.renderInput('Student Number', '', (value) => this.setState({stdNum: value}) )}
-                {this.renderInput('UOW email', '',      (value) => this.setState({email: value}) )}
+                {this.renderInput('Student Number', '', (value) => this.setState({stdNum: value}), 'numeric')}
+                {this.renderInput('UOW email', '',      (value) => this.setState({email: value}), 'email-address' )}
 				
-            </View>
+            </ScrollView>
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Continue' nav={() => this.submitForm()} />
-                    {/*<DefaultButton title='Back' nav={() => this.props.navigation.navigate('Login')} />*/}
                 </View>
 			</View>
 		);

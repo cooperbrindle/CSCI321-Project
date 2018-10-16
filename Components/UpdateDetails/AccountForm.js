@@ -83,7 +83,7 @@ export default class AccountForm extends Component {
 		return (
 			<View style={styles.container}>
             <KeyboardAwareScrollView>
-            <View>
+            <ScrollView>
 				<Text style={styles.title}>
                     Account Info
                 </Text>
@@ -132,7 +132,7 @@ export default class AccountForm extends Component {
                 {this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName, true)}
                 {this.renderInput('Student Number', '', (a) => this.setState({stdNum:a}), this.state.stdNum, false)}
 				
-            </View>
+            </ScrollView>
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />
