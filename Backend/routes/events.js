@@ -2,7 +2,10 @@ var router = require('express').Router();
 var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
 var tokenAuth = require('../lib/tokenAuth');
-var googleMapsClient = require('./key.js');
+const key = require('./key.js');
+var googleMapsClient = require('@google/maps').createClient({
+    key: key.googleKey,
+});
 
 
 router.post('/eventslist', (req, res) => {
