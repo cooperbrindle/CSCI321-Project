@@ -22,7 +22,7 @@ export default class LibraryMembership extends Component {
 	}
     
     /////////////////////////////////////////////////////////
-    /////////////////////
+    ///Loads Constituent Data from Vultrsdk
     componentWillMount(){
         try{
             var vultr = this.props.screenProps;
@@ -37,8 +37,77 @@ export default class LibraryMembership extends Component {
             isLoading: false,
         });
     }
+
     /////////////////////////////////////
-    //
+    //Handles UI Output for page
+    render() {
+		return (
+			<View style={staticStyles.container}>
+                    <Image style={staticStyles.logo}
+                        source={libraryLogo} />
+                
+
+                <Text style={staticStyles.title}>
+                    Claim your library card!
+                </Text>
+                <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
+				<ScrollView style={staticStyles.blurbView}>
+                    
+                    <Text style={staticStyles.blurbTextPoints}>
+                        {blurbPoints}
+                    </Text>
+                </ScrollView>
+                {this.renderForm()}
+                {this.renderBtn()}
+			</View>
+		);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    //Called by render to display email input
+    renderForm(){
+        var subBtn;
+        if(this.state.isLoading)
+            return (
+                <View style={baseStyles.activityView}>
+                    <ActivityIndicator size='large' color='#cc0000'/>
+                </View>
+            );
+        else return (
+            this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true, 'email-address')
+        );
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+    //Takes user input for email address
+    renderInput(title, ph, onChangeT, v, edita, keyboardType){
+        if(!keyboardType) keyboardType = 'default';
+		return(
+			<View style={styles.inputCont}>
+                <Text style={styles.inputText}>
+                    {title}
+                </Text>
+                <TextInput style={styles.inputBox}
+                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
+                    onChangeText={onChangeT} keyboardType={keyboardType}
+                    value={v} editable = {edita}/>
+            </View>
+		)
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    //Displays button for submit
+    renderBtn(){
+        if(this.state.isLoading) return <View/>
+        else return (
+            <View style={staticStyles.submitBtnCont}>
+                <DefaultButton title='Claim Now' nav={() => this.submit()} />
+            </View>
+        );
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    //Handles the submission of data
     submit(){
         this.setState({errorMessage: '', isLoading: true});
         try{
@@ -73,63 +142,4 @@ export default class LibraryMembership extends Component {
             })
         }catch(err){console.warn('catch error: '+ err.message);}
     }
-    
-	renderInput(title, ph, onChangeT, v, edita, keyboardType){
-        if(!keyboardType) keyboardType = 'default';
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT} keyboardType={keyboardType}
-                    value={v} editable = {edita}/>
-            </View>
-		)
-    }
-    
-    renderForm(){
-        var subBtn;
-        if(this.state.isLoading)
-            return (
-                <View style={baseStyles.activityView}>
-                    <ActivityIndicator size='large' color='#cc0000'/>
-                </View>
-            );
-        else return (
-            this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true, 'email-address')
-		);
-    }
-    renderBtn(){
-        if(this.state.isLoading) return <View/>
-        else return (
-            <View style={staticStyles.submitBtnCont}>
-                <DefaultButton title='Claim Now' nav={() => this.submit()} />
-            </View>
-        );
-    }
-
-	render() {
-		return (
-			<View style={staticStyles.container}>
-                    <Image style={staticStyles.logo}
-                        source={libraryLogo} />
-                
-
-                <Text style={staticStyles.title}>
-                    Claim your library card!
-                </Text>
-                <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
-				<ScrollView style={staticStyles.blurbView}>
-                    
-                    <Text style={staticStyles.blurbTextPoints}>
-                        {blurbPoints}
-                    </Text>
-                </ScrollView>
-                {this.renderForm()}
-                {this.renderBtn()}
-			</View>
-		);
-		}
-    };
+};
