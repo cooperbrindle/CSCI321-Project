@@ -40,6 +40,13 @@ export const homeStyles = StyleSheet.create({
         margin: 5,
         borderColor: 'white',
     },
+    magView: {
+        flex: 1,
+        borderWidth: 1,
+        backgroundColor: '#ffffff',
+        margin: 5,
+        borderColor: 'white',
+    },
     
 
     //////////////////////////////
@@ -48,11 +55,13 @@ export const homeStyles = StyleSheet.create({
         flex: 2,
     },
     highlightText: {
+        textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 20,
         paddingLeft: 20,
         paddingTop: 10,
         paddingRight: 10,
+        paddingBottom: 10,
     },
     highlightBlurb: {
         color: 'black',
@@ -87,7 +96,9 @@ export const homeStyles = StyleSheet.create({
     discImage: {
         backgroundColor: '#FFFFFF',
         flex: 1,
-        resizeMode: 'center',
+        resizeMode: 'contain',
+        paddingTop: 15,
+        paddingBottom: 15,
     },
 });
 

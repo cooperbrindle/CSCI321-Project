@@ -20,6 +20,7 @@ const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
 const promoIcon = require('./assets/Benefits.png');
+const outlookLogo = require('./assets/outLogo.png')
 
 export default class HomePage extends Component {
 	
@@ -119,13 +120,11 @@ export default class HomePage extends Component {
 							{title: 'UOW Outlook Magazine', 
 							link: item.data.link})
 						}}>
-					<View style={homeStyles.highlightView}>
+					<View style={homeStyles.magView}>
 						<View style={homeStyles.highlightTextView}>
+							<Image style={homeStyles.discImage} source={outlookLogo}/>
 							<Text style={homeStyles.highlightText}>
 								{item.data.title}
-							</Text>
-							<Text style={homeStyles.highlightBlurb}>
-								{item.data.description}
 							</Text>
 						</View>
 						
