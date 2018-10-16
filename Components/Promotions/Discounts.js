@@ -1,12 +1,12 @@
 
 
 import React, { Component } from 'react';
-import { Text, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView} from 'react-native';
+import { StyleSheet, Text, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView, Modal, Alert} from 'react-native';
 import { navigationOptionsFunc } from '../styles/navOptions';
 import { baseStyles } from '../styles/BaseStyles';
-import { listStyles } from '../styles/EventStyles'
+import { listStyles } from '../styles/EventStyles';
 import { staticStyles } from '../styles/BenefitsStyles';
-import Overlay from 'react-native-modal-overlay';
+const disCard = require('../assets/discPage.png');
 
 export default class Discounts extends Component {
 	constructor(props){
@@ -21,6 +21,7 @@ export default class Discounts extends Component {
         isLoading: true,
         errorMessage: '',
         data: null,
+        modalVisible: false,
     }
     
     componentDidMount(){ 
@@ -38,39 +39,45 @@ export default class Discounts extends Component {
         return this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
     }
 
-    overlayFunc(){
-        <Overlay visible={this.state.modalVisible}
-            closeOnTouchOutside animationType="zoomIn"
-            containerStyle={{backgroundColor: 'rgba(37, 8, 10, 0.78)'}}
-            childrenWrapperStyle={{backgroundColor: '#eee'}}
-            animationDuration={500}>
-            <Text>Some Modal Content</Text>
-        </Overlay>
+    setModalVisible(value) {
+        this.setState({modalVisible: value});
     }
 
     renderItem(item){
-        var option;
         if(item.discountType == 'card'){
-            option = this.overlayFunc();
-        }
-        else {
-            option = this.props.navigation.navigate('DiscountCard');
-        }
-        return(
-            <TouchableHighlight onPress={() => {option}}>
-                <View style={listStyles.itemView}>
-                    <Image
-                        style={staticStyles.image}
-                        source={{uri: item.imageURL}}
-                    />
-                    <View style={listStyles.textView}>
-                        <Text style={listStyles.text}>
-                            {item.blurb}
-                        </Text>
+            return(
+                <TouchableHighlight onPress={ () => {this.setModalVisible(true);}}>
+                    <View style={listStyles.itemView}>
+                        <Image
+                            style={staticStyles.image}
+                            source={{uri: item.imageURL}}
+                        />
+                        <View style={listStyles.textView}>
+                            <Text style={listStyles.text}>
+                                {item.blurb}
+                            </Text>
+                        </View>
                     </View>
-                </View>
-            </TouchableHighlight>
-        )
+                </TouchableHighlight>
+            )
+        }
+        else{
+            return(
+                <TouchableHighlight onPress={() => this.props.navigation.navigate('DiscountCard')}>
+                    <View style={listStyles.itemView}>
+                        <Image
+                            style={staticStyles.image}
+                            source={{uri: item.imageURL}}
+                        />
+                        <View style={listStyles.textView}>
+                            <Text style={listStyles.text}>
+                                {item.blurb}
+                            </Text>
+                        </View>
+                    </View>
+                </TouchableHighlight>
+            )
+        }  
     }
     renderList(){
         if(this.state.isLoading)
@@ -88,10 +95,47 @@ export default class Discounts extends Component {
     }
 	render() {
 		return (
-			<View style={baseStyles.container}>
+            <View style={baseStyles.container}>
+                <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+                    Alert.alert('Congratulations!');
+                    }}>
+                    <View style={modalStyle.container}>
+                        <TouchableHighlight style={modalStyle.touch}
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                            }}>
+                            <Image style={modalStyle.image} source={disCard}/>
+                        </TouchableHighlight>
+                    </View>
+                </Modal>
                 {this.renderActivityIndicator()}
-				{this.renderList()}
+                {this.renderList()}
 			</View>
 		);
 		}
 };
+
+const modalStyle = StyleSheet.create({
+    image: {
+        resizeMode: 'stretch',
+        position: 'absolute',
+        width: '70%',
+        height: '70%',
+        alignSelf: 'center',
+    },
+    touch: {
+        backgroundColor: 'rgba(0,0,0,0.75)',
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+    },
+    container: {
+        flex: 1,
+        
+        
+    },
+})
