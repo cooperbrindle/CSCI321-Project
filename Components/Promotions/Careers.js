@@ -17,7 +17,7 @@ const blurbPoints = 'Career Consultations - Schedule an appointment with our exp
 
 export default class Careers extends Component {
 	static navigationOptions = ({navigation}) => {
-		return navigationOptionsFunc('Careers', navigation, false);
+		return navigationOptionsFunc('Career Support', navigation, false);
 	}
 
 	render() {

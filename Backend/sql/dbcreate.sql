@@ -61,7 +61,6 @@ CREATE TABLE CONSTITUENTEXPORT(
     emailOther  VARCHAR(256)    NULL, /* Other Email */
     linkedIn    VARCHAR(256)    NULL, /* LinkedIn URL */
     mobile      VARCHAR(256)    NULL, /* Mobile Number */
-    other       VARCHAR(256)    NULL, /* Unknown */
     postSub     VARCHAR(10)     NOT NULL, /* Option to Recieve Postal Communications */
     mobileSub   VARCHAR(10)     NOT NULL, /* Option to Recieve Mobile Communications */
     emailSub    VARCHAR(10)     NOT NULL, /* Option to Recieve Email Communications */

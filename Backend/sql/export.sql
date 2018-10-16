@@ -32,28 +32,36 @@ WHERE (id, stdNum, birthDate, title, firstName, nickname, middleName, lastName, 
       (SELECT * FROM CONSTITUENT);
 
 /* Export tables to a .csv file */
+SELECT 'EventName', 'ConstNum', 'StudNum', 'Title', 'FirstName', 'LastName', 'OrgName', 'Position', 'Dietary', 'Mobility'
+      UNION ALL
+      SELECT *
+      FROM EVENTCONSTITUENTEXPORT
+      INTO OUTFILE '/tmp/eventconexport.csv'
+      FIELDS TERMINATED BY ','
+      LINES TERMINATED BY '\n';
 
-SELECT *
-FROM EVENTCONSTITUENTEXPORT
-INTO OUTFILE '/tmp/eventconexport.csv' 
-FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n';
+SELECT 'EventName', 'ConstId', 'Title', 'FirstName', 'LastName', 'OrgName', 'Position', 'Dietary', 'Mobility'
+      UNION ALL
+      SELECT *
+      INTO OUTFILE '/tmp/eventguestexport.csv'
+      FIELDS TERMINATED BY ','
+      LINES TERMINATED BY '\n'
+      FROM EVENTGUESTEXPORT;
+SELECT 'ConstNum', 'StudNum', 'Email'
+      UNION ALL
+      SELECT *
+      INTO OUTFILE '/tmp/libmemexport.csv' 
+      FIELDS TERMINATED BY ','
+      LINES TERMINATED BY '\n'
+      FROM LIBRARYMEMEXPORT;
 
-SELECT *
-INTO OUTFILE '/tmp/eventguestexport.csv' 
-FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-FROM EVENTGUESTEXPORT;
-
-SELECT *
-INTO OUTFILE '/tmp/libmemexport.csv' 
-FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-FROM LIBRARYMEMEXPORT;
-
-SELECT *
-INTO OUTFILE '/tmp/constexport.csv' 
-FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-FROM CONSTITUENTEXPORT;
+SELECT 'ConstNum', 'StudNum', 'BirthDate', 'Title', 'FirstName', 'NickName', 'MiddleName', 'LastName', 'MaidenName', 'OrgName', 'Position', 
+      'Address', 'Suburb', 'State', 'County', 'PostCode', 'Country', 'Email', 'EmailOther', 'LinkedIn', 'Mobile', 
+      'PostSub', 'MobileSub', 'EmailSub', 'Promotions', 'Outlook'
+      UNION ALL
+      SELECT *
+      INTO OUTFILE '/tmp/constexport.csv' 
+      FIELDS TERMINATED BY ','
+      LINES TERMINATED BY '\n'
+      FROM CONSTITUENTEXPORT;
 
