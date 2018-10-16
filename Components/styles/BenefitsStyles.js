@@ -43,4 +43,10 @@ export const staticStyles = StyleSheet.create({
         color:'white',
         fontSize: 14,
     },
+    image: {
+        backgroundColor: '#FFFFFF',
+        flex: 1,
+        resizeMode: 'center',
+        padding: 5,
+    },
     });
