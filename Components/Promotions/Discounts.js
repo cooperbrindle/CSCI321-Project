@@ -8,6 +8,8 @@ import { listStyles } from '../styles/EventStyles';
 import { staticStyles } from '../styles/BenefitsStyles';
 const disCard = require('../assets/discPage.png');
 
+
+
 export default class Discounts extends Component {
 	constructor(props){
         super(props);
@@ -61,9 +63,30 @@ export default class Discounts extends Component {
                 </TouchableHighlight>
             )
         }
+        if(item.discountType == 'link'){
+            return(
+                <TouchableHighlight onPress={() => this.props.navigation.navigate('WebViewPage', 
+                    {title: item.displayName, 
+                    link: item.link})}>
+                    <View style={listStyles.itemView}>
+                        <Image
+                            style={staticStyles.image}
+                            source={{uri: item.imageURL}}
+                        />
+                        <View style={listStyles.textView}>
+                            <Text style={listStyles.text}>
+                                {item.blurb}
+                            </Text>
+                        </View>
+                    </View>
+                </TouchableHighlight>
+            )
+        }  
         else{
             return(
-                <TouchableHighlight onPress={() => this.props.navigation.navigate('DiscountCard')}>
+                <TouchableHighlight onPress={() => this.props.navigation.navigate('WebViewPage', 
+                    {title: item.displayName, 
+                    link: item.link})}>
                     <View style={listStyles.itemView}>
                         <Image
                             style={staticStyles.image}
