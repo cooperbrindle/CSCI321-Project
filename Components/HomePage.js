@@ -1,16 +1,21 @@
-
+/////////////////////////////////////////
+// MAIN HOME PAGE
+/////////////////////////////////////////
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, Image, Dimensions, ActivityIndicator} from 'react-native';
 
+//styles
 import { baseStyles } from './styles/BaseStyles';
 import { homeStyles } from './styles/HomeStyles';
+import {navigationOptionsFunc} from './styles/navOptions';
+
+//custom props
 import { DashButton } from './CustomProps/DashButton';
 import { Logo } from './CustomProps/Logo';
 import Carousel from 'react-native-snap-carousel';
 
-import {navigationOptionsFunc} from './styles/navOptions';
-
+//Button Icons
 const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
@@ -18,10 +23,12 @@ const promoIcon = require('./assets/Benefits.png');
 
 export default class HomePage extends Component {
 	
+	//nav header
 	static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Home', navigation, true);
 	}
-
+	
+	//Navheader left button handler (toggle drawer nav menu)
 	toggleSettings = () => {
 		this.props.navigation.toggleDrawer();;
 	}
@@ -34,9 +41,10 @@ export default class HomePage extends Component {
 	};
 
 	componentDidMount(){
-		this.props.navigation.setParams({toggleSettings: this.toggleSettings})
-
+		this.props.navigation.setParams({toggleSettings: this.toggleSettings}) //bind handler function to header
 		this.setState({isLoading: true, didLoad: false, highlightData: null});
+
+		//Load Highlights carousel data
 		try{
 		var vultr = this.props.screenProps;
 		vultr.getHighlights()
@@ -53,8 +61,9 @@ export default class HomePage extends Component {
 			this.setState({isLoading: false});}
 	}
 
-	
+	//Render single highlight item
 	renderHighlight({item, index}){
+		///////////////////////////////////////////////	EVENT
 		if(item.type == 'event'){
 			var parts = item.data.startdate.split('/')
         	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -82,6 +91,8 @@ export default class HomePage extends Component {
                 </View>
             </TouchableHighlight>
 			);
+
+		///////////////////////////////////////////////	DISCOUNT
 		}if(item.type == 'discount')
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
@@ -99,6 +110,8 @@ export default class HomePage extends Component {
                 </View>
             </TouchableHighlight>
 			);
+
+		///////////////////////////////////////////////	MAGAZINE ARTICLE
 		if(item.type == 'mag')
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
@@ -121,6 +134,8 @@ export default class HomePage extends Component {
 			);
 	}
 
+	//Render Highlights carousel when data did load from server
+	// SOURCE: https://github.com/archriss/react-native-snap-carousel
 	renderCarousel(){
 		if(this.state.isLoading || !this.state.didLoad) return (<View/>);
 		else 
@@ -136,6 +151,7 @@ export default class HomePage extends Component {
 			);
 	}
 
+	//MAIN RENDER
 	render() {
 		const actInd = this.state.isLoading? <ActivityIndicator size='large' color='#cc0000'/> : <View style={homeStyles.carouselView}/>;
         

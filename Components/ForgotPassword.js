@@ -1,21 +1,27 @@
-
+/////////////////////////////////////////
+// FORGOT PASSWORD PAGE
+/////////////////////////////////////////
 
 import React, { Component } from 'react';
 import { Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
+
+//styles
 import { styles } from './styles/FormStyles';
-import { DefaultButton } from './CustomProps/DefaultButton';
+import { baseStyles } from './styles/BaseStyles';
 import { navigationOptionsFunc } from './styles/navOptions';
 
-import { baseStyles } from './styles/BaseStyles';
+//custom props
+import { DefaultButton } from './CustomProps/DefaultButton';
+
 
 export default class ForgotPassword extends Component {
     
+    //nav header
     static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Forgot Password', navigation, false);
 	}
 
-	/////////////////////////////////////
-    //
+	
     componentWillMount(){
         this.setState({
             errorMessage: '',
@@ -26,13 +32,15 @@ export default class ForgotPassword extends Component {
         });
     }
 
+    //Submit Button press handler
     saveChanges(){
         this.setState({errorMessage: '', isLoading: true})
+        //Check if any empty fields
         if(this.state.email == '' || this.state.firstName == '' || this.state.lastName == ''){
             this.setState({errorMessage: 'Please enter all Fields', isLoading: false});
             return;
         }
-
+        
         var vultr = this.props.screenProps;
         vultr.resetPassword(this.state.email, this.state.firstName, this.state.lastName)
         .then(() => {
@@ -51,6 +59,7 @@ export default class ForgotPassword extends Component {
         })
     }
 
+    //render text input box with text header
 	renderInput(title, ph, onChangeT, v, auto, keyboardType){
         if(!keyboardType) keyboardType = 'default'
 		return(
@@ -66,6 +75,7 @@ export default class ForgotPassword extends Component {
 		)
 	}
 
+    //MAIN RENDER
 	render() {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
 		return (

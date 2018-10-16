@@ -1,4 +1,6 @@
-
+/////////////////////////////////////////
+// Web View Page
+/////////////////////////////////////////
 import React, { Component } from 'react';
 import { View, WebView, ActivityIndicator} from 'react-native';
 import { baseStyles } from '../styles/BaseStyles';

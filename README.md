@@ -6,11 +6,10 @@ React Native
 
 ## Requirements
 
+- Node.js
 - React Native
-- React Navigation
-- Java JDK 1.8 (JRE doesn't have required tools)
-- Node.js, Python2
-- firebase
+- React Native CLI
+- Expo
 
 
 ### Installing
@@ -19,21 +18,20 @@ How to get react native setup:
 
 https://facebook.github.io/react-native/docs/getting-started.html
 
-```
-npm install -g create-react-native-app
-```
-For the app navigation:
+All dependencies listed in package.json
 
-```
-npm install --save react-navigation
-```
+App:
 
-For firebase
-```
-npm install --save firebase
-```
+	Clone git repo.
+	Inside directory:
 
-## Project will later be ejected for native code use and final deployment
+	```
+	npm install
+	```
+	```
+	npm start
+	```
+
 
 ## Members
 
@@ -45,5 +43,6 @@ npm install --save firebase
 ## Client
 
 - Carly Evans (Alumni EIS)
+- Emily Warren (Alumni EIS)
 - Paris Dennett (Alumni Business)
 - Leanne Newsham (Alumni Head)

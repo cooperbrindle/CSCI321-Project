@@ -1,18 +1,23 @@
+/////////////////////////////////////////
+// Login Page
+/////////////////////////////////////////
+
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, ActivityIndicator, TouchableOpacity, AsyncStorage} from 'react-native'; 
 
+//custom props
 import { Logo } from './CustomProps/Logo';
 import { DefaultButton } from './CustomProps/DefaultButton';
 import { SocialButton } from './CustomProps/SocialButton';
-import { Facebook } from 'expo';
 
+//style sheets
 import { loginStyles } from './styles/LoginStyles';
 import { baseStyles } from './styles/BaseStyles';
 
 
 export default class Login extends React.Component {
     
-    static navigationOptions = {
+    static navigationOptions = { //remove header
         header: null,
     };
     
@@ -25,18 +30,18 @@ export default class Login extends React.Component {
     };
 
     async componentDidMount(){
-        var vultr = this.props.screenProps;
+        var vultr = this.props.screenProps; //vultrSDK
         this.setState({
             isLoading: true,
             vultr: this.props.screenProps,
             username: vultr.username,
         });
 
-        //LOAD TOKEN
+        //Loasd Token, Username from local device storage
         var token, username;
 		try{ 
             token = await AsyncStorage.getItem('token');
-            username = await AsyncStorage.getItem('username');
+            username = await AsyncStorage.getItem('username'); //TODO: put empty string for getItem catch thing
         }catch(err){
             console.log(err); 
             token = null;
@@ -44,13 +49,12 @@ export default class Login extends React.Component {
         };
 		vultr.loadData(token, username);
 		
-        if(vultr.isLoggedIn()){
+        if(vultr.isLoggedIn()){     //Auto Login check (if token does exist then go to home page)
             vultr.loadConstituent();
             this.props.navigation.navigate('HomeDrawer');
             return;
         }
-        else{
-            //TODO: REMOVE THIS ELSE - ONLY FOR TESTING
+        else{ //TODO: REMOVE THIS ELSE - ONLY FOR TESTING
             this.setState({
                 username: 'ewarren',
                 password: 'password',
@@ -59,6 +63,7 @@ export default class Login extends React.Component {
         this.setState({isLoading: false});
     }
 
+    //LOGIN BUTTON PRESS HANDLER
     loginPress() {
         
         this.setState({
@@ -68,16 +73,16 @@ export default class Login extends React.Component {
         
         const {username, password } = this.state;
         try{
-            if(username != '' && password != ''){
+            if(username != '' && password != ''){ //if not empty inputs
                this.state.vultr.signInWithEmailPassword(username, password)
-                .then((result) =>{
+                .then((result) =>{ //LOGIN WORKED
                     this.setState({isLoading: false});
                     this.props.navigation.navigate('HomeDrawer');
                 })
-                .catch((error) =>{
+                .catch((error) =>{ //LOGIN FAILED
                     this.setState({errorMessage: error, isLoading: false});
                 });
-            }else{
+            }else{ //EMPTY TEXT FIELDS
                 this.setState({
                     errorMessage: 'Empty Fields',
                     isLoading: false
@@ -87,14 +92,12 @@ export default class Login extends React.Component {
         this.setState({isLoading: false});}
     };
 
+    //SIGN UP BUTTON PRESS HANDLER
     signupPress() {
         this.props.navigation.navigate('SUForm');
     }
 
-    async facebookLogin() {
-    }
-
-
+    //Render page buttons when not loading
     renderButtons(){
         if(this.state.isLoading)
             return <View/>;
@@ -112,9 +115,9 @@ export default class Login extends React.Component {
     }
 
     
-
+    //MAIN RENDER
     render() {
-
+        //activity indicator
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
         
         return (

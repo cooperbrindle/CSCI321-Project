@@ -1,8 +1,24 @@
+/////////////////////////////////////////
+// Inital app start page
+// UOW Alumni mobile application
+/////////////////////////////////////////
 
+
+/////////////////////////////////////////
+// custom node packages references
+//
+// 	LinkedIn SignIn Modal: https://github.com/xcarpentier/react-native-linkedin
+// 	Carousel: https://github.com/archriss/react-native-snap-carousel
+// 	Keyboard Aware Scroll View: https://github.com/APSL/react-native-keyboard-aware-scroll-view
+//
+/////////////////////////////////////////
 
 import React from 'react';
+import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
+import Vultrsdk from './Components/Vultrsdk';
 
-
+/////////////////////////////////////////////////////////////////////////////////////////
+// Page Imports
 import LoginPage from './Components/LoginPage';
 import Logout from './Components/Drawer/Logout';
 import ForgotPassword from './Components/ForgotPassword';
@@ -28,12 +44,11 @@ import Careers from './Components/Promotions/Careers';
 import DiscountCard from './Components/Promotions/DiscountCard';
 import WebViewPage from './Components/WebView/WebViewPage';
 
-import Vultrsdk from './Components/Vultrsdk';
 
-import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
+/////////////////////////////////////////////////////////////////////////////////////////
+// Navigation setup
 
-
-
+//Main app navigation stack
 const navStack = createStackNavigator({
 	//Routes
 	HomePage: { screen: HomePage},
@@ -51,13 +66,13 @@ const navStack = createStackNavigator({
 	DiscountCard: { screen: DiscountCard },
 	EventRego: { screen: EventRego },
 	GuestRego: { screen: GuestRego },
-	Conditions: { screen: Conditions },
 	WebViewPage: { screen: WebViewPage },
-
+	
 },{ //options
 	initialRouteName: 'HomePage',
 });
 
+// user so pages have header bars
 const passwordStack = createStackNavigator({
 	Password: { screen: PasswordForm }
 });
@@ -66,6 +81,7 @@ const faqStack = createStackNavigator({
 });
 
 
+// Tab drawer navigator
 const drawerNav = createDrawerNavigator({
 	//Routes
 	Home: { screen: navStack },
@@ -83,17 +99,19 @@ const drawerNav = createDrawerNavigator({
 });
 
 
-
+// stack so all pages have header bar
 const RootStack = createStackNavigator({
-  	//Routs
+	//Routs
 	Login: { screen: LoginPage},
 	SUForm: { screen: SignUpForm},
 	SUFinish: { screen: SignUpFinish},
+	Conditions: { screen: Conditions },
 	ForgotPassword: { screen: ForgotPassword },
-  },{ //options
+},{ //options
   initialRouteName: 'Login',
 });
 
+//Switch navigator (ROOT NAVIGATOR)
 const RootSwitch = createSwitchNavigator({
 	//Routs
   LoginRoot: { screen: RootStack},
@@ -105,6 +123,7 @@ initialRouteName: 'LoginRoot',
 export default class App extends React.Component{
 
 	componentWillMount(){
+		//INITIATE BACKEND SDK
 		this.vultr = new Vultrsdk();
 	}
 

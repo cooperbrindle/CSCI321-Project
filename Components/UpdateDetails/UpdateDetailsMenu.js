@@ -1,18 +1,24 @@
-
+/////////////////////////////////////////
+// Update Details Menu Page
+/////////////////////////////////////////
 
 import React, { Component } from 'react';
-import { Text, View, ActivityIndicator, Alert, AsyncStorage, Modal, TextInput, Dimensions} from 'react-native';
-import { DefaultButton } from '../CustomProps/DefaultButton';
-import { DashButton } from '../CustomProps/DashButton';
-import { SocialButton } from '../CustomProps/SocialButton';
+import { Text, View, ActivityIndicator, Alert, TextInput } from 'react-native';
+
+//styles
 import { baseStyles } from '../styles/BaseStyles';
 import { styles } from '../styles/FormStyles';
 import { udStyles } from '../styles/udStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+//custom props
 import LinkedInModal from 'react-native-linkedin';
+import { SocialButton } from '../CustomProps/SocialButton';
+import { DefaultButton } from '../CustomProps/DefaultButton';
+import { DashButton } from '../CustomProps/DashButton';
 import { linkedInConfig } from '../socialConfig';
 
+//Dash button icons
 const accountIcon = require('../assets/Account.png');
 const contactIcon = require('../assets/Contact.png');
 const employmentIcon = require('../assets/Employment.png');
@@ -20,6 +26,7 @@ const subscripIcon = require('../assets/Subscriptions.png');
 
 export default class UpdateDetailsMenu extends Component {
 	
+	//nav header
 	static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Update Details', navigation, false);
 	}
@@ -29,7 +36,6 @@ export default class UpdateDetailsMenu extends Component {
 		isLoading: false,
 		didLoad: false,
 		errorMessage: '',
-		successMessage: '',
 		showLinkedIn: false,
 		password: 'password',
 		modalVisible: true,
@@ -39,21 +45,23 @@ export default class UpdateDetailsMenu extends Component {
 	componentWillMount(){
 	}
 
+	//Load constituent data
 	load(){
 		try{
 			var vultr = this.props.screenProps;
-			if(this.state.password == ''){
+			if(this.state.password == ''){ //empty password
 				this.setState({errorMessage: 'Please enter password'});
 				return;
 			}
+
+			//Load data
 			this.setState({vultr: this.props.screenProps, modalVisible: false});
 			vultr.loadConstituent(this.state.password)
 			.then(() => {
-				const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate
+				const originalData = JSON.parse(JSON.stringify(vultr.data)); //duplicate, used for discarding changes
 				this.setState({
-					originalData: originalData,
+					originalData: originalData, 
 					data: vultr.data,
-					constituentRefID: vultr.data.id,
 					isLoading: false,
 					didLoad: true,
 					modalVisible: false,
@@ -61,7 +69,7 @@ export default class UpdateDetailsMenu extends Component {
 					errorMessage: '',
 				});
 
-			}).catch((err) => {
+			}).catch((err) => { //Data did not load / incorrect password
 				this.setState({
 					isLoading: false,
 					didLoad: false,
@@ -75,17 +83,18 @@ export default class UpdateDetailsMenu extends Component {
 	}
 
 	//	Method to navigate to form and pass data
-	//	 will pass the entire structure and each page can just pick out what it needs essentialls
 	navigateToForm(formName){
 		if(!this.state.isLoading)
 			this.props.navigation.navigate(formName, {data: this.state.data});
 	}
 
+	//discard all changes made (Locally)
 	discardChanges(){
 		const newData = JSON.parse(JSON.stringify(this.state.originalData));
 		this.setState({data: newData});
 	}
 
+	//Save changes back to server
 	saveChanges(){
 		this.setState({errorMessage: '', isLoading: true});
 		try{
@@ -93,7 +102,6 @@ export default class UpdateDetailsMenu extends Component {
 			vultr.updateDetails(this.state.data)
 			.then(() => {
 				this.setState({errorMessage: '',
-					successMessage: '',
 					isLoading: false
 				});
 				Alert.alert(
@@ -106,14 +114,13 @@ export default class UpdateDetailsMenu extends Component {
 				)
 			}).catch(() => {
 				this.setState({errorMessage: 'Error updating details',
-					successMessage: '',
 					isLoading: false
 				});
 			})
 		}catch(err){console.warn('catch error: '+ err.message);}
 	}
 
-
+	//Fetch LinkedIn user data from LinkedIn API
 	async loadLinkedInUser(accessToken){
 		this.setState({
 			isLoading: true,
@@ -129,14 +136,14 @@ export default class UpdateDetailsMenu extends Component {
 		}).then((result) => {
 			if(!result.ok) throw('SERVER ERROR');
 			else return(result.json());
-		}).then((result) => {
+		}).then((result) => { //Data did load
 			console.log(result);
 			this.setState({
 				isLoading: false,
 				didLoad: true,
 			});
-			this.replaceData(result);
-		}).catch((error) => {
+			this.replaceData(result);	
+		}).catch((error) => {	//data did not load
 			console.log('ERROR: ' + error);
 			this.setState({
 				isLoading: false,
@@ -146,9 +153,11 @@ export default class UpdateDetailsMenu extends Component {
 		})
 	}
 
+	//replace new data from Linkedin data
 	replaceData(result){
 		var data = this.state.data;
 		var str = '';
+		//All if's used to reduce text shown in Alert prop
 		if(data.firstName != result.firstName){
 			data.firstName = result.firstName;
 			str += 'First Name: ' + result.firstName + '\n';
@@ -186,6 +195,8 @@ export default class UpdateDetailsMenu extends Component {
 		);
 	}
 
+	//Show LinkedIn Sign in modal Web view
+	// SOURCE: https://github.com/xcarpentier/react-native-linkedin
     renderLinkedInModal() {
         return (
             <LinkedInModal
@@ -201,6 +212,7 @@ export default class UpdateDetailsMenu extends Component {
         );
 	}
 
+	//Import with facebook press handler
 	facebookImport(){
 		Alert.alert(
 			'Sorry!',
@@ -212,13 +224,14 @@ export default class UpdateDetailsMenu extends Component {
 		);
 	}
 	
-
+	//Activity indicator
 	renderLoading(){
 		if(this.state.isLoading)
 			return (<ActivityIndicator size='large' color='#cc0000'/>);
 		else return (<View/>);
 	}
 
+	//render error messages
 	renderMessages(){
 		if(this.state.errorMessage != ''){
 			return(
@@ -227,20 +240,14 @@ export default class UpdateDetailsMenu extends Component {
 				</Text>
 			);
 		}
-		else if(this.state.successMessage != ''){
-			return(
-				<View style={udStyles.SuccessView}>
-					<Text style={udStyles.successText}>
-						{this.state.successMessage}
-					</Text>
-				</View>
-			);
-		}
 		else return (<View/>);
 	}
 
+	//dashboard menu buttons or password overlay
 	renderDashBoard(){
-		if(this.state.modalVisible){
+
+		//SHOW PASSWORD INPUT OVERLAY IF VISABLE=TRUE
+		if(this.state.modalVisible){ 
 			return(
 				<View style={baseStyles.container}>
 					<Text style={styles.title}>
@@ -260,6 +267,7 @@ export default class UpdateDetailsMenu extends Component {
 				</View>
 			);
 		
+		//ELSE SHOW DASHBOARD MENU WHEN DATA LOADS
 		}else if(this.state.didLoad)
 			return(
 				<View style={baseStyles.container}>
@@ -288,8 +296,8 @@ export default class UpdateDetailsMenu extends Component {
 		else return(<View/>);
 	}
 
+	//MAIN RENDER
 	render() {
-
 		return (
 			<View style={baseStyles.container}>
 				{this.renderMessages()}
