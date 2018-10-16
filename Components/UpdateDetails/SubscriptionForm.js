@@ -75,7 +75,7 @@ export default class SubscriptionForm extends Component {
 				<View style={udStyles.switchView}>
 					<View style={udStyles.textSwitch}>
 						<Text style={udStyles.switchText}>
-							Allow communitcation via post
+							Allow communication via post
 						</Text>
 					</View>
 					<Switch
@@ -86,7 +86,7 @@ export default class SubscriptionForm extends Component {
 				<View style={udStyles.switchView}>
 					<View style={udStyles.textSwitch}>
 						<Text style={udStyles.switchText}>
-							Allow communitcation via mobile
+							Allow communication via mobile
 						</Text>
 					</View>
 					<Switch
@@ -97,7 +97,7 @@ export default class SubscriptionForm extends Component {
 				<View style={udStyles.switchView}>
 					<View style={udStyles.textSwitch}>
 						<Text style={udStyles.switchText}>
-							Allow communitcation via email
+							Allow communication via email
 						</Text>
 					</View>
 					<Switch
