@@ -10,16 +10,16 @@ CREATE TABLE CONSTITUENT(
     id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
     stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
     birthDate   VARCHAR(10)     NULL, /* Date of Birth */
-    title       VARCHAR(10)     NULL, /* Title ie Mr Miss */
-    firstName   VARCHAR(36)     NULL, /* First Name */
-    nickname    VARCHAR(36)     NULL, /* Nickname */
-    middleName  VARCHAR(36)     NULL, /* Middle Name */
-    lastName    VARCHAR(64)     NOT NULL, /* Last Name/s */
-    maidenName  VARCHAR(64)     NULL, /* Maiden Name */
+    title       VARCHAR(256)     NULL, /* Title ie Mr Miss */
+    firstName   VARCHAR(256)     NULL, /* First Name */
+    nickname    VARCHAR(256)     NULL, /* Nickname */
+    middleName  VARCHAR(256)     NULL, /* Middle Name */
+    lastName    VARCHAR(256)     NOT NULL, /* Last Name/s */
+    maidenName  VARCHAR(256)     NULL, /* Maiden Name */
     orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
     position    VARCHAR(256)    NULL, /* Position Name */
     address     VARCHAR(256)    NULL, /* Home Address */
-    suburb      VARCHAR(256)    NULL, /* Home Suburb */
+    city        VARCHAR(256)    NULL, /* Home city */
     state       VARCHAR(256)    NULL, /* Home State */
     county      VARCHAR(256)    NULL, /* Home County */
     postcode    VARCHAR(256)    NULL, /* Home Postcode */
@@ -41,18 +41,18 @@ CREATE TABLE CONSTITUENT(
 
 CREATE TABLE CONSTITUENTEXPORT(
     id          VARCHAR(10)     NOT NULL, /* Constituent ID Number */
-    stdNum      VARCHAR(10)     NOT NULL, /* Student Number */
-    birthDate   VARCHAR(10)     NULL, /* Date of Birth */
-    title       VARCHAR(10)     NULL, /* Title ie Mr Miss */
-    firstName   VARCHAR(36)     NULL, /* First Name */
-    nickname    VARCHAR(36)     NULL, /* Nickname */
-    middleName  VARCHAR(36)     NULL, /* Middle Name */
-    lastName    VARCHAR(64)     NOT NULL, /* Last Name/s */
-    maidenName  VARCHAR(64)     NULL, /* Maiden Name */
+    stdNum      VARCHAR(256)     NOT NULL, /* Student Number */
+    birthDate   VARCHAR(256)     NULL, /* Date of Birth */
+    title       VARCHAR(256)     NULL, /* Title ie Mr Miss */
+    firstName   VARCHAR(256)     NULL, /* First Name */
+    nickname    VARCHAR(256)     NULL, /* Nickname */
+    middleName  VARCHAR(256)     NULL, /* Middle Name */
+    lastName    VARCHAR(256)     NOT NULL, /* Last Name/s */
+    maidenName  VARCHAR(256)     NULL, /* Maiden Name */
     orgName     VARCHAR(256)    NULL, /* Employer Organisation Name */
     position    VARCHAR(256)    NULL, /* Position Name */
     address     VARCHAR(256)    NULL, /* Home Address */
-    suburb      VARCHAR(256)    NULL, /* Home Suburb */
+    city      VARCHAR(256)    NULL, /* Home city */
     state       VARCHAR(256)    NULL, /* Home State */
     county      VARCHAR(256)    NULL, /* Home County */
     postcode    VARCHAR(256)    NULL, /* Home Postcode */
@@ -99,12 +99,12 @@ CREATE TABLE LIBRARYMEMEXPORT(
 /* Cooper 06/09/2018 */
 CREATE TABLE EVENTS(
     eventname       VARCHAR(256)    NOT NULL, /* Event Name */
-    eventgroup      VARCHAR(64)     NOT NULL, /* Organising Department */
-    eventtype       VARCHAR(64)     NOT NULL, /* Purpose of Event */
-    startdate       VARCHAR(10)     NOT NULL, /* Start of Event */
-    enddate         VARCHAR(10)     NOT NULL, /* End of Event */
-    starttime       VARCHAR(10)     NOT NULL, /* Start Time */
-    endtime         VARCHAR(10)     NOT NULL, /* End Time */
+    eventgroup      VARCHAR(256)     NOT NULL, /* Organising Department */
+    eventtype       VARCHAR(256)     NOT NULL, /* Purpose of Event */
+    startdate       VARCHAR(256)     NOT NULL, /* Start of Event */
+    enddate         VARCHAR(256)     NOT NULL, /* End of Event */
+    starttime       VARCHAR(256)     NOT NULL, /* Start Time */
+    endtime         VARCHAR(256)     NOT NULL, /* End Time */
     capacity        DECIMAL(4)      NOT NULL, /* Max number of attendants */
     locationname    VARCHAR(256)    NULL, /* Event Venue */
     address         VARCHAR(256)    NULL, /* Venue Address */
@@ -121,8 +121,8 @@ CREATE TABLE EVENTS(
 
 /* Cooper 31/08/2018 */
 CREATE TABLE DISCOUNTS(
-    titleID         VARCHAR(24)     NOT NULL, /* Short Hand Unique Name for Discounts */
-    partnerType     VARCHAR(24)     NOT NULL, /* UOW, Local, National, Global */
+    titleID         VARCHAR(100)     NOT NULL, /* Short Hand Unique Name for Discounts */
+    partnerType     VARCHAR(100)     NOT NULL, /* UOW, Local, National, Global */
     displayName     VARCHAR(256)    NOT NULL, /* Full display name for Discount */
     discountType    VARCHAR(4)      NOT NULL, /* card = display card, code = checkout code, link */
     blurb           VARCHAR(1028)   NOT NULL, /* To be displayed on discount page */
