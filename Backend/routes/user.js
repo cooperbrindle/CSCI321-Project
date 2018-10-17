@@ -69,11 +69,8 @@ router.post('/loadconstituent', async(req, res) => {
             const passHash = result[0].passHash;
 
             if(!bcrypt.compareSync(req.body.password, passHash)){
-                console.warn('Incorrect password at update details');
                 res.json({error: 'Incorrect password'});
                 return;
-            }else{
-                console.warn('Correct Password at update details');
             }
         }
 
