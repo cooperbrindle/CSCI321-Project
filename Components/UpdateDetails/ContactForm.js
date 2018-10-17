@@ -5,9 +5,12 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
 import { styles } from '../styles/FormStyles';
+import { navigationOptionsFunc } from '../styles/navOptions';
+
+//custom props
+import { FormInput } from '../CustomProps/FormInput';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class ContactForm extends Component {
     static navigationOptions = ({navigation}) => {
@@ -67,21 +70,6 @@ export default class ContactForm extends Component {
         return true;
     }
 	
-	
-	renderInput(title, ph, onChangeT, v, keyboardType){
-        if(!keyboardType) keyboardType = 'default';
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT} keyboardType={keyboardType}
-                    value={v} />
-            </View>
-		)
-	}
 
 	render() {
 		return (
@@ -91,13 +79,14 @@ export default class ContactForm extends Component {
 				<Text style={styles.title}>
                     Contact Info
                 </Text>
-
-				{this.renderInput('email (preferred)', 'js@uowmail.edu.au', (a) => this.setState({email:a}), this.state.email, 'email-address')}
-				{this.renderInput('Other email', '', (a) => this.setState({emailOther:a}), this.state.emailOther, 'email-address')}
-                {this.renderInput('Mobile', '0441234567', (a) => this.setState({mobile:a}), this.state.mobile, 'numeric')}
-                {this.renderInput('Address', 'This field will be expanded out in the future', (a) => this.setState({address:a}), this.state.address)}
-                {this.renderInput('City', 'Wollongong', (a) => this.setState({city:a}), this.state.city)}
 				
+                <FormInput title='email (preferred)' onChangeText={(a) => this.setState({email:a})} 
+                    value={this.state.email} keyboardType='email-address' autoCapitalize='none'/>
+                <FormInput title='email (other)' onChangeText={(a) => this.setState({emailOther:a})} 
+                    value={this.state.emailOther} keyboardType='email-address' autoCapitalize='none'/>
+                <FormInput title='Mobile' onChangeText={(a) => this.setState({mobile:a})} value={this.state.mobile} keyboardType='numeric'/>
+                <FormInput title='Address' onChangeText={(a) => this.setState({address:a})} value={this.state.address} />
+                <FormInput title='City' onChangeText={(a) => this.setState({city:a})} value={this.state.city} />
             
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>

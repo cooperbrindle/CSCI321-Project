@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
 
 //custom props
+import { FormInput } from '../CustomProps/FormInput';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { baseStyles } from '../styles/BaseStyles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -92,19 +93,6 @@ export default class SignUpForm extends Component {
             });
     }
 
-	renderInput(title, ph, stateValue, keyboardType){
-        if(!keyboardType) keyboardType = 'default'
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={stateValue} keyboardType={keyboardType}/> 
-            </View>
-		)
-	}
 
     //MAIN RENDER
 	render() {
@@ -156,11 +144,15 @@ export default class SignUpForm extends Component {
                     
                 </View>
 
-                {this.renderInput('First Name', '',     (value) => this.setState({firstName: value}) )}
-                {this.renderInput('Last Name', '',      (value) => this.setState({lastName: value}) )}
-                {this.renderInput('Student Number', '', (value) => this.setState({stdNum: value}), 'numeric')}
-                {this.renderInput('UOW email', '',      (value) => this.setState({email: value}), 'email-address' )}
-				
+                <FormInput title='First Name' onChangeText={(a) => this.setState({firstName:a})} 
+                    value={this.state.firstName} />
+                <FormInput title='Last Name' onChangeText={(a) => this.setState({lastName:a})} 
+                    value={this.state.lastName} />
+                <FormInput title='Student Number' onChangeText={(a) => this.setState({stdNum:a})} 
+                    value={this.state.stdNum} keyboardType='numeric' />
+                <FormInput title='UOW Email' onChangeText={(a) => this.setState({email:a})} 
+                    value={this.state.email} keyboardType='email-address' autoCapitalize='none'/>
+
             </ScrollView>
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>

@@ -5,11 +5,15 @@
 
 import React, { Component } from 'react';
 import { Text, TextInput, View, Alert, ActivityIndicator } from 'react-native';
+
+//styles
 import { styles } from '../styles/FormStyles';
-import { DefaultButton } from '../CustomProps/DefaultButton';
+import { baseStyles } from '../styles/BaseStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
-import { baseStyles } from '../styles/BaseStyles';
+//custom props
+import { FormInput } from '../CustomProps/FormInput';
+import { DefaultButton } from '../CustomProps/DefaultButton';
 
 export default class PasswordForm extends Component {
     
@@ -69,19 +73,6 @@ export default class PasswordForm extends Component {
         })
     }
 
-	renderInput(title, ph, onChangeT, v){
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT} secureTextEntry autoCapitalize='none'
-                    value={v} />
-            </View>
-		)
-	}
 
     //MAIN RENDER
 	render() {
@@ -99,10 +90,13 @@ export default class PasswordForm extends Component {
                     {actInd}
                 </View>
 
-				{this.renderInput('Old Password', '', (a) => this.setState({oldPassword:a}), this.state.oldPassword)}
-				{this.renderInput('New Password', '', (a) => this.setState({newPassword1:a}), this.state.newPassword1)}
-                {this.renderInput('Confirm Password', '', (a) => this.setState({newPassword2:a}), this.state.newPassword2)}
-				
+				<FormInput title='Old Password' onChangeText={(a) => this.setState({oldPassword:a})} 
+                    value={this.state.oldPassword} secureTextEntry={true} autoCapitalize='none' />
+                <FormInput title='New Password' onChangeText={(a) => this.setState({newPassword1:a})} 
+                    value={this.state.newPassword1} secureTextEntry={true} autoCapitalize='none'/>
+                <FormInput title='Confirm Password' onChangeText={(a) => this.setState({newPassword2:a})} 
+                    value={this.state.newPassword2} secureTextEntry={true} autoCapitalize='none'/>
+                
                 <View style={styles.submitBtnCont}>
 					<DefaultButton title='Submit' nav={() => this.saveChanges()} />
                     <DefaultButton title='Cancel' nav={() => this.props.navigation.navigate('Home')} />

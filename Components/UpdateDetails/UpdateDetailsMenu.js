@@ -22,7 +22,7 @@ import LinkedInModal from 'react-native-linkedin';
 import { SocialButton } from '../CustomProps/SocialButton';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { DashButton } from '../CustomProps/DashButton';
-import { linkedInConfig } from '../socialConfig';
+import { linkedInConfig } from '../config';
 
 //Dash button icons
 const accountIcon = require('../assets/Account.png');

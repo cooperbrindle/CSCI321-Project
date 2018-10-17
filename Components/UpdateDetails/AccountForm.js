@@ -4,6 +4,9 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View } from 'react-native';
+
+//custom props
+import { FormInput } from '../CustomProps/FormInput';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -68,22 +71,7 @@ export default class AccountForm extends Component {
         }
         return true;
     }
-    //
-    /////////////////////////////////////
-    //TODO: make uneditale fields slightly different colour
-    renderInput(title, ph, onChangeT, v, edita){
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT}
-                    value={v} editable = {edita}/>
-            </View>
-		)
-	}
+    
 
     //MAIN RENDER
 	render() {
@@ -135,9 +123,9 @@ export default class AccountForm extends Component {
                     
                 </View>
 
-                {this.renderInput('First Name', '', (a) => this.setState({firstName:a}), this.state.firstName, true)}
-                {this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName, true)}
-                {this.renderInput('Student Number', '', (a) => this.setState({stdNum:a}), this.state.stdNum, false)}
+                <FormInput title='First Name' onChangeText={(a) => this.setState({firstName:a})} value={this.state.firstName} />
+                <FormInput title='Last Name' onChangeText={(a) => this.setState({lastName:a})} value={this.state.lastName} />
+                <FormInput title='Student Number' onChangeText={(a) => this.setState({stdNum:a})} value={this.state.stdNum} editable={false} keyboardType='numeric'/>
 				
             </ScrollView>
             </KeyboardAwareScrollView>

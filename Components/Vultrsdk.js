@@ -1,6 +1,16 @@
+/////////////////////////////////////////
+// APP BACKEND SDK
+//
+//  all methods not commented are self explanatory api calls
+//  all api calls use one of two methods [makerequest, makeauthrequest]
+//    which handle all errors and data transformation
+////////////////////////////////////////
 
-const API_URL = 'http://149.28.172.13';
 import { AsyncStorage } from 'react-native';
+import { appConfig } from './config';
+
+
+const API_URL = appConfig.APIURL;
 
 export default class Vultr{
     
@@ -10,30 +20,39 @@ export default class Vultr{
         this.username = '';
     }
 
+    //Load token and username from device local storage
     loadData(token, username){
         this.token = token;
         this.username = username;
     }
 
+    //Check if user is logged in by presence of token
+    //  used for auto login feature
     isLoggedIn(){
         if(this.token == null) return false
         else return true;
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //  BACKEND API CALLS
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     loadConstituent(password){
         if(!password || password == null) password = null;
         return new Promise((resolve, reject) => {
             this.makeAuthRequest('/user/loadconstituent', 'POST', {username: this.username, password: password}
             ).then((res) => {
-                //if(res.error == 'Incorrect password'){reject(res.error)}
-                //else{
-                    this.data = res[0];
-                    console.log(res[0]);
-                    try{
-                        AsyncStorage.setItem('username', this.username);
-                    }catch(err){console.log('ERROR SAVING USERNAME: ' + err)}
-                    resolve();
-                //}
+                this.data = res[0];
+                //console.log(res[0]);
+                try{ //Store username in device local storage
+                    AsyncStorage.setItem('username', this.username);
+                }catch(err){}
+                resolve();
             }).catch((error) => { reject(error);})
         });
     }
@@ -46,13 +65,10 @@ export default class Vultr{
                     password: password
                 }
             ).then((res) => {
-                //if(res.error && res.error != '') reject(res.error);
-                //else{
-                    this.saveToken(res.token);
-                    this.loadConstituent()
-                    .then(() => {resolve();
-                    }).catch((err) => { reject(err);})
-                //}
+                this.saveToken(res.token);//save token to device local storage
+                this.loadConstituent()  //load user constituent data
+                .then(() => {resolve();
+                }).catch((err) => { reject(err);})
             }).catch((error) => {reject(error);})
         });
         
@@ -71,7 +87,7 @@ export default class Vultr{
     }
 
     libraryReq(email) {
-        console.log(this.data.id);
+        //update details if differen email supplied
         if(email != this.data.email){
             this.data.email = email;
             this.updateDetails(this.data);
@@ -96,9 +112,7 @@ export default class Vultr{
                     newPassword: newPassword,
                     id: this.data.id,
                 }
-            ).then((res) => {
-                //if(res.error && res.error != '') reject(res.error);
-                resolve();
+            ).then(() => {resolve();
             }).catch((error) => {reject(error); })
         });
     }
@@ -107,9 +121,7 @@ export default class Vultr{
         return new Promise((resolve, reject) => {
             this.makeRequest('/auth/signUp', 'POST',
                 {data: data}
-            ).then((res) => {
-                //if(res.error && res.error != '') reject(res.error);
-                resolve(res.data);
+            ).then((res) => {resolve(res.data);
             }).catch((error) => { reject(error);})
         });
     }   
@@ -122,7 +134,7 @@ export default class Vultr{
                     username: username,
                     passHash: password,
                 }
-            ).then((res) => {
+            ).then((res) => { //constinue to sign in
                 this.signInWithEmailPassword(username, password)
                 .then(() => {resolve();})
             }).catch((error) => {reject(error);})
@@ -131,6 +143,7 @@ export default class Vultr{
 
     registerConst(eventData, constInfo){
         return new Promise((resolve, reject) => {
+            //update details if different employer details filled out
             if(constInfo.position != this.data.position || constInfo.orgName != this.data.orgName){
                 this.data.position = constInfo.position;
                 this.data.orgName = constInfo.orgName;
@@ -149,9 +162,7 @@ export default class Vultr{
                     dietary: constInfo.dietary,
                     mobility: constInfo.wheelchair,
                 }
-            ).then((res) => {
-                //if(res.error && res.error != '') reject(res.error);
-                resolve();
+            ).then((res) => { resolve();
             }).catch((error) => {reject(error);})
         });
     }
@@ -169,20 +180,20 @@ export default class Vultr{
                     dietary: guestData.dietary,
                     mobility: guestData.wheelchair,
                 }
-            ).then((res) => {
-                //if(res.error && res.error != '') reject(res.error);
-                resolve();
+            ).then((res) => {resolve();
             }).catch((error) => {reject(error);})
         });
     }
 
     geocodeAddress(eventData){
         return new Promise((resolve, reject) => {
+            if(eventData.address == "" || eventData.address == '' || eventData.address == null){
+                resolve({latitude: 0, longitude: 0});
+                return;
+            }
             this.makeAuthRequest('/events/geocodeaddress', 'POST',
                 {data: eventData,}
-            ).then((res) => {
-                //if(res.error && res.error != '') reject(res.error);
-                resolve(res);
+            ).then((res) => {resolve(res);
             }).catch((error) => {reject(error);})
         });
     }
@@ -222,13 +233,15 @@ export default class Vultr{
                     firstName: fn, 
                     lastName: ln,
                 }
-            ).then((res) => {
-                //if(res.error && res.error != '') reject(res.error);
-                resolve();
+            ).then((res) => {resolve();
             }).catch((error) => {reject(error);})
         });
     }
 
+
+    //Make authenticated request to API
+    // passes token in authorization header
+    //  handles response errors, status codes and async JSON transforms
     makeAuthRequest(url, method, body){
         return new Promise((resolve, reject) => {
             data = fetch(API_URL + url, {
@@ -240,15 +253,17 @@ export default class Vultr{
                 },
                 body: JSON.stringify(body)
             }).then((result) => {
+                //CHECK RESPONSE STATUS CODE
                 if(!result.ok) reject('SERVER REQUEST ERROR');
                 else return(result.json());
             }).then((res) => {
-                if(res.error && res.error != ''){
-                    if(typeof res.error !== 'string')
-                        res.error = res.error.message;
+                //CHECK IF ERROR SENT BACK FROM SERVER
+                if(res.error && res.error != ''){ //used for local javascript library/app errors
+                    if(typeof res.error !== 'string') //converts error object to string 
+                        res.error = res.error.message; //to fit how server responds with errorss
                     reject(res.error);
                 }else resolve(res);
-            }).catch((error) => {
+            }).catch((error) => { //CATCH local javascript library/app errors
                 if(error != ''){
                     if(typeof error !== 'string')
                         error = error.message;
@@ -258,6 +273,10 @@ export default class Vultr{
         });
     }
 
+
+    //Make unauthenticated request to API
+    //  handles response errors, status codes and async JSON transforms
+    //  SAME AS MAKEAUTHREQUEST BUT WITHOUT AUTH HEADER
     makeRequest(url, method, body){
         return new Promise((resolve, reject) => {
             data = fetch(API_URL + url, {
@@ -286,6 +305,7 @@ export default class Vultr{
         });
     }
 
+    //Saves auth JWT to device local storage
     saveToken(token){
         this.token = token;
         try{
@@ -293,6 +313,7 @@ export default class Vultr{
         }catch(err){console.log('ERROR SAVING TOKEN: ' + err)}
     }
 
+    //Removes auth JWT from device local storage - disables autologin
     logout(){
         this.token = null;
         try{

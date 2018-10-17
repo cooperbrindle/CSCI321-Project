@@ -2,8 +2,13 @@
 
 import React, { Component } from 'react';
 import { ScrollView, Text, TextInput, View, Alert, Image, ActivityIndicator} from 'react-native';
+
+//styles
 import { styles } from '../styles/FormStyles';
 import { baseStyles } from '../styles/BaseStyles';
+
+//custom props
+import { FormInput } from '../CustomProps/FormInput';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { navigationOptionsFunc } from '../styles/navOptions';
 import { staticStyles } from '../styles/BenefitsStyles';
@@ -66,7 +71,6 @@ export default class LibraryMembership extends Component {
     ////////////////////////////////////////////////////////////////////////////////
     //Called by render to display email input
     renderForm(){
-        var subBtn;
         if(this.state.isLoading)
             return (
                 <View style={baseStyles.activityView}>
@@ -74,26 +78,11 @@ export default class LibraryMembership extends Component {
                 </View>
             );
         else return (
-            this.renderInput('Preferred Email', '', (a) => this.setState({email:a}), this.state.email, true, 'email-address')
-        );
+            <FormInput title='Preffered Email' onChangeText={(a) => this.setState({email:a})} 
+                    value={this.state.email} keyboardType='email-address' autoCapitalize='none'/>
+            );
     }
 
-    /////////////////////////////////////////////////////////////////////////
-    //Takes user input for email address
-    renderInput(title, ph, onChangeT, v, edita, keyboardType){
-        if(!keyboardType) keyboardType = 'default';
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT} keyboardType={keyboardType}
-                    value={v} editable = {edita}/>
-            </View>
-		)
-    }
 
     ///////////////////////////////////////////////////////////////////////////////
     //Displays button for submit

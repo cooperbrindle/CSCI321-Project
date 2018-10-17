@@ -6,7 +6,7 @@
 /////////////////////////////////////////
 
 import React, { Component } from 'react';
-import { Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
+import { Text, TextInput, View, Alert, ActivityIndicator, ScrollView} from 'react-native';
 
 //styles
 import { styles } from './styles/FormStyles';
@@ -14,6 +14,7 @@ import { baseStyles } from './styles/BaseStyles';
 import { navigationOptionsFunc } from './styles/navOptions';
 
 //custom props
+import { FormInput } from './CustomProps/FormInput';
 import { DefaultButton } from './CustomProps/DefaultButton';
 
 
@@ -62,27 +63,12 @@ export default class ForgotPassword extends Component {
         })
     }
 
-    //render text input box with text header
-	renderInput(title, ph, onChangeT, v, auto, keyboardType){
-        if(!keyboardType) keyboardType = 'default'
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT} autoCapitalize={auto} keyboardType={keyboardType}
-                    value={v} />
-            </View>
-		)
-	}
-
     //MAIN RENDER
 	render() {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
 		return (
 			<View style={baseStyles.container}>
+                <ScrollView>
 				<Text style={styles.title}>
                     Reset your password
                 </Text>
@@ -94,10 +80,14 @@ export default class ForgotPassword extends Component {
                     {actInd}
                 </View>
 
-                {this.renderInput('Email', '', (a) => this.setState({email:a}), this.state.email, 'none', 'email-address')}
-                {this.renderInput('First Name', '', (a) => this.setState({firstName:a}), this.state.firstName, 'sentences')}
-				{this.renderInput('Last Name', '', (a) => this.setState({lastName:a}), this.state.lastName, 'sentences')}
-				
+                <FormInput title='Email' onChangeText={(a) => this.setState({email:a})} 
+                    value={this.state.email} autoCapitalize='none' keyboardType='email-address' autoCapitalize='none'/>
+                <FormInput title='First Name' onChangeText={(a) => this.setState({firstName:a})} 
+                    value={this.state.firstName} />
+                <FormInput title='Last Name' onChangeText={(a) => this.setState({lastName:a})} 
+                    value={this.state.lastName} />
+                
+                </ScrollView>
                 <View style={styles.submitBtnCont}>
 					<DefaultButton title='Submit' nav={() => this.saveChanges()} />
                 </View>

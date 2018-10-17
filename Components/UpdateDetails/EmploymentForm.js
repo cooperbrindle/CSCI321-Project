@@ -4,11 +4,14 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
+
+//custom props
+import { FormInput } from '../CustomProps/FormInput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { DefaultButton } from '../CustomProps/DefaultButton';
 
 //styles
 import { styles } from '../styles/FormStyles';
-import { DefaultButton } from '../CustomProps/DefaultButton';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class EmploymentForm extends Component {
@@ -44,34 +47,19 @@ export default class EmploymentForm extends Component {
         this.props.navigation.goBack();
 	}
     
-    //Input box and input title
-	renderInput(title, ph, onChangeT, v, edita){
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT}
-                    value={v} editable = {edita}/>
-            </View>
-		)
-	}
 
     //MAIN RENDER
 	render() {
 		return (
 			<View style={styles.container}>
             <KeyboardAwareScrollView>
-            <ScrollView>
 				<Text style={styles.title}>
                     Employment Info
                 </Text>
-                {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
-                {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
-				
-            </ScrollView>
+
+				<FormInput title='Job Title' onChangeText={(a) => this.setState({position:a})} value={this.state.position} />
+                <FormInput title='Employer' onChangeText={(a) => this.setState({orgName:a})} value={this.state.orgName} />
+            
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />

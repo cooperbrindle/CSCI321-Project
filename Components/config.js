@@ -15,3 +15,7 @@ export const linkedInConfig = {
     ],
 
 }
+
+export const appConfig = {
+    APIURL: 'http://149.28.172.13',
+}

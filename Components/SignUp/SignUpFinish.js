@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text, TextInput, View, ActivityIndicator } from 'react-native';
 
 //custom props
+import { FormInput } from '../CustomProps/FormInput';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { Logo } from '../CustomProps/Logo.js';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -74,19 +75,6 @@ export default class SignUpFinish extends Component {
     //////////////////////////////////// UI /////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
 
-	renderInput(title, ph, setValue, stateValue, isSecure, isEditable){
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey' value={stateValue}
-                    onChangeText={setValue} secureTextEntry={isSecure} autoCapitalize='none' editable={isEditable}
-                />
-            </View>
-		);
-    }
 
     //MAIN RENDER
 	render() {
@@ -113,10 +101,14 @@ export default class SignUpFinish extends Component {
                     {actInd}
                 </View>
 
-                {this.renderInput('username', '', (value) => this.setState({username: value}), this.state.username, false, true )}
-                {this.renderInput('password', '', (value) => this.setState({password: value}), this.state.password, true, true )}
-                {this.renderInput('confirm password', '', (value) => this.setState({passwordConf: value}), this.state.passwordConf, true, true )}
-			</ScrollView>
+                <FormInput title='username' onChangeText={(a) => this.setState({username:a})} 
+                    value={this.state.username} autoCapitalize='none'/>
+                <FormInput title='password' onChangeText={(a) => this.setState({password:a})} 
+                    value={this.state.password} secureTextEntry={true} autoCapitalize='none'/>
+                <FormInput title='confirm password' onChangeText={(a) => this.setState({passwordConf:a})} 
+                    value={this.state.passwordConf} secureTextEntry={true} autoCapitalize='none'/>
+            
+            </ScrollView>
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
                     <DefaultButton title='Continue' nav={() => this.submitForm()} />
@@ -125,10 +117,3 @@ export default class SignUpFinish extends Component {
 		);
 		}
     };
-    
-    const stylesA = StyleSheet.create({
-        logoCont: {
-            flex: 0.5,
-            marginTop: 50,
-        },
-    });

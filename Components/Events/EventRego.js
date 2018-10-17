@@ -8,6 +8,7 @@ import { styles } from '../styles/FormStyles';
 import { baseStyles } from '../styles/BaseStyles';
 
 //Custom Props
+import { FormInput } from '../CustomProps/FormInput';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { navigationOptionsFunc } from '../styles/navOptions';
@@ -74,31 +75,21 @@ export default class EventRego extends Component {
             )
         else return (
             <KeyboardAwareScrollView>
-                {this.renderInput('Job Title', '', (a) => this.setState({position:a}), this.state.position, true)}
-                {this.renderInput('Employer', '', (a) => this.setState({orgName:a}), this.state.orgName, true)}
-                {this.renderInput('Dietary Requirements (if any)', '', (a) => this.setState({dietary:a}), this.state.dietary, true)}
-                {this.renderInput('Mobility Requirements (if any)', '', (a) => this.setState({wheelchair:a}), this.state.wheelchair, true)}
-                {this.renderInput('Number of Guests', '', (a) => this.setState({guests:a}), this.state.guests, true, 'numeric')}
+                <FormInput title='Job Title' onChangeText={(a) => this.setState({position:a})} 
+                    value={this.state.position} />
+                <FormInput title='Employer' onChangeText={(a) => this.setState({orgName:a})} 
+                    value={this.state.orgName} />
+                <FormInput title='Dietary Requirement (if any)' onChangeText={(a) => this.setState({dietary:a})} 
+                    value={this.state.dietary} />
+                <FormInput title='Mobility Requirements (if any)' onChangeText={(a) => this.setState({wheelchair:a})} 
+                    value={this.state.wheelchair} />
+                <FormInput title='Number of Guests' onChangeText={(a) => this.setState({guests:a})} 
+                    value={this.state.guests} keyboardType='numeric'/>
+
             </KeyboardAwareScrollView>
         )
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    //Handles all form inputs
-    renderInput(title, ph, onChangeT, v, edita, keyboardType){
-        if(!keyboardType) keyboardType = 'default';
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
-                </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT} keyboardType={keyboardType}
-                    value={v} editable = {edita}/>
-            </View>
-		)
-    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Submits the rego info to server and if theres a guest redirects to guest rego page, else it goes to the home page

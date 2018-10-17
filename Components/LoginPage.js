@@ -41,11 +41,11 @@ export default class Login extends React.Component {
         var token, username;
 		try{ 
             token = await AsyncStorage.getItem('token');
-            username = await AsyncStorage.getItem('username'); //TODO: put empty string for getItem catch thing
+            username = await AsyncStorage.getItem('username');
         }catch(err){
             console.log(err); 
             token = null;
-            username = null;
+            username = '';
         };
 		vultr.loadData(token, username);
 		
