@@ -65,7 +65,9 @@ export default class BenefitsMenu extends Component {
 				</View>
 				
 				<View style={homeStyles.dashboard}>
-					<DashButton title='Discounts Program' img={Discounts} nav={()=>this.props.navigation.navigate('Discounts', {})} />
+					<DashButton title='Discounts Program' img={Discounts} nav={()=>this.props.navigation.navigate('Discounts', {
+						card: false,
+					})} />
 					<DashButton title='Library Membership' img={Library} nav={()=>this.props.navigation.navigate('LibraryMem', {data: this.state.data})} />
 				</View>
 				<View style={homeStyles.dashboard}>

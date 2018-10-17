@@ -29,6 +29,7 @@ export default class Discounts extends Component {
     //////////////////////////////////////////////////////////////////////////////////
     //Calls the getDiscounts function in the Vultrsdk, then loads the data into this.state
     componentDidMount(){ 
+        this.setState({isLoading: true, modalVisible: this.props.navigation.getParam('card', false)});
         this.props.screenProps.getDiscounts('category')
         .then((res) => {
             this.setState({data: res, isLoading: false, errorMessage: ''});
