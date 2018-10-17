@@ -22,8 +22,8 @@ All dependencies listed in package.json
 
 App:
 
-	Clone git repo.
-	Inside directory:
+Clone git repo.
+Inside directory:
 
 	```
 	npm install
