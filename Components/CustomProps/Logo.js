@@ -1,3 +1,8 @@
+/////////////////////////////////////////
+// CUSTOM UOW LOGO PROP
+// uses dynamic banner to scale it to phone width
+////////////////////////////////////////
+
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
 

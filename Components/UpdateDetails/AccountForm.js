@@ -1,19 +1,24 @@
-
+/////////////////////////////////////////
+// ACCOUNT DETAILS FORM PAGE
+////////////////////////////////////////
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
-import { styles } from '../styles/FormStyles';
+import { Platform, StyleSheet, ScrollView, Text, TextInput, View } from 'react-native';
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+//styles
+import { styles } from '../styles/FormStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class AccountForm extends Component {
-	static navigationOptions = ({navigation}) => {
+    
+    //Nav header
+    static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Update Details', navigation, false);
 	}
     
-    /////////////////////////////////////
-    //
+    //load data passed to page
     componentWillMount(){
         const data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
@@ -32,6 +37,7 @@ export default class AccountForm extends Component {
         });
     }
 
+    //save button press handler
     saveChanges(){
         if(!this.validateData())
             return;
@@ -49,6 +55,7 @@ export default class AccountForm extends Component {
         this.props.navigation.goBack();
     }
 
+    //validata that data conforms
     validateData(){
         this.setState({errorMessage: ''});
         ////////////////Empty Input validation
@@ -64,8 +71,7 @@ export default class AccountForm extends Component {
     //
     /////////////////////////////////////
     //TODO: make uneditale fields slightly different colour
-    
-	renderInput(title, ph, onChangeT, v, edita){
+    renderInput(title, ph, onChangeT, v, edita){
 		return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
@@ -79,6 +85,7 @@ export default class AccountForm extends Component {
 		)
 	}
 
+    //MAIN RENDER
 	render() {
 		return (
 			<View style={styles.container}>

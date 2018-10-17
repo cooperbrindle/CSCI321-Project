@@ -1,5 +1,11 @@
 /////////////////////////////////////////
 // Update Details Menu Page
+//
+// - loads constituent details from backend
+// 	and passes data to each form page for editing
+// - submits changes
+// - imports data and autofills from LinkedIn
+// - facebook not implemented yet. not enough data to make feasible 
 /////////////////////////////////////////
 
 import React, { Component } from 'react';

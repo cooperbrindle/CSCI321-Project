@@ -2,8 +2,12 @@
 
 import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, Image} from 'react-native';
+
+//custom props
 import { DashButton } from '../CustomProps/DashButton';
 import { Logo } from '../CustomProps/Logo';
+
+//styles
 import { navigationOptionsFunc } from '../styles/navOptions';
 import { baseStyles } from '../styles/BaseStyles';
 import { homeStyles, smallDashStyles } from '../styles/HomeStyles';
@@ -20,10 +24,8 @@ const ScholarshipsImg = require('../assets/Scholarships.png');
 const Careers = require('../assets/Careers.png');
 
 export default class BenefitsMenu extends Component {
-	constructor(props){
-		super(props);
-	}
 	
+	//Nav header
 	static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Benefits', navigation, false);
 	}

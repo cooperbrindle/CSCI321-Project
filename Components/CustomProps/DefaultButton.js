@@ -1,7 +1,10 @@
+/////////////////////////////////////////
+// CUSTOM FORM BUTTON
+// mostly used for form submitions
+////////////////////////////////////////
+
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-
-
 
 export class DefaultButton extends React.Component{
 

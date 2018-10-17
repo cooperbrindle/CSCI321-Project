@@ -1,6 +1,10 @@
 /////////////////////////////////////////
-// Inital app start page
+// INITIAL APP START PAGE
+//
 // UOW Alumni mobile application
+//
+// 		Daniel McKinnell - 17/10/18
+//		Cooper Brindle 	 - 17/10/18
 /////////////////////////////////////////
 
 
@@ -41,7 +45,6 @@ import BenefitsMenu from './Components/Promotions/Benefits';
 import LibraryMembership from './Components/Promotions/LibraryMembership';
 import Discounts from './Components/Promotions/Discounts';
 import Careers from './Components/Promotions/Careers';
-import DiscountCard from './Components/Promotions/DiscountCard';
 import WebViewPage from './Components/WebView/WebViewPage';
 
 
@@ -63,7 +66,6 @@ const navStack = createStackNavigator({
     LibraryMem: { screen: LibraryMembership },
     Discounts: { screen: Discounts },
     Careers: { screen: Careers },
-	DiscountCard: { screen: DiscountCard },
 	EventRego: { screen: EventRego },
 	GuestRego: { screen: GuestRego },
 	WebViewPage: { screen: WebViewPage },

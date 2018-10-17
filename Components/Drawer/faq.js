@@ -1,3 +1,7 @@
+/////////////////////////////////////////
+// FREQUENTLY ASKED QUESTIONS
+////////////////////////////////////////
+
 import React, { Component } from 'react';
 import { StyleSheet, View, WebView, ActivityIndicator } from 'react-native';
 import { navigationOptionsFunc } from '../styles/navOptions';

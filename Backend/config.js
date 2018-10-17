@@ -1,3 +1,17 @@
+/////////////////////////////////////////
+// SERVER CONFIGURATION FILE
+//
+//  - token
+//  - mysql
+//  - temp password reset
+//  - email
+//  - main server
+////////////////////////////////////////
+
+exports.server = {
+    port: 80,
+}
+
 exports.token = {
     tokenSecret: 'alumniApp',
     defaultTokenExpiry: '1d',
@@ -14,7 +28,7 @@ exports.sql = {
 
 exports.tempPassword = {
     //possible: 'abcdefghijklmnopqrstuvwxyz1234567890',
-    //maxLength: 10,
+    //maxLength: 6,
     possible: 'abc',
     maxLength: 3,
 }

@@ -1,3 +1,10 @@
+/////////////////////////////////////////
+// LOGOUT PAGE
+// - small page to handle logging out
+// - future will be modal overlay
+// - essencially removes auth token and redirects to login
+////////////////////////////////////////
+
 import React, { Component } from 'react';
 import { StyleSheet, View, ActivityIndicator} from 'react-native'; 
 import { baseStyles } from '../styles/BaseStyles';
@@ -22,7 +29,7 @@ export default class Logout extends Component {
 	
 	componentDidMount(){
 		var vultr = this.props.screenProps;
-		
+		//Remove token and navigate back to login page
         vultr.logout();
         this.props.navigation.navigate('Login');
 	}

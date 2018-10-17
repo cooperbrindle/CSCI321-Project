@@ -1,4 +1,6 @@
-
+/////////////////////////////////////////
+// CONSTACT DETAILS FORM PAGE
+////////////////////////////////////////
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
@@ -12,8 +14,7 @@ export default class ContactForm extends Component {
 		return navigationOptionsFunc('Update Details', navigation, false);
 	}
 
-	/////////////////////////////////////
-    //
+    //Load data passed to page
     componentWillMount(){
         const data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
@@ -30,8 +31,9 @@ export default class ContactForm extends Component {
         });
     }
 
+    //save button press handler
     saveChanges(){
-        if(!this.validateDate())
+        if(!this.validateData())
             return;
 
         let data = this.props.navigation.getParam('data', 'NoData');
@@ -47,24 +49,23 @@ export default class ContactForm extends Component {
         this.props.navigation.goBack();
     }
 
-    validateDate(){
+    //check all data conforms
+    validateData(){
         //TODO: email validation
+
+        //empty inputs
         if(this.state.email == '' || this.state.emailOther == '' ||
         this.state.mobile == '' || this.state.address == '' || this.state.city == ''){
             this.setState({errorMessage: 'Empty Fields'});
-            console.warn('INVALID MOBILE');
             return false;
         }
-        //TODO: check mobile for nonDigits
+        //Check mobile has no alpha characters
         if(/[a-z]/i.test(this.state.mobile)){
             this.setState({errorMessage: 'Invalid Mobile'});
-            console.warn('INVALID MOBILE');
             return false;
         }
         return true;
     }
-    //
-    /////////////////////////////////////
 	
 	
 	renderInput(title, ph, onChangeT, v, keyboardType){

@@ -1,19 +1,24 @@
-
+/////////////////////////////////////////
+// EMPLOYMENT DETAILS FORM PAGE
+////////////////////////////////////////
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, ScrollView, Text, TextInput, View, TouchableHighlight, Image} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+//styles
 import { styles } from '../styles/FormStyles';
 import { DefaultButton } from '../CustomProps/DefaultButton';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class EmploymentForm extends Component {
-	static navigationOptions = ({navigation}) => {
+    
+    //Nav header
+    static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Update Details', navigation, false);
 	}
 
-	/////////////////////////////////////
-    //
+	//Load data passed to page
     componentWillMount(){
         const data = this.props.navigation.getParam('data', 'NoData');
         if(data == 'NoData'){
@@ -26,9 +31,8 @@ export default class EmploymentForm extends Component {
             orgName: data.orgName,
         });
     }
-    //
-	/////////////////////////////////////
 
+    //Save button press handler
 	saveChanges(){
         let data = this.props.navigation.getParam('data', 'NoData');
         try{
@@ -39,7 +43,8 @@ export default class EmploymentForm extends Component {
         }
         this.props.navigation.goBack();
 	}
-	
+    
+    //Input box and input title
 	renderInput(title, ph, onChangeT, v, edita){
 		return(
 			<View style={styles.inputCont}>
@@ -54,6 +59,7 @@ export default class EmploymentForm extends Component {
 		)
 	}
 
+    //MAIN RENDER
 	render() {
 		return (
 			<View style={styles.container}>

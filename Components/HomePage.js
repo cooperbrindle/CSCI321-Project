@@ -1,5 +1,9 @@
 /////////////////////////////////////////
 // MAIN HOME PAGE
+//
+// - Main navigation dashboard menu
+// - highlights carousel of most recent events
+// 	plus a random discount and magazine link
 /////////////////////////////////////////
 
 import React, { Component } from 'react';

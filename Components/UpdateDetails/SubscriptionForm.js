@@ -1,14 +1,20 @@
-
+/////////////////////////////////////////
+// PROMOTIONAL SUBSCRIPTIONS PREFERENCES PAGE
+////////////////////////////////////////
 
 import React, { Component } from 'react';
 import { ScrollView, View, Switch, Text} from 'react-native';
+import { DefaultButton } from '../CustomProps/DefaultButton';
+
+//styles
 import { styles } from '../styles/FormStyles';
 import { udStyles } from '../styles/udStyles';
-import { DefaultButton } from '../CustomProps/DefaultButton';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
 
 export default class SubscriptionForm extends Component {
+	
+	//Nav header
 	static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Update Details', navigation, false);
 	}

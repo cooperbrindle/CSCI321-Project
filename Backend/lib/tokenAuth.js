@@ -1,3 +1,11 @@
+/////////////////////////////////////////
+// TOKEN BASED AUTHENTICATION LIBRARY
+//      JWT (JSON WEB TOKEN)
+//
+//  - used to create and verify tokens for users
+//   to authenticate to backend REST API
+////////////////////////////////////////
+
 var dbconn = require('./sqlConnection');
 var jwt = require('jsonwebtoken');
 const log = require('./log').log;
@@ -8,15 +16,13 @@ exports.createToken = (payload) => {
                         //expiresIn: config.defaultTokenExpiry,
                         issuer: tokenConfig.issuer,
                     });
-    //console.log(token);
     return token;
 }
 
+//VERIFIES TOKEN
 exports.verifyToken = async(token) => {
-    //console.log('verifying...');
     try{
     var decoded = await jwt.verify(token, tokenConfig.tokenSecret, {issuer: tokenConfig.issuer})
-        //console.log('verified');
         return '';
     }catch(err){
         console.log(err.name + ':\n\n' + err.message);
@@ -24,6 +30,7 @@ exports.verifyToken = async(token) => {
     }
 }
 
+//Express router middleware function to verify token
 exports.checkRequestToken = async(req, res, next) => {
     // check header or url parameters or post parameters for token
 	var token = req.headers['authorization'];

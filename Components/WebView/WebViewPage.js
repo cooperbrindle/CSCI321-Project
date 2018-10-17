@@ -7,6 +7,7 @@ import { baseStyles } from '../styles/BaseStyles';
 
 export default class WebViewPage extends Component {
 	
+	//Nav header
 	static navigationOptions = ({navigation}) => {
 		return{
 			title: navigation.state.params.title,

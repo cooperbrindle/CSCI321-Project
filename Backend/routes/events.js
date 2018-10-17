@@ -1,3 +1,12 @@
+/////////////////////////////////////////
+// 	  /events/	route handler
+//
+//	- /eventslist
+//	- /registerconst
+//	- /registerguest
+//  - /geocodeaddress
+////////////////////////////////////////
+
 var router = require('express').Router();
 var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
@@ -8,16 +17,17 @@ var googleMapsClient = require('@google/maps').createClient({
 });
 
 
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 router.post('/eventslist', (req, res) => {
-	log(' Request made to: /events');
+	log('Request made to: /events');
 
 	try{
 	if(!req.body.category || typeof req.body.category != "string") {
 		res.status(400).send("400 Bad Request")
 	}
 
-	const category = req.body.category;
-	var data;
+    //Retrieve and return entre events list (ORDER BY START DATE)
 	dbconn.query('SELECT * FROM EVENTS ORDER BY STR_TO_DATE(startdate, \'%d/%m/%Y\')', (err, result) => {
 		if (err) throw err;
 		data = result;
@@ -33,6 +43,7 @@ router.post('/eventslist', (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
+// ENABLE TOKEN AUTHENTICATION FOR FOLLOWING ROUTES
 router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
 
 
@@ -43,13 +54,11 @@ router.post('/registerconst', async(req, res) => {
     log('Request made to: /registerconst');
 	try{
         var data = req.body;
-        //console.log(data);
         
         //Check if already registered
         var qry = 'SELECT id FROM EVENTCONSTITUENTEXPORT WHERE id = ? && eventname = ?'
         var err, result = await dbconn.query(qry, [data.id, data.eventname]);
         if(err) throw err;
-        console.log('LENGTH: ' + result.length);
         if(result.length > 0){
             res.json({error: 'Already Registered'});
             return;
@@ -58,7 +67,7 @@ router.post('/registerconst', async(req, res) => {
         //insert new row
         dbconn.query('INSERT INTO EVENTCONSTITUENTEXPORT SET ?', data, (err, result) => {
             if(err) throw err;
-            log('Updated eventconstituent ' + data.eventname + ' ' + data.id);
+            log('Registered Constituent for ' + data.eventname + ' - Constituent ID: ' + data.id);
             res.json('ok');
         });
 	}catch(err){
@@ -72,51 +81,53 @@ router.post('/registerconst', async(req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/registerguest', (req, res) => {
     
-    log(' Request made to: /registerguest');
+    log('Request made to: /registerguest');
 	try{
         var data = req.body;
-        console.log(data);
         
-        //check ctx row exists and drop
-                
-                dbconn.query('DELETE FROM EVENTGUESTEXPORT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
-                    //insert new row
-                    dbconn.query('INSERT INTO EVENTGUESTEXPORT SET ?', data, (err, result) => {
-                        if(err) throw err;
-                        log('Updated eventguest ' + data.eventname + ' ' + data.id);
-                        res.json('ok');
-                    });
+        //Delete old guest row
+        dbconn.query('DELETE FROM EVENTGUESTEXPORT WHERE id = ? AND eventname = ?',[data.id, data.eventname], (err, result) => {
+            //insert new row
+            dbconn.query('INSERT INTO EVENTGUESTEXPORT SET ?', data, (err, result) => {
+                if(err) throw err;
+                log('Updated eventguest ' + data.eventname + ' ' + data.id);
+                res.json('ok');
+            });
 
-                });
+        });
 	}catch(err){
 		log('ERROR: ' + err);
 	}
 		
 })
 
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 router.post('/geocodeaddress', (req, res) => {
     
-    console.log(' Request made to: /geocodeaddress');
+    log('Request made to: /geocodeaddress');
 	try{
-        var data = req.body.data;
-        console.log(data.state);    
+        var data = req.body.data;    
         var state = data.state.toUpperCase();
+
+        //Begin Google Geocoding
         googleMapsClient.geocode({
             address: data.address + ', ' + data.city + ', ' + state,
-          }, function(err, response) {
-            if (!err) {
-              var longitude = response.json.results[0].geometry.location.lng;
-              var latitude = response.json.results[0].geometry.location.lat;
-              dbconn.query('UPDATE EVENTS SET latitude = ?, longitude = ? WHERE eventname = ?', [latitude,longitude, data.eventname], (err, result) => {
-                if(err) throw err;
-                console.log('Updated events ' + data.eventname);
-                console.log(latitude + ' ' + longitude);
-                res.json({latitude, longitude});
+          }, (err, response) => {
+            if (!err) { //Successful GeoCoding
+                var longitude = response.json.results[0].geometry.location.lng;
+                var latitude = response.json.results[0].geometry.location.lat;
+                //Store coords
+                dbconn.query('UPDATE EVENTS SET latitude = ?, longitude = ? WHERE eventname = ?', [latitude,longitude, data.eventname], (err, result) => {
+                    if(err) throw err;
+                    log('GeoCoded event ' + data.eventname);
+                    res.json({latitude: latitude, longitude: longitude});
             });
             }
             else{
-                console.log('Error?');
-                res.json();
+                log('GeoCoding Error for ' + data.eventname + '\n\t'+err);
+                res.json({latitude: 0, longitude: 0});
             }
           });
     }

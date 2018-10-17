@@ -1,4 +1,7 @@
-
+/////////////////////////////////////////
+// UPDATE PASSWORD PAGE
+// - used for user to update their password
+////////////////////////////////////////
 
 import React, { Component } from 'react';
 import { Text, TextInput, View, Alert, ActivityIndicator } from 'react-native';
@@ -9,16 +12,18 @@ import { navigationOptionsFunc } from '../styles/navOptions';
 import { baseStyles } from '../styles/BaseStyles';
 
 export default class PasswordForm extends Component {
+    
+    //Nav bar
     static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Update Password', navigation, true);
 	}
 
+    //setings button function to bind to nav bar
 	toggleSettings = () => {
 		this.props.navigation.toggleDrawer();;
 	}
 
-	/////////////////////////////////////
-    //
+	//set data
     componentWillMount(){
         this.setState({
             errorMessage: '',
@@ -30,17 +35,22 @@ export default class PasswordForm extends Component {
         this.props.navigation.setParams({toggleSettings: this.toggleSettings})
     }
 
+    //submit changes press handler
     saveChanges(){
         this.setState({errorMessage: '', isLoading: true})
+        
+        //If any field is empty
         if(this.state.oldPassword == '' || this.state.newPassword1 == '' || this.state.newPassword2 == ''){
             this.setState({errorMessage: 'Please enter all fields', isLoading: false});
             return;
         }
+        //If passwords do not match
         if(this.state.newPassword1 != this.state.newPassword2){
             this.setState({errorMessage: 'Passwords do not match', isLoading: false});
             return;
         }
 
+        //submit
         var vultr = this.props.screenProps;
         vultr.updatePassword(this.state.newPassword1, this.state.oldPassword)
         .then(() => {
@@ -73,6 +83,7 @@ export default class PasswordForm extends Component {
 		)
 	}
 
+    //MAIN RENDER
 	render() {
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
 		return (

@@ -1,16 +1,23 @@
+/////////////////////////////////////////
+// 	  /user/	route handler
+//
+//	- /updatedetails
+//	- /loadconstituent
+//  - /libraryreq
+////////////////////////////////////////
+
 var router = require('express').Router();
 var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
 var tokenAuth = require('../lib/tokenAuth');
 var bcrypt = require('bcryptjs');
 
-
+//  - CTX = CONSTITUENTEXPORT
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
+// ENABLE TOKEN AUTHENTICATION FOR FOLLOWING ROUTES
 router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
-
-
 
 
 
@@ -18,17 +25,15 @@ router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/updatedetails', (req, res) => {
     
-    log(' Request made to: /updatedetails');
+    log('Request made to: /updatedetails');
 	try{
         if(!req.body.data)
             res.status(400).send("400 Bad Request");
             
         var data = req.body.data;
-        //console.log(data);
         
+        //Remove newest updates from export table CTX if exist (table gets wiped on exporting)
         dbconn.query('DELETE FROM CONSTITUENTEXPORT WHERE id = ?', data.id, (err, result) => {
-            
-            console.warn('Okey Dokey');
             //insert new row
             dbconn.query('INSERT INTO CONSTITUENTEXPORT SET ?', data, (err, result) => {
                 if(err) throw err;
@@ -44,6 +49,7 @@ router.post('/updatedetails', (req, res) => {
 		
 })
 
+
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/loadconstituent', async(req, res) => {
@@ -52,7 +58,8 @@ router.post('/loadconstituent', async(req, res) => {
 
 	try{
         
-        //CHECK PASSWORD
+        //CHECK PASSWORD is supplied (used for entering update details menu)
+        //  password is not supplied when app auto logs in
         if(req.body.password && req.body.password != null){
             var err, result = await dbconn.query('SELECT id, passHash FROM APPUSER WHERE id = ('+
                 'SELECT id FROM APPUSER WHERE username = ?)', req.body.username);
@@ -69,10 +76,9 @@ router.post('/loadconstituent', async(req, res) => {
                 console.warn('Correct Password at update details');
             }
         }
-        else{console.log('NO PASSWORD SUPPLIED')}
 
-        var qry = '';
         //CHECK CTX FOR MORE RECENT UPDATES
+        var qry = '';
         qry = 'SELECT * FROM CONSTITUENTEXPORT WHERE id = ('+
             'SELECT id FROM APPUSER WHERE username = ?)';
         err, result = await dbconn.query(qry, req.body.username);
@@ -82,7 +88,7 @@ router.post('/loadconstituent', async(req, res) => {
             res.json(result);
         }
         else{
-            //NO CTX ROW
+            //NO CTX ROW, Load from normal constituent table
             qry = 'SELECT * FROM CONSTITUENT WHERE id = ('+
                 'SELECT id FROM APPUSER WHERE username = ?)';
             err, result = await dbconn.query(qry, req.body.username);
@@ -106,7 +112,6 @@ router.post('/libraryreq', async(req, res) => {
     log('Request made to: /libraryreq');
 	try{            
         var data = req.body;
-        //console.log(data);
         
         //Check already registered
         var qry = 'SELECT id FROM LIBRARYMEMEXPORT WHERE id = ?';
@@ -117,6 +122,7 @@ router.post('/libraryreq', async(req, res) => {
             return;
         }
 
+        //create library membership request table
         dbconn.query('INSERT INTO LIBRARYMEMEXPORT SET ?', data, (err, result) => {
             if(err) throw err;
             log('Updated libraryexport ' + data.email);

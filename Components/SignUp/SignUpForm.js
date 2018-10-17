@@ -2,14 +2,19 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
-import { styles } from '../styles/FormStyles';
+
+//custom props
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { baseStyles } from '../styles/BaseStyles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+//styles
+import { styles } from '../styles/FormStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class SignUpForm extends Component {
 
+    //Nav header
     static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Sign Up', navigation, false);
 	}
@@ -30,17 +35,17 @@ export default class SignUpForm extends Component {
         this.vultr = this.props.screenProps;
     }
 
+    //When database finds match
     handleSubmitResult(result){
-        
-         this.props.navigation.navigate('Conditions', {
+        this.props.navigation.navigate('Conditions', {
             email: result.email,
             id: result.id,
         });
     }
     
+    //submit form to backend
     submitForm() {
         this.setState({isLoading: true, errorMessage: ''});
-        
         
         //Create JSON data from form
         var data = {
@@ -50,19 +55,22 @@ export default class SignUpForm extends Component {
             email: this.state.email,
             birthDate: this.state.day + '/' + this.state.month + '/' + this.state.year,
         };
-        if(data.birthDate == '//') data.birthDate = '';
+
+        if(data.birthDate == '//') data.birthDate = ''; //reset birthdate to blank if nothing was entered
+        //Check empty fields (only if all empty)
         if(data.firstName == '' && data.lastName == '' && data.stdNum == ''
         && data.email == '' && data.birthDate == ''){
             this.setState({errorMessage: 'No fields entered', isLoading: false});
             return;
         }
-        //send data to cloud function here
+        //submit data
         this.vultr.submitSignUp(data)
             .then((result) => {
                 this.setState({isLoading: false, errorMessage: ''});
                 this.handleSubmitResult(result);
             
             }).catch(error => {
+                //Set error alerts for user already registered or search found too many users
                 if(error == 'Already a user' || error == 'Too many users'){
                     this.setState({isLoading: false});
                     var msg = '';
@@ -98,6 +106,7 @@ export default class SignUpForm extends Component {
 		)
 	}
 
+    //MAIN RENDER
 	render() {
 
         const actInd = this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;

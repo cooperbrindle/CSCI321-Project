@@ -2,21 +2,24 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text, View, Alert} from 'react-native';
+import { DefaultButton } from '../CustomProps/DefaultButton';
+
+//styles
 import { navigationOptionsFunc } from '../styles/navOptions';
 import { styles } from '../styles/FormStyles';
 import { baseStyles } from '../styles/BaseStyles';
 
-import { DefaultButton } from '../CustomProps/DefaultButton';
 
-
-const blurbPoints = '-  Access a wide range of online resources, including e-journals and databases\n\n'+
+//TERMS AND CONDITIONS
+const TCs = '-  Access a wide range of online resources, including e-journals and databases\n\n'+
             '-  Borrow 30 items for 28 days at the Wollongong location, or five items at other locations\n\n'+
             '-  Renew items and place up to 10 holds at a time.\n\n';
 
-const blurbEnd = 'New membership applications will be processed and confirmed within 5-7 business days via return email.';
 
 export default class Conditions extends Component {
-	static navigationOptions = ({navigation}) => {
+    
+    //Nav header
+    static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Terms and Conditions', navigation, false);
 	}
 
@@ -30,13 +33,12 @@ export default class Conditions extends Component {
 
     componentDidMount(){
         this.props.vultr = this.props.screenProps;
-        var emailProp = this.props.navigation.getParam('email', '**error passing email info**');
+        var emailProp = this.props.navigation.getParam('email', '');
         id = this.props.navigation.getParam('id', '');
         this.setState({email: emailProp, id: id});
     }
     
-    /////////////////////////////////////
-    //
+    //Accept button press handler
     submit(){
         this.setState({errorMessage: '', isLoading: true});
         this.props.navigation.navigate('SUFinish', {
@@ -44,6 +46,8 @@ export default class Conditions extends Component {
             id: this.state.id,
         });
     }
+
+    //decline button press handler
     refuse(){
         Alert.alert(
             'Account Not Created',
@@ -55,12 +59,13 @@ export default class Conditions extends Component {
         )
     }
 
+    //MAIN RENDER
 	render() {
 		return (
 			<View style={baseStyles.container}>
 				<ScrollView style={thisStyles.blurbView}>         
                     <Text style={thisStyles.blurbTextPoints}>
-                        {blurbPoints}
+                        {TCs}
                     </Text>
                 </ScrollView>
                 <View style={styles.submitBtnCont}>

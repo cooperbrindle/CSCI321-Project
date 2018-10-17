@@ -2,19 +2,21 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, FlatList, View, TouchableHighlight, Image, ActivityIndicator, ScrollView, Modal, Alert} from 'react-native';
+
+//styles
 import { navigationOptionsFunc } from '../styles/navOptions';
 import { baseStyles } from '../styles/BaseStyles';
 import { listStyles } from '../styles/EventStyles';
 import { staticStyles } from '../styles/BenefitsStyles';
+
+//discound card image
 const disCard = require('../assets/discPage.png');
 
 
 
 export default class Discounts extends Component {
-	constructor(props){
-        super(props);
-    }
     
+    //Nav header
 	static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Discounts', navigation, false);
 	}

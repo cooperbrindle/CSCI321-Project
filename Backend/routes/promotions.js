@@ -1,24 +1,29 @@
+/////////////////////////////////////////
+// 	  /promotions/	route handler
+//
+//	- /discounts
+//	- /highlights
+////////////////////////////////////////
+
 var router = require('express').Router();
 var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 router.post('/discounts', (req, res) => {
-	log(' Request made to: /discounts');
+	log('Request made to: /discounts');
 
+	//Return entire list of discounts
 	try{
 	if(!req.body.category || typeof req.body.category != "string") {
 		res.status(400).send("400 Bad Request")
 	}
 
-	const category = req.body.category;
-	var data;
 	dbconn.query('SELECT * FROM DISCOUNTS ORDER BY titleID', (err, result, fields) => {
 		if (err) throw err;
-		//console.log(result);
-		data = result;
 		res.json(result);
 	});
 	}catch(err){
@@ -29,27 +34,34 @@ router.post('/discounts', (req, res) => {
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 router.post('/highlights', async(req, res) => {
-	log(' Request made to: /highlights');
+	log('Request made to: /highlights');
 
+	//Returns items for HomePage highlights carousel
+	//	Currently:
+	//	2 closest events
+	//	1 discount
+	//	1 magazine article link
 	try{
 		var event1, event2, discount, mag;
 		var err, result;
+		//EVENTS
 		err, result = await dbconn.query('SELECT * FROM EVENTS ORDER BY STR_TO_DATE(startdate, \'%d/%m/%Y\') LIMIT 2')
 		if (err) throw err;
 		event1 = result[0];
 		event2 = result[1];
-
+		//DISCOUNT
 		err, result = await dbconn.query('SELECT * FROM DISCOUNTS ORDER BY RAND() LIMIT 1');
 		if (err) throw err;
 		discount = result[0];
-
+		//MAGAZINE
 		err, result = await dbconn.query('SELECT * FROM MAGAZINEHIGHLIGHTS ORDER BY RAND() LIMIT 1');
 		if (err) throw err;
 		mag = result[0];
 
-		
+		//compile data
 		var data = [
 			{type: 'event', data: event1},
 			{type: 'discount', data: discount},

@@ -1,9 +1,15 @@
+/////////////////////////////////////////
+// CUSTOM SOCIAL LINKING BUTTONS
+// facebook and linkedin
+////////////////////////////////////////
+
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native';
 
-
+//logos
 const fbLogo = require('../assets/fblogo.png');
 const liLogo = require('../assets/lilogo.png');
+
 export class SocialButton extends React.Component{
 
     render() {

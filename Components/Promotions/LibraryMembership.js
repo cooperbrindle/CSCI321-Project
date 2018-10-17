@@ -112,7 +112,7 @@ export default class LibraryMembership extends Component {
         this.setState({errorMessage: '', isLoading: true});
         try{
             this.state.vultr.libraryReq(this.state.email)
-            .then(() => {
+            .then(() => { //submit successful
                 this.setState({
                     errorMessage: '',
                     isLoading: false
@@ -125,7 +125,7 @@ export default class LibraryMembership extends Component {
                     ],
                     { cancelable: false }
                 )
-            }).catch((err) => {
+            }).catch((err) => { //submit failed
                 this.setState({
                     errorMessage: err,
                     isLoading: false

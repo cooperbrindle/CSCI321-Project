@@ -1,3 +1,13 @@
+/////////////////////////////////////////
+// 	  /auth/	route handler
+//
+//	- /login
+//	- /signup
+//	- /register
+//	- /resetpassword
+//	- /updatepassword
+////////////////////////////////////////
+
 var router = require('express').Router();
 var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
@@ -12,9 +22,9 @@ const saltRounds = 10;
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/login', async(req, res) => {
-	log(' Request made to: /login');
+	log('Request made to: /login');
 	
-	try{
+	try{ //check username and password were sent
 	if(!req.body.username || typeof req.body.username != "string"){
 		res.status(400).send("400 Bad Request");
 		return;
@@ -26,28 +36,31 @@ router.post('/login', async(req, res) => {
     
     const sentUsername = req.body.username;
 	const sentPassword = req.body.password;
-	const qry = 'SELECT username, passHash FROM APPUSER WHERE username = ?';
 	
+	//get username, passHash
+	const qry = 'SELECT username, passHash FROM APPUSER WHERE username = ?';
 	dbconn.query(qry, sentUsername, (err, result, fields) => {
 		
 		if(err) throw err;
         if(result.length > 1) throw 'MORE THAN ONE USER FOUND';
 		
-
+		//if result was anything other than 1 row
         if(result.length < 1 || sentUsername != result[0].username){
 			//return no user found error
-			console.warn('NO USER FOUND');
+			//console.warn('NO USER FOUND');
 			res.json({error: 'No user found'});
 			return;
 		}
+		
 		var errorMsg = '', token = '';
-		if(!bcrypt.compareSync(sentPassword, result[0].passHash)){
-			console.warn('Incorrect password');
+		
+		if(!bcrypt.compareSync(sentPassword, result[0].passHash)){ //INCORRECT PASWORD
+			//console.warn('Incorrect password');
 			errorMsg = 'Incorrect username or password';
-		}else{
-			console.warn('Correct Password');
+		}else{														//CORRECT PASWORD
+			//console.warn('Correct Password');
 			errorMsg = '';
-			token = tokenAuth.createToken({
+			token = tokenAuth.createToken({ //create token to send back
 				id: result[0].id
 			})
 		}
@@ -68,17 +81,19 @@ router.post('/login', async(req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/signUp', async(req, res) => {
-	log(' Request made to: /signUp');
-	try{
+	log('Request made to: /signUp');
+	
+	try{ //check data was sent
 	if(!req.body.data)
 		res.status(400).send("400 Bad Request");
     
 	var data = req.body.data;
-	console.log(data);
+	//console.log(data);
 	var numqry = '', fnqry = '', lnqry = '', emailqry = '', bdqry = '';
 	var qry = 'SELECT * FROM CONSTITUENT WHERE ';
 
-	//search by student number
+	/////////////////////////////////////////////
+	//create search queries from what is supplied
 	if(data.stdNum && data.stdNum != '')
 		numqry = 'stdNum = \'' + data.stdNum + '\'';
 	if(data.email && data.email != '')
@@ -90,6 +105,8 @@ router.post('/signUp', async(req, res) => {
 	if(data.birthDate && data.birthDate!= '')
 		bdqry = 'birthDate = \'' + data.birthDate + '\'';
 	
+	//////////////////////////////////////////////
+	//combine all search queries
 	var hasBefore = false
 	if(numqry != ''){
 		hasBefore = true;
@@ -116,11 +133,11 @@ router.post('/signUp', async(req, res) => {
 		qry += bdqry;
 	}
 	
-	console.log(qry);
-
+	//Search
 	var err, result1 = await dbconn.query(qry);
 	if(err) throw err;
 	
+	//check result size
 	var errorMsg = '';
 	if(result1.length != 1){
 		if(result1.length > 1)
@@ -156,26 +173,25 @@ router.post('/signUp', async(req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/register', async(req, res) => {
-	log(' Request made to: /register');
+	log('Request made to: /register');
 
 	try{
-
+	//Check if username already exists
 	var qry = 'SELECT username FROM APPUSER WHERE username = ?';
 	var err, result = await dbconn.query(qry, req.body.username);
 	if(err) throw err;
-	console.log('USERS FOUND: ' + result.length);
 	if(result.length > 0){
 		res.json({error: 'username already exists'})
 		return;
 	}
-    
+	
+	//hash password
 	var salt = bcrypt.genSaltSync(saltRounds);
 	var hash = bcrypt.hashSync(req.body.passHash, salt);
 	req.body.passHash = hash;
 	
+	//create user in database
 	qry = 'INSERT INTO APPUSER SET ?';
-
-	
 	dbconn.query(qry, req.body, (err, result1) => {
 		if(err) throw err;
 		res.json('ok');
@@ -190,18 +206,17 @@ router.post('/register', async(req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/resetpassword', async(req, res) => {
-	log(' Request made to: /resetpassword');
+	log('Request made to: /resetpassword');
 
 	try{
-
+	
+	//Search appuser for match with emailm firstname, lastname
 	var qry = 'SELECT id FROM APPUSER WHERE id = (' + 
 				'SELECT id FROM CONSTITUENT WHERE email = ? AND firstName = ? AND lastName = ?)';
-
 	var err, result = await dbconn.query(qry, [req.body.email, req.body.firstName, req.body.lastName]);
-	
 	if(err) throw err;
+		//if no match found
 	if(result.length < 1 || result.length > 1){
-		console.log('NO MATCH');
 		res.json({error:'no match'});
 		return;
 	}
@@ -217,7 +232,8 @@ router.post('/resetpassword', async(req, res) => {
 	var salt = bcrypt.genSaltSync(saltRounds);
 	var hash = bcrypt.hashSync(password, salt);
 
-	//SEND EMAIL
+	//SEND EMAIL	-	Currently disabled as no active email account being used
+	//					password just shows in server logs
 	// emailer.sendPassword(password, req.body.email)
 	// .then((info)=>{
 	// 	//UPDATE TEMP PASSWORD IN DB
@@ -233,7 +249,8 @@ router.post('/resetpassword', async(req, res) => {
 	// 	return;
 	// })
 	
-
+	//TEMP FOR NOT EMAILING: send password back as error
+	//res.json({error: 'NEW PASSWORD: '+password})
 	}catch(err){
 		log('ERROR: ' + err);
 	}
@@ -242,6 +259,7 @@ router.post('/resetpassword', async(req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
+// ENABLE TOKEN AUTHENTICATION FOR FOLLOWING ROUTES
 router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
 
 
@@ -251,9 +269,9 @@ router.use((req, res, next) => {tokenAuth.checkRequestToken(req, res, next)});
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 router.post('/updatepassword', async(req, res) => {
-	log(' Request made to: /updatepassword ');
+	log('Request made to: /updatepassword ');
 
-	try{
+	try{//check passwords were sent
 	if(!req.body.newPassword || typeof req.body.newPassword != "string"){
 		res.status(400).send("400 Bad Request");
 		return;
@@ -261,17 +279,19 @@ router.post('/updatepassword', async(req, res) => {
 	
 	errorMsg = '';
 	
+	//Get current passhash and check against oldPassword sent
 	var err, result = await dbconn.query('SELECT passHash FROM APPUSER WHERE id = ?', req.body.id);
 	if(err) throw err;
-
+		//compare oldPassword
 	if(!bcrypt.compareSync(req.body.oldPassword, result[0].passHash)){
 		res.json({error: 'Old password does not match'});
 		return;
 	}
 
+	//Hash and store new password
 	var salt = bcrypt.genSaltSync(saltRounds);
 	var hash = bcrypt.hashSync(req.body.newPassword, salt);
-	
+		//store
 	dbconn.query('UPDATE APPUSER SET passHash = ? WHERE id = ?', [hash, req.body.id], (err, result) => {
 		if(err) throw err;
 		res.json({error: errorMsg});

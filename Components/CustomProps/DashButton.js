@@ -1,13 +1,12 @@
-
+/////////////////////////////////////////
+// CUSTOM MENU BUTTON
+// Used for the dashboad menu style
+////////////////////////////////////////
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableHighlight, Image} from 'react-native';
 
 export class DashButton extends React.Component{
-
-    constructor(props){
-        super(props);
-    }
 
     render() {
         return(

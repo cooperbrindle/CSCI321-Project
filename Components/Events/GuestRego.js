@@ -9,7 +9,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { navigationOptionsFunc } from '../styles/navOptions';
 
 export default class GuestRego extends Component {
-	static navigationOptions = ({navigation}) => {
+    
+    //Nav header
+    static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Guest Registration', navigation, false);
     }
     

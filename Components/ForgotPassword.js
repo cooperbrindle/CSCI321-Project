@@ -1,5 +1,8 @@
 /////////////////////////////////////////
 // FORGOT PASSWORD PAGE
+//
+// - resets users password to temporary one
+//  and emails to supplied email if match found
 /////////////////////////////////////////
 
 import React, { Component } from 'react';

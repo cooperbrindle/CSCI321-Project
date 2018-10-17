@@ -2,12 +2,14 @@
 
 import React, { Component } from 'react';
 import { ScrollView, Text, View, Image} from 'react-native';
+import { DefaultButton } from '../CustomProps/DefaultButton';
+
+//styles
 import { baseStyles } from '../styles/BaseStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
-import { DefaultButton } from '../CustomProps/DefaultButton';
 import { staticStyles } from '../styles/BenefitsStyles'
 
-
+//display library logo image
 const libraryLogo = require('../assets/careerSmart.jpg');
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +20,9 @@ const blurbPoints = 'Career Consultations - Schedule an appointment with our exp
             'Advertise Jobs- Have an employment oppotunity for UOW Students? Post it to CareerHub\n\n';
 
 export default class Careers extends Component {
-	static navigationOptions = ({navigation}) => {
+    
+    //Nav header
+    static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Career Support', navigation, false);
 	}
 
