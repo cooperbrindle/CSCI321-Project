@@ -98,12 +98,12 @@ export default class HomePage extends Component {
 		if(item.type == 'discount'){
 			var redirect;
 			if(item.data.discountType == 'card'){
-				redirect = () => {this.props.navigation.navigate('Discounts', {card: true})};
+				redirect = () => this.props.navigation.navigate('Discounts', {card: true});
 			}
 			else{
-				redirect = () => {this.props.navigation.navigate('WebViewPage', 
+				redirect = () => this.props.navigation.navigate('WebViewPage', 
 				{title: item.data.displayName, 
-				link: item.data.link})};
+				link: item.data.link});
 			}
 			
 			return (
