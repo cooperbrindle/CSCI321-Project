@@ -54,7 +54,7 @@ export default class Login extends React.Component {
             this.props.navigation.navigate('HomeDrawer');
             return;
         }
-        this.setState({isLoading: false});
+        this.setState({isLoading: false, username: username});
     }
 
     //LOGIN BUTTON PRESS HANDLER

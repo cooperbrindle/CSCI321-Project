@@ -1,6 +1,0 @@
-SignUp
-    - No scrollView on data input page
-
-Events
-    Display
-        
