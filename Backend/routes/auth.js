@@ -209,17 +209,27 @@ router.post('/resetpassword', async(req, res) => {
 	log('Request made to: /resetpassword');
 
 	try{
-	
-	//Search appuser for match with emailm firstname, lastname
+
+	//CHECK CTX FIRST
 	var qry = 'SELECT id FROM APPUSER WHERE id = (' + 
-				'SELECT id FROM CONSTITUENT WHERE email = ? AND firstName = ? AND lastName = ?)';
+				'SELECT id FROM CONSTITUENTEXPORT WHERE email = ? AND firstName = ? AND lastName = ?)';
 	var err, result = await dbconn.query(qry, [req.body.email, req.body.firstName, req.body.lastName]);
 	if(err) throw err;
 		//if no match found
-	if(result.length < 1 || result.length > 1){
-		res.json({error:'no match'});
-		return;
+	if(result.length != 1){
+		//CHECK NORMAL CONSTIT IF NO ROW IN CTX
+		qry = 'SELECT id FROM APPUSER WHERE id = (' + 
+					'SELECT id FROM CONSTITUENT WHERE email = ? AND firstName = ? AND lastName = ?)';
+		err, result = await dbconn.query(qry, [req.body.email, req.body.firstName, req.body.lastName]);
+		if(err) throw err;
+			//if no match found
+		if(result.length != 1){
+			res.json({error:'no match'});
+			return;
+		}
+		
 	}
+	//Search appuser for match with emailm firstname, lastname
 	var id = result[0].id;
 
 	//CREATE TEMP PASSWORD
@@ -237,11 +247,11 @@ router.post('/resetpassword', async(req, res) => {
 	// emailer.sendPassword(password, req.body.email)
 	// .then((info)=>{
 	// 	//UPDATE TEMP PASSWORD IN DB
-	// 	qry = 'UPDATE APPUSER SET passHash = ? WHERE id = ?';
-	// 	dbconn.query(qry, [hash, id], (err, result1) => {
-	// 		if(err) throw err;
-	// 		res.json('ok');
-	// 	});
+		qry = 'UPDATE APPUSER SET passHash = ? WHERE id = ?';
+		dbconn.query(qry, [hash, id], (err, result1) => {
+			if(err) throw err;
+			//res.json('ok');
+		});
 	
 	// }).catch((error)=>{
 	// 	console.log('EMAIL FAILED');
@@ -250,7 +260,7 @@ router.post('/resetpassword', async(req, res) => {
 	// })
 	
 	//TEMP FOR NOT EMAILING: send password back as error
-	//res.json({error: 'NEW PASSWORD: '+password})
+	res.json({error: '*FOR TESTING* NEW PASSWORD: '+password})
 	}catch(err){
 		log('ERROR: ' + err);
 	}
