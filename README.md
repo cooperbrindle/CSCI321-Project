@@ -25,12 +25,12 @@ App:
 Clone git repo.
 Inside directory:
 
-	```
-	npm install
-	```
-	```
-	npm start
-	```
+```
+npm install
+```
+```
+npm start
+```
 
 
 ## Members
