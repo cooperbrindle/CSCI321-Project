@@ -30,7 +30,8 @@ export default class ContactForm extends Component {
             emailOther: data.emailOther,
             mobile: data.mobile,
             address: data.address,
-            city: data.city
+            city: data.city,
+            state: data.state,
         });
     }
 
@@ -46,6 +47,7 @@ export default class ContactForm extends Component {
             data.mobile = this.state.mobile;
             data.address = this.state.address;
             data.city = this.state.city;
+            data.state = this.state.state;
         }catch(err){
             console.warn('ERROR: '+ err.message);
         }
@@ -80,13 +82,14 @@ export default class ContactForm extends Component {
                     Contact Info
                 </Text>
 				
-                <FormInput title='email (preferred)' onChangeText={(a) => this.setState({email:a})} 
+                <FormInput title='Email (preferred)' onChangeText={(a) => this.setState({email:a})} 
                     value={this.state.email} keyboardType='email-address' autoCapitalize='none'/>
-                <FormInput title='email (other)' onChangeText={(a) => this.setState({emailOther:a})} 
+                <FormInput title='Email (other)' onChangeText={(a) => this.setState({emailOther:a})} 
                     value={this.state.emailOther} keyboardType='email-address' autoCapitalize='none'/>
                 <FormInput title='Mobile' onChangeText={(a) => this.setState({mobile:a})} value={this.state.mobile} keyboardType='numeric'/>
                 <FormInput title='Address' onChangeText={(a) => this.setState({address:a})} value={this.state.address} />
                 <FormInput title='City' onChangeText={(a) => this.setState({city:a})} value={this.state.city} />
+                <FormInput title='State' onChangeText={(a) => this.setState({state:a})} value={this.state.state} />
             
             </KeyboardAwareScrollView>
                 <View style={styles.submitBtnCont}>
