@@ -20,6 +20,7 @@ const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
 const promoIcon = require('./assets/Benefits.png');
+//Placeholder image, waiting on smcu
 const outlookLogo = require('./assets/outLogo.png')
 
 export default class HomePage extends Component {

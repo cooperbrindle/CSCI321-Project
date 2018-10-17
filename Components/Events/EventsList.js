@@ -71,7 +71,7 @@ export default class EventsList extends Component {
                 <FlatList style={listStyles.fList}
                     data={this.state.data}
                     renderItem={({item}) => this.renderItem(item)}
-                    keyExtractor={(item, index) => index}
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </ScrollView>
         )
