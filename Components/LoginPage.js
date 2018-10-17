@@ -54,12 +54,6 @@ export default class Login extends React.Component {
             this.props.navigation.navigate('HomeDrawer');
             return;
         }
-        else{ //TODO: REMOVE THIS ELSE - ONLY FOR TESTING
-            this.setState({
-                username: 'ewarren',
-                password: 'password',
-            })
-        }
         this.setState({isLoading: false});
     }
 

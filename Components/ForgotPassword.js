@@ -30,9 +30,9 @@ export default class ForgotPassword extends Component {
         this.setState({
             errorMessage: '',
             isLoading: false,
-            email: 'ecwarren1@gmail.com',
-            firstName: 'Emily',
-            lastName: 'Warren',
+            email: '',
+            firstName: '',
+            lastName: '',
         });
     }
 
