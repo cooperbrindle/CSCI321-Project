@@ -127,7 +127,7 @@ export default class Login extends React.Component {
                 
                 <TextInput style={loginStyles.inputBox}
                     placeholder="username" underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={(un) => this.setState({username:un})}
+                    onChangeText={(un) => this.setState({username:un})} autoCapitalize='none'
                     value={this.state.username} />
                 
                 <TextInput style={loginStyles.inputBox}
