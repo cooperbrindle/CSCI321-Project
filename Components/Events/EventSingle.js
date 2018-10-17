@@ -1,9 +1,13 @@
 
 import React, { Component } from 'react';
 import { Text, View, ScrollView} from 'react-native';
+
+//Custom Props
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import MapView, { Marker } from 'react-native-maps';
 import { navigationOptionsFunc } from '../styles/navOptions';
+
+//Styles
 import {eventStyles} from '../styles/EventStyles';
 import {styles} from '../styles/FormStyles';
 
@@ -56,7 +60,25 @@ export default class EventSingle extends Component {
 				});
 			})
 		}
-    }
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	//Builds page by calling other render functions
+	render() {
+		return (
+			<View style={eventStyles.container}>
+				{this.renderDescription()}
+				{this.renderInfo()}
+				{this.renderMap()}
+				<View style={styles.submitBtnCont}>
+                    <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego', {eventData: this.state.eventData})} />
+                </View>
+			</View>
+		);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////
+	//Renders the event name at the top of the page
 	renderDescription(){
 		return(
 			<View style={eventStyles.heading}>
@@ -66,6 +88,9 @@ export default class EventSingle extends Component {
             </View>
 		)
 	}
+
+	//////////////////////////////////////////////////////////////////////////////
+	//Displays Event Info
 	renderInfo(){
 		return(
 			<ScrollView styles={eventStyles.infoCont}>
@@ -103,6 +128,8 @@ export default class EventSingle extends Component {
 		)
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////
+	//Displays map and creates marker at coordinates provided by geocode
 	renderMap(){
 		return(
 			<View style={eventStyles.mapCont}>
@@ -125,20 +152,4 @@ export default class EventSingle extends Component {
 			</View>
 		);
 	}
-	
-
-	render() {
-		return (
-			<View style={eventStyles.container}>
-				{this.renderDescription()}
-				{this.renderInfo()}
-				{this.renderMap()}
-				<View style={styles.submitBtnCont}>
-                    <DefaultButton title='Register' nav={() => this.props.navigation.navigate('EventRego', {eventData: this.state.eventData})} />
-                </View>
-			</View>
-		);
-		}
 };
-	
-	

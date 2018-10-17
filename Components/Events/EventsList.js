@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Text, FlatList, View, TouchableHighlight, ActivityIndicator, ScrollView} from 'react-native';
+
+//Custom Props
 import { navigationOptionsFunc } from '../styles/navOptions';
+
+//Styles
 import { listStyles } from '../styles/EventStyles';
 import {baseStyles} from '../styles/BaseStyles';
 
@@ -20,6 +24,8 @@ export default class EventsList extends Component {
         data: null,
     }
     
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    //Calls getEvents() from Vultrsdk to load event list from server
     componentDidMount(){ 
         this.props.screenProps.getEvents('events')
         .then((res) => {
@@ -31,10 +37,44 @@ export default class EventsList extends Component {
         })
     }
 
+    //////////////////////////////////////////////////////////////////
+    //Calls renderList() and builds page
+	render() {
+		return (
+			<View style={baseStyles.container}>
+            <View style={baseStyles.activityView}>
+                {this.renderActivityIndicator()}
+            </View>
+				{this.renderList()}
+			</View>
+		);
+	}
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Loading Wheel
     renderActivityIndicator(){
         return this.state.isLoading ? <ActivityIndicator size='large' color='#cc0000'/> : <View/>;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //Builds list of event items
+    renderList(){
+        if(this.state.isLoading)
+            return <View/>;
+        
+        else return(
+            <ScrollView style={listStyles.scrollView}>
+                <FlatList style={listStyles.fList}
+                    data={this.state.data}
+                    renderItem={({item}) => this.renderItem(item)}
+                    keyExtractor={(item, index) => index.toString()
+                    }
+                />
+            </ScrollView>
+        )
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////
+    //Displays an event item
     renderItem(item){
         var parts = item.startdate.split('/')
         var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -62,31 +102,6 @@ export default class EventsList extends Component {
             </TouchableHighlight>
         )
     }
-    renderList(){
-        if(this.state.isLoading)
-            return <View/>;
-        
-        else return(
-            <ScrollView style={listStyles.scrollView}>
-                <FlatList style={listStyles.fList}
-                    data={this.state.data}
-                    renderItem={({item}) => this.renderItem(item)}
-                    keyExtractor={(item, index) => index.toString()
-                    }
-                />
-            </ScrollView>
-        )
-    }
-	render() {
-		return (
-			<View style={baseStyles.container}>
-            <View style={baseStyles.activityView}>
-                {this.renderActivityIndicator()}
-            </View>
-				{this.renderList()}
-			</View>
-		);
-		}
 };
 	
 	
