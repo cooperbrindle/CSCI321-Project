@@ -24,6 +24,7 @@ const updateDetailsIcon = require('./assets/UpdateDetails.png');
 const outlookIcon = require('./assets/Outlook.png');
 const eventsIcon = require('./assets/Events.png');
 const promoIcon = require('./assets/Benefits.png');
+//Placeholder image, waiting on smcu
 const outlookLogo = require('./assets/outLogo.png')
 
 export default class HomePage extends Component {
@@ -96,12 +97,22 @@ export default class HomePage extends Component {
                 </View>
             </TouchableHighlight>
 			);
-
+			}
 		///////////////////////////////////////////////	DISCOUNT
-		}if(item.type == 'discount')
+		if(item.type == 'discount'){
+			var redirect;
+			if(item.data.discountType == 'card'){
+				redirect = () => this.props.navigation.navigate('Discounts', {card: true});
+			}
+			else{
+				redirect = () => this.props.navigation.navigate('WebViewPage', 
+				{title: item.data.displayName, 
+				link: item.data.link});
+			}
+			
 			return (
 				<TouchableHighlight style={homeStyles.highlightBtn}
-					onPress={() => this.props.navigation.navigate('DiscountCard')}>
+					onPress={redirect}>
                 <View style={homeStyles.highlightView}>
                     <Image
                         style={homeStyles.discImage}
@@ -115,7 +126,7 @@ export default class HomePage extends Component {
                 </View>
             </TouchableHighlight>
 			);
-
+		}
 		///////////////////////////////////////////////	MAGAZINE ARTICLE
 		if(item.type == 'mag')
 			return (

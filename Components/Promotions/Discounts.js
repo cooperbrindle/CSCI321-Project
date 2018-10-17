@@ -31,6 +31,7 @@ export default class Discounts extends Component {
     //////////////////////////////////////////////////////////////////////////////////
     //Calls the getDiscounts function in the Vultrsdk, then loads the data into this.state
     componentDidMount(){ 
+        this.setState({isLoading: true, modalVisible: this.props.navigation.getParam('card', false)});
         this.props.screenProps.getDiscounts('category')
         .then((res) => {
             this.setState({data: res, isLoading: false, errorMessage: ''});
@@ -124,7 +125,7 @@ export default class Discounts extends Component {
                 <FlatList style={listStyles.fList}
                     data={this.state.data}
                     renderItem={({item}) => this.renderItem(item)}
-                    keyExtractor={(item, index) => index}
+                    keyExtractor = { (item, index) => index.toString() }
                 />
             </ScrollView>
         )

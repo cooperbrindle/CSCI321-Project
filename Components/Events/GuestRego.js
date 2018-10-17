@@ -2,8 +2,12 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, Alert, ActivityIndicator} from 'react-native';
+
+//Styles
 import { styles } from '../styles/FormStyles';
 import { baseStyles } from '../styles/BaseStyles';
+
+//Custom Props
 import { DefaultButton } from '../CustomProps/DefaultButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { navigationOptionsFunc } from '../styles/navOptions';
@@ -14,7 +18,7 @@ export default class GuestRego extends Component {
     static navigationOptions = ({navigation}) => {
 		return navigationOptionsFunc('Guest Registration', navigation, false);
     }
-    
+    //Sets Default values
     state = {
         errorMessage: '',
         isLoading: false,
@@ -27,8 +31,8 @@ export default class GuestRego extends Component {
         wheelchair: '',
     };
 
-	/////////////////////////////////////
-    //
+	////////////////////////////////////////////////////////////////////
+    //Loads data from previous screen
     componentWillMount(){
         try{
             const pageData = this.props.navigation.getParam('eventData', 'NoData');
@@ -53,72 +57,29 @@ export default class GuestRego extends Component {
             
         });
     }
-    //
-	/////////////////////////////////////
 
-	submitRego(){
-        if(!this.validateData()){
-            Alert.alert(
-                'Invalid Input',
-                'First and Last Name Must Not Be Blank',
-                [
-                    {text: 'OK', onPress: () => {return}},
-                ],
-                { cancelable: false }
-            )
-            
-        }
-        else{
-            this.setState({isLoading: true, errorMessage: ''});
-            var guestData = {
-                title: this.state.title,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                position: this.state.position,
-                orgName: this.state.orgName,
-                dietary: this.state.dietary,
-                wheelchair: this.state.wheelchair,
-            }
-            this.props.screenProps.registerGuest(this.state.eventData, guestData)
-            .then(() => {
-                this.setState({isLoading: false, errorMessage: ''});
-                Alert.alert(
-                    'Submitted',
-                    this.state.constName + ' and ' + this.state.firstName + ' have been successfully registered for the ' + this.state.eventname,
-                    [
-                        {text: 'OK', onPress: () => this.props.navigation.navigate('HomePage')},
-                    ],
-                    { cancelable: false }
-                )
-
-            }).catch(error => {
-                this.setState({isLoading: false, errorMessage: error});
-            });
-        }
-	}
-    
-    validateData(){
-        ////////////////Empty Input validation
-        if(this.state.firstName == '' || this.state.lastName == ''){
-            return false;
-        }
-        return true;
-    }
-    
-	renderInput(title, ph, onChangeT, v, edita){
-		return(
-			<View style={styles.inputCont}>
-                <Text style={styles.inputText}>
-                    {title}
+    //////////////////////////////////////////////////////////////////////////
+    //Builds page by calling renderForm()
+	render() {
+        var subBtn;
+        if(this.state.isLoading)subBtn = <View/>
+        else subBtn = (<View style={styles.submitBtnCont}>
+                <DefaultButton title='Submit' nav={() => this.submitRego()} />
+            </View>)
+		return (
+			<View style={styles.container}>
+				<Text style={styles.title}>
+                    {this.state.eventname}
                 </Text>
-                <TextInput style={styles.inputBox}
-                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
-                    onChangeText={onChangeT}
-                    value={v} editable = {edita}/>
-            </View>
-		)
+                <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
+                {this.renderForm()}
+                {subBtn}
+			</View>
+		);
     }
     
+    //////////////////////////////////////////////////////////////////////
+    //Builds data inpput form
     renderForm(){
         if(this.state.isLoading)
             return (
@@ -157,25 +118,80 @@ export default class GuestRego extends Component {
         )
     }
 
-	render() {
-        var subBtn;
-        if(this.state.isLoading)subBtn = <View/>
-        else subBtn = (<View style={styles.submitBtnCont}>
-                <DefaultButton title='Submit' nav={() => this.submitRego()} />
-            </View>)
-		return (
-			<View style={styles.container}>
-				<Text style={styles.title}>
-                    {this.state.eventname}
+    /////////////////////////////////////////////////////////////////////////////
+    //Builds form items and gets input
+	renderInput(title, ph, onChangeT, v, edita){
+		return(
+			<View style={styles.inputCont}>
+                <Text style={styles.inputText}>
+                    {title}
                 </Text>
-                <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
-                {this.renderForm()}
-                {subBtn}
-			</View>
-		);
+                <TextInput style={styles.inputBox}
+                    placeholder={ph} underlineColorAndroid='transparent' placeholderTextColor='grey'
+                    onChangeText={onChangeT}
+                    value={v} editable = {edita}/>
+            </View>
+		)
+    }
+
+	//////////////////////////////////////////////////////////////////
+    //Calls validateData() then submits data to server
+	submitRego(){
+        if(!this.validateData()){
+            Alert.alert(
+                'Invalid Input',
+                'First and Last Name Must Not Be Blank',
+                [
+                    {text: 'OK', onPress: () => {return}},
+                ],
+                { cancelable: false }
+            )
+            
+        }
+        else{
+            this.setState({isLoading: true, errorMessage: ''});
+            var guestData = {
+                //Sets guest data to inputted data
+                title: this.state.title,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                position: this.state.position,
+                orgName: this.state.orgName,
+                dietary: this.state.dietary,
+                wheelchair: this.state.wheelchair,
+            }
+            //Passes guestData object to server
+            this.props.screenProps.registerGuest(this.state.eventData, guestData)
+            .then(() => {
+                this.setState({isLoading: false, errorMessage: ''});
+                Alert.alert(
+                    'Submitted',
+                    this.state.constName + ' and ' + this.state.firstName + ' have been successfully registered for the ' + this.state.eventname,
+                    [
+                        {text: 'OK', onPress: () => this.props.navigation.navigate('HomePage')},
+                    ],
+                    { cancelable: false }
+                )
+
+            }).catch(error => {
+                this.setState({isLoading: false, errorMessage: error});
+            });
+        }
 	}
+    
+    //////////////////////////////////////////////////////////////////////////
+    //Confirms minimum data input
+    validateData(){
+        ////////////////Empty Input validation
+        if(this.state.firstName == '' || this.state.lastName == ''){
+            return false;
+        }
+        return true;
+    }
 };
 
+///////////////////////////////////////////////////////////////////
+//Custom styles for this page
 const guestStyles = StyleSheet.create({
     
     topInputCont: {
