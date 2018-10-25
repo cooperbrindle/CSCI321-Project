@@ -10,6 +10,7 @@ export const baseStyles = StyleSheet.create({
     logoCont: {
         flex: 1,
         marginBottom: 15,
+        paddingBottom: 10,
     },
     errorText: {
         color: 'red',
