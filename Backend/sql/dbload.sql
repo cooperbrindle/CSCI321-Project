@@ -21,9 +21,6 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
 /* Load Test Data */
-INSERT INTO EVENTCONSTITUENT VALUES('2018 New York Alumni Event', '123412', '5113416', '', '', 'Brindle', '', '', '', '');
-INSERT INTO EVENTCONSTITUENTEXPORT VALUES('2018 New York Alumni Event', '123412', '5113416', '', '', 'Brindle', '', '', '', '');
-INSERT INTO EVENTCONSTITUENTEXPORT VALUES('2018 New York Alumni Event', '696969', '5643612', '', '', 'McKinnell', '', '', '', '');
 INSERT INTO MAGAZINEHIGHLIGHTS VALUES('UOW Alumni Events', 'The UOW Alumni Relations Team has been travelling the globe to meet you, our alumni community.', 'https://www.uow.edu.au/alumni/outlook/UOW245285.html');
 
 /* Load Users */
