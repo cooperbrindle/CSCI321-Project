@@ -8,6 +8,7 @@
 var router = require('express').Router();
 var dbconn = require('../lib/sqlConnection');
 const log = require('../lib/log').log;
+const urlList = require('../config').urlList;
 
 
 
@@ -44,6 +45,7 @@ router.post('/highlights', async(req, res) => {
 	//	2 closest events
 	//	1 discount
 	//	1 magazine article link
+	// ALSO RETURNS URL LIST NOW FOR WHEN HOMEPAGE IS LOADED
 	try{
 		var event1, event2, discount, mag;
 		var err, result;
@@ -68,7 +70,7 @@ router.post('/highlights', async(req, res) => {
 			{type: 'event', data: event2},
 			{type: 'mag', data: mag},
 		];
-		res.json(data);
+		res.json({highlights: data, urlList: urlList});
 
 	}catch(err){
 		log('ERROR: ' + err);

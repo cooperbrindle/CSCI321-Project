@@ -43,3 +43,13 @@ exports.email = {
     from: '',
 
 }
+
+exports.urlList = {
+    magazine: 'https://www.uow.edu.au/alumni/outlook/index.html',
+    careers: 'https://careerhub.uow.edu.au/students/login?ReturnUrl=%2f',
+    networks: 'https://www.uow.edu.au/alumni/networks/index.html',
+    study: 'https://www.uow.edu.au/future/postgrad/index.html',
+    scholarships: 'https://www.uow.edu.au/alumni/benefits/postgrad/index.html',
+    volunteering: 'https://www.uow.edu.au/alumni/benefits/volunteer/index.html',
+    mentoring: 'https://www.uow.edu.au/alumni/benefits/mentoring/index.html',
+}

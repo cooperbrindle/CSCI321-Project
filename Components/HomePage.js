@@ -43,6 +43,7 @@ export default class HomePage extends Component {
 		isLoading: false,
 		didLoad: false,
 		highlightData: [],
+		urlList: [],
 		errorMessage: '',
 	};
 
@@ -57,7 +58,8 @@ export default class HomePage extends Component {
 		.then(res => {
 				this.setState({
 					isLoading: false,
-					highlightData: res,
+					highlightData: res.highlights,
+					urlList: res.urlList,
 					didLoad: true,
 				});
 		}).catch(err =>{
@@ -180,13 +182,13 @@ export default class HomePage extends Component {
 					<DashButton title='Outlook Magazine' img={outlookIcon} nav={
 						()=>this.props.navigation.navigate('WebViewPage', 
 								{title: 'UOW Outlook Magazine', 
-								link: 'https://www.uow.edu.au/alumni/outlook/index.html'})
+								link: urlList.magazine})
 						} />
 				</View>
 
 				<View style={homeStyles.dashboard}>
 					<DashButton title='Events' img={eventsIcon} nav={()=>this.props.navigation.navigate('EventsList')} />
-					<DashButton title='Benefits' img={promoIcon} nav={()=>this.props.navigation.navigate('Benefits')} />
+					<DashButton title='Benefits' img={promoIcon} nav={()=>this.props.navigation.navigate('Benefits', {urlList: this.state.urlList})} />
 				</View>
 
 				<Text style={homeStyles.carouselTitle}>

@@ -38,6 +38,10 @@ export default class BenefitsMenu extends Component {
 		successMessage: '',
 	};
 
+	componentDidMount(){
+		this.setState({urlList: this.props.navigation.getParam('urlList', [])})
+	}
+
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//Renders the display for dash buttons with a page redirect
 	renderdashBtn(title, page, img, navOptions){
@@ -67,34 +71,35 @@ export default class BenefitsMenu extends Component {
 				</View>
 				
 				<View style={homeStyles.dashboard}>
-					<DashButton title='Discounts Program' img={Discounts} nav={()=>this.props.navigation.navigate('Discounts', {
-						card: false,
-					})} />
+					<DashButton title='Discounts Program' img={Discounts} nav={()=>this.props.navigation.navigate('Discounts', {card: false})} />
 					<DashButton title='Library Membership' img={Library} nav={()=>this.props.navigation.navigate('LibraryMem', {data: this.state.data})} />
 				</View>
 				<View style={homeStyles.dashboard}>
-					<DashButton title='Career Support' img={Careers} nav={()=>this.props.navigation.navigate('Careers', {})} />
+					<DashButton title='Career Support' img={Careers} nav={() => this.props.navigation.navigate('WebViewPage',
+                            {title: 'CareerHub',
+							link: this.state.urlList.careers})} />
+					
 					<DashButton title='Networks & Groups' img={Networking} nav={()=>this.props.navigation.navigate('WebViewPage', 
 								{title: 'Networks and Groups',
-								link: 'https://www.uow.edu.au/alumni/networks/index.html',})} />
+								link: this.state.urlList.networks,})} />
 				</View>
 
 				<View style={smallDashStyles.dashboardSmall}>
 					{this.renderdashBtn("Further Study", 'WebViewPage', Study, {
 						title: 'Further Study',
-						link: 'https://www.uow.edu.au/future/postgrad/index.html'
+						link: this.state.urlList.study
 					} )}
 					{this.renderdashBtn("Scholarships", 'WebViewPage', ScholarshipsImg, {
 						title: 'Alumni Scholarships',
-						link: 'https://www.uow.edu.au/alumni/benefits/postgrad/index.html',
+						link: this.state.urlList.scholarships,
 					})}
 					{this.renderdashBtn("Volunteer Opportunities", 'WebViewPage', Volunteering, {
 						title: 'Volunteer Opportunities',
-						link: 'https://www.uow.edu.au/alumni/benefits/volunteer/index.html',
+						link: this.state.urlList.volunteering,
 					})}
 					{this.renderdashBtn("Mentor Opportunities", 'WebViewPage', Mentoring, {
 						title: 'Mentor Opportunities',
-						link: 'https://www.uow.edu.au/alumni/benefits/mentoring/index.html',
+						link: this.state.urlList.mentoring,
 					})}
 				</View>
 

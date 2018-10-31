@@ -44,7 +44,7 @@ import SubscriptionForm from './Components/UpdateDetails/SubscriptionForm';
 import BenefitsMenu from './Components/Promotions/Benefits';
 import LibraryMembership from './Components/Promotions/LibraryMembership';
 import Discounts from './Components/Promotions/Discounts';
-import Careers from './Components/Promotions/Careers';
+//import Careers from './Components/Promotions/Careers';
 import WebViewPage from './Components/WebView/WebViewPage';
 
 
@@ -65,7 +65,7 @@ const navStack = createStackNavigator({
     Benefits: { screen: BenefitsMenu },
     LibraryMem: { screen: LibraryMembership },
     Discounts: { screen: Discounts },
-    Careers: { screen: Careers },
+    //Careers: { screen: Careers },
 	EventRego: { screen: EventRego },
 	GuestRego: { screen: GuestRego },
 	WebViewPage: { screen: WebViewPage },
