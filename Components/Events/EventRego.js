@@ -83,7 +83,7 @@ export default class EventRego extends Component {
                     value={this.state.dietary} />
                 <FormInput title='Mobility Requirements (if any)' onChangeText={(a) => this.setState({wheelchair:a})} 
                     value={this.state.wheelchair} />
-                <FormInput title='Number of Guests' onChangeText={(a) => this.setState({guests:a})} 
+                <FormInput title='Number of Guests' onChangeText={(a) => this.setState({guests:a})} selectTextOnFocus={true}
                     value={this.state.guests} keyboardType='numeric'/>
 
             </KeyboardAwareScrollView>

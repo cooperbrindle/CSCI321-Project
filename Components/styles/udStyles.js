@@ -20,23 +20,5 @@ export const udStyles = StyleSheet.create({
         marginRight: 5,
         justifyContent: 'center',
     },
-    switchView: {
-        flexDirection: 'row',
-        borderWidth: 1,
-        backgroundColor: '#0C2340',
-        margin: 5,
-        borderColor: 'white',
-        height: 50,
-    },
-    textSwitch: {
-        justifyContent: 'center',
-        flex: 2,
-    },
-    switchText: {
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 18,
-        paddingLeft: 20,
-        paddingRight: 10,
-    },
+    
 });

@@ -9,7 +9,7 @@ import { navigationOptionsFunc } from '../styles/navOptions';
 export default class FAQs extends Component {
 	
 	static navigationOptions = ({navigation}) => {
-		return navigationOptionsFunc('Frequently asked Questions', navigation, true);
+		return navigationOptionsFunc('FAQs', navigation, true);
 	}
 
 	toggleSettings = () => {

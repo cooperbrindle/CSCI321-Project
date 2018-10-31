@@ -11,6 +11,8 @@ import { styles } from '../styles/FormStyles';
 import { udStyles } from '../styles/udStyles';
 import { navigationOptionsFunc } from '../styles/navOptions';
 
+import { CustSwitch } from '../CustomProps/CustSwitch';
+
 
 export default class SubscriptionForm extends Component {
 	
@@ -52,87 +54,27 @@ export default class SubscriptionForm extends Component {
         }
         this.props.navigation.goBack();
 	}
-	//When switch value changes
-	////////////////////////////////////////////////////////////////////
-	videoKilledTheRadioStar(value, type){
-		if(type=='post'){
-			this.setState({
-				postValue: value
-			});
-		}
-		if(type=='mobile'){
-			this.setState({
-				mobileValue: value
-			});
-		}
-		if(type=='email'){
-			this.setState({
-				emailValue: value
-			});
-		}
-	}
-	//
+	
+
+	
+
 	//////////////////////////////////////////////////////////////////////
 	render() {
 		return (
 			
 			<View style={styles.container}>
 			<ScrollView>
-				<View style={udStyles.switchView}>
-					<View style={udStyles.textSwitch}>
-						<Text style={udStyles.switchText}>
-							Allow communication via post
-						</Text>
-					</View>
-					<Switch
-						disabled = {false}
-						value = {this.state.postValue}
-						onValueChange ={(value) => {this.videoKilledTheRadioStar(value, 'post')}}/>
-				</View>
-				<View style={udStyles.switchView}>
-					<View style={udStyles.textSwitch}>
-						<Text style={udStyles.switchText}>
-							Allow communication via mobile
-						</Text>
-					</View>
-					<Switch
-						disabled = {false}
-						value = {this.state.mobileValue}
-						onValueChange ={(value) => {this.videoKilledTheRadioStar(value, 'mobile')}}/>
-				</View>
-				<View style={udStyles.switchView}>
-					<View style={udStyles.textSwitch}>
-						<Text style={udStyles.switchText}>
-							Allow communication via email
-						</Text>
-					</View>
-					<Switch
-						disabled = {false}
-						value = {this.state.emailValue}
-						onValueChange ={(value) => {this.videoKilledTheRadioStar(value, 'email')}}/>
-				</View>
-				<View style={udStyles.switchView}>
-					<View style={udStyles.textSwitch}>
-						<Text style={udStyles.switchText}>
-							Allow promotional material to be sent
-						</Text>
-					</View>
-					<Switch
-						disabled = {false}
-						value = {this.state.promotionsValue}
-						onValueChange ={(value) => {this.setState({promotionsValue: value})}}/>
-				</View>
-				<View style={udStyles.switchView}>
-					<View style={udStyles.textSwitch}>
-						<Text style={udStyles.switchText}>
-							Recieve Outlook Magazine (Quarterly)
-						</Text>
-					</View>
-					<Switch
-						disabled = {false}
-						value = {this.state.outlookValue}
-						onValueChange ={(value) => {this.setState({outlookValue: value})}}/>
-				</View>
+				
+				<CustSwitch text='Allow promotional material to be sent' value={this.state.promotionsValue} onValueChange={(v) => this.setState({promotionsValue: v})} />
+				<CustSwitch text='Recieve Outlook Magazine (Quarterly)' value={this.state.outlookValue} onValueChange={(v) => this.setState({outlookValue: v})} />
+				
+				<View style={{margin:20}} />
+
+				<CustSwitch text='Allow communication via post' value={this.state.postValue} onValueChange={(v) => this.setState({postValue: v})} />
+				<CustSwitch text='Allow communication via mobile' value={this.state.mobileValue} onValueChange={(v) => this.setState({mobileValue: v})} />
+				<CustSwitch text='Allow communication via email' value={this.state.emailValue} onValueChange={(v) => this.setState({emailValue: v})} />
+
+
 			</ScrollView>
 				<View style={styles.submitBtnCont}>
                     <DefaultButton title='Save' nav={() => this.saveChanges()} />

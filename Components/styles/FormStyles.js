@@ -43,12 +43,12 @@ export const styles = StyleSheet.create({
     inputContDate: {
         flex: 1,
         flexDirection: 'column',
-        marginLeft: 10,
+        marginRight: 10,
     },
     inputContYear: {
         flex: 2,
         flexDirection: 'column',
-        marginLeft: 10,
+        //marginLeft: 10,
     },
 
     //////////////////////////////////////////Inputs
@@ -61,14 +61,23 @@ export const styles = StyleSheet.create({
     inputBox: {
         color: 'grey',
         paddingLeft: 10,
+        backgroundColor:'white',
+        height: 50,
+        borderRadius:5,
+    },
+    inputBoxUneditable: {
+        color: 'grey',
+        paddingLeft: 10,
         backgroundColor:'#d9d9d6',
         height: 50,
         borderRadius:5,
     },
+
+
     inputBoxSmall: {
         color: 'grey',
         paddingLeft: 10,
-        backgroundColor:'#d9d9d6',
+        backgroundColor:'white',
         height: 50,
         borderRadius:5,
     },
@@ -76,7 +85,7 @@ export const styles = StyleSheet.create({
         color: 'grey',
         alignItems: 'center',
         textAlign: 'center',
-        backgroundColor:'#d9d9d6',
+        backgroundColor:'white',
         height: 50,
         borderRadius:5,
     },
@@ -89,6 +98,28 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
         alignContent: 'flex-start',
         justifyContent: 'flex-end',
+    },
+
+
+
+    switchView: {
+        flexDirection: 'row',
+        borderWidth: 1,
+        backgroundColor: '#0C2340',
+        margin: 5,
+        borderColor: 'white',
+        height: 50,
+    },
+    switchTextCont: {
+        justifyContent: 'center',
+        flex: 2,
+    },
+    switchText: {
+        color: 'white',
+        textAlign: 'left',
+        fontSize: 18,
+        paddingLeft: 20,
+        paddingRight: 10,
     },
     
 });

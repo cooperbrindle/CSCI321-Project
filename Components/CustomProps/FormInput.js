@@ -11,7 +11,6 @@ import { styles } from '../styles/FormStyles';
 export class FormInput extends React.Component{
 
     static defaultProps = {
-    //props = {
         placeholder: '',
         secureTextEntry: false,
         value: '',
@@ -19,15 +18,19 @@ export class FormInput extends React.Component{
         autoCapitalize: 'sentences',
         keyboardType: 'default',
         maxLength: 200,
+        clearButtonMode: 'while-editing',
     }
 
     render() {
+        var inputStyle;
+        if(this.props.editable) inputStyle = styles.inputBox;
+        else inputStyle = styles.inputBoxUneditable;
         return(
 			<View style={styles.inputCont}>
                 <Text style={styles.inputText}>
                     {this.props.title}
                 </Text>
-                <TextInput style={styles.inputBox}
+                <TextInput style={inputStyle}
                     placeholder={this.props.placeholder}
                     underlineColorAndroid='transparent' 
                     placeholderTextColor='grey'
@@ -38,6 +41,7 @@ export class FormInput extends React.Component{
                     autoCapitalize={this.props.autoCapitalize}
                     keyboardType={this.props.keyboardType}
                     maxLength={this.props.maxLength}
+                    clearButtonMode={this.props.clearButtonMode}
                 />
             </View>
 		);

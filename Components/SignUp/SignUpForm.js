@@ -93,6 +93,34 @@ export default class SignUpForm extends Component {
             });
     }
 
+    //Converts dates from format 1 to 01 or 96 to 1996 and checks is real date
+    handleDate(type, value){
+        const days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        this.setState({errorMessage: ''});
+        if(type < 3){ //Day or Month
+            //Check right days in month
+            if(this.state.day != '' && this.state.month != ''){
+                var d = parseInt(this.state.day);
+                var m = parseInt(this.state.month);
+                if(d > days[m-1] || d < 1)
+                    this.setState({errorMessage: 'Invalid Date'});
+            }//add 0 if needed
+            if(value.length == 1){
+                value = '0'+value;
+                if(type == 1) this.setState({day: value});
+                else this.setState({month: value});
+            } 
+        //else change year to full year if two chars long
+        }else if(value.length == 2){
+            var d = new Date();
+            var y = d.getFullYear().toString().substr(2,2);
+            var v = parseInt(value);
+            if(v < y) value = d.getFullYear().toString().substr(0,2) + value;
+            else value = '19' + value; 
+            this.setState({year: value});;
+        }
+    }
+
 
     //MAIN RENDER
 	render() {
@@ -122,24 +150,24 @@ export default class SignUpForm extends Component {
                             DD
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder={this.state.day} onChangeText={(t) => this.setState({day:t})} 
-                            underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'}/>
+                            placeholder={this.state.day} onChangeText={(t) => this.setState({day:t})} selectTextOnFocus={true} onEndEditing={()=>this.handleDate(1, this.state.day)}
+                            value={this.state.day} underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'} maxLength={2}/>
                     </View>
                     <View style={styles.inputContDate}>
                         <Text style={styles.inputText}>
                             MM
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder={this.state.month} onChangeText={(t) => this.setState({month:t})} 
-                            underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'}/>
+                            placeholder={this.state.month} onChangeText={(t) => this.setState({month:t})} selectTextOnFocus={true} onEndEditing={()=>this.handleDate(2, this.state.month)}
+                            value={this.state.month} underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'} maxLength={2}/>
                     </View>
                     <View style={styles.inputContYear}>
                         <Text style={styles.inputText}>
                             YYYY
                         </Text>
                         <TextInput style={styles.inputBoxDate}
-                            placeholder={this.state.year} onChangeText={(t) => this.setState({year:t})} 
-                            underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'}/>
+                            placeholder={this.state.year} onChangeText={(t) => this.setState({year:t})} selectTextOnFocus={true} onEndEditing={()=>this.handleDate(3, this.state.year)}
+                            value={this.state.year} underlineColorAndroid='transparent' placeholderTextColor='grey' keyboardType={'numeric'} maxLength={4}/>
                     </View>
                     
                 </View>
@@ -150,7 +178,7 @@ export default class SignUpForm extends Component {
                     value={this.state.lastName} />
                 <FormInput title='Student Number' onChangeText={(a) => this.setState({stdNum:a})} 
                     value={this.state.stdNum} keyboardType='numeric' />
-                <FormInput title='UOW Email' onChangeText={(a) => this.setState({email:a})} 
+                <FormInput title='UOW email' onChangeText={(a) => this.setState({email:a})} 
                     value={this.state.email} keyboardType='email-address' autoCapitalize='none'/>
 
             </ScrollView>

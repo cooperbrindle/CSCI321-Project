@@ -54,7 +54,7 @@ export default class EmploymentForm extends Component {
 			<View style={styles.container}>
             <KeyboardAwareScrollView>
 				<Text style={styles.title}>
-                    Employment Info
+                    Employment Details
                 </Text>
 
 				<FormInput title='Job Title' onChangeText={(a) => this.setState({position:a})} value={this.state.position} />

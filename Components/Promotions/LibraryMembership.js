@@ -53,7 +53,7 @@ export default class LibraryMembership extends Component {
                 
 
                 <Text style={staticStyles.title}>
-                    Claim your library card!
+                    Claim your library card
                 </Text>
                 <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
 				<ScrollView style={staticStyles.blurbView}>
@@ -78,7 +78,7 @@ export default class LibraryMembership extends Component {
                 </View>
             );
         else return (
-            <FormInput title='Preffered Email' onChangeText={(a) => this.setState({email:a})} 
+            <FormInput title='Preferred email' onChangeText={(a) => this.setState({email:a})} 
                     value={this.state.email} keyboardType='email-address' autoCapitalize='none'/>
             );
     }

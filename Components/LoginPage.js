@@ -128,12 +128,12 @@ export default class Login extends React.Component {
                 <TextInput style={loginStyles.inputBox}
                     placeholder="username" underlineColorAndroid='transparent' placeholderTextColor='grey'
                     onChangeText={(un) => this.setState({username:un})} autoCapitalize='none'
-                    value={this.state.username} />
+                    value={this.state.username} maxLength={100} clearButtonMode='while-editing' />
                 
                 <TextInput style={loginStyles.inputBox}
                     placeholder="password" underlineColorAndroid='transparent' placeholderTextColor='grey'
                     onChangeText={(pw) => this.setState({password:pw})} secureTextEntry autoCapitalize='none'
-                    value={this.state.password}/>
+                    value={this.state.password} maxLength={100} clearButtonMode='while-editing' />
                 
                 {this.renderButtons()}
                 

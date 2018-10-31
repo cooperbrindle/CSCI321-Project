@@ -82,9 +82,9 @@ export default class ContactForm extends Component {
                     Contact Info
                 </Text>
 				
-                <FormInput title='Email (preferred)' onChangeText={(a) => this.setState({email:a})} 
+                <FormInput title='email (preferred)' onChangeText={(a) => this.setState({email:a})} 
                     value={this.state.email} keyboardType='email-address' autoCapitalize='none'/>
-                <FormInput title='Email (other)' onChangeText={(a) => this.setState({emailOther:a})} 
+                <FormInput title='email (other)' onChangeText={(a) => this.setState({emailOther:a})} 
                     value={this.state.emailOther} keyboardType='email-address' autoCapitalize='none'/>
                 <FormInput title='Mobile' onChangeText={(a) => this.setState({mobile:a})} value={this.state.mobile} keyboardType='numeric'/>
                 <FormInput title='Address' onChangeText={(a) => this.setState({address:a})} value={this.state.address} />

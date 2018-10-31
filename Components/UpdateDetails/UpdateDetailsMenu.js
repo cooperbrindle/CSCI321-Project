@@ -43,7 +43,7 @@ export default class UpdateDetailsMenu extends Component {
 		didLoad: false,
 		errorMessage: '',
 		showLinkedIn: false,
-		password: '',
+		password: 'password',
 		modalVisible: true,
 	};
 	

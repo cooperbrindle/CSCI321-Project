@@ -87,7 +87,7 @@ const faqStack = createStackNavigator({
 const drawerNav = createDrawerNavigator({
 	//Routes
 	Home: { screen: navStack },
-	Password: { screen: passwordStack },
+	'Update Password': { screen: passwordStack },
 	FAQs: { screen: faqStack },
 	Logout: { screen: Logout },
 },{ //options
