@@ -182,7 +182,7 @@ export default class HomePage extends Component {
 					<DashButton title='Outlook Magazine' img={outlookIcon} nav={
 						()=>this.props.navigation.navigate('WebViewPage', 
 								{title: 'UOW Outlook Magazine', 
-								link: urlList.magazine})
+								link: this.state.urlList.magazine})
 						} />
 				</View>
 
