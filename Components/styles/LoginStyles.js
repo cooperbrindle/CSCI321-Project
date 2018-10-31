@@ -12,7 +12,7 @@ export const loginStyles = StyleSheet.create({
         flex: 2,
     },
     
-    errorText: {color: 'red',},
+    errorText: {color: 'red', fontFamily: 'Verdana',},
 
     activityView: {
         justifyContent: 'center',
@@ -53,6 +53,7 @@ export const loginStyles = StyleSheet.create({
         marginRight: 5,
     },
     forgotText: {
+        fontFamily: 'Verdana',
         color: '#0047BB',
         fontSize: 14,
         alignSelf: 'center',

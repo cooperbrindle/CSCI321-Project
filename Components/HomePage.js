@@ -177,7 +177,7 @@ export default class HomePage extends Component {
 
 				<View style={homeStyles.dashboard}>
 					<DashButton title='Update Details' img={updateDetailsIcon} nav={()=>this.props.navigation.navigate('UDMenu')} />
-					<DashButton title='Outlook' img={outlookIcon} nav={
+					<DashButton title='Outlook Magazine' img={outlookIcon} nav={
 						()=>this.props.navigation.navigate('WebViewPage', 
 								{title: 'UOW Outlook Magazine', 
 								link: 'https://www.uow.edu.au/alumni/outlook/index.html'})
