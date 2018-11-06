@@ -14,14 +14,14 @@ import { homeStyles, smallDashStyles } from '../styles/HomeStyles';
 
 ///////////////////////////////////////////////////////////////////////////////////
 //Declaration for all dash pictures
-const Library = require('../assets/Library.png');
+const Library = require('../assets/LibraryMembership.png');
 const Discounts = require('../assets/Discounts.png');
-const Mentoring = require('../assets/Mentoring.png');
-const Volunteering = require('../assets/Volunteering.png');
+const Mentoring = require('../assets/MentorOpportunities.png');
+const Volunteering = require('../assets/VolunteerOpportunities.png');
 const Networking = require('../assets/Networks.png');
-const Study = require('../assets/Study.png');
+const Study = require('../assets/FurtherStudy.png');
 const ScholarshipsImg = require('../assets/Scholarships.png');
-const Careers = require('../assets/Careers.png');
+const Careers = require('../assets/CareerSupport.png');
 
 export default class BenefitsMenu extends Component {
 	
@@ -36,10 +36,11 @@ export default class BenefitsMenu extends Component {
 		didLoad: false,
 		errorMessage: '',
 		successMessage: '',
+		urlList: [],
 	};
 
 	componentDidMount(){
-		this.setState({urlList: this.props.navigation.getParam('urlList', [])})
+		this.setState({urlList: this.props.navigation.getParam('urlList', [])});
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////
@@ -87,8 +88,8 @@ export default class BenefitsMenu extends Component {
 				<View style={smallDashStyles.dashboardSmall}>
 					{this.renderdashBtn("Further Study", 'WebViewPage', Study, {
 						title: 'Further Study',
-						link: this.state.urlList.study
-					} )}
+						link: this.state.urlList.study,
+					})}
 					{this.renderdashBtn("Scholarships", 'WebViewPage', ScholarshipsImg, {
 						title: 'Alumni Scholarships',
 						link: this.state.urlList.scholarships,
