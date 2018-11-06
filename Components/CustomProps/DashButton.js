@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
             alignSelf: 'center',
         },
         dashText: {
-            fontFamily: 'Verdana',
+            //fontFamily: 'Verdana',
             color: '#0C2340',
             fontSize: 18,
             textAlign: 'center',

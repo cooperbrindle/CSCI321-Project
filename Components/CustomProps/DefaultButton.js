@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         borderColor: '#d9d9d6',
     },
     loginText: {
-        fontFamily: 'Verdana',
+        //fontFamily: 'Verdana',
         color: '#cc0000',
     },
 });

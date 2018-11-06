@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
     },
     socialText: {
-        fontFamily: 'Verdana',
+        //fontFamily: 'Verdana',
         flex: 1,
         color: 'white',
         fontWeight: 'bold',

@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 
     /////////////////////////////////////////
     title: {
-        fontFamily: 'Verdana',
+        //fontFamily: 'Verdana',
         alignSelf: 'center',
         textAlign: 'center',
         fontSize: 28,
@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
 
     //////////////////////////////////////////Inputs
     inputText: {
-        fontFamily: 'Verdana',
+        //fontFamily: 'Verdana',
         alignSelf: 'flex-start',
         textAlign: 'right',
         fontSize: 18,
