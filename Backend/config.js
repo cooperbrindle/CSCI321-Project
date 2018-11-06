@@ -46,7 +46,7 @@ exports.email = {
 
 exports.urlList = {
     magazine: 'https://www.uow.edu.au/alumni/outlook/index.html',
-    careers: 'https://careerhub.uow.edu.au/students/login?ReturnUrl=%2f',
+    careers: 'https://careerhub.uow.edu.au/students/login?ReturnUrl=%2fstudents',
     networks: 'https://www.uow.edu.au/alumni/networks/index.html',
     study: 'https://www.uow.edu.au/future/postgrad/index.html',
     scholarships: 'https://www.uow.edu.au/alumni/benefits/postgrad/index.html',
