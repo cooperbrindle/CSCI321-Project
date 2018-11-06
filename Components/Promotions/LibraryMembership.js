@@ -15,11 +15,14 @@ import { staticStyles } from '../styles/BenefitsStyles';
 
 const libraryLogo = require('../assets/libraryLogo.jpg');
 
+const blurbStart = 'UOW alumni are entitled to a complimentary Alumni Membership to the UOW Library.\n\n'
+
 const blurbPoints = '-  Access a wide range of online resources, including e-journals and databases\n\n'+
             '-  Borrow 30 items for 28 days at the Wollongong location, or five items at other locations\n\n'+
             '-  Renew items and place up to 10 holds at a time.\n\n';
 
-const blurbEnd = 'New membership applications will be processed and confirmed within 5-7 business days via return email.';
+const blurbEnd = 'New membership applications will be processed and confirmed within 5-7 business days via return email. '+
+            'Memberships need to be renewed annually, and you will be sent a reminder.';
 
 export default class LibraryMembership extends Component {
 	static navigationOptions = ({navigation}) => {
@@ -32,9 +35,14 @@ export default class LibraryMembership extends Component {
         try{
             var vultr = this.props.screenProps;
             this.setState({vultr: this.props.screenProps});
-            this.setState({
-                email: vultr.data.email, 
-            });
+            if(vultr.data && vultr.data.email)
+                this.setState({
+                    email: vultr.data.email, 
+                });
+            else
+                this.setState({
+                    email: '', 
+                });
             }catch(err){console.warn('try catch error: ' + err.message);}
         
         this.setState({
@@ -58,6 +66,9 @@ export default class LibraryMembership extends Component {
                 <Text style={baseStyles.errorText}>{this.state.errorMessage}</Text>
 				<ScrollView style={staticStyles.blurbView}>
                     
+                    <Text style={staticStyles.blurbTextEnd}>
+                        {blurbStart}
+                    </Text>
                     <Text style={staticStyles.blurbTextPoints}>
                         {blurbPoints}
                     </Text>

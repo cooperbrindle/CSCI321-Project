@@ -11,10 +11,10 @@ export const staticStyles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 36,
         color: 'white',
-        marginBottom: 10,
+        //marginBottom: 10,
     },
     submitBtnCont: {
-        flex: 0.3,
+        //flex: 0.3,
         marginLeft: 5,
         marginRight: 5,
         marginBottom: 10,
@@ -41,7 +41,7 @@ export const staticStyles = StyleSheet.create({
     },
     blurbTextEnd: {
         color:'white',
-        fontSize: 14,
+        fontSize: 22,
     },
     image: {
         backgroundColor: '#FFFFFF',
